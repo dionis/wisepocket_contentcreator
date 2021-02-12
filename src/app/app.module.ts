@@ -23,7 +23,7 @@ import { AuthenticationModule } from './main/authentication/authentication.modul
 
 const appRoutes: Routes = [
     {
-        path      : '**',
+        path      : '*',
         redirectTo: 'auth/login'
     },
     {

@@ -1,15 +1,15 @@
 export const locale = {
-    lang: 'en',
+    lang: 'es',
     data: {
         'NAV': {
-            'APPLICATIONS': 'Applications',
+            'APPLICATIONS': 'Aplicaiones',
             'SAMPLE'        : {
-                'TITLE': 'Sample',
+                'TITLE': 'Ejemplo',
                 'BADGE': '25'
             },
-            'CAMPINGS': 'Campings',
+            'CAMPINGS': 'Campañas',
             'CampingsList': {
-                'TITLE': 'Campings List',
+                'TITLE': 'Lista de Campañas',
                 'BADGE': '12' 
             },
         },

@@ -21,9 +21,11 @@ import { SampleModule } from 'app/main/sample/sample.module';
 
 import { AuthenticationModule } from './main/authentication/authentication.module';
 
+import { UIFormsModule } from './main/ui/forms/forms.module';
+
 const appRoutes: Routes = [
     {
-        path      : '*',
+        path      : 'login',
         redirectTo: 'auth/login'
     },
     {
@@ -31,11 +33,16 @@ const appRoutes: Routes = [
         loadChildren: () => import('./main/authentication/authentication.module')
                             .then(m => m.AuthenticationModule)
     },
+    {
+        path      : '*',
+        redirectTo: 'ui/forms'
+    }
 ];
 
 @NgModule({
     declarations: [
         AppComponent
+
     ],
     imports     : [
         BrowserModule,
@@ -62,7 +69,8 @@ const appRoutes: Routes = [
         // App modules
         LayoutModule,
         SampleModule,
-        AuthenticationModule
+        AuthenticationModule,
+        UIFormsModule
 
     ],
     bootstrap   : [

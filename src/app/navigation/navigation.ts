@@ -22,5 +22,28 @@ export const navigation: FuseNavigation[] = [
                 }
             }
         ]
-    }
+    },
+    {
+        id       : 'camping',
+        title    : 'Campings',
+        translate: 'NAV.CAMPINGS',
+        type     : 'group',
+        children : [
+            {
+                id       : 'campings_table',
+                title    : 'Campings List',
+                translate: 'NAV.CampingsList.TITLE',
+                type     : 'item',
+                icon     : 'list',
+                url      : '/#',
+                badge    : {
+                    title    : '25',
+                    translate: 'NAV.CampingsList.BADGE',
+                    bg       : '#F44336',
+                    fg       : '#FFFFFF'
+                }
+            }
+        ]
+    },
+
 ];

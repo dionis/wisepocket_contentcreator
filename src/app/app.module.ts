@@ -35,7 +35,7 @@ const appRoutes: Routes = [
     },
     {
         path      : '**',
-        redirectTo: 'forms'
+        redirectTo: 'ui/forms'
     }
 ];
 

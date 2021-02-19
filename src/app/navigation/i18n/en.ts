@@ -6,7 +6,13 @@ export const locale = {
             'SAMPLE'        : {
                 'TITLE': 'Sample',
                 'BADGE': '25'
-            }
-        }
+            },
+            'CAMPINGS': 'Campings',
+            'CampingsList': {
+                'TITLE': 'Campings List',
+                'BADGE': '12' 
+            },
+        },
+        
     }
 };

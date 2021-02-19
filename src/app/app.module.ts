@@ -34,8 +34,8 @@ const appRoutes: Routes = [
                             .then(m => m.AuthenticationModule)
     },
     {
-        path      : '*',
-        redirectTo: 'ui/forms'
+        path      : '**',
+        redirectTo: 'forms'
     }
 ];
 

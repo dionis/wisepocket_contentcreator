@@ -43,12 +43,15 @@ export class FormsComponent implements OnInit, OnDestroy
     {
         // Horizontal Stepper form steps
         this.horizontalStepperStep1 = this._formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName : ['', Validators.required]
+            nameCampaign: ['', Validators.required],
+            description : ['', Validators.required]
         });
 
         this.horizontalStepperStep2 = this._formBuilder.group({
-            address: ['', Validators.required]
+            phone: ['', Validators.required],
+            postalCode: ['', [Validators.required, Validators.maxLength(5)]],
+            website: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]]
         });
 
         this.horizontalStepperStep3 = this._formBuilder.group({

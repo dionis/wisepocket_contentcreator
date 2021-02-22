@@ -34,8 +34,9 @@ const appRoutes: Routes = [
                             .then(m => m.AuthenticationModule)
     },
     {
-        path      : '*',
-        redirectTo: 'ui/forms'
+        path      : 'forms',
+        loadChildren: () => import('./main/ui/forms/forms.module')
+                            .then(m => m.UIFormsModule)
     }
 ];
 

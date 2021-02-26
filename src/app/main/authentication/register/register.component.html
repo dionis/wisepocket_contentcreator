@@ -10,7 +10,7 @@
 
             <div class="title">CREATE AN ACCOUNT</div>
 
-            <form name="registerForm" [formGroup]="registerForm" novalidate>
+            <form name="registerForm" [formGroup]="registerForm" (ngSubmit)= "onSave()" novalidate>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Name</mat-label>
@@ -18,6 +18,15 @@
                     <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
                     <mat-error>
                         Name is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput formControlName="apellido">
+                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                    <mat-error>
+                        Apellido is required
                     </mat-error>
                 </mat-form-field>
 

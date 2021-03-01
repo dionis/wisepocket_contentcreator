@@ -23,6 +23,7 @@ import { AuthenticationModule } from './main/authentication/authentication.modul
 
 import { UIFormsModule } from './main/ui/forms/forms.module';
 
+
 const appRoutes: Routes = [
     {
         path      : 'login',
@@ -42,7 +43,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
 
     ],
     imports     : [
@@ -74,6 +75,7 @@ const appRoutes: Routes = [
         UIFormsModule
 
     ],
+    
     bootstrap   : [
         AppComponent
     ]

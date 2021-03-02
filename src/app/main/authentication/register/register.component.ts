@@ -73,7 +73,6 @@ export class RegisterComponent implements OnInit, OnDestroy
     {
         this.registerForm = this._formBuilder.group({
             name           : ['', Validators.required],
-            apellido        : ['', Validators.required],
             email          : ['', [Validators.required, Validators.email]],
             phone       : ['', [Validators.required,Validators.pattern("^[0-9]*$"),Validators.maxLength(8)]],
             organization   : ['', Validators.required],
@@ -115,8 +114,9 @@ export class RegisterComponent implements OnInit, OnDestroy
     onSave(){
         const data = this.registerForm.getRawValue();
         console.log(data);
-        this.userService.singUp(data).then(res=>{
-            alert(res.message)
+        this.userService.singUp(data)
+        .then(res=>{
+            alert(res)
             this.router.navigate(['auth/login']);
         })
         .catch(err=>{

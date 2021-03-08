@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { FuseSharedModule } from '../../../@fuse/shared.module';
+import { AuthguardService } from '../../services/authguard.service';
 
 // const routes = [
 //     {
@@ -57,18 +58,22 @@ import { FuseSharedModule } from '../../../@fuse/shared.module';
 const routes = [
   {
       path        : 'mail',
+      canActivate: [AuthguardService],
       loadChildren: () => import('./mail/mail.module').then(m => m.MailModule)
   },
   {
       path        : 'mail-ngrx',
+      canActivate: [AuthguardService],
       loadChildren: () => import('./mail-ngrx/mail.module').then(m => m.MailNgrxModule)
   },
   {
       path        : 'e-commerce',
+      canActivate: [AuthguardService],
       loadChildren: () => import('./e-commerce/e-commerce.module').then(m => m.EcommerceModule)
   },
   {
       path        : 'contacts',
+      canActivate: [AuthguardService],
       loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule)
   }
  ];

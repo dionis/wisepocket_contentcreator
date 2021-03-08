@@ -10,10 +10,12 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { FuseSharedModule } from '../../../../@fuse/shared.module';
 
 import { FormsComponent } from '../../../../app/main/ui/forms/forms.component';
+import { AuthguardService } from '../../../services/authguard.service';
 
 const routes: Routes = [
     {
         path     : 'forms',
+        canActivate: [AuthguardService],
         component: FormsComponent
     }
 ];

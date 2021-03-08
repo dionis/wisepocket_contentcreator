@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit
             console.log(res);
         })
         .catch(err=>{
-            if(err.status ===400){
+            if(err.status === 400){
                 alert('EMAIL O LA CONTRASEÑA INCORRECTOS');
             }
             if(err.status === 0 || err.status === 500){

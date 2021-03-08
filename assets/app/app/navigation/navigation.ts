@@ -125,7 +125,7 @@ export const navigation: FuseNavigation[] = [
   translate: 'NAV.WIZARD',
   type     : 'item',
   icon     : 'send',
-  url      : 'forms'
+  url      : 'wizard/forms'
 },
 
 

@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './main/authentication/auth.interceptors.service';
 import { Error404Module } from './main/errors/404/error-404.module';
 import {Error500Module} from './main/errors/500/error-500.module'
+import { AuthguardService } from './services/authguard.service';
 
 const appRoutes: Routes = [
     {
@@ -37,19 +38,23 @@ const appRoutes: Routes = [
     },
     {
         path        : 'dashboard',
+        canActivate: [AuthguardService],
         loadChildren: () => import('./main/sample/sample.module')
                             .then(m => m.SampleModule)
     },
     {
       path        : 'apps',
+      canActivate: [AuthguardService],
       loadChildren: () => import('./main/apps/apps.module').then(m => m.AppsModule)
   },
   {
     path        : 'wizard',
+    canActivate: [AuthguardService],
     loadChildren: () => import('./main/ui/forms/forms.module').then(m => m.UIFormsModule)
 },
   {
       path        : 'pages',
+      canActivate: [AuthguardService],
       loadChildren: () => import('./main/pages/pages.module').then(m => m.PagesModule)
   },
    {

@@ -36,7 +36,7 @@ module.exports = {
 
     login: async function(req,res){
         if(!(req.body.email) || !(req.body.password)){ return res.status(400).send({
-            'message': 'Request must contain Email and password'
+            'message': 'Request must contain Email and Password'
         })};
         const _user = await User.findOne({email:req.body.email}, async (err,user)=>{
 
@@ -44,9 +44,12 @@ module.exports = {
             if(err){
               console.log("!!!!! In this position ");
               console.error(err);
-              return res.sendStatus(500);}
+              return res.sendStatus(500);
+            }
             if(!user){
-                return res.sendStatus(400);
+                return res.sendStatus(400,{
+                    'error': 'User not found'
+                });
             }
             // await sails.helpers.passwords.hashPassword('12345678')
             const validpass = await bcrypt.compare(req.body.password,user.password);
@@ -82,20 +85,28 @@ module.exports = {
         }
     },
 
-    getUserById: (req,res)=>{
-        if(!req.param('id')){
-            return res.sendStatus(400,{
+    getUserById: async (req,res)=>{
+        sails.log.debug("entra");
+        if(!req.param('_id')){
+            return res.send({
                 'error': 'LA consulta debe tener un parametro'
             })
-        }
-        User.findOne({_id:req.param('id')})
+        }   
+        await User.findOne({id:req.param('_id')})
         .then(user =>{
+            if(!user){ 
+                return res.send({
+                    'id': req.param('_id'),
+                    'error':'User not found!!!'
+                });
+            }
+            sails.log.debug("user");
             return res.send({
                 'data': user
             });
         })
         .catch(err=>{
-            return res.sendStatus(500,{
+            return res.send({
                 'error': err
             });
         })

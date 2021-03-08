@@ -48,6 +48,7 @@ export class UserService {
         const expiresAt = moment().add(res.expiresIn,'second');
         localStorage.setItem('id_token', res.idToken);
         localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
+        this.user = new User();
         this.getUserById();
         resolve(res);
       },error =>{
@@ -59,11 +60,12 @@ export class UserService {
   logout() {
       localStorage.removeItem("id_token");
       localStorage.removeItem("expires_at");
-      this.user = null
+      this.user = null;
   }
 
   public isLoggedIn() {
-      return moment().isBefore(this.getExpiration());
+      console.log(this.user, moment().isBefore(this.getExpiration()) );
+      return this.user && moment().isBefore(this.getExpiration());
   }
 
   isLoggedOut() {
@@ -81,9 +83,8 @@ export class UserService {
     let user_id = token._id;
     console.log(user_id);
     let idparams = new HttpParams();
-    idparams.append('id',user_id);
-    this._http.get(  environment.sails_services_urlpath+":"+environment.sails_services_urlport+'/getUserById/'+user_id,
-                  {params: idparams}).pipe(map((responseData:any) =>{
+    this._http.get(  environment.sails_services_urlpath+":"+environment.sails_services_urlport+'/user/getUserById/',
+                  {params: idparams.append('_id',user_id)}).pipe(map((responseData:any) =>{
 
                       if(responseData.data){
                         console.log(responseData.data.name)
@@ -95,6 +96,7 @@ export class UserService {
                         console.log(this.user);
                         return this.user;
                       }else{
+                        console.log(responseData);
                         return responseData;
                       }
                   })).subscribe(res=>{
@@ -105,6 +107,7 @@ export class UserService {
   }
 
   getMyUser():User{
+    console.log(localStorage.getItem('id_token'));
     console.log(this.user)
     return this.user;
   }

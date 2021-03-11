@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FileValidator } from 'ngx-material-file-input';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -15,9 +16,19 @@ export class FormsComponent implements OnInit, OnDestroy
     horizontalStepperStep1: FormGroup;
     horizontalStepperStep2: FormGroup;
     horizontalStepperStep3: FormGroup;
+    horizontalStepperStep4: FormGroup;
+    readonly maxSize = 104857600;
+    campaignicon:string = 'campaignicon';
+    @ViewChild('fileDorp',{static:false}) inputFile:ElementRef;
 
     // Private
     private _unsubscribeAll: Subject<any>;
+    files: File[] = [];
+    image1: File = undefined;
+    image2: File = undefined;
+    image3: File = undefined;
+    image4: File = undefined;
+    campIconf:File = undefined;
 
     /**
      * Constructor
@@ -59,8 +70,39 @@ export class FormsComponent implements OnInit, OnDestroy
             state     : ['', Validators.required],
             postalCode: ['', [Validators.required, Validators.maxLength(5)]]
         });
-    }
+        console.log(this.inputFile);
 
+    }
+    onChage(event){
+        console.log(event);
+        console.log(this.inputFile);
+    }
+    onSelectIcon(event){
+        console.log(event.addedFiles)
+       this.campIconf = event.addedFiles[0];
+    }
+    onSelect(event) {
+        console.log(event);
+        switch (event.source.id) {
+            case "image1":
+                this.image1 = event.addedFiles[0];
+                break;
+            case "image2":
+                this.image2 = event.addedFiles[0];
+                break;
+            case "image3":
+                this.image3 = event.addedFiles[0];
+                break;
+            case "image4":
+                this.image4 = event.addedFiles[0];
+                break;
+            default:
+                break;
+        }
+        //this.files.push(...event.addedFiles);
+        //console.log(this.files);
+      }
+      
     /**
      * On destroy
      */

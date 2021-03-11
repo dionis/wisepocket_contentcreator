@@ -46,6 +46,7 @@ module.exports.routes = {
  'POST /singIn': 'UserController.login',
  'POST /logout': 'UserController.logout',
  'GET /user/getUserById/': 'UserController.getUserById',
+ 'GET /users' : 'UserController.getUsers',
 
  //Image's Requests
  'POST /addImg': 'ImagenController.create',

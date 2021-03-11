@@ -72,7 +72,14 @@ module.exports = {
     },
   
     getCampings: (req,res)=>{
-        Camping.find().populate('createdby')
+        const page = req.param('page')
+        const limit  = req.param('limit')
+        Camping.find()
+        .populate('createdby')
+        .paginate({
+            page:page?page:undefined,
+            limit:limit?limit:undefined,
+        })
         .then(campings =>{
             return res.send({
                 'message': 'Lista de Campañas',
@@ -80,23 +87,43 @@ module.exports = {
             })
         })
         .catch(err=>{
-            return res.sendStatus(400,{
+            return res.status(500).send({
                 'message': 'Imposible Mostrar',
                 'error': err
             })
         })
     },
 
-    getCampingsbyUser: async (req,res)=>{
+    getCampaign: async (req,res)=>{
         if(!req.param('_id')){
-            return res.sendStatus({
-                'error': 'User ID no encontrado en el Request'
+            return res.status(400).send({
+                'error': 'ID no encontrado en el Request'
             })
         }
-        const us = await User.findOne({
+        await Camping.findOne({id:req.param('_id')})
+        .then(campaign=>{
+            if(!campaign){ return res.status(400).send({'error':'No Campaign Foud'});}
+            return res.ok({
+                'message': 'Fetched Successfully',
+                'data': campaign
+            });
+        })
+    },
+
+    getCampingsbyUser: async (req,res)=>{
+        const page = req.param('page')
+        const limit  = req.param('limit')
+        if(!req.param('_id')){
+            return res.sendStatus(400);
+        }
+        await User.findOne({
             where: {id: req.param('_id')},
             select: ['campings']
         }).populate('campings')
+        .paginate({
+            page:page?page:undefined,
+            limit:limit?limit:undefined,
+        })
         .then(data => {
             return res.send({
                 'data': data

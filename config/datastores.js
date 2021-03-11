@@ -14,6 +14,10 @@
  */
 
 module.exports.datastores = {
+  test:{
+    adapter: 'sails-mongo',
+    url: 'mongodb://root@localhost/netBDTest',
+  },
 
 
   /***************************************************************************

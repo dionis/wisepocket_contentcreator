@@ -1,7 +1,6 @@
 :host {
 
     .content {
-
         form {
             width: 100%;
             max-width: 800px !important;
@@ -17,7 +16,74 @@
 
         .horizontal-stepper-wrapper,
         .vertical-stepper-wrapper {
-            max-width: 800px;
+            max-width: 1000px;
+        }
+        .dropzone{
+          padding: 1rem;
+          text-align: center;
+          border: dashed 1px #979797;
+          position: relative;
+          margin: 10px auto;
+          margin-left: 10px;
+          margin-right: 10px;
+          max-width: 50%;
+          input{
+              opacity: 0;
+              position: absolute;
+              z-index: 2;
+              width: 100%;
+              height: 100%;
+              top: 0;
+              left: 0;
+          }
+          
+          .preview{
+              width: 100%;
+              height: 100%;
+              top: 0;
+              left: 40%;
+              max-height: max-content;
+              max-width: max-content;
+          }
+          #iconlabel{
+            bottom: 0;
+          }
+          label{
+              color: white;
+              width: 183px;
+              height: 33px;
+              border-radius: 21.5px;
+              background-color: #db202f;
+              padding: 8px 16px;
+              position: relative;
+          }
+          .campaign-icon{
+            margin: 10px auto;
+            margin-left: 5px;
+            margin-right: 5px;
+            width: 100%;
+            height: 100%;
+            left: 35%;
+          }
+
+          h3{
+              font-size: 20px;
+              font-weight: 300;
+              color: #38424c;
+              margin-top: 10px;
+              margin-bottom: 10px;
+          }
+
+          .images{
+              width: 50%;   
+              height: 70%;
+              margin: 10px auto;
+              margin-left: 5px;
+              margin-right: 5px ;
+              max-width: 50%;
+              max-height: 70%;
+          }
+
         }
     }
 }

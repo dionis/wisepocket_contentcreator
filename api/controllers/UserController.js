@@ -47,7 +47,7 @@ module.exports = {
               return res.sendStatus(500);
             }
             if(!user){
-                return res.sendStatus(400,{
+                return res.status(400).send(400,{
                     'error': 'User not found'
                 });
             }
@@ -83,6 +83,27 @@ module.exports = {
         if (req.wantsJSON) {
         return res.ok('Logged out successfully!');
         }
+    },
+
+    getUsers: async (req,res)=>{
+        const page = req.param('page')
+        const limit  = req.param('limit')
+        let user= null;
+        await User.find()
+        .paginate({
+            page:page?page:undefined,
+            limit:limit?limit:undefined
+        })
+        .then(users=>{
+            if(!users) return res.sendStatus(400);
+                return res.send({
+                    'data': users
+                })
+        })
+        .catch(err=>{
+            return res.send(err);
+        })
+        
     },
 
     getUserById: async (req,res)=>{

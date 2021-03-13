@@ -7,18 +7,10 @@
         ]
     },
   "files": [
-<<<<<<< HEAD
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
-    "include": [
-        "src/**/*.d.ts"
-=======
     "assets/app/main.ts",
     "assets/app/polyfills.ts"
   ],
     "include": [
         "assets/app/**/*.d.ts"
->>>>>>> 859b3d27b686fbf7af80b86a10911b55299787fb
     ]
 }

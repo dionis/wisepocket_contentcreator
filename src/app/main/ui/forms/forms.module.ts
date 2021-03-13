@@ -13,7 +13,7 @@ import { FormsComponent } from 'app/main/ui/forms/forms.component';
 
 const routes: Routes = [
     {
-        path     : 'ui/forms',
+        path     : 'forms',
         component: FormsComponent
     }
 ];

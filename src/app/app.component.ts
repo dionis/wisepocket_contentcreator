@@ -65,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy
         this._translateService.addLangs(['en', 'tr', 'es']);
 
         // Set the default language
-        this._translateService.setDefaultLang('en');
+        this._translateService.setDefaultLang('es');
 
         // Set the navigation translations
         this._fuseTranslationLoaderService.loadTranslations(navigationEnglish, navigationTurkish, navigationSpanish);
@@ -144,6 +144,7 @@ export class AppComponent implements OnInit, OnDestroy
                 }
 
                 // Color theme - Use normal for loop for IE11 compatibility
+                // tslint:disable-next-line:prefer-for-of
                 for ( let i = 0; i < this.document.body.classList.length; i++ )
                 {
                     const className = this.document.body.classList[i];

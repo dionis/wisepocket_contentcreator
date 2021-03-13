@@ -1,0 +1,51 @@
+Wizard
+
+Que se extienda a todo lo ancho del espacio de trabajo
+
+
+Paso 1
+
+Poner internacionalizacion en los componentes
+
+Validad que el nombre de la campana solo pueda tener de 100 a 120 caracteres
+
+
+Validar que la descripcion de a campana tenga solo 800 caracteres
+
+
+Paso 2
+
+Validad la cantidad de caracteres y que solo sean numeros en el telefono (20)
+
+Validar que se entre solo un website
+
+Validad el tamano de el correo
+Eje:
+
+Permite esto:
+rreina05@gmail.com.vddd.vvv.vvv.vv.vv.com.vddd.vvv.vvv.vv.vv.v.com.vddd.vvv.vvv.vv.
+
+Paso 3 Buscar
+ Base de Datos de nombre de Paises y de Estados para evitar que la persona tecle esos nombres
+
+
+ Revisar porque en el Paso 2 y el Paso 3 se repite el codigo postal. Es asi en la Historia de Usuario???
+
+
+ Falta un Paso para los contactos de
+
+ Facebook, telegram, Watshapp, Twitter, likendlind y otros
+
+ Revisar si existe forma de validar que sean verdaderos
+
+
+ Paso 4 (Imagene)
+ Ademas de arrastrar permitir buscar por el sistema de archivo al dar clic
+
+ Validar que solo sean jpg, png.
+ Buscar formas de poder estimar el tamano del archivo para poder restringirlos.
+
+ Permitir subir un video mp4 pequeno.
+
+
+ El ultimo paso debe ser un resumen de todos los pasos

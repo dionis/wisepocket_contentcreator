@@ -144,6 +144,7 @@ export class AppComponent implements OnInit, OnDestroy
                 }
 
                 // Color theme - Use normal for loop for IE11 compatibility
+                // tslint:disable-next-line:prefer-for-of
                 for ( let i = 0; i < this.document.body.classList.length; i++ )
                 {
                     const className = this.document.body.classList[i];

@@ -57,6 +57,7 @@ module.exports.routes = {
  'DELETE /camping/deleteCamping': 'CampingController.deleteCamping',
  'GET /camping/campingslist': 'CampingController.getCampings',
  'GET /camping/campingslistbyUser/:_id': 'CampingController.getCampingsbyUser',
+ 'GET /download': 'CampingController.downloadImage',
 
 
 

@@ -27,9 +27,11 @@ module.exports.policies = {
 
   CampingController: {
     '*': 'isAuthenticated',
+    create: true,
     editCamping: true,
     getCampings:true,
     deleteCamping:true,
+    downloadImage: true
   },
 
   ImagenController: {

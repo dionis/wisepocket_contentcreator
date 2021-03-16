@@ -32,9 +32,8 @@ export class UserService {
 
   singUp(user): Promise<any>{
     return new Promise((resolve,reject)=>{
-
-
-        this._http.post(  environment.sails_services_urlpath+":"+environment.sails_services_urlport+'/singUp',user).subscribe(res=>{
+        this._http.post(  environment.sails_services_urlpath+":"+environment.sails_services_urlport+'/singUp',user)
+        .subscribe(res=>{
           resolve(res);
         },reject)
     })

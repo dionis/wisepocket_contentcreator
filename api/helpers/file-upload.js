@@ -33,8 +33,7 @@ module.exports = {
   fn: async function (inputs,exits) {
     if(inputs.req.file)
       inputs.req.file('campIcon').upload({
-        adapter: require('skipper-gridfs'),
-        uri: 'mongodb://localhost:27017/netBD'
+        dirname: require('path').resolve(sails.config.appPath, 'assets/images')
       }, function (err, filesUploaded) {
         if (err) throw 'upload_err';
         //sails.log.debug(filesUploaded.length)

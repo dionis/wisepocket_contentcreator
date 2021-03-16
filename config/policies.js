@@ -31,7 +31,8 @@ module.exports.policies = {
     editCamping: true,
     getCampings:true,
     deleteCamping:true,
-    downloadImage: true
+    downloadImage: true,
+    uploadFile:true
   },
 
   ImagenController: {

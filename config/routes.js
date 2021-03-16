@@ -51,14 +51,16 @@ module.exports.routes = {
  //Image's Requests
  'POST /addImg': 'ImagenController.create',
 
+ 'POST /uploadFile': 'CampingController.uploadFile',
+ 'GET /download': 'CampingController.downloadImage',
+
  //Camping's Requests
  'POST /camping/addCamping': 'CampingController.create',
  'PATCH /camping/editCamping': 'CampingController.editCamping',
  'DELETE /camping/deleteCamping': 'CampingController.deleteCamping',
  'GET /camping/campingslist': 'CampingController.getCampings',
  'GET /camping/campingslistbyUser/:_id': 'CampingController.getCampingsbyUser',
- 'GET /download': 'CampingController.downloadImage',
-
+ 
 
 
 

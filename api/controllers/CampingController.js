@@ -32,18 +32,13 @@ module.exports = {
                 createdby: user.id
             }).fetch()
             .then(async (camping)=>{
-                sails.log.debug('entra bien');
-                images = await sails.helpers.fileUpload(req)
-                .tolerate('noUsersFound', ()=>{ 
-                    res.status(500).send({
-                        'error': 'error Uploading'
-                    })
-                });
-                sails.log.debug(images);
+                //sails.log.debug('entra bien');
+                
+                //sails.log.debug(images);
                 return res.send({
                     'success': true,
                     'message': 'Record Created',
-                    'files': images,
+                    //'files': images,
                     'data': camping 
                 })
             })
@@ -163,6 +158,18 @@ module.exports = {
         //         })
         //     })
         // }) 
+    },
+
+    uploadFile: async (req,res)=>{
+        file = await sails.helpers.fileUpload(req)
+                .tolerate('noUsersFound', ()=>{ 
+                    res.status(500).send({
+                        'error': 'error Uploading'
+                    })
+                });
+        res.send({
+            'files':file
+        })
     },
 
     downloadImage: async (req,res)=>{

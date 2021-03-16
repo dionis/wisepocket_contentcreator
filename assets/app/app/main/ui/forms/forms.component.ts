@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileValidator } from 'ngx-material-file-input';
 import { Subject } from 'rxjs';
+import { FileUploadService } from '../../../services/file-upload.service';
 
 @Component({
     selector   : 'forms',
@@ -36,7 +37,8 @@ export class FormsComponent implements OnInit, OnDestroy
      * @param {FormBuilder} _formBuilder
      */
     constructor(
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private uploadService: FileUploadService
     )
     {
         // Set the private defaults
@@ -84,6 +86,7 @@ export class FormsComponent implements OnInit, OnDestroy
     onSelectIcon(event){
         console.log(event.addedFiles)
        this.campIconf = event.addedFiles[0];
+       this.files.push(event.addedFiles[0]);
     }
     onSelect(event) {
         console.log(event);
@@ -103,7 +106,7 @@ export class FormsComponent implements OnInit, OnDestroy
             default:
                 break;
         }
-        //this.files.push(...event.addedFiles);
+        this.files.push(event.addedFiles[0]);
         //console.log(this.files);
       }
       
@@ -126,6 +129,8 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     finishHorizontalStepper(): void
     {
+        this.uploadService.upload_files(this.files);
+        console.log(this.files)
         alert('You have finished the horizontal stepper!');
     }
 }

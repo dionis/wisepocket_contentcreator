@@ -125,9 +125,15 @@ export const navigation: FuseNavigation[] = [
   translate: 'NAV.WIZARD',
   type     : 'item',
   icon     : 'send',
-  url      : 'wizard/forms'
+  url      : 'forms'
 },
-
+{
+  id   : 'profile',
+  title: 'Profile',
+  type : 'item',
+  icon : 'person',
+  url  : '/pages/profile'
+},
 
 
 ];

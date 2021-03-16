@@ -15,6 +15,7 @@ module.exports = {
         sails.log.debug(payload);
         await User.findOne({id:payload._id}, async (err, user)=> {
             if (err) { 
+                sails.log.debug('No match User');
                 return res.sendStatus(500);
             }
             await Camping.create({
@@ -30,15 +31,20 @@ module.exports = {
                 contactoFacebook: req.body.contactoFacebook,
                 createdby: user.id
             }).fetch()
-            .then(camping=>{
+            .then(async (camping)=>{
+                //sails.log.debug('entra bien');
+                
+                //sails.log.debug(images);
                 return res.send({
                     'success': true,
                     'message': 'Record Created',
+                    //'files': images,
                     'data': camping 
                 })
             })
             .catch(err=>{
-                return res.sendStatus(500); 
+                sails.log.debug('entra Err');
+                return res.status(500).send(err); 
             })
         })
 
@@ -152,6 +158,32 @@ module.exports = {
         //         })
         //     })
         // }) 
+    },
+
+    uploadFile: async (req,res)=>{
+        file = await sails.helpers.fileUpload(req)
+                .tolerate('noUsersFound', ()=>{ 
+                    res.status(500).send({
+                        'error': 'error Uploading'
+                    })
+                });
+        res.send({
+            'files':file
+        })
+    },
+
+    downloadImage: async (req,res)=>{
+        if(req.param('fd')){
+            image = await sails.helpers.fileDownload(req);
+            res.contentType('image/jpg');
+            res.send({
+                'data': image
+            });
+        }else{
+            return res.status(400).send({
+                'error': 'fd parameter reqired'
+            })
+        }
     }
 
 };

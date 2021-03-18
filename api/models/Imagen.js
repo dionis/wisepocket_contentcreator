@@ -20,14 +20,34 @@ module.exports = {
       unique: true,
     },
 
-    camping:{
-      collection: 'camping',
+    campaign:{
+      collection: 'campaign',
       via: 'logo'
     },
 
-    perfil:{
-      model: 'user',
-      unique: true,
+    image1: {
+      collection: 'campaign',
+      via: 'carrusel1'
+    },
+
+    image2: {
+      collection: 'campaign',
+      via: 'carrusel2'
+    },
+
+    image3: {
+      collection: 'campaign',
+      via: 'carrusel3'
+    },
+
+    image4: {
+      collection: 'campaign',
+      via: 'carrusel4'
+    },
+
+    perfil: {
+      collection: 'user',
+      via: 'imgPerfil'
     }
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗

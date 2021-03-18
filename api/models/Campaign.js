@@ -10,22 +10,98 @@
 module.exports = {
 
   attributes: {
-
-    nombre: {
+    titulo: {
       type: 'string',
-      unique: true,
       required: true,
+      unique: true
     },
 
-    fecha: {
+    descripcion: {
       type: 'string',
-      columnType: 'date'
+      required: true,
+      columnName:'descripcion'
     },
 
-    // user: {
-    //   collection: 'user',
-    //   via: 'campings'
-    // }
+    contanctoTelefono: {
+      type: 'number',
+      required: true,
+      columnName:'contanctoTelefono'
+    },
+
+    colorPrincipal: {
+      type: 'number',
+      columnName:'colorPrincipal'
+    },
+    colorSecundario: {
+      type: 'number',
+      columnName:'colorSecundario'
+    },
+
+    contactoEmail: {
+      type: 'string',
+      required: true
+    },
+
+    direccionPostal: {
+      type: 'string',
+      required: true
+    },
+
+    contactoTelegram: {
+      type: 'string',
+      allowNull: true
+    },
+
+    contactoWhatsapp: {
+      type: 'string',
+      allowNull: true
+    },
+
+    contactoFacebook: {
+      type: 'string',
+      allowNull: true
+    },
+
+    logo: {
+      model: 'imagen',
+      //unique: true,
+    },
+
+    carrusel1:{
+      model: 'imagen',
+    },
+
+    carrusel2:{
+      model: 'imagen',
+    },
+
+    carrusel3:{
+      model: 'imagen',
+    },
+
+    carrusel4:{
+      model: 'imagen',
+    },
+    
+    createdby :{
+      model: 'user'
+    }
+
+
+    //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
+    //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
+    //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+
+
+    //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
+    //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
+    //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
+
+
+    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
+    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
+    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+
   },
 
 

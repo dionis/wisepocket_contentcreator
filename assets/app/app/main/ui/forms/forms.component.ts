@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileValidator } from 'ngx-material-file-input';
 import { Subject } from 'rxjs';
+import { FileUploadService } from '../../../services/file-upload.service';
 
 @Component({
     selector   : 'forms',
@@ -36,11 +37,13 @@ export class FormsComponent implements OnInit, OnDestroy
      * @param {FormBuilder} _formBuilder
      */
     constructor(
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private uploadService: FileUploadService
     )
     {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+        
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -54,24 +57,27 @@ export class FormsComponent implements OnInit, OnDestroy
     {
         // Horizontal Stepper form steps
         this.horizontalStepperStep1 = this._formBuilder.group({
-            nameCampaign: ['', Validators.required],
-            description : ['', Validators.required]
+            nameCampaign: ['', [Validators.required, Validators.minLength(100), Validators.maxLength(120)]],
+            description : ['', [Validators.required, Validators.maxLength(800)]]
         });
 
+        const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
         this.horizontalStepperStep2 = this._formBuilder.group({
-            phone: ['', Validators.required],
+            phone: ['', [Validators.required,Validators.pattern("^[0-9]*$"),Validators.maxLength(20)]],
             postalCode: ['', [Validators.required, Validators.maxLength(5)]],
-            website: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]]
+            website: ['', [Validators.required, Validators.pattern(reg)]],
+            email: ['', [Validators.required, Validators.email, Validators.maxLength(30)]]
         });
 
         this.horizontalStepperStep3 = this._formBuilder.group({
+            country   : ['', Validators.required],
             city      : ['', Validators.required],
-            state     : ['', Validators.required],
-            postalCode: ['', [Validators.required, Validators.maxLength(5)]]
+            state     : ['', Validators.required]
         });
         console.log(this.inputFile);
-
+        console.log(this.horizontalStepperStep2.get('phone'));
+        console.log(this.horizontalStepperStep2.get('website'));
+        console.log(this.horizontalStepperStep2.get('email'));
     }
     onChage(event){
         console.log(event);
@@ -80,6 +86,7 @@ export class FormsComponent implements OnInit, OnDestroy
     onSelectIcon(event){
         console.log(event.addedFiles)
        this.campIconf = event.addedFiles[0];
+       this.files.push(event.addedFiles[0]);
     }
     onSelect(event) {
         console.log(event);
@@ -99,7 +106,7 @@ export class FormsComponent implements OnInit, OnDestroy
             default:
                 break;
         }
-        //this.files.push(...event.addedFiles);
+        this.files.push(event.addedFiles[0]);
         //console.log(this.files);
       }
       
@@ -122,6 +129,8 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     finishHorizontalStepper(): void
     {
+        this.uploadService.upload_files(this.files);
+        console.log(this.files)
         alert('You have finished the horizontal stepper!');
     }
 }

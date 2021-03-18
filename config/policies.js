@@ -25,13 +25,14 @@ module.exports.policies = {
     logout: true,
   },
 
-  CampingController: {
+  CampaignController: {
     '*': 'isAuthenticated',
     create: true,
-    editCamping: true,
-    getCampings:true,
-    deleteCamping:true,
-    downloadImage: true
+    editCampaign: true,
+    getCampaigns:true,
+    deleteCampaign:true,
+    downloadImage: true,
+    uploadFile:true
   },
 
   ImagenController: {

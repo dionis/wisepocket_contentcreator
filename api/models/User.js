@@ -62,16 +62,16 @@ module.exports = {
       defaultsTo: true,
     },
 
-    campings: {
-      collection: 'camping',
+    campaings: {
+      collection: 'campaign',
       via: 'createdby'
     },
 
-    imgPerfil: {
-      collection: 'imagen',
-      via: 'perfil'
-
+    imgPerfil:{
+      model: 'imagen',
+      unique: true,
     }
+
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝

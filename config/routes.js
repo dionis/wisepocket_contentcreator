@@ -51,15 +51,15 @@ module.exports.routes = {
  //Image's Requests
  'POST /addImg': 'ImagenController.create',
 
- 'POST /uploadFile': 'CampingController.uploadFile',
- 'GET /download': 'CampingController.downloadImage',
+ 'POST /uploadFile': 'CampaignController.uploadFile',
+ 'GET /download': 'CampaignController.downloadImage',
 
- //Camping's Requests
- 'POST /camping/addCamping': 'CampingController.create',
- 'PATCH /camping/editCamping': 'CampingController.editCamping',
- 'DELETE /camping/deleteCamping': 'CampingController.deleteCamping',
- 'GET /camping/campingslist': 'CampingController.getCampings',
- 'GET /camping/campingslistbyUser/:_id': 'CampingController.getCampingsbyUser',
+ //Campaign's Requests
+ 'POST /campaign/addCampaign': 'CampaignController.create',
+ 'PATCH /campaign/editCampaign': 'CampaignController.editCampaign',
+ 'DELETE /campaign/deleteCampaign': 'CampaignController.deleteCampaign',
+ 'GET /campaign/Campaignslist': 'CampaignController.getCampaigns',
+ 'GET /campaign/CampaignslistbyUser/:_id': 'CampaignController.getCampaignsbyUser',
  
 
 

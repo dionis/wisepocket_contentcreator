@@ -43,6 +43,7 @@ export class FormsComponent implements OnInit, OnDestroy
     {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+        
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -56,24 +57,27 @@ export class FormsComponent implements OnInit, OnDestroy
     {
         // Horizontal Stepper form steps
         this.horizontalStepperStep1 = this._formBuilder.group({
-            nameCampaign: ['', Validators.required],
-            description : ['', Validators.required]
+            nameCampaign: ['', [Validators.required, Validators.minLength(100), Validators.maxLength(120)]],
+            description : ['', [Validators.required, Validators.maxLength(800)]]
         });
 
+        const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
         this.horizontalStepperStep2 = this._formBuilder.group({
-            phone: ['', Validators.required],
+            phone: ['', [Validators.required,Validators.pattern("^[0-9]*$"),Validators.maxLength(20)]],
             postalCode: ['', [Validators.required, Validators.maxLength(5)]],
-            website: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]]
+            website: ['', [Validators.required, Validators.pattern(reg)]],
+            email: ['', [Validators.required, Validators.email, Validators.maxLength(30)]]
         });
 
         this.horizontalStepperStep3 = this._formBuilder.group({
+            country   : ['', Validators.required],
             city      : ['', Validators.required],
-            state     : ['', Validators.required],
-            postalCode: ['', [Validators.required, Validators.maxLength(5)]]
+            state     : ['', Validators.required]
         });
         console.log(this.inputFile);
-
+        console.log(this.horizontalStepperStep2.get('phone'));
+        console.log(this.horizontalStepperStep2.get('website'));
+        console.log(this.horizontalStepperStep2.get('email'));
     }
     onChage(event){
         console.log(event);

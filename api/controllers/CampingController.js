@@ -14,7 +14,8 @@ module.exports = {
         const payload = await jwt.decode(token);
         sails.log.debug(payload);
         await User.findOne({id:payload._id}, async (err, user)=> {
-            if (err) { 
+            if (err) {
+                sails.log.error(err);
                 sails.log.debug('No match User');
                 return res.sendStatus(500);
             }
@@ -34,7 +35,7 @@ module.exports = {
             .then(async (camping)=>{
                 sails.log.debug('entra bien');
                 images = await sails.helpers.fileUpload(req)
-                .tolerate('noUsersFound', ()=>{ 
+                .tolerate('noUsersFound', ()=>{
                     res.status(500).send({
                         'error': 'error Uploading'
                     })
@@ -44,12 +45,12 @@ module.exports = {
                     'success': true,
                     'message': 'Record Created',
                     'files': images,
-                    'data': camping 
+                    'data': camping
                 })
             })
             .catch(err=>{
                 sails.log.debug('entra Err');
-                return res.status(500).send(err); 
+                return res.status(500).send(err);
             })
         })
 
@@ -81,7 +82,7 @@ module.exports = {
             return res.sendStatus(500);
         })
     },
-  
+
     getCampings: (req,res)=>{
         const page = req.param('page')
         const limit  = req.param('limit')
@@ -162,7 +163,7 @@ module.exports = {
         //             'data': campings
         //         })
         //     })
-        // }) 
+        // })
     },
 
     downloadImage: async (req,res)=>{

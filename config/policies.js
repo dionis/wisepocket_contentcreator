@@ -32,7 +32,8 @@ module.exports.policies = {
     getCampaigns:true,
     deleteCampaign:true,
     downloadImage: true,
-    uploadFile:true
+    uploadFile:true,
+    deleteFile:true,
   },
 
   ImagenController: {

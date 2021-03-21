@@ -69,7 +69,6 @@ module.exports = {
 
     imgPerfil:{
       model: 'imagen',
-      unique: true,
     }
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗

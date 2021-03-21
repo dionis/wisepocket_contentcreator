@@ -4,7 +4,6 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
- const { image } = require('d3-fetch');
 const jwt = require('jsonwebtoken');
  module.exports = {
  
@@ -20,26 +19,62 @@ const jwt = require('jsonwebtoken');
                 if (err) { 
                     //ails.log.debug('No match User');
                     return res.status(500).send({
-                        'error': 'No match User'
+                        'error': err
                     });
                 }
-                images = await sails.helpers.fileUpload(req)
-                    .tolerate('noReqImages', ()=>{ 
-                        return res.status(400).send({
-                            'message': 'No images founds'
+                if(!user) return res.status(400).send({'error': 'User Not Found'});
+                const campIcon = [];
+                //images= [];
+                // if(req.file('campIcon')){
+                // campIcon = await sails.helpers.fileUpload(req,'campIcon')
+                // .tolerate('upload_err', ()=>{
+                //     return res.status(500).send({
+                //         'message': 'Error while uploading files'
+                //     });
+                // })
+                // .tolerate('noImageCreated', ()=>{
+                //     return res.status(500).send({
+                //         'message': 'Error while saving Image objects'
+                //     });
+                // });
+                req.file('campIcon').upload({
+                    dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
+                }, async (err,file)=>{
+                    if(err) return res.status(500).send({'error': err });
+                    if(file.length === 1){
+                        sails.log.debug(file)
+                        await Imagen.create({
+                            titulo: file[0].filename,
+                            path: file[0].fd,
+                          }).fetch()
+                        .then(img=>{
+                            sails.log.debug(img)
+                            campIcon.push(img);
+                            sails.log.debug('CampIcon',campIcon);
                         })
-                    })
-                    .tolerate('upload_err', ()=>{
-                        return res.status(500).send({
-                            'message': 'Error whie uploading files'
-                        })
-                    })
-                    .intercept('noImageCreated', ()=>{
-                        return res.status(500).send({
-                            'message': 'Imposible to save image in th BD'
-                        })
-                    })
-                    sails.log.debug(images)
+                        .catch(err=>{
+                            sails.log.debug('entra')
+                            return res.status(500).send({'error': err });
+                        });
+                    } 
+                });
+                // }
+                images = await sails.helpers.fileUpload(req,'images')                
+                .tolerate('upload_err', (err)=>{
+                    return res.status(500).send({
+                        'message': 'Error while uploading files',
+                        'error': err
+                    });
+                })
+                .tolerate('noImageCreated', (err)=>{
+                    return res.status(500).send({
+                        'message': 'Error while saving Image objects',
+                        'error': err
+                    });
+                });
+                //sails.log.debug(images)
+                sails.log.debug('CampIcon',campIcon);
+                sails.log.debug('Immages',images);
                 await Campaign.create({
                     titulo: req.body.titulo,
                     descripcion: req.body.descripcion,
@@ -52,11 +87,11 @@ const jwt = require('jsonwebtoken');
                     contactoWhatsapp: req.body.contactoWhatsapp,
                     contactoFacebook: req.body.contactoFacebook,
                     createdby: user.id,
-                    logo: images[0]?images[0].id:null,
-                    carrusel1: images[1]?images[1].id:null,
-                    carrusel2: images[2]?images[2].id:null,
-                    carrusel3: images[3]?images[3].id:null,
-                    carrusel4: images[4]?images[4].id:null
+                    logo: campIcon[0]?campIcon[0].id:null,
+                    carrusel1: images[0]?images[0].id:null,
+                    carrusel2: images[1]?images[1].id:null,
+                    carrusel3: images[2]?images[2].id:null,
+                    carrusel4: images[3]?images[3].id:null
                 }).fetch()
                 .then(async (campaign)=>{
                     //sails.log.debug('entra bien');
@@ -78,10 +113,25 @@ const jwt = require('jsonwebtoken');
  
      },
  
-     editCampaign: (req,res)=>{
+     editCampaign: async (req,res)=>{
          if(!req.param('id')){return req.sendStatus(400)}
-         sails.log.debug(req.allParams());
-         return Campaign.update({id:req.param('id')},req.allParams()).fetch()
+         if(req.file('file')){
+            file = await sails.helpers.fileUpload(req)
+            .tolerate('upload_err', (err)=>{
+               return res.status(500).send({
+                   'message': 'Error while uploading files',
+                   'error': err
+               });
+           })
+           .tolerate('noImageCreated', (err)=>{
+               return res.status(500).send({
+                   'message': 'Error while saving Image objects',
+                   'error': err
+               });
+           }) 
+         }
+         sails.log.debug(req.body);
+         return await Campaign.update({id:req.param('id')},req.allParams()).fetch()
          .then(campaign=>{
              return res.send({
                  'message': 'Record Edited',
@@ -191,16 +241,18 @@ const jwt = require('jsonwebtoken');
  
      uploadFile: async (req,res)=>{
          file = await sails.helpers.fileUpload(req)
-                 .tolerate('noReqImages', ()=>{ 
-                     return res.status(400).send({
-                         'message': 'No images founds'
-                     })
-                 })
-                 .tolerate('upload_err', ()=>{
-                     return res.status(500).send({
-                         'message': 'Error whie uploading files'
-                     })
-                 })
+         .tolerate('upload_err', (err)=>{
+            return res.status(500).send({
+                'message': 'Error while uploading files',
+                'error': err
+            });
+        })
+        .tolerate('noImageCreated', (err)=>{
+            return res.status(500).send({
+                'message': 'Error while saving Image objects',
+                'error': err
+            });
+        })
          res.send({
              'message': 'Files Uploaded Successfully',
              'files':file
@@ -219,6 +271,14 @@ const jwt = require('jsonwebtoken');
                  'error': 'fd parameter reqired'
              })
          }
-     }
- 
- };
+     },
+    
+    deleteFile(req,res){
+        path = req.param('fd');
+        const fs = require('fs');
+        fs.unlink(path, function(err) {
+        if (err) return res.status(400).send({'error': err}); // handle error as you wish
+        return res.ok();
+        });    
+    }
+};

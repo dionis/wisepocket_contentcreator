@@ -9,7 +9,7 @@
  * https://sailsjs.com/config/bootstrap
  */
 const bcrypt = require('bcrypt');
-
+var faker = require('faker');
 module.exports.bootstrap = async function() {
 
   // Import dependencies
@@ -65,11 +65,56 @@ module.exports.bootstrap = async function() {
   // await User.createEach([
   //   { email: 'admin@example.com', phone:'+53552448', name: 'Ryan Dahl', fullName: 'Ryan Dahl', isSuperAdmin: true, password: await sails.helpers.passwords.hashPassword('12345678') },
   // ]);
-
-  await User.createEach([
-    { email: 'admin@example.com', phone:'+53552448', name: 'Ryan Dahl', fullName: 'Ryan Dahl', isSuperAdmin: true, password: hashpass },
-  ]);
-
+  const users = [
+    { email: 'admin@example.com', phone:'+53552448', name: 'Ryan Dahl', fullName: 'Ryan Dahl', isSuperAdmin: true, password: hashpass }
+  ];
+  let registerSize = 10;
+  for (let index = 0; index < registerSize; index++) {
+    name = faker.name.findName();
+    email = faker.internet.email(name);
+    phone = faker.phone.phoneNumber();
+    organization = faker.company.companyName()
+    cargo = faker.name.jobTitle();
+    password =  await bcrypt.hash(faker.internet.password(),salt)
+    users.push({
+      email: email, 
+      phone: phone, 
+      name: name, 
+      organization: organization,
+      cargo: cargo, 
+      isSuperAdmin: false, 
+      isOrganization: true,
+      password: password 
+    })   
+  }
+  userlist = await User.createEach(users).fetch();
+  registerSize = 50;
+  campaigns = [];
+  for (let index = 0; index < registerSize; index++) {
+    user = faker.random.arrayElement(userlist);
+    let phone = faker.phone.phoneNumber();
+    campaigns.push({
+        titulo: faker.company.companyName(),
+        descripcion: "This is a test ",
+        contanctoTelefono: phone,
+        colorPrincipal: faker.commerce.color(),
+        colorSecundario: faker.commerce.color(),
+        contactoEmail: faker.internet.email(faker.name.findName()),
+        direccionPostal: faker.address.zipCode(),
+        contactoTelegram: "@roloas",
+        contactoWhatsapp: phone,
+        contactoFacebook: "@sdadscd",
+        createdby: user.id,
+      }
+    );
+  }
+  await sails.helpers.createCampaign(campaigns)
+  .tolerate('notUniqueError', (err)=>{
+    sails.log.warn('Error', err)
+  })
+  .tolerate('someError',(err)=>{
+    sails.log.warn('Error', err)
+  })
   // Save new bootstrap version
   await sails.helpers.fs.writeJson.with({
     destination: bootstrapLastRunInfoPath,

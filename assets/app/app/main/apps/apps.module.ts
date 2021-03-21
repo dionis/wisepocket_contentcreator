@@ -75,7 +75,12 @@ const routes = [
       path        : 'contacts',
       canActivate: [AuthguardService],
       loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule)
-  }
+  },
+  {
+    path        : 'maps',
+    canActivate: [AuthguardService],
+    loadChildren: () => import('./componets-third-party/components-third-party.module').then(m => m.ComponentsThirdPartyModule)
+}
  ];
 
 @NgModule({

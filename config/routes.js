@@ -53,9 +53,11 @@ module.exports.routes = {
 
  'POST /uploadFile': 'CampaignController.uploadFile',
  'GET /download': 'CampaignController.downloadImage',
+ 'POST /deleteFile': 'CampaignController.deleteFile',
 
  //Campaign's Requests
  'POST /campaign/addCampaign': 'CampaignController.create',
+ //'POST /addCampaign': {action:'campaign/registrate'},
  'PATCH /campaign/editCampaign': 'CampaignController.editCampaign',
  'DELETE /campaign/deleteCampaign': 'CampaignController.deleteCampaign',
  'GET /campaign/Campaignslist': 'CampaignController.getCampaigns',

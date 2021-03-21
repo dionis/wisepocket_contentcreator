@@ -23,17 +23,17 @@ module.exports = {
     },
 
     contanctoTelefono: {
-      type: 'number',
+      type: 'string',
       required: true,
       columnName:'contanctoTelefono'
     },
 
     colorPrincipal: {
-      type: 'number',
+      type: 'string',
       columnName:'colorPrincipal'
     },
     colorSecundario: {
-      type: 'number',
+      type: 'string',
       columnName:'colorSecundario'
     },
 
@@ -49,7 +49,7 @@ module.exports = {
 
     contactoTelegram: {
       type: 'string',
-      allowNull: true
+      allowNull: true,
     },
 
     contactoWhatsapp: {

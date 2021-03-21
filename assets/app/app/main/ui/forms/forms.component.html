@@ -307,7 +307,7 @@
                                 margin-bottom: 10px;">  
                                     <ngx-dropzone [id]="campaignicon" class="campaign-icon" (change)="onSelectIcon($event)" 
                                     [multiple] = "false"
-                                    accept="image/jpeg,image/jpg,image/png,image/gif">
+                                    accept="image/jpg,image/png">
                                         <ngx-dropzone-label>Campaing Icon</ngx-dropzone-label>
                                         <ngx-dropzone-image-preview *ngIf="campIconf" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="campIconf">
                                             <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
@@ -323,14 +323,14 @@
                                 <div fxLayout="row" fxFlex="1 0 auto" >
                                     <ngx-dropzone id="image1" class="images" (change)="onSelect($event)" 
                                     [multiple] = "false"
-                                    accept="image/jpeg,image/jpg,image/png,image/gif">
+                                    accept="image/jpg,image/png">
                                         <ngx-dropzone-label>Image 1</ngx-dropzone-label>
                                         <ngx-dropzone-image-preview *ngIf="image1" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image1">
                                             <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
                                         </ngx-dropzone-image-preview>
                                     </ngx-dropzone>
                                     <ngx-dropzone id="image2" class="images" (change)="onSelect($event)" 
-                                    accept="image/jpeg,image/jpg,image/png,image/gif"
+                                    accept="image/jpg,image/png"
                                     [multiple] = "false">
                                         <ngx-dropzone-label>Image 2</ngx-dropzone-label>
                                         <ngx-dropzone-image-preview *ngIf="image2" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image2">
@@ -340,14 +340,14 @@
                                 </div>
                                 <div fxLayout="row" fxFlex="1 0 auto" >
                                     <ngx-dropzone id="image3" class="images" (change)="onSelect($event)" [multiple] = "false"
-                                    accept="image/jpeg,image/jpg,image/png,image/gif">
+                                    accept="image/jpg,image/png">
                                         <ngx-dropzone-label>Image 3</ngx-dropzone-label>
                                         <ngx-dropzone-image-preview *ngIf="image3" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image3">
                                             <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
                                         </ngx-dropzone-image-preview>
                                     </ngx-dropzone>
                                     <ngx-dropzone id="image4" class="images" (change)="onSelect($event)" 
-                                    accept="image/jpeg,image/jpg,image/png,image/gif"
+                                    accept="image/jpg,image/png"
                                     [multiple] = "false">
                                         <ngx-dropzone-label>Image 4</ngx-dropzone-label>
                                         <ngx-dropzone-image-preview *ngIf="image4" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image4">

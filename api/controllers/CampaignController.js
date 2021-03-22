@@ -4,10 +4,10 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-const jwt = require('jsonwebtoken');
+//const jwt = require('jsonwebtoken');
  module.exports = {
  
-     create: async (req,res)=>{
+    /*  create: async (req,res)=>{
          if(!req.body){ return res.sendStatus(400);}
          const token = req.header('Authorization').split('Bearer ')[1];
          //sails.log.debug(token);
@@ -23,8 +23,6 @@ const jwt = require('jsonwebtoken');
                     });
                 }
                 if(!user) return res.status(400).send({'error': 'User Not Found'});
-                const campIcon = [];
-                //images= [];
                 // if(req.file('campIcon')){
                 // campIcon = await sails.helpers.fileUpload(req,'campIcon')
                 // .tolerate('upload_err', ()=>{
@@ -37,44 +35,45 @@ const jwt = require('jsonwebtoken');
                 //         'message': 'Error while saving Image objects'
                 //     });
                 // });
-                req.file('campIcon').upload({
-                    dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
-                }, async (err,file)=>{
-                    if(err) return res.status(500).send({'error': err });
-                    if(file.length === 1){
-                        sails.log.debug(file)
-                        await Imagen.create({
-                            titulo: file[0].filename,
-                            path: file[0].fd,
-                          }).fetch()
-                        .then(img=>{
-                            sails.log.debug(img)
-                            campIcon.push(img);
-                            sails.log.debug('CampIcon',campIcon);
-                        })
-                        .catch(err=>{
-                            sails.log.debug('entra')
-                            return res.status(500).send({'error': err });
-                        });
-                    } 
-                });
-                // }
-                images = await sails.helpers.fileUpload(req,'images')                
-                .tolerate('upload_err', (err)=>{
-                    return res.status(500).send({
-                        'message': 'Error while uploading files',
-                        'error': err
-                    });
-                })
-                .tolerate('noImageCreated', (err)=>{
-                    return res.status(500).send({
-                        'message': 'Error while saving Image objects',
-                        'error': err
-                    });
-                });
+                // const campIcon = [];
+                // req.file('campIcon').upload({
+                //     dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
+                // }, async (err,file)=>{
+                //     if(err) return res.status(500).send({'error': err });
+                //     if(file.length === 1){
+                //         sails.log.debug(file)
+                //         await Imagen.create({
+                //             titulo: file[0].filename+'-'+req.body.titulo,
+                //             path: file[0].fd,
+                //           }).fetch()
+                //         .then(img=>{
+                //             sails.log.debug(img)
+                //             campIcon.push(img);
+                //             sails.log.debug('CampIcon',campIcon);
+                //         })
+                //         .catch(err=>{
+                //             sails.log.debug('entra')
+                //             return res.status(500).send({'error': err });
+                //         });
+                //     } 
+                // });
+                // // }
+                // images = await sails.helpers.fileUpload(req,'images')                
+                // .tolerate('upload_err', (err)=>{
+                //     return res.status(500).send({
+                //         'message': 'Error while uploading files',
+                //         'error': err
+                //     });
+                // })
+                // .tolerate('noImageCreated', (err)=>{
+                //     return res.status(500).send({
+                //         'message': 'Error while saving Image objects',
+                //         'error': err
+                //     });
+                // });
                 //sails.log.debug(images)
-                sails.log.debug('CampIcon',campIcon);
-                sails.log.debug('Immages',images);
+                // sails.log.debug('CampIcon',campIcon);
+                // sails.log.debug('Immages',images);
                 await Campaign.create({
                     titulo: req.body.titulo,
                     descripcion: req.body.descripcion,
@@ -87,11 +86,11 @@ const jwt = require('jsonwebtoken');
                     contactoWhatsapp: req.body.contactoWhatsapp,
                     contactoFacebook: req.body.contactoFacebook,
                     createdby: user.id,
-                    logo: campIcon[0]?campIcon[0].id:null,
-                    carrusel1: images[0]?images[0].id:null,
-                    carrusel2: images[1]?images[1].id:null,
-                    carrusel3: images[2]?images[2].id:null,
-                    carrusel4: images[3]?images[3].id:null
+                    // logo: campIcon[0]?campIcon[0].id:null,
+                    // carrusel1: images[0]?images[0].id:null,
+                    // carrusel2: images[1]?images[1].id:null,
+                    // carrusel3: images[2]?images[2].id:null,
+                    // carrusel4: images[3]?images[3].id:null
                 }).fetch()
                 .then(async (campaign)=>{
                     //sails.log.debug('entra bien');
@@ -114,25 +113,51 @@ const jwt = require('jsonwebtoken');
      },
  
      editCampaign: async (req,res)=>{
-         if(!req.param('id')){return req.sendStatus(400)}
-         if(req.file('file')){
-            file = await sails.helpers.fileUpload(req)
-            .tolerate('upload_err', (err)=>{
-               return res.status(500).send({
-                   'message': 'Error while uploading files',
-                   'error': err
-               });
-           })
-           .tolerate('noImageCreated', (err)=>{
-               return res.status(500).send({
-                   'message': 'Error while saving Image objects',
-                   'error': err
-               });
-           }) 
-         }
+         if(!req.param('id')){return req.status(400).send({'error':'No Id Found in Request'})}
+        //  if(req.file('file')){
+        //     file = await sails.helpers.fileUpload(req)
+        //     .tolerate('upload_err', (err)=>{
+        //        return res.status(500).send({
+        //            'message': 'Error while uploading files',
+        //            'error': err
+        //        });
+        //    })
+        //    .tolerate('noImageCreated', (err)=>{
+        //        return res.status(500).send({
+        //            'message': 'Error while saving Image objects',
+        //            'error': err
+        //        });
+        //    }) 
+        //  }
          sails.log.debug(req.body);
-         return await Campaign.update({id:req.param('id')},req.allParams()).fetch()
+         Campaign.update({id:req.param('id')},req.allParams()).fetch()
          .then(campaign=>{
+             //if(req.file('campIcon')._files.length>0){
+            //sails.log.debug('entra al if');
+            // req.file('campIcon').upload({
+            //     dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
+            // }, async (err,files)=>{
+            //     if(err) return res.status(500).send({'error': err });
+            //     if(files.length > 0){
+            //         sails.log.debug(files)
+            //         sails.log.debug('CAmpaign Icon', campaign)
+            //         await Imagen.update({id:campaign[0].logo},{
+            //             titulo: files[0].filename,
+            //             path: files[0].fd,
+            //         })
+            //         .then(img=>{
+            //             sails.log.debug(img)
+            //             // campIcon.push(img);
+            //             // sails.log.debug('CampIcon',campIcon);
+            //         })
+            //         .catch(err=>{
+            //             sails.log.debug('mal update image')
+            //             return res.status(500).send({'error': err });
+            //         });
+            //     } 
+            // });
+            
+            // }
              return res.send({
                  'message': 'Record Edited',
                  'data': campaign
@@ -280,5 +305,5 @@ const jwt = require('jsonwebtoken');
         if (err) return res.status(400).send({'error': err}); // handle error as you wish
         return res.ok();
         });    
-    }
+    } */
 };

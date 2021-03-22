@@ -18,6 +18,9 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
+  'campaign/*': 'isAuthenticated',
+  'image/*': 'isAuthenticated',
+
   UserController: {
     '*': 'isAuthenticated',
     login: true,
@@ -34,6 +37,7 @@ module.exports.policies = {
     downloadImage: true,
     uploadFile:true,
     deleteFile:true,
+    getCampaign: true,
   },
 
   ImagenController: {

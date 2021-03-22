@@ -49,19 +49,26 @@ module.exports.routes = {
  'GET /users' : 'UserController.getUsers',
 
  //Image's Requests
- 'POST /addImg': 'ImagenController.create',
+ 'POST /addImg': {action:'image/create'},
 
  'POST /uploadFile': 'CampaignController.uploadFile',
  'GET /download': 'CampaignController.downloadImage',
  'POST /deleteFile': 'CampaignController.deleteFile',
 
  //Campaign's Requests
- 'POST /campaign/addCampaign': 'CampaignController.create',
- //'POST /addCampaign': {action:'campaign/registrate'},
- 'PATCH /campaign/editCampaign': 'CampaignController.editCampaign',
+ //'POST /campaign/addCampaign': 'CampaignController.create',
+ 'POST /campaign/addCampaign': {action:'campaign/registrate'},
+ //'PATCH /campaign/editCampaign': 'CampaignController.editCampaign',
+ 'PATCH /campaign/editCampaign': {action:'campaign/edit'},
+ //'DELETE /campaign/deleteCampaign': 'CampaignController.deleteCampaign',
  'DELETE /campaign/deleteCampaign': 'CampaignController.deleteCampaign',
- 'GET /campaign/Campaignslist': 'CampaignController.getCampaigns',
- 'GET /campaign/CampaignslistbyUser/:_id': 'CampaignController.getCampaignsbyUser',
+ //'GET /campaign/Campaignslist': 'CampaignController.getCampaigns',
+ 'GET /campaign/Campaignslist': {action:'campaign/showall'},
+ //'GET /campaign/CampaignslistbyUser/:_id': 'CampaignController.getCampaignsbyUser',
+ 'GET /campaign/CampaignslistbyUser': {action:'campaign/show-campaign-of-user'},
+
+ 'GET /campaign/CampaignDetail': {action:'campaign/get-campaign'},
+
  
 
 

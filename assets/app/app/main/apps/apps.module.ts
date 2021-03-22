@@ -77,7 +77,7 @@ const routes = [
       loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule)
   },
   {
-    path        : 'maps',
+    path        : 'componets-third-party',
     canActivate: [AuthguardService],
     loadChildren: () => import('./componets-third-party/components-third-party.module').then(m => m.ComponentsThirdPartyModule)
 }

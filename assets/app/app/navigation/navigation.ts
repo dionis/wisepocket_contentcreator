@@ -79,7 +79,14 @@ export const navigation: FuseNavigation[] = [
               type      : 'item',
               url       : '/apps/e-commerce/orders/1',
               exactMatch: true
-          }
+          },
+          {
+            id        : 'maps',
+            title     : 'Maps',
+            type      : 'item',
+            url       : '/apps/componets-third-party/google-maps',
+            exactMatch: true
+        }
       ]
   },
 

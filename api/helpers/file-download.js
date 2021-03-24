@@ -8,8 +8,8 @@ module.exports = {
 
 
   inputs: {
-    req: {
-      type: 'ref',
+    path: {
+      type: 'string',
       description: 'The current incoming request (req).',
       required: true
     },
@@ -32,16 +32,18 @@ module.exports = {
 
 
   fn: function (inputs,exits) {
-    var blobAdapter = require('skipper-gridfs')({
-        uri: 'mongodb://localhost:27017/netBD'
-    });
-
-    var fd = inputs.req.param('fd'); // value of fd comes here from get request
+    // var blobAdapter = require('skipper-gridfs')({
+    //     uri: 'mongodb://localhost:27017/netBD'
+    // });
+    const fs = require('fs');
+    var fd = inputs.path; // value of fd comes here from get request
     sails.log.debug(fd);
-    blobAdapter.read(fd, function(error , file) {
+    arrayString = fd.split("'\\'")// Arreglar
+    sails.log.debug(arrayString);
+    fs.read(fd, function(error , file) {
         if(error) {
           sails.log.debug(error);
-            throw 'download_err';
+          exits.download_err(error);
         } else {
           sails.log.debug(file);
           return exits.success(file);

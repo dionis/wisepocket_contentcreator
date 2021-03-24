@@ -50,10 +50,11 @@ module.exports.routes = {
 
  //Image's Requests
  'POST /addImg': {action:'image/create'},
+ 'GET /downloadImage': {action:'image/download'},
+ 'DELETE /deleteImage': {action: 'image/delete'},
 
- 'POST /uploadFile': 'CampaignController.uploadFile',
+
  'GET /download': 'CampaignController.downloadImage',
- 'POST /deleteFile': 'CampaignController.deleteFile',
 
  //Campaign's Requests
  //'POST /campaign/addCampaign': 'CampaignController.create',

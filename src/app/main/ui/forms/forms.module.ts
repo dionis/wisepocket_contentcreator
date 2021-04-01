@@ -7,9 +7,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { FormsComponent } from 'app/main/ui/forms/forms.component';
+
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { from } from 'rxjs';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import {DragDorpDirective} from 'e:/proyectos/wisepocket_contentcreator/assets/app/app/main/ui/forms/dragdrop.directive';
 
 const routes: Routes = [
     {
@@ -20,7 +27,8 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        FormsComponent
+        FormsComponent,
+        DragDorpDirective,
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -32,7 +40,11 @@ const routes: Routes = [
         MatSelectModule,
         MatStepperModule,
 
+        TranslateModule,
+
         FuseSharedModule,
+        MaterialFileInputModule,
+        NgxDropzoneModule,
     ]
 })
 export class UIFormsModule

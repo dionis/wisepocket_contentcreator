@@ -88,6 +88,7 @@ $typography: mat-typography-config(
 @import "../app/main/apps/mail/mail.theme";
 @import "../app/main/apps/mail-ngrx/mail.theme";
 
+@import "../app/main/campaigns/list-camp/list-camp.theme.scss";
 
 @import "../app/main/authentication/register/register.theme.scss";
 @import "../app/main/authentication/login/login.theme.scss";
@@ -97,6 +98,7 @@ $typography: mat-typography-config(
 @import "../app/main/pages/profile/tabs/about/about.theme";
 @import "../app/main/pages/profile/tabs/photos-videos/photos-videos.theme";
 @import "../app/main/pages/profile/tabs/timeline/timeline.theme";
+
 
 
 // Define a mixin for easier access
@@ -109,6 +111,7 @@ $typography: mat-typography-config(
    @include e-commerce-products-theme($theme);
    @include mail-theme($theme);
    @include mail-ngrx-theme($theme);
+   @include list-campaign-theme($theme);
 
 
     // Layout components

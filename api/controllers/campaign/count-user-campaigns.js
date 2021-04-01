@@ -1,8 +1,9 @@
-const jwt = require('jsonwebtoken')
+const { result } = require("lodash");
+
 module.exports = {
 
 
-  friendlyName: 'Show campaign of user',
+  friendlyName: 'Count user campaigns',
 
 
   description: '',
@@ -20,27 +21,20 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    const page = this.req.param('page')
-    const limit  = this.req.param('limit')
     const token = this.req.header('Authorization').split('Bearer ')[1];
     //sails.log.debug(token);
     //const payload = await jwt.decode(token);
     await jwt.verify(token,'hjghdvdfjvnishvishr4oo', async (err,payload)=>{
         if(err) return this.res.status(500).send({'error': err});
-        await Campaign.find({
+        await Campaign.count({
           where: {createdby: payload._id},
         })
-        .populate('logo')
-        .paginate({
-            page:page?page:undefined,
-            limit:limit?limit:undefined,
-        })
-        .then(campaigns => {
+        .then(result => {
           return this.res.send({
             'success': true,
-            'message': 'Records Fetched',
+            'message': 'Records Counted',
             //'files': images,
-            'data': campaigns
+            'data': result
           })
         })
         .catch(err=>{
@@ -48,6 +42,7 @@ module.exports = {
         });
 
     });
+
   }
 
 

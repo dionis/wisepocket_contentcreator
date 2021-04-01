@@ -1,15 +1,17 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { DataSource } from '@angular/cdk/collections';
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, fromEvent, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
-import { fuseAnimations } from '../../../../../@fuse/animations';
-import { FuseUtils } from '../../../../../@fuse/utils';
+import { fuseAnimations } from '@fuse/animations';
+import { FuseUtils } from '@fuse/utils';
 
 import { EcommerceProductsService } from '../../../../../app/main/apps/e-commerce/products/products.service';
 import { takeUntil } from 'rxjs/internal/operators';
+import { CampaignService } from '../../../../services/campaign.service';
+import { Campaign } from '../../../../models/campaign.model';
 
 @Component({
     selector     : 'e-commerce-products',
@@ -21,7 +23,15 @@ import { takeUntil } from 'rxjs/internal/operators';
 export class EcommerceProductsComponent implements OnInit
 {
     dataSource: FilesDataSource | null;
-    displayedColumns = ['id', 'image', 'name', 'category', 'price', 'quantity', 'active'];
+    displayedColumns = ['id',
+        'logo', 
+        'titulo', 
+        'contactoTelefono',
+        'direccionPostal',
+        'contactoEmail', 
+        //'contactoTelegram', 
+        'active'
+    ];
 
     @ViewChild(MatPaginator, {static: true})
     paginator: MatPaginator;
@@ -36,7 +46,8 @@ export class EcommerceProductsComponent implements OnInit
     private _unsubscribeAll: Subject<any>;
 
     constructor(
-        private _ecommerceProductsService: EcommerceProductsService
+        private _ecommerceProductsService: EcommerceProductsService,
+        private campService: CampaignService
     )
     {
         // Set the private defaults
@@ -52,8 +63,11 @@ export class EcommerceProductsComponent implements OnInit
      */
     ngOnInit(): void
     {
-        this.dataSource = new FilesDataSource(this._ecommerceProductsService, this.paginator, this.sort);
-
+        // console.log(this._ecommerceProductsService.products)
+        // this.dataSource = new CampaignDataSource(this.campService);
+        // console.log(this.dataSource)
+        // this.dataSource.loadCampaigns(0,10);
+        this.dataSource = new FilesDataSource(this.campService, this.paginator, this.sort);
         fromEvent(this.filter.nativeElement, 'keyup')
             .pipe(
                 takeUntil(this._unsubscribeAll),
@@ -73,25 +87,39 @@ export class EcommerceProductsComponent implements OnInit
 
 export class FilesDataSource extends DataSource<any>
 {
+    private campagainsSubject= new BehaviorSubject<any[]>([]);
+    private campaigns: any[] = [];
     private _filterChange = new BehaviorSubject('');
     private _filteredDataChange = new BehaviorSubject('');
 
     /**
      * Constructor
      *
-     * @param {EcommerceProductsService} _ecommerceProductsService
+     * @param {CampaignService} campService
      * @param {MatPaginator} _matPaginator
      * @param {MatSort} _matSort
      */
     constructor(
-        private _ecommerceProductsService: EcommerceProductsService,
+        private campService: CampaignService,
         private _matPaginator: MatPaginator,
         private _matSort: MatSort
     )
     {
         super();
 
-        this.filteredData = this._ecommerceProductsService.products;
+        this.filteredData = this.loadCampaigns();
+    }
+    loadCampaigns(): any[]{
+        let arrayCamp: any[] = [];
+        this.campService.fetchCampagins('','')
+        .subscribe((campaigns:any[])=>{
+            console.log(campaigns);
+            this.campagainsSubject.next(campaigns)
+            this.campaigns = campaigns;
+            arrayCamp = campaigns;
+        } );
+        return arrayCamp;
+        //console.log(this.campagainsSubject.value)
     }
 
     /**
@@ -102,7 +130,7 @@ export class FilesDataSource extends DataSource<any>
     connect(): Observable<any[]>
     {
         const displayDataChanges = [
-            this._ecommerceProductsService.onProductsChanged,
+            this.campagainsSubject,
             this._matPaginator.page,
             this._filterChange,
             this._matSort.sortChange
@@ -111,13 +139,13 @@ export class FilesDataSource extends DataSource<any>
         return merge(...displayDataChanges)
             .pipe(
                 map(() => {
-                        let data = this._ecommerceProductsService.products.slice();
+                        let data = this.campaigns.slice();
 
                         data = this.filterData(data);
 
                         this.filteredData = [...data];
 
-                        data = this.sortData(data);
+                        //data = this.sortData(data);
 
                         // Grab the page's slice of data.
                         const startIndex = this._matPaginator.pageIndex * this._matPaginator.pageSize;
@@ -131,6 +159,9 @@ export class FilesDataSource extends DataSource<any>
     // -----------------------------------------------------------------------------------------------------
 
     // Filtered data
+    get countCampaigns():number{
+        return this.campaigns.length
+    }
     get filteredData(): any
     {
         return this._filteredDataChange.value;
@@ -193,7 +224,7 @@ export class FilesDataSource extends DataSource<any>
                 case 'id':
                     [propertyA, propertyB] = [a.id, b.id];
                     break;
-                case 'name':
+                case 'titulo':
                     [propertyA, propertyB] = [a.name, b.name];
                     break;
                 case 'categories':
@@ -222,5 +253,39 @@ export class FilesDataSource extends DataSource<any>
      */
     disconnect(): void
     {
+    }
+}
+
+export class CampaignDataSource extends DataSource<Campaign>{
+    private campagainsSubject= new BehaviorSubject<Campaign[]>([]);
+    private loadingSubject = new BehaviorSubject<boolean>(false);
+
+    constructor(private campService:CampaignService,
+                
+        ){
+            super();
+        }
+    
+    get filteredData(): any
+    {
+        return this.campagainsSubject.value;
+    }
+
+    connect(collectionViewer: CollectionViewer): Observable<Campaign[]>{
+        return this.campagainsSubject.asObservable();
+    }
+    disconnect(){
+        this.campagainsSubject.complete();
+        this.loadingSubject.complete();
+    }
+
+    loadCampaigns(page:number,limit:number){
+
+        this.campService.getCampaignUser(page.toString(),limit.toString())
+        .subscribe(campaigns=>{
+            console.log(campaigns)
+            this.campagainsSubject.next(campaigns)
+        } );
+        console.log(this.campagainsSubject.value)
     }
 }

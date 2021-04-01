@@ -27,22 +27,31 @@ export const navigation: FuseNavigation[] = [
         id       : 'camping',
         title    : 'Campings',
         translate: 'NAV.CAMPINGS',
-        type     : 'group',
+        type     : 'collapsable',
         children : [
             {
                 id       : 'campings_table',
-                title    : 'Campings List',
+                title    : 'Campings',
                 translate: 'NAV.CampingsList.TITLE',
                 type     : 'item',
                 icon     : 'list',
-                url      : '/#',
+                url      : 'campaigns/campaigns-list',
                 badge    : {
                     title    : '25',
                     translate: 'NAV.CampingsList.BADGE',
                     bg       : '#F44336',
                     fg       : '#FFFFFF'
                 }
-            }
+            },
+            {
+                id       : 'wizard',
+                title    : 'Wizard',
+                translate: 'NAV.WIZARD',
+                type     : 'item',
+                icon     : 'send',
+                url      : 'campaigns/forms'
+              },
+
         ]
     },
     {
@@ -126,14 +135,7 @@ export const navigation: FuseNavigation[] = [
   icon     : 'account_box',
   url      : '/apps/contacts'
 },
-{
-  id       : 'wizard',
-  title    : 'Wizard',
-  translate: 'NAV.WIZARD',
-  type     : 'item',
-  icon     : 'send',
-  url      : 'forms'
-},
+
 {
   id   : 'profile',
   title: 'Profile',

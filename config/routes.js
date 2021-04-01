@@ -70,6 +70,9 @@ module.exports.routes = {
 
  'GET /campaign/CampaignDetail': {action:'campaign/get-campaign'},
 
+ 'GET /campaign/countall': {action:'campaign/countall'},
+ 'GET /campaign/countUserCampaigns': {action:'campaign/count-user-campaigns'},
+
  
 
 

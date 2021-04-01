@@ -19,7 +19,7 @@
                     shopping_basket
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Products
+                    Your Campaigns
                 </span>
             </div>
             <!-- / APP TITLE -->
@@ -35,9 +35,9 @@
 
             <!-- ADD BUTTON -->
             <button mat-raised-button
-                    [routerLink]="'/apps/e-commerce/products/new'"
+                    [routerLink]="'/campaigns/forms'"
                     class="add-product-button fuse-white mt-24 mt-md-0">
-                <span>ADD NEW CAMPAING</span>
+                <span>ADD NEW Campaign</span>
             </button>
             <!-- / ADD BUTTON -->
 
@@ -55,66 +55,72 @@
 
                 <!-- ID Column -->
                 <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
                     <mat-cell *matCellDef="let product">
                         <p class="text-truncate">{{product.id}}</p>
                     </mat-cell>
                 </ng-container>
 
                 <!-- Image Column -->
-                <ng-container matColumnDef="image">
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <ng-container matColumnDef="logo">
+                    <mat-header-cell *matHeaderCellDef>Icon</mat-header-cell>
                     <mat-cell *matCellDef="let product">
-                        <img class="product-image"
-                             *ngIf="product.featuredImageId" [alt]="product.name"
-                             [src]="product.images[product.featuredImageId].url"/>
-                        <img *ngIf="!product.featuredImageId"
+                        <img class="product-image !== null"
+                             *ngIf="product.logo" [alt]="product.logo.titulo"
+                             [src]="product.logo.path"/>
+                        <img *ngIf="product.logo === null"
                              [src]="'assets/images/ecommerce/product-image-placeholder.png'">
+                    </mat-cell> -->
+                </ng-container>
+                <!-- Titulo Camp-->
+                <ng-container matColumnDef="titulo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Titulo</mat-header-cell>
+                    <mat-cell *matCellDef="let product">
+                        <p class="text-truncate">{{product.titulo}}</p>
                     </mat-cell>
                 </ng-container>
-
                 <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                <ng-container matColumnDef="contactoTelefono">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Phone Contact</mat-header-cell>
                     <mat-cell *matCellDef="let product">
-                        <p class="text-truncate">{{product.name}}</p>
+                        <p class="text-truncate">{{product.contanctoTelefono}}</p>
                     </mat-cell>
                 </ng-container>
 
                 <!-- Category Column -->
-                <ng-container matColumnDef="category">
-                    <mat-header-cell *matHeaderCellDef fxHide mat-sort-header fxShow.gt-md>Category</mat-header-cell>
-                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-md>
+                <ng-container matColumnDef="direccionPostal">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >Postal Code</mat-header-cell>
+                    <mat-cell *matCellDef="let product">
                         <p class="category text-truncate">
-                            {{product.categories[0]}}
+                            {{product.direccionPostal}}
                         </p>
                     </mat-cell>
                 </ng-container>
 
                 <!-- Price Column -->
-                <ng-container matColumnDef="price">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Price</mat-header-cell>
+                <ng-container matColumnDef="contactoEmail">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Email</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
                         <p class="price text-truncate">
-                            {{product.priceTaxIncl | currency:'USD':'symbol'}}
+                            {{product.contactoEmail}}
                         </p>
                     </mat-cell>
                 </ng-container>
 
-                <!-- Quantity Column -->
-                <ng-container matColumnDef="quantity">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Quantity</mat-header-cell>
+                <!-- Quantity Column
+                <ng-container matColumnDef="contactoTelegram">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Telegram</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-sm>
 
                         <span class="quantity-indicator text-truncate"
                               [ngClass]="{'red-500':product.quantity <= 5, 'amber-500':product.quantity > 5 && product.quantity <= 25,'green-600':product.quantity > 25}">
                         </span>
                         <span>
-                            {{product.quantity}}
+                            {{product.contactoTelegram}}
                         </span>
 
                     </mat-cell>
-                </ng-container>
+                </ng-container> -->
 
                 <!-- Active Column -->
                 <ng-container matColumnDef="active">
@@ -136,7 +142,7 @@
             </mat-table>
 
             <mat-paginator #paginator
-                           [length]="dataSource.filteredData.length"
+                           [length]="dataSource.countCampaigns"
                            [pageIndex]="0"
                            [pageSize]="10"
                            [pageSizeOptions]="[5, 10, 25, 100]">
@@ -147,4 +153,3 @@
     </div>
     <!-- / CENTER -->
 </div>
-

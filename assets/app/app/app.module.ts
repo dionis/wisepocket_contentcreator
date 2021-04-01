@@ -21,7 +21,6 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { AppComponent } from '../app/app.component';
 import { LayoutModule } from '../app/layout/layout.module';
 import { SampleModule } from '../app/main/sample/sample.module';
-import {UIFormsModule} from '../app/main/ui/forms/forms.module';
 import { AuthenticationModule } from './main/authentication/authentication.module';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './main/authentication/auth.interceptors.service';
@@ -29,6 +28,13 @@ import { Error404Module } from './main/errors/404/error-404.module';
 import {Error500Module} from './main/errors/500/error-500.module'
 import { AuthguardService } from './services/authguard.service';
 import {AppMaterialModule} from './app.material.module';
+import { ListCampComponent } from './main/campaigns/list-camp/list-camp.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { CampaignsModule } from './main/campaigns/campaigns.module';
+
+//import { ListCampComponent } from './main/campaigns/list-camp/list-camp.component';
 
 const appRoutes: Routes = [
     {
@@ -48,16 +54,16 @@ const appRoutes: Routes = [
       loadChildren: () => import('./main/apps/apps.module').then(m => m.AppsModule)
   },
   {
-    path        : 'wizard',
+    path        : 'campaigns',
     canActivate: [AuthguardService],
-    loadChildren: () => import('./main/ui/forms/forms.module').then(m => m.UIFormsModule)
-},
+    loadChildren: () => import('../app/main/campaigns/campaigns.module').then(m => m.CampaignsModule)
+    },
   {
       path        : 'pages',
       canActivate: [AuthguardService],
       loadChildren: () => import('./main/pages/pages.module').then(m => m.PagesModule)
   },
-   {
+    {
         path      : '**',
         redirectTo: 'auth/login'
     },
@@ -67,7 +73,8 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        //ListCampComponent
     ],
     imports     : [
         BrowserModule,
@@ -93,7 +100,7 @@ const appRoutes: Routes = [
         LayoutModule,
         SampleModule,
         AuthenticationModule,
-        UIFormsModule,
+        CampaignsModule,
         Error404Module,
         Error500Module,
         AppMaterialModule,

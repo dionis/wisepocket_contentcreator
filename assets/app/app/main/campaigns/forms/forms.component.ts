@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileValidator } from 'ngx-material-file-input';
 import { Subject } from 'rxjs';
+import { CampaignService } from '../../../services/campaign.service';
 import { FileUploadService } from '../../../services/file-upload.service';
 
 @Component({
@@ -38,7 +39,8 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     constructor(
         private _formBuilder: FormBuilder,
-        private uploadService: FileUploadService
+        private uploadService: FileUploadService,
+        private campService: CampaignService
     )
     {
         // Set the private defaults
@@ -73,6 +75,7 @@ export class FormsComponent implements OnInit, OnDestroy
             postalCode: ['', [Validators.required, Validators.maxLength(5)]]
         });
         console.log(this.inputFile);
+        this.campService.fetchCampagins('0','10');
 
     }
     onChage(event){

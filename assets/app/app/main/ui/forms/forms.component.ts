@@ -1,8 +1,15 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FuseTranslationLoaderService } from '../../../../@fuse/services/translation-loader.service';
+
 import { FileValidator } from 'ngx-material-file-input';
 import { Subject } from 'rxjs';
 import { FileUploadService } from '../../../services/file-upload.service';
+
+
+import { locale as english } from './i18n/en';
+import { locale as turkish } from './i18n/tr';
+import { locale as spanish } from './i18n/es';
 
 @Component({
     selector   : 'forms',
@@ -38,11 +45,13 @@ export class FormsComponent implements OnInit, OnDestroy
      */
     constructor(
         private _formBuilder: FormBuilder,
-        private uploadService: FileUploadService
+        private uploadService: FileUploadService,
+        private _fuseTranslationLoaderService: FuseTranslationLoaderService
     )
     {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+        this._fuseTranslationLoaderService.loadTranslations(english, turkish, spanish);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -105,7 +114,7 @@ export class FormsComponent implements OnInit, OnDestroy
         this.files.push(event.addedFiles[0]);
         //console.log(this.files);
       }
-      
+
     /**
      * On destroy
      */

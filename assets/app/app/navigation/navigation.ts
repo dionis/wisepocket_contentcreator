@@ -32,13 +32,13 @@ export const navigation: FuseNavigation[] = [
             {
                 id       : 'campings_table',
                 title    : 'Campings List',
-                translate: 'NAV.CampingsList.TITLE',
+                translate: 'NAV.CAMPINGIN_LIST.TITLE',
                 type     : 'item',
                 icon     : 'list',
                 url      : '/#',
                 badge    : {
                     title    : '25',
-                    translate: 'NAV.CampingsList.BADGE',
+                    translate: 'NAV.CAMPINGIN_LIST.BADGE',
                     bg       : '#F44336',
                     fg       : '#FFFFFF'
                 }

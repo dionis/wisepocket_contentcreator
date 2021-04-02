@@ -8,11 +8,11 @@ export const locale = {
                 'BADGE': '25'
             },
             'CAMPINGS': 'Campañas',
-            'CampingsList': {
+            'CAMPINGIN_LIST': {
                 'TITLE': 'Lista de Campañas',
-                'BADGE': '12' 
+                'BADGE': '12'
             },
         },
-        
+
     }
 };

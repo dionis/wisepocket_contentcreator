@@ -8,9 +8,9 @@ export const locale = {
                 'BADGE': '15'
             },
             'CAMPINGS': 'Campings',
-            'CampingsList': {
+            'CAMPINGIN_LIST': {
                 'TITLE': 'Campings List',
-                'BADGE': '12' 
+                'BADGE': '12'
             },
         }
     }

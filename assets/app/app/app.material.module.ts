@@ -4,6 +4,9 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [],
@@ -17,6 +20,9 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     MatButtonModule,
     MatIconModule,
     MaterialFileInputModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule
   ],
   exports: [
     MatMomentDateModule,
@@ -25,6 +31,9 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     MatButtonModule,
     MatIconModule,
     MaterialFileInputModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule
   ]
 })
 export class AppMaterialModule { }

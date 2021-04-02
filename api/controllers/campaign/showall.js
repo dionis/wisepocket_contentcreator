@@ -20,6 +20,7 @@ module.exports = {
   fn: async function (inputs) {
     const page = this.req.param('page')
     const limit  = this.req.param('limit')
+    sails.log.debug(page,limit)
     await Campaign.find()
     .populate('createdby')
     .paginate({
@@ -30,7 +31,8 @@ module.exports = {
         return this.res.send({
           'success': true,
           'message': 'Records Fetched',
-          'data': campaigns
+          'data': campaigns,
+          'count': campaigns.length
         })
     })
     .catch(err=>{

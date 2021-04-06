@@ -62,6 +62,16 @@ module.exports = {
       allowNull: true
     },
 
+    city:{
+      type: 'string',
+      required: true
+    },
+
+    state: {
+      type: 'string',
+      required: true
+    },
+
     logo: {
       model: 'imagen',
       //unique: true,

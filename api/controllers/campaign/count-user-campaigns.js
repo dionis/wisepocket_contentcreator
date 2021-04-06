@@ -1,5 +1,4 @@
-const { result } = require("lodash");
-
+var jwt = require('jsonwebtoken')
 module.exports = {
 
 

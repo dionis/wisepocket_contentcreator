@@ -250,11 +250,15 @@
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>Postal Code</mat-label>
-                                <input matInput #postalCode2 formControlName="postalCode"
-                                    maxlength="5" required>
-                                <mat-hint align="end">{{postalCode2.value.length}} / 5</mat-hint>
-                                <mat-error>Postal Code is required!</mat-error>
+                                <mat-label>Primary Color</mat-label>
+                                <input matInput formControlName="primaryColor" required>
+                                <mat-error>Primary Color is required!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Secondary Color</mat-label>
+                                <input matInput formControlName="secondaryColor" required>
+                                <mat-error>Secondary Color is required!</mat-error>
                             </mat-form-field>
 
                         </div>

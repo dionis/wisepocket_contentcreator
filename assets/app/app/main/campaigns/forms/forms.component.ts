@@ -8,9 +8,9 @@ import { CampaignService } from '../../../services/campaign.service';
 import { FileUploadService } from '../../../services/file-upload.service';
 
 
-import { locale as english } from './i18n/en';
-import { locale as turkish } from './i18n/tr';
-import { locale as spanish } from './i18n/es';
+// import { locale as english } from './i18n/en';
+// import { locale as turkish } from './i18n/tr';
+// import { locale as spanish } from './i18n/es';
 
 @Component({
     selector   : 'forms',
@@ -52,7 +52,7 @@ export class FormsComponent implements OnInit, OnDestroy
     {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
-        this._fuseTranslationLoaderService.loadTranslations(english, turkish, spanish);
+        //this._fuseTranslationLoaderService.loadTranslations(english, turkish, spanish);
     }
 
     // -----------------------------------------------------------------------------------------------------

@@ -7,6 +7,9 @@ import { Campaign } from '../../../models/campaign.model';
 import { Imagen } from '../../../models/image.model';
 import { CampaignService } from '../../../services/campaign.service';
 import { FileUploadService } from '../../../services/file-upload.service';
+import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
+import { locale as english } from '../../../main/campaigns/forms/i18n/en';
+import { locale as spanish } from '../../../main/campaigns/forms/i18n/es';
 
 @Component({
     selector   : 'forms',
@@ -22,6 +25,7 @@ export class FormsComponent implements OnInit, OnDestroy
     horizontalStepperStep2: FormGroup;
     horizontalStepperStep3: FormGroup;
     horizontalStepperStep4: FormGroup;
+    horizontalStepperStep5: FormGroup;
     readonly maxSize = 104857600;
     campaignicon:string = 'campaignicon';
     @ViewChild('fileDorp',{static:false}) inputFile:ElementRef;
@@ -39,13 +43,18 @@ export class FormsComponent implements OnInit, OnDestroy
      * Constructor
      *
      * @param {FormBuilder} _formBuilder
+     * @param {FuseTranslationLoaderService} _fuseTranslationLoaderService
      */
     constructor(
         private _formBuilder: FormBuilder,
         private uploadService: FileUploadService,
-        private campService: CampaignService
+        private campService: CampaignService,
+        private _fuseTranslationLoaderService: FuseTranslationLoaderService
     )
     {
+        // Load the translations
+        this._fuseTranslationLoaderService.loadTranslations(english, spanish);
+
         // Set the private defaults
         this._unsubscribeAll = new Subject();
     }
@@ -61,22 +70,29 @@ export class FormsComponent implements OnInit, OnDestroy
     {
         // Horizontal Stepper form steps
         this.horizontalStepperStep1 = this._formBuilder.group({
-            nameCampaign: ['', Validators.required],
-            description : ['', Validators.required]
+            nameCampaign: ['', [Validators.required, Validators.minLength(100), Validators.maxLength(120)]],
+            description : ['', [Validators.required, Validators.maxLength(800)]]
         });
 
+        const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
         this.horizontalStepperStep2 = this._formBuilder.group({
-            phone: ['', Validators.required],
+            phone: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(20)]],
             postalCode: ['', [Validators.required, Validators.maxLength(5)]],
-            website: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]]
+            website: ['', [Validators.required, Validators.pattern(reg)]],
+            email: ['', [Validators.required, Validators.email, Validators.maxLength(30)]]
         });
 
         this.horizontalStepperStep3 = this._formBuilder.group({
             city      : ['', Validators.required],
             state     : ['', Validators.required],
             primaryColor: ['', Validators.required],
-            secondaryColor: ['', Validators.required],
+            secondaryColor: ['', Validators.required]
+        });
+
+        this.horizontalStepperStep4 = this._formBuilder.group({
+            facebook      : ['', Validators.required],
+            whatsapp      : ['', Validators.required],
+            telegram      : ['', Validators.required]
         });
         //console.log(this.inputFile);
         //this.campService.fetchCampagins('0','10');

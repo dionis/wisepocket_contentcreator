@@ -19,7 +19,7 @@
                     shopping_basket
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Your Campaigns
+                    {{'LIST.MY_CAMPAIGNS' | translate}}
                 </span>
             </div>
             <!-- / APP TITLE -->
@@ -28,7 +28,7 @@
             <div class="search-wrapper mx-32 mx-md-0">
                 <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon>search</mat-icon>
-                    <input #filter placeholder="Search for a product">
+                    <input #filter [placeholder]="'LIST.SEARCH' | translate">
                 </div>
             </div>
             <!-- / SEARCH -->
@@ -37,7 +37,7 @@
             <button mat-raised-button
                     [routerLink]="'/campaigns/forms'"
                     class="add-product-button fuse-white mt-24 mt-md-0">
-                <span>ADD NEW Campaign</span>
+                <span>{{'LIST.NEW_CAMPAIGN' | translate}}</span>
             </button>
             <!-- / ADD BUTTON -->
 
@@ -63,7 +63,7 @@
 
                 <!-- Icon Column -->
                 <ng-container matColumnDef="logo">
-                    <mat-header-cell *matHeaderCellDef>Icon</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef>{{'LIST.ICON' | translate}}</mat-header-cell>
                     <mat-cell *matCellDef="let product">
                         <img class="product-image !== null"
                              *ngIf="product.logo" [alt]="product.logo.titulo"
@@ -74,14 +74,14 @@
                 </ng-container>
                 <!-- Title Column-->
                 <ng-container matColumnDef="titulo">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Titulo</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'LIST.TITLE' | translate}}</mat-header-cell>
                     <mat-cell *matCellDef="let product">
                         <p class="text-truncate">{{product.titulo}}</p>
                     </mat-cell>
                 </ng-container>
                 <!-- Contanct Phone Column -->
                 <ng-container matColumnDef="contactoTelefono">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Phone Contact</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'LIST.PHONE_CONTACT' | translate}}</mat-header-cell>
                     <mat-cell *matCellDef="let product">
                         <p class="text-truncate">{{product.contanctoTelefono}}</p>
                     </mat-cell>
@@ -89,7 +89,7 @@
 
                 <!-- Code Postal Column -->
                 <ng-container matColumnDef="direccionPostal">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header >Postal Code</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header >{{'LIST.POSTAL_CODE' | translate}}</mat-header-cell>
                     <mat-cell *matCellDef="let product">
                         <p class="category text-truncate">
                             {{product.direccionPostal}}
@@ -99,7 +99,7 @@
 
                 <!-- Contact Email Column -->
                 <ng-container matColumnDef="contactoEmail">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Email</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>{{'LIST.EMAIL' | translate}}</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
                         <p class="price text-truncate">
                             {{product.contactoEmail}}
@@ -124,7 +124,7 @@
 
                 <!-- Active Column -->
                 <ng-container matColumnDef="active">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Active</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>{{'LIST.ACTIVE' | translate}}</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
                         <mat-icon *ngIf="product.active" class="active-icon green-600 s-16">check</mat-icon>
                         <mat-icon *ngIf="!product.active" class="active-icon red-500 s-16">close</mat-icon>

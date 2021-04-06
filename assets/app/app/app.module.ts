@@ -25,7 +25,7 @@ import { AuthenticationModule } from './main/authentication/authentication.modul
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './main/authentication/auth.interceptors.service';
 import { Error404Module } from './main/errors/404/error-404.module';
-import {Error500Module} from './main/errors/500/error-500.module'
+import {Error500Module} from './main/errors/500/error-500.module';
 import { AuthguardService } from './services/authguard.service';
 import {AppMaterialModule} from './app.material.module';
 import { ListCampComponent } from './main/campaigns/list-camp/list-camp.component';
@@ -34,7 +34,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CampaignsModule } from './main/campaigns/campaigns.module';
 
-//import { ListCampComponent } from './main/campaigns/list-camp/list-camp.component';
+
 
 const appRoutes: Routes = [
     {
@@ -73,8 +73,8 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent,
-        //ListCampComponent
+        AppComponent
+        
     ],
     imports     : [
         BrowserModule,

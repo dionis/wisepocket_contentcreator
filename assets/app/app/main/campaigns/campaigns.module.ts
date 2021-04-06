@@ -23,12 +23,13 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AgmCoreModule } from '@agm/core';
+import { CampaignDetailComponent } from './product/campaign-detail.component';
 
 const routes: Routes = [
   {
@@ -40,14 +41,21 @@ const routes: Routes = [
       path     : 'campaigns-list',
       canActivate: [AuthguardService],
       component: ListCampComponent
-  }
+  },
+  {
+    path     : 'campaigns-detail/:id',
+    canActivate: [AuthguardService],
+    component: CampaignDetailComponent
+}
+    
 ];
 
 @NgModule({
   declarations: [
     FormsComponent,
     DragDorpDirective,
-    ListCampComponent
+    ListCampComponent,
+    CampaignDetailComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +77,7 @@ const routes: Routes = [
     MatSnackBarModule,
     MatTableModule,
     MatTabsModule,
-
+    MatSnackBarModule,
     FuseSharedModule,
   ]
 })

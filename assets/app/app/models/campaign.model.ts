@@ -1,9 +1,13 @@
+import { Imagen } from "./image.model";
 import { User } from "./user.model";
 
 export class Campaign{
+    id:string;
     titulo: string;
     descripcion: string;
-    contanctoTelefono: string
+    contanctoTelefono: string;
+    state: string;
+    city: string;
     colorPrincipal: string
     colorSecundario: string
     contactoEmail: string
@@ -11,27 +15,10 @@ export class Campaign{
     contactoTelegram: string
     contactoWhatsapp: string
     contactoFacebook: string
-  
-    //   logo: {
-    //     model: 'imagen',
-    //     //unique: true,
-    //   },
-  
-    //   carrusel1:{
-    //     model: 'imagen',
-    //   },
-  
-    //   carrusel2:{
-    //     model: 'imagen',
-    //   },
-  
-    //   carrusel3:{
-    //     model: 'imagen',
-    //   },
-  
-    //   carrusel4:{
-    //     model: 'imagen',
-    //   },
-      
+    logo: string;
+    carrusel1: string;
+    carrusel2: string;
+    carrusel3:string;
+    carrusel4:string; 
     createdby : User
 }

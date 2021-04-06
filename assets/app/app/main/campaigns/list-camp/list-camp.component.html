@@ -61,7 +61,7 @@
                     </mat-cell>
                 </ng-container>
 
-                <!-- Image Column -->
+                <!-- Icon Column -->
                 <ng-container matColumnDef="logo">
                     <mat-header-cell *matHeaderCellDef>Icon</mat-header-cell>
                     <mat-cell *matCellDef="let product">
@@ -72,14 +72,14 @@
                              [src]="'assets/images/ecommerce/product-image-placeholder.png'">
                     </mat-cell> -->
                 </ng-container>
-                <!-- Titulo Camp-->
+                <!-- Title Column-->
                 <ng-container matColumnDef="titulo">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Titulo</mat-header-cell>
                     <mat-cell *matCellDef="let product">
                         <p class="text-truncate">{{product.titulo}}</p>
                     </mat-cell>
                 </ng-container>
-                <!-- Name Column -->
+                <!-- Contanct Phone Column -->
                 <ng-container matColumnDef="contactoTelefono">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Phone Contact</mat-header-cell>
                     <mat-cell *matCellDef="let product">
@@ -87,7 +87,7 @@
                     </mat-cell>
                 </ng-container>
 
-                <!-- Category Column -->
+                <!-- Code Postal Column -->
                 <ng-container matColumnDef="direccionPostal">
                     <mat-header-cell *matHeaderCellDef mat-sort-header >Postal Code</mat-header-cell>
                     <mat-cell *matCellDef="let product">
@@ -97,7 +97,7 @@
                     </mat-cell>
                 </ng-container>
 
-                <!-- Price Column -->
+                <!-- Contact Email Column -->
                 <ng-container matColumnDef="contactoEmail">
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Email</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
@@ -136,7 +136,7 @@
                 <mat-row *matRowDef="let product; columns: displayedColumns;"
                          class="product"
                          matRipple
-                         [routerLink]="'/apps/e-commerce/products/'+product.id+'/'+product.handle">
+                         [routerLink]="'/campaigns/campaigns-detail/'+product.id">
                 </mat-row>
 
             </mat-table>

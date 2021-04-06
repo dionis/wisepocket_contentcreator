@@ -12,13 +12,14 @@ export class FileUploadService {
 
   upload_files(files){
     const formdata = new FormData();
+    //if(typeof(files,) )
+    formdata.append('files',files);
     for (let index = 0; index < files.length; index++) {
       console.log(files[index]);
-      formdata.append('campIcon',files[index]);
+      formdata.append('files',files[index]);
     }
-    this._http.post(environment.sails_services_urlpath+":"+environment.sails_services_urlport+'/uploadFile',formdata)
-    .subscribe(res=>{
-      console.log(res);
-    })
+    return this._http.post(
+      environment.sails_services_urlpath+":"+environment.sails_services_urlport+'/addImg',
+      formdata)
   }
 }

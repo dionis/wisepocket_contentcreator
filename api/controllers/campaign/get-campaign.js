@@ -39,6 +39,11 @@ module.exports = {
           'data': campaign
       });
     })
+    .catch(error=>{
+      return this.res.status(500).send({
+        'error': err
+      });
+    })
 
   }
 

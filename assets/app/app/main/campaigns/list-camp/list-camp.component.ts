@@ -94,6 +94,7 @@ export class ListCampComponent implements AfterViewInit,OnInit {
 }
 export class CampaignDataSource extends DataSource<any>{
     private campagainsSubject= new BehaviorSubject<any[]>([]);
+    private errorSubject = new Subject<string>();
     private loadingSubject = new BehaviorSubject<boolean>(false);
     private _countCampaigns: number = 0;
 
@@ -105,7 +106,7 @@ export class CampaignDataSource extends DataSource<any>{
             this.campService.countUserCampaigns()
             .subscribe(res=>{
                 console.log(res);
-                this._countCampaigns = this.campService.campaignsTotal;
+                this._countCampaigns = res['data'];
             })
             
         }
@@ -115,9 +116,11 @@ export class CampaignDataSource extends DataSource<any>{
     }
 
     connect(collectionViewer: CollectionViewer): Observable<any[]>{
-        return this.campagainsSubject.asObservable();
+        console.log(this.campagainsSubject)
+        //if(this.campagainsSubject.value.length !== 0){
+            return this.campagainsSubject.asObservable();
+        //}
         
-
     }
     disconnect(){
         this.campagainsSubject.complete();
@@ -128,11 +131,12 @@ export class CampaignDataSource extends DataSource<any>{
     }
 
     loadUserCampaigns(page:number,limit:number){
-
         this.campService.getCampaignUser(page.toString(),limit.toString())
         .subscribe(campaigns=>{
             console.log(campaigns);
             this.campagainsSubject.next(campaigns)
+        }, error=>{
+            this.errorSubject.next(error.message);
         } );
         console.log(this.campagainsSubject.value)
     }

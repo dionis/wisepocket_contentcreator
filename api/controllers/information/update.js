@@ -1,18 +1,19 @@
 module.exports = {
 
 
-  friendlyName: 'Edit Campaign Action',
+  friendlyName: 'Update',
 
 
-  description: 'Edit campaign.',
+  description: 'Update information.',
 
 
   inputs: {
-    campaignId: {
+    informationId: {
       type: 'string',
-      description: 'A Campaign Id'
+      description: 'A Information Id'
     }
   },
+
 
   exits: {
 
@@ -20,17 +21,19 @@ module.exports = {
 
 
   fn: async function (inputs) {
+
+    // All done.
     data = this.req.body;
-    if(!inputs.campaignId){return this.res.status(400).send({'error':'No Id Found in Request'})}
-        // sails.log.debug(req.body);
+    if(!inputs.informationId){return this.res.status(400).send({'error':'No Id Found in Request'})}
+         //sails.log.debug(req.body);
          if(!data) return this.res.status(400).send({'error': 'Data in body Request Not Found'});
-         updatedId = inputs.campaignId;
-         await Campaign.update({id: updatedId},data).fetch()
-         .then(campaign=>{
+         updatedId = inputs.informationId;
+         await Information.update({id: updatedId},data).fetch()
+         .then(info=>{
              return this.res.send({
                 'success': true,
                  'message': 'Record Edited',
-                 'data': campaign
+                 'data': info
              })
          })
          .catch(err=>{

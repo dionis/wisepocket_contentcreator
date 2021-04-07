@@ -95,6 +95,11 @@ module.exports = {
     
     createdby :{
       model: 'user'
+    },
+
+    informations: {
+      collection: 'information',
+      via: 'campaign'
     }
 
 

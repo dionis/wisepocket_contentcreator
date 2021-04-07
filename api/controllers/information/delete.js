@@ -4,13 +4,13 @@ module.exports = {
   friendlyName: 'Delete',
 
 
-  description: 'Delete campaign.',
+  description: 'Delete information.',
 
 
   inputs: {
-    campaignId: {
+    informationId: {
       type: 'string',
-      description: 'A Campaign Id'
+      description: 'A Information Id',
     }
   },
 
@@ -23,15 +23,15 @@ module.exports = {
   fn: async function (inputs) {
 
     // All done.
-    if(!inputs.campaignId){return this.res.status(400).send({'error':'No Id Found in Request'})}
-        // sails.log.debug(req.body);
-         updatedId = inputs.campaignId;
-         await Campaign.destroy({id: updatedId},data).fetch()
-         .then(campaign=>{
+    if(!inputs.informationId){return this.res.status(400).send({'error':'No Id Found in Request'})}
+         //sails.log.debug(req.body);
+         updatedId = inputs.informationId;
+         await Information.destroy({id: updatedId},data).fetch()
+         .then(info=>{
              return this.res.send({
                 'success': true,
                  'message': 'Record Edited',
-                 'data': campaign
+                 'data': info
              })
          })
          .catch(err=>{

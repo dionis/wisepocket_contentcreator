@@ -1,5 +1,5 @@
 /**
- * Imagen.js
+ * Information.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -14,45 +14,26 @@ module.exports = {
       unique: true
     },
 
-    path: {
+    campaign: {
+      model: 'campaign',
+      required: true
+    },
+
+    text: {
       type: 'string',
       required: true,
-      unique: true,
     },
 
-    campaign:{
-      collection: 'campaign',
-      via: 'logo'
+    images: {
+      collection: 'imagen',
+      via: 'related_theme'
     },
 
-    image1: {
-      collection: 'campaign',
-      via: 'carrusel1'
+    videos: {
+      collection: 'video',
+      via: 'related_theme'
     },
 
-    image2: {
-      collection: 'campaign',
-      via: 'carrusel2'
-    },
-
-    image3: {
-      collection: 'campaign',
-      via: 'carrusel3'
-    },
-
-    image4: {
-      collection: 'campaign',
-      via: 'carrusel4'
-    },
-
-    perfil: {
-      collection: 'user',
-      via: 'imgPerfil'
-    },
-
-    related_theme: {
-      model: 'information'
-    }
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗

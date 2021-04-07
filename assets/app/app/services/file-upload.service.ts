@@ -20,6 +20,6 @@ export class FileUploadService {
     }
     return this._http.post(
       environment.sails_services_urlpath+":"+environment.sails_services_urlport+'/addImg',
-      formdata)
+      formdata).toPromise()
   }
 }

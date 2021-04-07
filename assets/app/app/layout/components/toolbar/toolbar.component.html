@@ -4,10 +4,10 @@
 
         <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
 
-            <button mat-icon-button class="navbar-toggle-button"
+            <!-- <button mat-icon-button class="navbar-toggle-button"
                     *ngIf="!hiddenNavbar && !rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
                 <mat-icon class="secondary-text">menu</mat-icon>
-            </button>
+            </button> -->
 
             <div class="toolbar-separator" *ngIf="!hiddenNavbar && !rightNavbar" fxHide.gt-md></div>
 
@@ -17,9 +17,9 @@
                 </div>
             </div>
 
-            <div class="px-8 px-md-16">
+            <!-- <div class="px-8 px-md-16">
                 <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts>
-            </div>
+            </div> -->
 
         </div>
 
@@ -41,15 +41,12 @@
                     <span>My Profile</span>
                 </button>
 
-                <button mat-menu-item class="">
+                <!-- <button mat-menu-item class="">
                     <mat-icon>mail</mat-icon>
                     <span>Inbox</span>
-                </button>
+                </button> -->
 
-                <button mat-menu-item class="" (click)="logout()">
-                    <mat-icon>exit_to_app</mat-icon>
-                    <span>Logout</span>
-                </button>
+
 
             </mat-menu>
 
@@ -81,7 +78,12 @@
 
             <div class="toolbar-separator" fxHide fxShow.gt-xs></div>
 
-            <button mat-icon-button
+            <button mat-menu-item  class="quick-panel-toggle-button"  aria-label="Logout">
+              <mat-icon  class="secondary-text">exit_to_app</mat-icon>
+              <span>Logout</span>
+           </button>
+
+            <!-- <button mat-icon-button
                     class="quick-panel-toggle-button"
                     (click)="toggleSidebarOpen('quickPanel')"
                     aria-label="Toggle quick panel">
@@ -93,7 +95,7 @@
             <button mat-icon-button class="navbar-toggle-button"
                     *ngIf="!hiddenNavbar && rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
                 <mat-icon class="secondary-text">menu</mat-icon>
-            </button>
+            </button> -->
 
         </div>
 

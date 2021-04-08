@@ -269,7 +269,11 @@
                             
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>{{'FORMS.STATE_PLACEHOLDER' | translate}}</mat-label>
-                                <input matInput formControlName="states">
+                                <select>
+                                    <option *ngFor="let state of IState" value="{{state.isoCode}}" >
+                                        {{state.name}}
+                                    </option>
+                                </select>
                                 <mat-error>State is required!</mat-error>
                             </mat-form-field>
 

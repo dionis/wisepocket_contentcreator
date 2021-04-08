@@ -41,10 +41,10 @@ export class FormsComponent implements OnInit, OnDestroy
     image4: File = undefined;
     campIconf:File = undefined;
 
-    private selectedCountry: ICountry[] = {isoCode: '', name: ''};
-    private countries: ICountry [];
-    private states: IState [];
-    private cities: ICity [];
+    public selectedCountry: ICountry[] = [{isoCode: '', name: '', phonecode: '', flag: '', currency: '', latitude: '', longitude: ''}];
+    public countries: ICountry [];
+    public states: IState [];
+    public cities: ICity [];
     
 
 
@@ -122,7 +122,7 @@ export class FormsComponent implements OnInit, OnDestroy
        this.campIconf = event.addedFiles[0];
        this.files.push(event.addedFiles[0]);
     }
-    onSelect(event) {
+    onSelect(event, isoCode: string) {
         console.log(event);
         switch (event.source.id) {
             case "image1":
@@ -142,7 +142,8 @@ export class FormsComponent implements OnInit, OnDestroy
         }
         this.files.push(event.addedFiles[0]);
         //console.log(this.files);
-      }
+        this.states = csc.getAllStates().filter(item => item.countryCode === isoCode);
+    }
       
     /**
      * On destroy

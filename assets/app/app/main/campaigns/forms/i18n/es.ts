@@ -11,6 +11,7 @@ export const locale = {
           POSTAL_CODE_PLACEHOLDER          : 'Código Postal',
           WEEBSITE_PLACEHOLDER             : 'Sitio Web',
           EMAIL_PLACEHOLDER                : 'Correo',
+          COUNTRY_PLACEHOLDER              : 'Pais',
           CITY_PLACEHOLDER                 : 'Ciudad',
           STATE_PLACEHOLDER                : 'Estado',
           PRIMARY_COLOR                    : 'Color Primario',

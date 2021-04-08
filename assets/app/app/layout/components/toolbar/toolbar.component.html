@@ -78,7 +78,9 @@
 
             <div class="toolbar-separator" fxHide fxShow.gt-xs></div>
 
-            <button mat-menu-item  class="quick-panel-toggle-button"  aria-label="Logout">
+            <button mat-menu-item  class="quick-panel-toggle-button"  
+            (click) = "logout()"
+            aria-label="Logout">
               <mat-icon  class="secondary-text">exit_to_app</mat-icon>
               <span>Logout</span>
            </button>

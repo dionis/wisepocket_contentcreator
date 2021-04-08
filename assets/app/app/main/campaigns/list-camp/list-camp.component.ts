@@ -10,6 +10,9 @@ import { takeUntil } from 'rxjs/internal/operators';
 import { CampaignService } from '../../../services/campaign.service';
 import { Campaign } from '../../../models/campaign.model';
 import { EcommerceProductsService } from '../../apps/e-commerce/products/products.service';
+import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
+import { locale as english } from '../../../main/campaigns/list-camp/i18n/en';
+import { locale as spanish } from '../../../main/campaigns/list-camp/i18n/es';
 
 @Component({
   selector     : 'campaign-list',
@@ -42,11 +45,21 @@ export class ListCampComponent implements AfterViewInit,OnInit {
     // Private
     private _unsubscribeAll: Subject<any>;
 
+    /**
+     * Constructor
+     *
+     * @param {FuseTranslationLoaderService} _fuseTranslationLoaderService
+     */
+
     constructor(
        // private _ecommerceProductsService: EcommerceProductsService,
-        private campService: CampaignService
+        private campService: CampaignService,
+        private _fuseTranslationLoaderService: FuseTranslationLoaderService
     )
     {
+        // Load the translations
+        this._fuseTranslationLoaderService.loadTranslations(english, spanish);
+
         // Set the private defaults
         this._unsubscribeAll = new Subject();
     }

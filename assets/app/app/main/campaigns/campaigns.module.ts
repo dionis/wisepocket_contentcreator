@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import {DragDorpDirective} from './forms/dragdrop.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { FuseSharedModule } from '../../../@fuse/shared.module';
 
@@ -68,6 +69,7 @@ const routes: Routes = [
     MatSelectModule,
     MatStepperModule,
     MaterialFileInputModule,
+    TranslateModule,
     NgxDropzoneModule,
     MatChipsModule,
     MatExpansionModule,

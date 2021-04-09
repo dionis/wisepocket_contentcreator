@@ -12,6 +12,7 @@ export const locale = {
           WEEBSITE_PLACEHOLDER             : 'Website',
           EMAIL_PLACEHOLDER                : 'Email',
           CAMPAIGN_REGION                  : 'Region',
+          COUNTRY_PLACEHOLDER              : 'Country',
           CITY_PLACEHOLDER                 : 'City',
           STATE_PLACEHOLDER                : 'State',
           PRIMARY_COLOR                    : 'Primary Color',

@@ -258,15 +258,29 @@
                         <div fxFlex="1 0 auto" fxLayout="column">
 
                             <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>{{'FORMS.CITY_PLACEHOLDER' | translate}}</mat-label>
-                                <input matInput formControlName="city" required>
-                                <mat-error>City is required!</mat-error>
+                                <mat-label>{{'FORMS.COUNTRY_PLACEHOLDER' | translate}}</mat-label>
+                                <select [(ngModel)]="selectedCountry.isoCode" (change) = "onSelect($event.target.value)" matInput formControlName="countries">
+                                    <option *ngFor="let countries of ICountry" value="{{country.isoCode}}">
+                                        {{country.name}}
+                                    </option>
+                                </select>
+                                <mat-error>Country is required!</mat-error>
+                            </mat-form-field>
+                            
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>{{'FORMS.STATE_PLACEHOLDER' | translate}}</mat-label>
+                                <select>
+                                    <option *ngFor="let state of IState" value="{{state.isoCode}}" >
+                                        {{state.name}}
+                                    </option>
+                                </select>
+                                <mat-error>State is required!</mat-error>
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>{{'FORMS.STATE_PLACEHOLDER' | translate}}</mat-label>
-                                <input matInput formControlName="state" required>
-                                <mat-error>State is required!</mat-error>
+                                <mat-label>{{'FORMS.CITY_PLACEHOLDER' | translate}}</mat-label>
+                                <input matInput formControlName="cities">
+                                <mat-error>City is required!</mat-error>
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex="100">
@@ -306,7 +320,7 @@
 
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>Facebook</mat-label>
-                                <input matInput formControlName="facebook">
+                                <input type="" matInput formControlName="facebook">
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex="100">

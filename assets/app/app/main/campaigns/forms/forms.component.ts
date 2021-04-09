@@ -10,6 +10,8 @@ import { FileUploadService } from '../../../services/file-upload.service';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as english } from '../../../main/campaigns/forms/i18n/en';
 import { locale as spanish } from '../../../main/campaigns/forms/i18n/es';
+import { ICountry, ICity, IState } from 'country-state-city/src/interface';
+import csc from 'country-state-city';
 
 @Component({
     selector   : 'forms',
@@ -39,6 +41,14 @@ export class FormsComponent implements OnInit, OnDestroy
     image4: File = undefined;
     campIconf:File = undefined;
 
+    public selectedCountry: ICountry[] = [{isoCode: '', name: '', phonecode: '', flag: '', currency: '', latitude: '', longitude: ''}];
+    public countries: ICountry [];
+    public states: IState [];
+    public cities: ICity [];
+    
+
+
+
     /**
      * Constructor
      *
@@ -46,6 +56,7 @@ export class FormsComponent implements OnInit, OnDestroy
      * @param {FuseTranslationLoaderService} _fuseTranslationLoaderService
      */
     constructor(
+        
         private _formBuilder: FormBuilder,
         private uploadService: FileUploadService,
         private campService: CampaignService,
@@ -83,8 +94,9 @@ export class FormsComponent implements OnInit, OnDestroy
         });
 
         this.horizontalStepperStep3 = this._formBuilder.group({
-            city      : ['', Validators.required],
-            state     : ['', Validators.required],
+            countries      : ['', Validators.required],
+            states     : ['', Validators.required],
+            cities      : ['', Validators.required],
             primaryColor: ['', Validators.required],
             secondaryColor: ['', Validators.required]
         });
@@ -96,6 +108,9 @@ export class FormsComponent implements OnInit, OnDestroy
         });
         //console.log(this.inputFile);
         //this.campService.fetchCampagins('0','10');
+        console.log(csc.getAllCountries());
+        this.countries = csc.getAllCountries();
+
 
     }
     onChage(event){
@@ -107,7 +122,7 @@ export class FormsComponent implements OnInit, OnDestroy
        this.campIconf = event.addedFiles[0];
        this.files.push(event.addedFiles[0]);
     }
-    onSelect(event) {
+    onSelect(event, isoCode: string) {
         console.log(event);
         switch (event.source.id) {
             case "image1":
@@ -127,7 +142,8 @@ export class FormsComponent implements OnInit, OnDestroy
         }
         this.files.push(event.addedFiles[0]);
         //console.log(this.files);
-      }
+        this.states = csc.getAllStates().filter(item => item.countryCode === isoCode);
+    }
       
     /**
      * On destroy

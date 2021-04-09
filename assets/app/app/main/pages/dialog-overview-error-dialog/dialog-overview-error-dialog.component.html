@@ -1,0 +1,22 @@
+  
+<div id="app-dialog-overview-error-dialog"> 
+  <div mat-dialog-content fxLayout="column" >
+    <div fxLayout="row" fxLayoutAlign="end start"> 
+      <button mat-icon-button class="button-row" style="float:right" (click)="onNoClick()"  >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center start">
+      <img  src="assets/images/dialog/alert-triangle.svg">
+    </div>
+  
+    <div>
+      <p class="mesagge">{{data.messgdetail}}</p>
+    </div>
+  </div>
+
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="center start">
+    <button class="accept" mat-button (click)="onNoClick()" cdkFocusInitial>Accept</button>
+  </div>
+</div> 

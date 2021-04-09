@@ -1,0 +1,193 @@
+<div class="topic-item">
+  <div class="content">
+       <div fxLayout="column">
+         <mat-card>
+          <mat-card-header>
+          </mat-card-header>
+          <mat-card-content>
+            <!-- <mat-tab-group dynamicHeight>
+              <mat-tab label="Home"> -->
+
+                  <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
+                      [@animateStagger]="{value:'50'}">
+
+                      <!-- WIDGET 1 -->
+                      <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
+                                  fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+
+                          <!-- Front -->
+                          <div class="fuse-widget-front">
+                              <div class="pl-16 pr-8 py-16 h-52" fxLayout="row"
+                                  fxLayoutAlign="space-between center">
+                                  <!-- <mat-form-field>
+                                      <mat-select class="simplified font-size-16"
+                                                  [(ngModel)]="widget1.currentRange"
+                                                  aria-label="Change range">
+                                          <mat-option *ngFor="let range of widget1.ranges | keys"
+                                                      [value]="range.key">
+                                              {{range.value}}
+                                          </mat-option>
+                                      </mat-select>
+                                  </mat-form-field> -->
+                                  <button mat-icon-button fuseWidgetToggle aria-label="more">
+                                      <mat-icon>more_vert</mat-icon>
+                                  </button>
+                              </div>
+
+                              <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+                                  <div class="light-blue-fg font-size-72 line-height-72">
+                                      {{widget1.data.count[widget1.currentRange]}}
+                                  </div>
+                                  <div class="h3 secondary-text font-weight-500">{{widget1.data.label}}
+                                  </div>
+                              </div>
+
+                              <div class="p-16 border-top" fxLayout="row" fxLayoutAlign="start center">
+                                  <span class="h4 secondary-text text-truncate">
+                                      {{widget1.data.extra.label}}:
+                                  </span>
+                                  <span class="h4 ml-8">
+                                      {{widget1.data.extra.count[widget1.currentRange]}}
+                                  </span>
+                              </div>
+                          </div>
+                          <!-- / Front -->
+
+                          <!-- Back -->
+                          <div class="fuse-widget-back p-16 pt-32">
+                              <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
+                                      aria-label="Flip widget">
+                                  <mat-icon class="s-16">close</mat-icon>
+                              </button>
+
+                              <div>
+                                  {{widget1.detail}}
+                              </div>
+                          </div>
+                          <!-- / Back -->
+
+                      </fuse-widget>
+                      <!-- / WIDGET 1 -->
+
+                      <!-- WIDGET 2 -->
+                      <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
+                                  fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+
+                          <!-- Front -->
+                          <div class="fuse-widget-front">
+                              <div class="pl-16 pr-8 py-16 h-52" fxLayout="row"
+                                  fxLayoutAlign="space-between center">
+                                  <div class="h3">{{widget2.title}}</div>
+
+                                  <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
+                                          aria-label="more">
+                                      <mat-icon>more_vert</mat-icon>
+                                  </button>
+                              </div>
+
+                              <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+                                  <div class="red-fg font-size-72 line-height-72">
+                                      {{widget2.data.count}}
+                                  </div>
+                                  <div class="h3 secondary-text font-weight-500">{{widget2.data.label}}
+                                  </div>
+                              </div>
+
+                              <div class="p-16 border-top" fxLayout="row" fxLayoutAlign="start center">
+                                  <span class="h4 secondary-text text-truncate">
+                                      {{widget2.data.extra.label}}:
+                                  </span>
+                                  <span class="h4 ml-8">{{widget2.data.extra.count}}</span>
+                              </div>
+                          </div>
+                          <!-- / Front -->
+
+                          <!-- Back -->
+                          <div class="fuse-widget-back p-16 pt-32">
+                              <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
+                                      aria-label="Flip widget">
+                                  <mat-icon class="s-16">close</mat-icon>
+                              </button>
+
+                              <div>
+                                  {{widget2.detail}}
+                              </div>
+                          </div>
+                          <!-- / Back -->
+
+                      </fuse-widget>
+                      <!-- / WIDGET 2 -->
+
+                      <!-- WIDGET 3 -->
+                      <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
+                                  fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+
+                          <!-- Front -->
+                          <div class="fuse-widget-front">
+                              <div class="pl-16 pr-8 py-16 h-52" fxLayout="row"
+                                  fxLayoutAlign="space-between center">
+                                  <div class="h3">{{widget3.title}}</div>
+
+                                  <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
+                                          aria-label="more">
+                                      <mat-icon>more_vert</mat-icon>
+                                  </button>
+                              </div>
+
+                              <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+                                  <div class="orange-fg font-size-72 line-height-72">
+                                      {{widget3.data.count}}
+                                  </div>
+                                  <div class="h3 secondary-text font-weight-500">{{widget3.data.label}}
+                                  </div>
+                              </div>
+
+                              <div class="p-16 border-top" fxLayout="row" fxLayoutAlign="start center">
+                                  <span class="h4 secondary-text text-truncate">
+                                      {{widget3.data.extra.label}}:
+                                  </span>
+                                  <span class="h4 ml-8">{{widget3.data.extra.count}}</span>
+                              </div>
+                          </div>
+                          <!-- / Front -->
+
+                          <!-- Back -->
+                          <div class="fuse-widget-back p-16 pt-32">
+                              <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
+                                      aria-label="Flip widget">
+                                  <mat-icon class="s-16">close</mat-icon>
+                              </button>
+
+                              <div>
+                                  {{widget3.detail}}
+                              </div>
+                          </div>
+                          <!-- / Back -->
+
+                      </fuse-widget>
+                      <!-- / WIDGET 3 -->
+
+
+                  </div>
+                  <!-- / WIDGET GROUP -->
+
+              <!-- </mat-tab>
+            </mat-tab-group> -->
+          </mat-card-content>
+          <mat-card-actions>
+           <div fxLayoutAlign="center end">
+              <button mat-icon-button>
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon>keyboard_arrow_up</mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+           </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+  </div>
+</div>

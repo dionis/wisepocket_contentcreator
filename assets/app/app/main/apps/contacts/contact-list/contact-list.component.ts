@@ -32,6 +32,22 @@ export class ContactsContactListComponent implements OnInit, OnDestroy
     dialogRef: any;
     confirmDialogRef: MatDialogRef<FuseConfirmDialogComponent>;
 
+
+    topicAbout:any [] = [
+      {
+        type:"text",
+        content:"El texto de lo que pasa"
+      },
+      {
+        type:"photo",
+        content:"/assets/app/assets/img/examples/shiba1.jpg"
+      },
+      {
+        type:"text",
+        content:"Otro textto nuevo para ver como lo hago"
+      }
+    ]
+
     // Private
     private _unsubscribeAll: Subject<any>;
 

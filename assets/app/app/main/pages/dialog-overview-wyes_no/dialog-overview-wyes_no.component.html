@@ -1,0 +1,28 @@
+  
+<div id="app-dialog-overview-wyes_no"> 
+  <div mat-dialog-content fxLayout="column" >
+    <div fxLayout="row" fxLayoutAlign="end start"> 
+      <button mat-icon-button class="button-row" style="float:right" (click)="onNoClick()"  >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center start">
+      <img  src="assets/images/dialog/alert-triangle.svg">
+    </div>
+  
+    <div>
+      <p class="mesagge">{{data.messgdetail}}</p>
+    </div>
+  </div>
+
+  <div mat-dialog-actions fxLayout="column" fxLayoutAlign="space-around center">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <button class="ok" mat-button (click)="onYesClick()" cdkFocusInitial  color="accent">Yes</button>
+      <button class="accept" mat-button (click)="onNoClick()" cdkFocusInitial>No</button>
+    </div>
+  
+ 
+ 
+  </div>
+</div> 

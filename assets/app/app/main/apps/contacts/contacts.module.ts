@@ -10,6 +10,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+
+
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatListModule } from '@angular/material/list';
 
 import { FuseSharedModule } from '../../../../@fuse/shared.module';
 import { FuseConfirmDialogModule, FuseSidebarModule } from '../../../../@fuse/components';
@@ -20,6 +26,7 @@ import { ContactsContactListComponent } from '../../../../app/main/apps/contacts
 import { ContactsSelectedBarComponent } from '../../../../app/main/apps/contacts/selected-bar/selected-bar.component';
 import { ContactsMainSidebarComponent } from '../../../../app/main/apps/contacts/sidebars/main/main.component';
 import { ContactsContactFormDialogComponent } from '../../../../app/main/apps/contacts/contact-form/contact-form.component';
+import { TopicItemComponent } from './contact-list/topic-item/topic-item.component';
 
 const routes: Routes = [
     {
@@ -37,7 +44,8 @@ const routes: Routes = [
         ContactsContactListComponent,
         ContactsSelectedBarComponent,
         ContactsMainSidebarComponent,
-        ContactsContactFormDialogComponent
+        ContactsContactFormDialogComponent,
+        TopicItemComponent
     ],
     imports        : [
         RouterModule.forChild(routes),
@@ -52,6 +60,10 @@ const routes: Routes = [
         MatRippleModule,
         MatTableModule,
         MatToolbarModule,
+        MatTabsModule,
+        MatButtonToggleModule,
+        MatListModule,
+        MatCardModule,
 
         FuseSharedModule,
         FuseConfirmDialogModule,

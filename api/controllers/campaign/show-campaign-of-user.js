@@ -21,7 +21,7 @@ module.exports = {
   fn: async function (inputs) {
 
     const page = this.req.param('page')
-    const limit  = this.req.param('limit')
+    const limit  = Number(this.req.param('limit'))
     const token = this.req.header('Authorization').split('Bearer ')[1];
     //sails.log.debug(token);
     //const payload = await jwt.decode(token);
@@ -31,10 +31,9 @@ module.exports = {
           where: {createdby: payload._id},
         })
         .populate('logo')
-        .paginate({
-            page:page?page:undefined,
-            limit:limit?limit:undefined,
-        })
+        .paginate(
+            page?page:undefined,
+            limit?limit:undefined)
         .then(campaigns => {
           return this.res.send({
             'success': true,

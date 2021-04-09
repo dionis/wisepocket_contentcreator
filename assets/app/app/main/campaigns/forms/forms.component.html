@@ -257,15 +257,33 @@
                         <div fxFlex="1 0 auto" fxLayout="column">
 
                             <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>{{'FORMS.CITY_PLACEHOLDER' | translate}}</mat-label>
-                                <input matInput formControlName="city" required>
-                                <mat-error>City is required!</mat-error>
+                                <mat-label>{{'FORMS.COUNTRY_PLACEHOLDER' | translate}}</mat-label>
+                                <mat-select matInput formControlName="countries">
+                                    <mat-option *ngFor="let country of countries" value="{{country.isoCode}}">
+                                        {{country.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Country is required!</mat-error>
+                            </mat-form-field>
+                            
+                            <mat-form-field  appearance="outline" fxFlex="100">
+                                <mat-label>{{'FORMS.STATE_PLACEHOLDER' | translate}}</mat-label>
+                                <mat-select formControlName= "states"> 
+                                    <mat-option *ngFor="let state of states" value="{{state.isoCode}}" >
+                                        {{state.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>State is required!</mat-error>
                             </mat-form-field>
 
-                            <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>{{'FORMS.STATE_PLACEHOLDER' | translate}}</mat-label>
-                                <input matInput formControlName="state" required>
-                                <mat-error>State is required!</mat-error>
+                            <mat-form-field  appearance="outline" fxFlex="100">
+                                <mat-label>{{'FORMS.CITY_PLACEHOLDER' | translate}}</mat-label>
+                                <mat-select formControlName= "cities"> 
+                                    <mat-option *ngFor="let city of cities" value="{{city.name}}" >
+                                        {{city.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>City is required!</mat-error>
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex="100">
@@ -305,7 +323,7 @@
 
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>Facebook</mat-label>
-                                <input matInput formControlName="facebook">
+                                <input type="" matInput formControlName="facebook">
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex="100">

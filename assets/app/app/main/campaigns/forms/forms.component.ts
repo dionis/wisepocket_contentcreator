@@ -10,6 +10,8 @@ import { FileUploadService } from '../../../services/file-upload.service';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as english } from '../../../main/campaigns/forms/i18n/en';
 import { locale as spanish } from '../../../main/campaigns/forms/i18n/es';
+import { ICountry, ICity, IState } from 'country-state-city/src/interface';
+import csc from 'country-state-city';
 
 
 // import { locale as english } from './i18n/en';
@@ -44,6 +46,18 @@ export class FormsComponent implements OnInit, OnDestroy
     image4: File = undefined;
     campIconf:File = undefined;
 
+    countrySelected = false;
+
+    public selectedCountry: ICountry[] = [{isoCode: '', name: '', phonecode: '', flag: '', currency: '', latitude: '', longitude: ''}];
+    public countries: ICountry [];
+    public states: IState [];
+    public cities: ICity [];
+
+    statesSubject: Subject<IState []>;
+    
+
+
+
     /**
      * Constructor
      *
@@ -51,6 +65,7 @@ export class FormsComponent implements OnInit, OnDestroy
      * @param {FuseTranslationLoaderService} _fuseTranslationLoaderService
      */
     constructor(
+        
         private _formBuilder: FormBuilder,
         private uploadService: FileUploadService,
         private campService: CampaignService,
@@ -62,7 +77,7 @@ export class FormsComponent implements OnInit, OnDestroy
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();
-        //this._fuseTranslationLoaderService.loadTranslations(english, turkish, spanish);
+        this.statesSubject = new Subject();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -89,8 +104,9 @@ export class FormsComponent implements OnInit, OnDestroy
         });
 
         this.horizontalStepperStep3 = this._formBuilder.group({
-            city      : ['', Validators.required],
-            state     : ['', Validators.required],
+            countries      : ['', Validators.required],
+            states     : ['', Validators.required],
+            cities      : ['', Validators.required],
             primaryColor: ['', Validators.required],
             secondaryColor: ['', Validators.required]
         });
@@ -102,6 +118,22 @@ export class FormsComponent implements OnInit, OnDestroy
         });
         //console.log(this.inputFile);
         //this.campService.fetchCampagins('0','10');
+        console.log(csc.getAllCountries());
+
+        this.countries = csc.getAllCountries();
+        this.horizontalStepperStep3.get('countries').valueChanges.subscribe(i=>{
+            console.log(i)
+            this.states = csc.getAllStates().filter(item => item.countryCode === i);
+            console.log(this.states)
+            
+        })
+        this.horizontalStepperStep3.get('states').valueChanges.subscribe(i=>{
+            console.log(i)
+            var state = csc.getStateByCode(i)
+            console.log(state)
+            this.cities = csc.getCitiesOfState(state.countryCode,state.isoCode);    
+        })
+        console.log(this.horizontalStepperStep3.get('countries'))
 
     }
     onChage(event){
@@ -113,6 +145,7 @@ export class FormsComponent implements OnInit, OnDestroy
        this.campIconf = event.addedFiles[0];
        this.files.push(event.addedFiles[0]);
     }
+    
     onSelect(event) {
         console.log(event);
         switch (event.source.id) {
@@ -163,8 +196,9 @@ export class FormsComponent implements OnInit, OnDestroy
         dataCamp.direccionPostal = this.horizontalStepperStep2.get('postalCode').value;
         dataCamp.colorPrincipal = this.horizontalStepperStep3.get('primaryColor').value;
         dataCamp.colorSecundario = this.horizontalStepperStep3.get('secondaryColor').value;
-        dataCamp.city = this.horizontalStepperStep3.get('city').value;
-        dataCamp.state = this.horizontalStepperStep3.get('state').value;
+        dataCamp.country = this.horizontalStepperStep3.get('countries').value;
+        dataCamp.city = this.horizontalStepperStep3.get('cities').value;
+        dataCamp.state = this.horizontalStepperStep3.get('states').value;
         dataCamp.contactoWhatsapp = this.horizontalStepperStep2.get('phone').value;
         dataCamp.contactoFacebook = this.horizontalStepperStep2.get('website').value;
         dataCamp.contactoTelegram = this.horizontalStepperStep2.get('website').value;

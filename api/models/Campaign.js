@@ -62,6 +62,11 @@ module.exports = {
       allowNull: true
     },
 
+    country: {
+      type: 'string',
+      required: true
+    },
+
     city:{
       type: 'string',
       required: true

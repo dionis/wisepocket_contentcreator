@@ -41,10 +41,14 @@ export class FormsComponent implements OnInit, OnDestroy
     image4: File = undefined;
     campIconf:File = undefined;
 
+    countrySelected = false;
+
     public selectedCountry: ICountry[] = [{isoCode: '', name: '', phonecode: '', flag: '', currency: '', latitude: '', longitude: ''}];
     public countries: ICountry [];
     public states: IState [];
     public cities: ICity [];
+
+    statesSubject: Subject<IState []>;
     
 
 
@@ -68,6 +72,7 @@ export class FormsComponent implements OnInit, OnDestroy
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+        this.statesSubject = new Subject();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -109,8 +114,21 @@ export class FormsComponent implements OnInit, OnDestroy
         //console.log(this.inputFile);
         //this.campService.fetchCampagins('0','10');
         console.log(csc.getAllCountries());
-        this.countries = csc.getAllCountries();
 
+        this.countries = csc.getAllCountries();
+        this.horizontalStepperStep3.get('countries').valueChanges.subscribe(i=>{
+            console.log(i)
+            this.states = csc.getAllStates().filter(item => item.countryCode === i);
+            console.log(this.states)
+            
+        })
+        this.horizontalStepperStep3.get('states').valueChanges.subscribe(i=>{
+            console.log(i)
+            var state = csc.getStateByCode(i)
+            console.log(state)
+            this.cities = csc.getCitiesOfState(state.countryCode,state.isoCode);    
+        })
+        console.log(this.horizontalStepperStep3.get('countries'))
 
     }
     onChage(event){
@@ -122,7 +140,8 @@ export class FormsComponent implements OnInit, OnDestroy
        this.campIconf = event.addedFiles[0];
        this.files.push(event.addedFiles[0]);
     }
-    onSelect(event, isoCode: string) {
+    
+    onSelect(event) {
         console.log(event);
         switch (event.source.id) {
             case "image1":
@@ -142,7 +161,7 @@ export class FormsComponent implements OnInit, OnDestroy
         }
         this.files.push(event.addedFiles[0]);
         //console.log(this.files);
-        this.states = csc.getAllStates().filter(item => item.countryCode === isoCode);
+        
     }
       
     /**

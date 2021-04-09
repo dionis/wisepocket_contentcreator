@@ -97,6 +97,7 @@ module.exports.bootstrap = async function() {
         titulo: faker.company.companyName(),
         descripcion: "This is a test ",
         contanctoTelefono: phone,
+        country: faker.address.country(),
         city: faker.address.city(),
         state: faker.address.state(),
         colorPrincipal: faker.commerce.color(),

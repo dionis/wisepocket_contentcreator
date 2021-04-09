@@ -6,6 +6,7 @@ export class Campaign{
     titulo: string;
     descripcion: string;
     contanctoTelefono: string;
+    country: string;
     state: string;
     city: string;
     colorPrincipal: string

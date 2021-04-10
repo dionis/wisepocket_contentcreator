@@ -28,9 +28,12 @@
               "assets/app/assets"
             ],
             "styles": [
-              "assets/app/styles.scss"
+              "assets/app/styles.scss",
+              "./node_modules/quill/dist/quill.core.css",
+              "./node_modules/quill/dist/quill.bubble.css",
+              "./node_modules/quill/dist/quill.snow.css"
             ],
-            "scripts": [],
+            "scripts": ["./node_modules/quill/dist/quill.min.js"],
             "showCircularDependencies": false
           },
           "configurations": {
@@ -122,11 +125,15 @@
             "assets": [
               "assets/app/favicon.ico",
               "assets/app/assets"
+
             ],
             "styles": [
-              "assets/app/styles.scss"
+              "assets/app/styles.scss",
+              "./node_modules/quill/dist/quill.core.css",
+              "./node_modules/quill/dist/quill.bubble.css",
+              "./node_modules/quill/dist/quill.snow.css"
             ],
-            "scripts": []
+            "scripts": ["./node_modules/quill/dist/quill.min.js"]
           }
         },
         "lint": {

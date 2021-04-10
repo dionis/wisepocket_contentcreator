@@ -9,7 +9,7 @@
               <mat-tab label="Home"> -->
 
                   <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
-                      [@animateStagger]="{value:'50'}">
+                      [@animateStagger]="{value:'50'}" fxLayoutAlign="center center">
 
                       <!-- WIDGET 1 -->
                       <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
@@ -19,6 +19,7 @@
                           <div class="fuse-widget-front">
                               <div class="pl-16 pr-8 py-16 h-52" fxLayout="row"
                                   fxLayoutAlign="space-between center">
+                                  <div class="h3">Text</div>
                                   <!-- <mat-form-field>
                                       <mat-select class="simplified font-size-16"
                                                   [(ngModel)]="widget1.currentRange"
@@ -77,7 +78,7 @@
                           <div class="fuse-widget-front">
                               <div class="pl-16 pr-8 py-16 h-52" fxLayout="row"
                                   fxLayoutAlign="space-between center">
-                                  <div class="h3">{{widget2.title}}</div>
+                                  <div class="h3">Photo</div>
 
                                   <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
                                           aria-label="more">
@@ -126,7 +127,7 @@
                           <div class="fuse-widget-front">
                               <div class="pl-16 pr-8 py-16 h-52" fxLayout="row"
                                   fxLayoutAlign="space-between center">
-                                  <div class="h3">{{widget3.title}}</div>
+                                  <div class="h3">Video</div>
 
                                   <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
                                           aria-label="more">
@@ -175,7 +176,7 @@
             </mat-tab-group> -->
           </mat-card-content>
           <mat-card-actions>
-           <div fxLayoutAlign="center end">
+           <div fxLayoutAlign="end end">
               <button mat-icon-button>
                 <mat-icon>keyboard_arrow_down</mat-icon>
               </button>

@@ -17,9 +17,5 @@ export class Campaign{
     contactoWhatsapp: string
     contactoFacebook: string
     logo: string;
-    carrusel1: string;
-    carrusel2: string;
-    carrusel3:string;
-    carrusel4:string; 
-    createdby : User
+    carrusel: string[];
 }

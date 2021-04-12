@@ -25,24 +25,8 @@ module.exports = {
       via: 'logo'
     },
 
-    image1: {
-      collection: 'campaign',
-      via: 'carrusel1'
-    },
-
-    image2: {
-      collection: 'campaign',
-      via: 'carrusel2'
-    },
-
-    image3: {
-      collection: 'campaign',
-      via: 'carrusel3'
-    },
-
-    image4: {
-      collection: 'campaign',
-      via: 'carrusel4'
+    related_campaign: {
+      model: 'campaign'
     },
 
     perfil: {

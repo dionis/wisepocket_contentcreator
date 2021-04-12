@@ -59,6 +59,8 @@ module.exports.routes = {
  //Campaign's Requests
  //'POST /campaign/addCampaign': 'CampaignController.create',
  'POST /campaign/addCampaign': {action:'campaign/registrate'},
+//Images Asociations
+ 'POST /campaign/addImagesToCampaign': {action:'campaign/asociate-images'},
  //'PATCH /campaign/editCampaign': 'CampaignController.editCampaign',
  'PATCH /campaign/editCampaign': {action:'campaign/edit'},
  //'DELETE /campaign/deleteCampaign': 'CampaignController.deleteCampaign',

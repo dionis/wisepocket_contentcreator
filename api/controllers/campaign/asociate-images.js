@@ -8,17 +8,7 @@ module.exports = {
 
 
   inputs: {
-    id: {
-      type: 'string',
-      required: true,
-      despcription: 'Information Id'
-    },
-
-    images: {
-      type: 'ref',
-      required: true,
-      despcription: 'Images of Information'
-    }
+    
   },
 
 
@@ -30,12 +20,21 @@ module.exports = {
   fn: async function (inputs) {
 
     // All done.
-    if(!inputs.images){return this.res.status(400).send({'error':'No Images Found in Request'})}
-    if(inputs.images.length <= 0){return this.res.status(400).send({'error':'Array Images Empty'})}
-    if(!inputs.id){return this.res.status(400).send({'error':'No Campaign Id was provided'})}
-    var images = inputs.images;
-    var camp = inputs.id;
-    await Campaign.addToCollection(camp,'images').members(images).fetch()
+    // if(!inputs.images){return this.res.status(400).send({'error':'No Images Found in Request'})}
+    // if(inputs.images.length <= 0){return this.res.status(400).send({'error':'Array Images Empty'})}
+    // if(!inputs.id){return this.res.status(400).send({'error':'No Campaign Id was provided'})}
+    // sails.log.debug(this.req.param('images'))
+    // sails.log.debug(this.req.param('id'))
+    var images = this.req.body.images;
+    var camp = this.req.body.id;
+    sails.log.debug(images)
+    sails.log.debug(camp)
+    if(typeof images === 'array'){ 
+      sails.log.debug(true) 
+    }else{
+      sails.log.debug(false)
+    }
+    await Campaign.addToCollection(camp,'carrusel').members(images)
     .then(camp=>{
       return this.res.send({
          'success': true,

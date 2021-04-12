@@ -1,5 +1,6 @@
-const { exists } = require('grunt');
 
+const path = require('path') 
+const fs = require('fs')
 module.exports = {
 
 
@@ -35,37 +36,52 @@ module.exports = {
   },
 
   fn: async function (inputs,exits) {
-    if(inputs.req.file)
-      inputs.req.file('files').upload({
-        dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
-      }, async function (err, filesUploaded) {
+    //sails.log.debug(inputs.req.file('files'))
+    if(!inputs.req.file) return exits.upload_err(err)
+    var newPath = 'assets/' 
+    inputs.req.file('files').upload({
+      maxBytes: 1024000000,
+      dirname: path.resolve(sails.config.appPath, newPath),
+    }, async function (err, filesUploaded) {
         if (err) {
           sails.log.debug(err)
           return exits.upload_err(err);
         }
-        let images = [];
+        let files = [];
         if(filesUploaded.length > 0){
           for (let index = 0; index < filesUploaded.length; index++) {
-            sails.log.debug(filesUploaded[index].type)
+            //sails.log.debug(filesUploaded[index].type)
             if(filesUploaded[index].type === 'image/jpeg' 
             || filesUploaded[index].type === 'image/png' 
             || filesUploaded[index].type === 'image/jpg'){
-                images.push({
+              newPath = "assets/images/"+filesUploaded[index].filename;
+              fs.rename(
+                filesUploaded[index].fd, 
+                newPath, function(err){
+                  if(err)sails.log.debug(err)})
+              files.push({
                   titulo: filesUploaded[index].filename,
-                  path: filesUploaded[index].fd,
+                  path: newPath,
                 });
+            }else{
+              if(filesUploaded[index].type === 'video/mp4' 
+              || filesUploaded[index].type === 'video/mpg' 
+              || filesUploaded[index].type === 'video/avi'){
+                newPath = "assets/videos/"+filesUploaded[index].filename;
+                fs.rename(
+                filesUploaded[index].fd, 
+                newPath, function(err){
+                });
+                files.push({
+                  titulo: filesUploaded[index].filename,
+                  path: newPath,
+                });
+              } 
             }
           }
-          await Imagen.createEach(images).fetch()
-            .then(imgs=>{
-              return exits.success(imgs);
-            }) 
-            .catch(err=>{
-              return exits.noImageCreated(err);
-            })
         }
-        return exits.success(images);
-    });
+        return exits.success(files);
+      });
     //return exits.success('hello');
   },
   

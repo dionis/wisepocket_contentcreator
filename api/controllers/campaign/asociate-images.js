@@ -19,7 +19,6 @@ module.exports = {
       required: true,
       despcription: 'Images of Information'
     }
-
   },
 
 
@@ -33,15 +32,15 @@ module.exports = {
     // All done.
     if(!inputs.images){return this.res.status(400).send({'error':'No Images Found in Request'})}
     if(inputs.images.length <= 0){return this.res.status(400).send({'error':'Array Images Empty'})}
-    if(!inputs.id){return this.res.status(400).send({'error':'No Information Id was provided'})}
+    if(!inputs.id){return this.res.status(400).send({'error':'No Campaign Id was provided'})}
     var images = inputs.images;
-    var info = inputs.id;
-    await Information.addToCollection(info,'images').members(images).fetch()
-    .then(info=>{
+    var camp = inputs.id;
+    await Campaign.addToCollection(camp,'images').members(images).fetch()
+    .then(camp=>{
       return this.res.send({
          'success': true,
           'message': 'Record Edited',
-          'data': info
+          'data': camp
       })
     })
     .catch(err=>{

@@ -21,7 +21,7 @@ import { locale as spanish } from '../../../main/campaigns/list-camp/i18n/es';
     animations   : fuseAnimations,
     encapsulation: ViewEncapsulation.None
 })
-export class ListCampComponent implements AfterViewInit,OnInit {
+export class ListCampComponent implements AfterViewInit, OnInit {
     dataSource: CampaignDataSource | null;
     displayedColumns = ['id',
         'logo', 
@@ -29,7 +29,7 @@ export class ListCampComponent implements AfterViewInit,OnInit {
         'contactoTelefono',
         'direccionPostal',
         'contactoEmail', 
-        //'contactoTelegram', 
+        // 'contactoTelegram', 
         'active'
     ];
 
@@ -73,10 +73,10 @@ export class ListCampComponent implements AfterViewInit,OnInit {
      */
     ngOnInit(): void
     {
-        //console.log(this._ecommerceProductsService.products)
-        this.dataSource = new CampaignDataSource(this.campService);
-        console.log(this.dataSource)
-        this.dataSource.loadUserCampaigns(0,10);
+        // console.log(this._ecommerceProductsService.products);
+        this.dataSource = new CampaignDataSource(this.campService, this.paginator, this.sort);
+        console.log(this.dataSource);
+        this.dataSource.loadUserCampaigns(0, 10);
         // fromEvent(this.filter.nativeElement, 'keyup')
         //     .pipe(
         //         takeUntil(this._unsubscribeAll),
@@ -92,6 +92,7 @@ export class ListCampComponent implements AfterViewInit,OnInit {
         //         this.dataSource.filter = this.filter.nativeElement.value;
         //     });
     }
+    // tslint:disable-next-line:typedef
     ngAfterViewInit() {
         this.paginator.page
             .pipe(
@@ -100,27 +101,29 @@ export class ListCampComponent implements AfterViewInit,OnInit {
             .subscribe();
     }
 
+    // tslint:disable-next-line:typedef
     loadCampaignsPage(){
         console.log(this.paginator.pageSize);
-        this.dataSource.loadUserCampaigns(this.paginator.pageIndex,this.paginator.pageSize);
+        this.dataSource.loadUserCampaigns(this.paginator.pageIndex, this.paginator.pageSize);
     }
 }
 export class CampaignDataSource extends DataSource<any>{
-    private campagainsSubject= new BehaviorSubject<any[]>([]);
+    private campagainsSubject = new BehaviorSubject<any[]>([]);
     private errorSubject = new Subject<string>();
     private loadingSubject = new BehaviorSubject<boolean>(false);
     private _countCampaigns: number = 0;
+    private _filterChange = new BehaviorSubject('');
 
-    constructor(private campService:CampaignService,
-        // private _matPaginator: MatPaginator,
-        // private _matSort: MatSort        
+    constructor(private campService: CampaignService,
+                private _matPaginator: MatPaginator,
+                private _matSort: MatSort        
         ){
             super();
             this.campService.countUserCampaigns()
-            .subscribe(res=>{
+            .subscribe(res => {
                 console.log(res);
                 this._countCampaigns = res['data'];
-            })
+            });
             
         }
     get filteredData(): any
@@ -128,13 +131,59 @@ export class CampaignDataSource extends DataSource<any>{
         return this.campagainsSubject.value;
     }
 
-    connect(collectionViewer: CollectionViewer): Observable<any[]>{
-        console.log(this.campagainsSubject)
-        //if(this.campagainsSubject.value.length !== 0){
-            return this.campagainsSubject.asObservable();
-        //}
-        
+    // Filter
+    get filter(): string
+    {
+        return this._filterChange.value;
     }
+    
+    set filter(filter: string)
+    {
+        this._filterChange.next(filter);
+    }
+
+    // connect(collectionViewer: CollectionViewer): Observable<any[]>{
+    //    console.log(this.campagainsSubject);
+    //    // if(this.campagainsSubject.value.length !== 0){
+    //    return this.campagainsSubject.asObservable();
+    //    // }
+    //    
+    // }
+
+    // -----------------------------------------------------------------------------------------------------
+    // @ Public methods
+    // -----------------------------------------------------------------------------------------------------
+
+
+    connect(): Observable<any[]>
+    {
+        const displayDataChanges = [
+            this._matPaginator.page,
+            this.campagainsSubject,
+            this._matSort.sortChange
+        ];
+    
+        return merge(...displayDataChanges).pipe(map(() => {
+    
+               // let data = this._ecommerceOrdersService.orders.slice();
+    
+               // data = this.filterData(data);
+    
+               // this.filteredData = [...data];
+    
+               // data = this.sortData(data);
+    
+                // Grab the page's slice of data.
+                // const startIndex = this._matPaginator.pageIndex * this._matPaginator.pageSize;
+                console.log("cantidad de eleme", this._matPaginator.pageSize);
+                console.log("pagina actual", this._matPaginator.pageIndex);
+                // console.log("posicion en el arreglo", startIndex );
+                return this.loadUserCampaigns( this._matPaginator.pageIndex, this._matPaginator.pageSize);
+            })
+        );
+    
+    }
+
     disconnect(){
         this.campagainsSubject.complete();
         this.loadingSubject.complete();
@@ -143,40 +192,41 @@ export class CampaignDataSource extends DataSource<any>{
         return this._countCampaigns;
     }
 
-    loadUserCampaigns(page:number,limit:number){
-        this.campService.getCampaignUser(page.toString(),limit.toString())
-        .subscribe(campaigns=>{
+    loadUserCampaigns(page: number, limit: number){
+        this.campService.getCampaignUser(page.toString(), limit.toString())
+        .subscribe(campaigns => {
             console.log(campaigns);
-            this.campagainsSubject.next(campaigns)
-        }, error=>{
+            this.campagainsSubject.next(campaigns);
+        }, error => {
             this.errorSubject.next(error.message);
         } );
-        console.log(this.campagainsSubject.value)
+        console.log(this.campagainsSubject.value);
     }
 
-    loadCampaigns(page:number,limit:number){
+    loadCampaigns(page: number, limit: number){
 
-        this.campService.fetchCampagins(page.toString(),limit.toString())
-        .subscribe(campaigns=>{
+        this.campService.fetchCampagins(page.toString(), limit.toString())
+        .subscribe(campaigns => {
             console.log(campaigns);
-            this.campagainsSubject.next(campaigns)
+            this.campagainsSubject.next(campaigns);
         } );
-        console.log(this.campagainsSubject.value)
+        console.log(this.campagainsSubject.value);
     }
-    // /**
-    //  * Filter data
-    //  *
-    //  * @param data
-    //  * @returns {any}
-    //  */
-    //     filterData(data): any
-    //     {
-    //         if ( !this.filter )
-    //         {
-    //             return data;
-    //         }
-    //         return FuseUtils.filterArrayByString(data, this.filter);
-    //     }
+     /**
+      * Filter data
+      *
+      * @param data
+      * @returns {any}
+      */
+     filterData(data): any
+     {
+         if ( !this.filter )
+         {
+             return data;
+         }
+         console.log("ejecutando", this.filter);
+         return FuseUtils.filterArrayByString(data, this.filter);
+     }
         
     // /**
     //  * Sort data
@@ -227,7 +277,7 @@ export class CampaignDataSource extends DataSource<any>{
 
 }
 
-//export class FilesDataSource extends DataSource<any>
+// export class FilesDataSource extends DataSource<any>
 // {
 //     private campagainsSubject= new BehaviorSubject<any[]>([]);
 //     private _filterChange = new BehaviorSubject('');

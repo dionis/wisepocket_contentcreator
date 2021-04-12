@@ -165,6 +165,9 @@ export class FilesDataSource extends DataSource<any>
 
                 // Grab the page's slice of data.
                 const startIndex = this._matPaginator.pageIndex * this._matPaginator.pageSize;
+                console.log('cantidad de eleme', this._matPaginator.pageSize);
+                console.log('pagina actual', this._matPaginator.pageIndex);
+                console.log('posicion en el arreglo', startIndex );
                 return data.splice(startIndex, this._matPaginator.pageSize);
             })
         );
@@ -183,8 +186,10 @@ export class FilesDataSource extends DataSource<any>
         {
             return data;
         }
+        console.log("ejecutando conslta", this.filter);
         return FuseUtils.filterArrayByString(data, this.filter);
     }
+    
 
     /**
      * Sort data

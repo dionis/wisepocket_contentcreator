@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { environment } from './../../environments/environment';
+import { environment } from '../../environments/environment';
+import { FileUploadService } from './file-upload.service';
+
 @Injectable({
   providedIn: 'root'
 })
-export class FileUploadService {
+export class ImageService {
 
-  constructor(private _http: HttpClient) { 
-    
-  }
-
+  constructor(private _http: HttpClient,
+              private fileService: FileUploadService) { }
   addImage(files){
     let formdata = new FormData();
     //if(typeof(files,) )

@@ -105,4 +105,19 @@ export class CampaignService {
       }
     }))
   }
+
+  asociateImages(idImages:string, id:string){
+    return this._http.get(
+      environment.sails_services_urlpath+":"+environment.sails_services_urlport+'/campaign/CampaignDetail',
+      {params:{'_id':id}}
+    ).pipe(map(responseData=>{
+      if(responseData['data']){
+        let campaign = new Campaign();
+        campaign = responseData['data'];
+        return campaign
+      }else{
+        return null;
+      }
+    }))
+  }
 }

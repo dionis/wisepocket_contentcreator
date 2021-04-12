@@ -82,20 +82,9 @@ module.exports = {
       //unique: true,
     },
 
-    carrusel1:{
-      model: 'imagen',
-    },
-
-    carrusel2:{
-      model: 'imagen',
-    },
-
-    carrusel3:{
-      model: 'imagen',
-    },
-
-    carrusel4:{
-      model: 'imagen',
+    carrusel:{
+      collection: 'imagen',
+      via: 'related_campaign'
     },
     
     createdby :{

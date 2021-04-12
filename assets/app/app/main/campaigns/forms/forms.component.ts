@@ -12,6 +12,7 @@ import { locale as english } from '../../../main/campaigns/forms/i18n/en';
 import { locale as spanish } from '../../../main/campaigns/forms/i18n/es';
 import { ICountry, ICity, IState } from 'country-state-city/src/interface';
 import csc from 'country-state-city';
+import { ImageService } from '../../../services/image.service';
 
 
 // import { locale as english } from './i18n/en';
@@ -67,7 +68,7 @@ export class FormsComponent implements OnInit, OnDestroy
     constructor(
         
         private _formBuilder: FormBuilder,
-        private uploadService: FileUploadService,
+        private imageService: ImageService,
         private campService: CampaignService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService
     )
@@ -204,44 +205,44 @@ export class FormsComponent implements OnInit, OnDestroy
         dataCamp.contactoTelegram = this.horizontalStepperStep2.get('website').value;
         if(this.campIconf){
             console.log(this.campIconf);
-            await this.uploadService.upload_files(this.campIconf).then(img=>{
+            await this.imageService.addImage(this.campIconf).then(img=>{
                 console.log(img);
                 let data = img['data'];
                 dataCamp.logo = data[0].id;
             });
         }
-        if(this.image1){
-            await this.uploadService.upload_files(this.image1)
-            .then((img:any)=>{
+        if(this.files.length>0){
+            await this.imageService.addImage(this.files)
+            .then((img)=>{
                 console.log(img); 
                 let data = img['data'];
-                dataCamp.carrusel1 = data[0].id;
+                dataCamp.carrusel = img;
             });
         }
-        if(this.image2){
-            await this.uploadService.upload_files(this.image2)
-            .then((img:any)=>{
-                console.log(img);
-                let data = img['data']; 
-                dataCamp.carrusel2 = data[0].id;
-            });
-        }
-        if(this.image3){
-            await this.uploadService.upload_files(this.image3)
-            .then((img:any)=>{
-                console.log(img);
-                let data = img['data']; 
-                dataCamp.carrusel3 = data[0].id;
-            });
-        }
-        if(this.image4){
-            await this.uploadService.upload_files(this.image3)
-            .then((img:any)=>{
-                console.log(img);
-                let data = img['data'];  
-                dataCamp.carrusel4 = data[0].id;
-            });
-        }
+        // if(this.image2){
+        //     await this.uploadService.upload_files(this.image2)
+        //     .then((img:any)=>{
+        //         console.log(img);
+        //         let data = img['data']; 
+        //         dataCamp.carrusel2 = data[0].id;
+        //     });
+        // }
+        // if(this.image3){
+        //     await this.uploadService.upload_files(this.image3)
+        //     .then((img:any)=>{
+        //         console.log(img);
+        //         let data = img['data']; 
+        //         dataCamp.carrusel3 = data[0].id;
+        //     });
+        // }
+        // if(this.image4){
+        //     await this.uploadService.upload_files(this.image3)
+        //     .then((img:any)=>{
+        //         console.log(img);
+        //         let data = img['data'];  
+        //         dataCamp.carrusel4 = data[0].id;
+        //     });
+        // }
         console.log(dataCamp);
        this.campService.addCampaign(dataCamp)
        .pipe(takeUntil(this._unsubscribeAll))

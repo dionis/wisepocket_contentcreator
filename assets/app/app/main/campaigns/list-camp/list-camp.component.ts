@@ -24,12 +24,12 @@ import { locale as spanish } from '../../../main/campaigns/list-camp/i18n/es';
 export class ListCampComponent implements AfterViewInit,OnInit {
     dataSource: CampaignDataSource | null;
     displayedColumns = ['id',
-        'logo', 
-        'titulo', 
+        'logo',
+        'titulo',
         'contactoTelefono',
         'direccionPostal',
-        'contactoEmail', 
-        //'contactoTelegram', 
+        'contactoEmail',
+        //'contactoTelegram',
         'active'
     ];
 
@@ -113,7 +113,7 @@ export class CampaignDataSource extends DataSource<any>{
 
     constructor(private campService:CampaignService,
         // private _matPaginator: MatPaginator,
-        // private _matSort: MatSort        
+        // private _matSort: MatSort
         ){
             super();
             this.campService.countUserCampaigns()
@@ -121,7 +121,7 @@ export class CampaignDataSource extends DataSource<any>{
                 console.log(res);
                 this._countCampaigns = res['data'];
             })
-            
+
         }
     get filteredData(): any
     {
@@ -133,7 +133,7 @@ export class CampaignDataSource extends DataSource<any>{
         //if(this.campagainsSubject.value.length !== 0){
             return this.campagainsSubject.asObservable();
         //}
-        
+
     }
     disconnect(){
         this.campagainsSubject.complete();
@@ -177,7 +177,7 @@ export class CampaignDataSource extends DataSource<any>{
     //         }
     //         return FuseUtils.filterArrayByString(data, this.filter);
     //     }
-        
+
     // /**
     //  * Sort data
     //  *
@@ -190,11 +190,11 @@ export class CampaignDataSource extends DataSource<any>{
     //      {
     //          return data;
     //      }
- 
+
     //      return data.sort((a, b) => {
     //          let propertyA: number | string = '';
     //          let propertyB: number | string = '';
- 
+
     //          switch ( this._matSort.active )
     //          {
     //              case 'id':
@@ -216,10 +216,10 @@ export class CampaignDataSource extends DataSource<any>{
     //                  [propertyA, propertyB] = [a.active, b.active];
     //                  break;
     //          }
- 
+
     //          const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
     //          const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
- 
+
     //          return (valueA < valueB ? -1 : 1) * (this._matSort.direction === 'asc' ? 1 : -1);
     //      });
     //  }

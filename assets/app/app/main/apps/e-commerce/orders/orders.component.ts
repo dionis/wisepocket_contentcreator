@@ -164,7 +164,12 @@ export class FilesDataSource extends DataSource<any>
                 data = this.sortData(data);
 
                 // Grab the page's slice of data.
+                console.log("Cantidad de elementos por pagina ", this._matPaginator.pageSize)
+                console.log("Pagina actual ", this._matPaginator.pageIndex  )
+
                 const startIndex = this._matPaginator.pageIndex * this._matPaginator.pageSize;
+
+                console.log("Posicion en el arreglo ", startIndex);
                 return data.splice(startIndex, this._matPaginator.pageSize);
             })
         );
@@ -183,6 +188,7 @@ export class FilesDataSource extends DataSource<any>
         {
             return data;
         }
+        console.log("Ejecutando consulta ",this.filter );
         return FuseUtils.filterArrayByString(data, this.filter);
     }
 

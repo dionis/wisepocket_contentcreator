@@ -144,7 +144,7 @@ export class FormsComponent implements OnInit, OnDestroy
     onSelectIcon(event){
         console.log(event.addedFiles)
        this.campIconf = event.addedFiles[0];
-       this.files.push(event.addedFiles[0]);
+      // this.files.push(event.addedFiles[0]);
     }
     
     onSelect(event) {
@@ -207,50 +207,31 @@ export class FormsComponent implements OnInit, OnDestroy
             console.log(this.campIconf);
             await this.imageService.addImage(this.campIconf).then(img=>{
                 console.log(img);
-                let data = img['data'];
-                dataCamp.logo = data[0].id;
+                //let data = img['data'];
+                dataCamp.logo = img[0];
             });
         }
+        let imagesCarruselIds = [];
         if(this.files.length>0){
             await this.imageService.addImage(this.files)
             .then((img)=>{
                 console.log(img); 
                 let data = img['data'];
-                dataCamp.carrusel = img;
+                imagesCarruselIds = img
+                //dataCamp.carrusel = img;
             });
         }
-        // if(this.image2){
-        //     await this.uploadService.upload_files(this.image2)
-        //     .then((img:any)=>{
-        //         console.log(img);
-        //         let data = img['data']; 
-        //         dataCamp.carrusel2 = data[0].id;
-        //     });
-        // }
-        // if(this.image3){
-        //     await this.uploadService.upload_files(this.image3)
-        //     .then((img:any)=>{
-        //         console.log(img);
-        //         let data = img['data']; 
-        //         dataCamp.carrusel3 = data[0].id;
-        //     });
-        // }
-        // if(this.image4){
-        //     await this.uploadService.upload_files(this.image3)
-        //     .then((img:any)=>{
-        //         console.log(img);
-        //         let data = img['data'];  
-        //         dataCamp.carrusel4 = data[0].id;
-        //     });
-        // }
         console.log(dataCamp);
-       this.campService.addCampaign(dataCamp)
+        await this.campService.addCampaign(dataCamp)
        .pipe(takeUntil(this._unsubscribeAll))
-       .subscribe(campaign =>{
-           console.log(campaign);
-       },error=>{
+       .subscribe(async campaign =>{
+           if(imagesCarruselIds.length>0){
+            await this.campService.asociateImages(imagesCarruselIds,campaign.id);
+           }
+           console.log(campaign);        
+        },error=>{
            console.log(error)
-       });
+       });       
         alert('You have finished the horizontal stepper!');
     }
 }

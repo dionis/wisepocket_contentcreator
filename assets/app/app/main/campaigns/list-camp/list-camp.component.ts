@@ -132,15 +132,15 @@ export class CampaignDataSource extends DataSource<any>{
     }
 
     // Filter
-    get filter(): string
-    {
-        return this._filterChange.value;
-    }
+    // get filter(): string
+    // {
+    //    return this._filterChange.value;
+    // }
     
-    set filter(filter: string)
-    {
-        this._filterChange.next(filter);
-    }
+    // set filter(filter: string)
+    // {
+    //    this._filterChange.next(filter);
+    // }
 
     // connect(collectionViewer: CollectionViewer): Observable<any[]>{
     //    console.log(this.campagainsSubject);
@@ -155,34 +155,33 @@ export class CampaignDataSource extends DataSource<any>{
     // -----------------------------------------------------------------------------------------------------
 
 
-    connect(): Observable<any[]>
-    {
-        const displayDataChanges = [
-            this._matPaginator.page,
-            this.campagainsSubject,
-            this._matSort.sortChange
-        ];
-    
-        return merge(...displayDataChanges).pipe(map(() => {
-    
-               // let data = this._ecommerceOrdersService.orders.slice();
-    
-               // data = this.filterData(data);
-    
-               // this.filteredData = [...data];
-    
-               // data = this.sortData(data);
-    
-                // Grab the page's slice of data.
-                // const startIndex = this._matPaginator.pageIndex * this._matPaginator.pageSize;
-                console.log("cantidad de eleme", this._matPaginator.pageSize);
-                console.log("pagina actual", this._matPaginator.pageIndex);
-                // console.log("posicion en el arreglo", startIndex );
-                return this.loadUserCampaigns( this._matPaginator.pageIndex, this._matPaginator.pageSize);
-            })
-        );
-    
-    }
+     connect(): Observable<any[]>
+     {
+         const displayDataChanges = [
+             this._matPaginator.page,            
+             this._matSort.sortChange
+         ];
+     
+         return merge(...displayDataChanges).pipe(map(() => {
+     
+                // let data = this._ecommerceOrdersService.orders.slice();
+     
+                // data = this.filterData(data);
+     
+                // this.filteredData = [...data];
+     
+                // data = this.sortData(data);
+     
+                 // Grab the page's slice of data.
+                 // const startIndex = this._matPaginator.pageIndex * this._matPaginator.pageSize;
+                 console.log("cantidad de eleme", this._matPaginator.pageSize);
+                 console.log("pagina actual", this._matPaginator.pageIndex);
+                 // console.log("posicion en el arreglo", startIndex );
+                 return this.loadUserCampaigns( this._matPaginator.pageIndex, this._matPaginator.pageSize);
+             })
+         );
+     
+     }
 
     disconnect(){
         this.campagainsSubject.complete();
@@ -192,15 +191,14 @@ export class CampaignDataSource extends DataSource<any>{
         return this._countCampaigns;
     }
 
-    loadUserCampaigns(page: number, limit: number){
-        this.campService.getCampaignUser(page.toString(), limit.toString())
+    loadUserCampaigns(page: number, limit: number): Observable<any[]>{
+        return this.campService.getCampaignUser(page.toString(), limit.toString())
         .subscribe(campaigns => {
-            console.log(campaigns);
-            this.campagainsSubject.next(campaigns);
+            console.log("Data from DataBase", campaigns);     
         }, error => {
             this.errorSubject.next(error.message);
         } );
-        console.log(this.campagainsSubject.value);
+        
     }
 
     loadCampaigns(page: number, limit: number){
@@ -212,21 +210,7 @@ export class CampaignDataSource extends DataSource<any>{
         } );
         console.log(this.campagainsSubject.value);
     }
-     /**
-      * Filter data
-      *
-      * @param data
-      * @returns {any}
-      */
-     filterData(data): any
-     {
-         if ( !this.filter )
-         {
-             return data;
-         }
-         console.log("ejecutando", this.filter);
-         return FuseUtils.filterArrayByString(data, this.filter);
-     }
+    
         
     // /**
     //  * Sort data

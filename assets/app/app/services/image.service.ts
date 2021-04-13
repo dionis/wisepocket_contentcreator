@@ -9,15 +9,17 @@ import { FileUploadService } from './file-upload.service';
 })
 export class ImageService {
 
-  constructor(private _http: HttpClient,
-              private fileService: FileUploadService) { }
+  constructor(private _http: HttpClient,) { }
   addImage(files){
+    console.log(files)
     let formdata = new FormData();
-    //if(typeof(files,) )
-    //formdata.append('files',files);
-    for (let index = 0; index < files.length; index++) {
-      console.log(files[index]);
-      formdata.append('files',files[index]);
+    if(files instanceof Array){
+      for (let index = 0; index < files.length; index++) {
+        console.log(files[index]);
+        formdata.append('files',files[index]);
+      }
+    }else{
+      formdata.append('files',files);
     }
     return this._http.post(
       environment.sails_services_urlpath+":"+environment.sails_services_urlport+'/addImg',

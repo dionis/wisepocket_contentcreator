@@ -25,11 +25,12 @@ module.exports = {
     // if(!inputs.id){return this.res.status(400).send({'error':'No Campaign Id was provided'})}
     // sails.log.debug(this.req.param('images'))
     // sails.log.debug(this.req.param('id'))
+    //var ids = JSON.parse(this.req.param('images'))
     var images = this.req.body.images;
     var camp = this.req.body.id;
-    sails.log.debug(images)
-    sails.log.debug(camp)
-    if(typeof images === 'array'){ 
+    sails.log.debug(images);
+    sails.log.debug(camp);
+    if(typeof ids === 'Array'){ 
       sails.log.debug(true) 
     }else{
       sails.log.debug(false)
@@ -46,7 +47,7 @@ module.exports = {
         return this.res.status(500).send({
           'error': err
         });
-    })
+    });
     return;
 
   }

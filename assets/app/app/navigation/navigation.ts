@@ -32,7 +32,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id       : 'campings_table',
                 title    : 'Campings',
-                translate: 'NAV.CampingsList.TITLE',
+                translate: 'NAV.CAMPINGIN_LIST.TITLE',
                 type     : 'item',
                 icon     : 'list',
                 url      : 'campaigns/campaigns-list',

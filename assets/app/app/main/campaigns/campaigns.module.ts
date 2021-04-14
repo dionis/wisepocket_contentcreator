@@ -13,6 +13,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '../../../@fuse/shared.module';
 
 import { FormsComponent } from './forms/forms.component';
+import { GameComponent } from './game/game.component';
+import { SurveyComponent } from './survey/survey.component';
 import { AuthguardService } from '../../services/authguard.service';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { from } from 'rxjs';
@@ -39,6 +41,16 @@ const routes: Routes = [
       component: FormsComponent
   },
   {
+    path     : 'game',
+    canActivate: [AuthguardService],
+    component: GameComponent
+  },
+  {
+    path     : 'survey',
+    canActivate: [AuthguardService],
+    component: SurveyComponent
+},
+  {
       path     : 'campaigns-list',
       canActivate: [AuthguardService],
       component: ListCampComponent
@@ -48,12 +60,14 @@ const routes: Routes = [
     canActivate: [AuthguardService],
     component: CampaignDetailComponent
 }
-    
+
 ];
 
 @NgModule({
   declarations: [
     FormsComponent,
+    GameComponent,
+    SurveyComponent,
     DragDorpDirective,
     ListCampComponent,
     CampaignDetailComponent

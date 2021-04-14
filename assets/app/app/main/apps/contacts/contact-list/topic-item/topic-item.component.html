@@ -63,6 +63,27 @@
 
                               <div>
                                   {{widget1.detail}}
+                                  <quill-editor>
+                                    <div quill-editor-toolbar>
+                                      <span class="ql-formats">
+                                        <button class="ql-bold" [title]="'Bold'"></button>
+                                      </span>
+                                      <span class="ql-formats">
+                                        <select class="ql-align" [title]="'Aligment'">
+                                          <option selected></option>
+                                          <option value="center"></option>
+                                          <option value="right"></option>
+                                          <option value="justify"></option>
+                                        </select>
+                                        <select class="ql-align" [title]="'Aligment2'">
+                                          <option selected></option>
+                                          <option value="center"></option>
+                                          <option value="right"></option>
+                                          <option value="justify"></option>
+                                        </select>
+                                      </span>
+                                    </div>
+                                  </quill-editor>
                               </div>
                           </div>
                           <!-- / Back -->
@@ -112,6 +133,25 @@
 
                               <div>
                                   {{widget2.detail}}
+                                  <div  fxLayout="column" class="dropzone" style="width: 50%; height: auto;">
+                                    <div fxLayout="row" fxFlex="1 0 auto" style="    width: 100%; height: 50%;
+                                    margin-top: 10px;
+                                    border-bottom-width: 10px;
+                                    margin-bottom: 10px;">
+                                        <ngx-dropzone [id]="campaignicon" class="campaign-icon" (change)="onSelectImage($event)"
+                                        [multiple] = "false"
+                                        accept="image/jpg,image/png">
+                                            <ngx-dropzone-label>>{{'FORMS.CAMPAIGN_ICON_PLACEHOLDER' | translate}}</ngx-dropzone-label>
+                                            <ngx-dropzone-image-preview *ngIf="campImage" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="campImage">
+                                                <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                            </ngx-dropzone-image-preview>
+                                        </ngx-dropzone>
+                                    </div>
+                                    <div fxLayout="row" fxFlex="1 0 auto" style="width: 100%;
+                                    height: 5%; margin-top: 10px; margin-bottom: 5px;" >
+                                        <label >{{'FORMS.DRAG_DROP' | translate}}</label>
+                                    </div>
+                                </div>
                               </div>
                           </div>
                           <!-- / Back -->
@@ -161,6 +201,25 @@
 
                               <div>
                                   {{widget3.detail}}
+                                  <div  fxLayout="column" class="dropzone" style="width: 50%; height: auto;">
+                                    <div fxLayout="row" fxFlex="1 0 auto" style="    width: 100%; height: 50%;
+                                    margin-top: 10px;
+                                    border-bottom-width: 10px;
+                                    margin-bottom: 10px;">
+                                        <ngx-dropzone [id]="campaignicon" class="campaign-icon" (change)="onSelectVideo($event)"
+                                        [multiple] = "false"
+                                        accept="video/mp4,avi">
+                                            <ngx-dropzone-label>>{{'FORMS.CAMPAIGN_ICON_PLACEHOLDER' | translate}}</ngx-dropzone-label>
+                                            <ngx-dropzone-image-preview *ngIf="campVideo" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="campVideo">
+                                                <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                            </ngx-dropzone-image-preview>
+                                        </ngx-dropzone>
+                                    </div>
+                                    <div fxLayout="row" fxFlex="1 0 auto" style="width: 100%;
+                                    height: 5%; margin-top: 10px; margin-bottom: 5px;" >
+                                        <label >{{'FORMS.DRAG_DROP' | translate}}</label>
+                                    </div>
+                                </div>
                               </div>
                           </div>
                           <!-- / Back -->

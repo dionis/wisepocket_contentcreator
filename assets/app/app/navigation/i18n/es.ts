@@ -12,6 +12,8 @@ export const locale = {
                 'TITLE': 'Lista de Campañas',
                 'BADGE': '12'
             },
+            'GAME': 'Juegos',
+            'SURVEY': 'Encuestas'
         },
 
     }

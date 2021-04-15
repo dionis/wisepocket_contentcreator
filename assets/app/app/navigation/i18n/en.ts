@@ -23,6 +23,8 @@ export const locale = {
             },
             'CONTACTS'    : 'Contacts',
             'WIZARD'       : 'Wizard',
+            'GAME': 'Games',
+            'SURVEY': 'Surveys'
         },
 
     }

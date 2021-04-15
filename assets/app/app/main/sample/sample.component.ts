@@ -28,17 +28,30 @@ export class SampleComponent implements OnInit, AfterViewInit
     }
 
     private initMap(){
+        let corner1 = L.latLng(19.8351702,-84.9514723);
+        let corner2 = L.latLng(23.2431588,-74.1343019);
+        const bonus = L.latLngBounds(corner1, corner2);
         this.map = L.map('map',{
-            center: [39.8282, -98.5795],
-            zoom: 3
+            center: corner1,
+            maxBounds: bonus,
+            crs: L.CRS.EPSG4326,
+            zoom: 6
         });
         const tiles = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
             maxZoom: 20,
             subdomains:['mt0','mt1','mt2','mt3']
             //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           });
-      
-        tiles.addTo(this.map);
+        
+        const tiles2 = L.tileLayer.wms('http://localhost:8080/geoserver/wisepocket/wms',{
+            layers: 'wisepocket:gis_osm_roads_free_1',
+            height: 768,
+            width:330,
+            attribution: "CUBA"
+          });
+          console.log(tiles2);
+          tiles.addTo(this.map);
+          console.log(this.map)
     }
     ngOnInit(){
 

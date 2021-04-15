@@ -51,6 +51,22 @@ export const navigation: FuseNavigation[] = [
                 icon     : 'send',
                 url      : 'campaigns/forms'
               },
+              {
+                id       : 'game',
+                title    : 'Game',
+                translate: 'NAV.GAME',
+                type     : 'item',
+                icon     : 'send',
+                url      : 'campaigns/game'
+              },
+              {
+                id       : 'survey',
+                title    : 'Survey',
+                translate: 'NAV.SURVEY',
+                type     : 'item',
+                icon     : 'send',
+                url      : 'campaigns/survey'
+              },
 
         ]
     },

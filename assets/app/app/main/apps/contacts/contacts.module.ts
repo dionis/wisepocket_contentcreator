@@ -30,6 +30,8 @@ import { ContactsContactFormDialogComponent } from '../../../../app/main/apps/co
 import { TopicItemComponent } from './contact-list/topic-item/topic-item.component';
 
 import { QuillModule } from 'ngx-quill';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import {DragDorpDirective} from './dragdrop.directive';
 
 
 const routes: Routes = [
@@ -49,7 +51,8 @@ const routes: Routes = [
         ContactsSelectedBarComponent,
         ContactsMainSidebarComponent,
         ContactsContactFormDialogComponent,
-        TopicItemComponent
+        TopicItemComponent,
+        DragDorpDirective
     ],
     imports        : [
         RouterModule.forChild(routes),
@@ -89,6 +92,7 @@ const routes: Routes = [
           },
           placeholder :"Insert text"
         }),
+        NgxDropzoneModule
     ],
     providers      : [
         ContactsService

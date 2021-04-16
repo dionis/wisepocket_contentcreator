@@ -1,0 +1,134 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+
+        <!-- <mat-toolbar-row class="toolbar-bottom py-16" fxLayout="column" fxLayoutAlign="center center">
+            <img [src]="contact.avatar" class="avatar contact-avatar huge m-0"
+                 [alt]="contact.name"/>
+            <div class="contact-name mt-8">{{contact.name}} {{contact.lastName}}</div>
+        </mat-toolbar-row> -->
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+
+        <form [formGroup]="contactForm">
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Title</mat-label>
+                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                    <input name="name" formControlName="title" matInput required>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Phone number</mat-label>
+                    <mat-icon matSuffix class="secondary-text">phone</mat-icon>
+                    <input formControlName="phone" matInput>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Email</mat-label>
+                    <mat-icon matSuffix class="secondary-text">email</mat-icon>
+                    <input name="email" formControlName="email" matInput type="email">
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Url Web Site</mat-label>
+                    <mat-icon matSuffix class="secondary-text">work</mat-icon>
+                    <input name="url" formControlName="url" matInput>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" class="textarea-wrapper" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Description</mat-label>
+                    <textarea name="description" formControlName="description" matInput type="text" max-rows="4"></textarea>
+                </mat-form-field>
+            </div>
+
+            <!-- <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Birthday</mat-label>
+                    <input matInput [matDatepicker]="birthdayDatePicker" name="birthday" formControlName="birthday">
+                    <mat-datepicker-toggle matSuffix [for]="birthdayDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #birthdayDatePicker></mat-datepicker>
+                </mat-form-field>
+            </div> -->
+        </form>
+        <div  fxLayout="row"  fxLayoutAlign="start start" class="dropzone" style="width: 50%; height: auto;">
+            <div fxLayout="row" fxFlex="1 0 auto" >
+
+                <ngx-dropzone id="image1" class="images" (change)="onSelect($event)"
+                [multiple] = "false"
+                accept="image/jpg,image/png">
+                    <ngx-dropzone-label>{{'FORMS.IMAGE1_PLACEHOLDER' | translate}}</ngx-dropzone-label>
+                    <ngx-dropzone-image-preview *ngIf="image1" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image1">
+                        <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                    </ngx-dropzone-image-preview>
+                </ngx-dropzone>
+
+                <ngx-dropzone id="image2" class="images" (change)="onSelect($event)"
+                accept="image/jpg,image/png"
+                [multiple] = "false">
+                    <ngx-dropzone-label>{{'FORMS.IMAGE2_PLACEHOLDER' | translate}}</ngx-dropzone-label>
+                    <ngx-dropzone-image-preview *ngIf="image2" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image2">
+                        <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                    </ngx-dropzone-image-preview>
+                </ngx-dropzone>
+
+                <ngx-dropzone id="image3" class="images" (change)="onSelect($event)"
+                accept="image/jpg,image/png"
+                [multiple] = "false">
+                    <ngx-dropzone-label>{{'FORMS.IMAGE2_PLACEHOLDER' | translate}}</ngx-dropzone-label>
+                    <ngx-dropzone-image-preview *ngIf="image3" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image3">
+                        <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                    </ngx-dropzone-image-preview>
+                </ngx-dropzone>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+
+        <button *ngIf="action === 'edit'"
+                mat-button
+                class="mr-8"
+                (click)="matDialogRef.close(['delete',contactForm])"
+                aria-label="Delete"
+                matTooltip="Delete">
+            DELETE
+        </button>
+
+        <button *ngIf="action !== 'edit'"
+                mat-button
+                class="save-button"
+                (click)="matDialogRef.close(contactForm)"
+                [disabled]="contactForm.invalid"
+                aria-label="SAVE">
+            ADD
+        </button>
+
+        <button *ngIf="action === 'edit'"
+                mat-button
+                class="save-button"
+                (click)="matDialogRef.close(['save',contactForm])"
+                [disabled]="contactForm.invalid"
+                aria-label="SAVE">
+            SAVE
+        </button>
+
+    </div>
+</div>

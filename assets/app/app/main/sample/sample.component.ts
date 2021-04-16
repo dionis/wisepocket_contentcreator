@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { FuseTranslationLoaderService } from '../../../@fuse/services/translation-loader.service';
 
@@ -7,11 +7,18 @@ import { locale as turkish } from './i18n/tr';
 import { locale as spanish } from './i18n/es';
 import * as L from 'leaflet' 
 import { MarkerService } from '../../services/marker.service';
+import { MatDialog } from '@angular/material/dialog';
+//import { GeopointsFormDialogComponent } from './contact-form/geopoints-form.component';
+import { FormControl, FormGroup } from '@angular/forms';
+import { FuseSidebarService } from '../../../@fuse/components/sidebar/sidebar.service';
+import { fuseAnimations } from '../../../@fuse/animations';
 
 @Component({
     selector   : 'sample',
     templateUrl: './sample.component.html',
-    styleUrls  : ['./sample.component.scss']
+    styleUrls  : ['./sample.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations   : fuseAnimations
 })
 export class SampleComponent implements OnInit, AfterViewInit
 {
@@ -24,9 +31,11 @@ export class SampleComponent implements OnInit, AfterViewInit
     private iconUrl = './leafleticons/marker-icon.png';
     private shadowUrl = './leafleticons/marker-shadow.png';
     private iconDefault;
+    dialogRef: any;
 
 
     serverMap: any;
+    searchInput: FormControl;
     /**
      * Constructor
      *
@@ -34,11 +43,14 @@ export class SampleComponent implements OnInit, AfterViewInit
      */
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
-        private markerService: MarkerService
+        private _fuseSidebarService: FuseSidebarService,
+        private markerService: MarkerService,
+        private _matDialog: MatDialog
     )
     {
+        this.searchInput = new FormControl('');
         this._fuseTranslationLoaderService.loadTranslations(english, turkish, spanish);
-        this.serverMap = 'googleMap';
+        
         this.iconDefault = L.icon({
             iconRetinaUrl:this.iconRetinaUrl,
             iconUrl: this.iconUrl,
@@ -66,7 +78,7 @@ export class SampleComponent implements OnInit, AfterViewInit
               });
               break;
             case 'geoServer':
-                tiles = L.tileLayer.wms(this.uris[1],{
+                tiles = L.tileLayer.wms('http://localhost:8080/geoserver/wisepocket/wms',{
                     layers: 'wisepocket:gis_osm_roads_free_1',
                     srs: "EPSG:4326",
                     height: 768,
@@ -97,12 +109,48 @@ export class SampleComponent implements OnInit, AfterViewInit
         }
     }
     ngOnInit(){
-
+        
     }
 
-    ngAfterViewInit(){
+    async ngAfterViewInit(){
+        await this.markerService.sourceMap.subscribe(source=>{
+            this.serverMap = source;
+            console.log(source)
+            //this.map = null;
+            //console.log(this.map)
+        })
         this.initMap(); //Inizialize Map
         //L.control.mousePosition().addTo(this.map);
         this.newMarker(); // Create Marker From Click Event
     }
+
+    newContact(): void
+    {
+        // this.dialogRef = this._matDialog.open(GeopointsFormDialogComponent, {
+        //     panelClass: 'contact-form-dialog',//ojo
+        //     data      : {
+        //         action: 'new'
+        //     }
+        // });
+
+        // this.dialogRef.afterClosed()
+        //     .subscribe((response: FormGroup) => {
+        //         if ( !response )
+        //         {
+        //             return;
+        //         }
+
+        //        //this._contactsService.updateContact(response.getRawValue());
+        //     });
+    }
+
+    /**
+     * Toggle the sidebar
+     *
+     * @param name
+     */
+     toggleSidebar(name): void
+     {
+         this._fuseSidebarService.getSidebar(name).toggleOpen();
+     }
 }

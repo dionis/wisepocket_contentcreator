@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as L from 'leaflet'
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MarkerService {
+  sourceMap: BehaviorSubject<string>;
   private iconRetinaUrl = './leafleticons/marker-icon-2x.png';
   private iconUrl = './leafleticons/marker-icon.png';
   private shadowUrl = './leafleticons/marker-shadow.png';
@@ -18,10 +20,17 @@ export class MarkerService {
     tooltipAnchor: [16, -28],
     shadowSize: [41, 41]
   });
-  constructor() { 
-
+  constructor() {
+    this.sourceMap = new BehaviorSubject('geoServer');
   }
   createMarker(e){
     return  L.marker([e.latlng.lat, e.latlng.lng],this.iconDefault)
+  }
+
+  setSource(source:string){
+    this.sourceMap.next(source);
+  }
+  getSource():Observable<string>{
+    return this.sourceMap.asObservable();
   }
 }

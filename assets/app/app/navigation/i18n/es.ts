@@ -13,7 +13,11 @@ export const locale = {
                 'BADGE': '12'
             },
             'GAME': 'Juegos',
-            'SURVEY': 'Encuestas'
+            'SURVEY': 'Encuestas',
+            'MAP'        : {
+                'TITLE': 'Mapas',
+                'BADGE': '25'
+            },
         },
 
     }

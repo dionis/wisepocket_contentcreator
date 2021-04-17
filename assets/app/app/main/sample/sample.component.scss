@@ -46,15 +46,30 @@
         bottom: 0;
         margin: 30px;
       }
-      
+
       .map-frame {
         border: 2px solid black;
         height: 100%;
       }
-      
+
       #map {
         width: auto;
         height: 466px;
       }
+  }
+}
+
+
+#add-contact-button1 {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  padding: 0;
+  z-index: 99;
+
+  @include media-breakpoint('xs') {
+      position: sticky;
+      top: calc(100vh - 120px);
+      bottom: auto;
   }
 }

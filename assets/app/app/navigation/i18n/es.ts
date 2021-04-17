@@ -12,28 +12,12 @@ export const locale = {
                 'TITLE': 'Lista de Campañas',
                 'BADGE': '12'
             },
-<<<<<<< HEAD
-            'ECOMMERCE'   : 'E-Commerce',
-            'MAIL'        : {
-                'TITLE': 'Correo',
-                'BADGE': '25'
-            },
-            'MAIL_NGRX'        : {
-                'TITLE': 'Correo Ngrx',
-                'BADGE': '13'
-            },
-            'CONTACTS'    : 'Conontactostacts',
-            'WIZARD'       : 'Guia',
-            'GAME'       : 'Juegos',
-            'SURVEY'       : 'Encuesta',
-=======
             'GAME': 'Juegos',
             'SURVEY': 'Encuestas',
             'MAP'        : {
                 'TITLE': 'Mapas',
                 'BADGE': '25'
             },
->>>>>>> develop_rolando
         },
 
     }

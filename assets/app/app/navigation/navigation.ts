@@ -31,11 +31,7 @@ export const navigation: FuseNavigation[] = [
         children : [
             {
                 id       : 'campings_table',
-<<<<<<< HEAD
-                title    : 'Campings',
-=======
                 title    : 'Campings List',
->>>>>>> develop_rolando
                 translate: 'NAV.CAMPINGIN_LIST.TITLE',
                 type     : 'item',
                 icon     : 'list',
@@ -56,13 +52,8 @@ export const navigation: FuseNavigation[] = [
                 url      : 'campaigns/forms'
               },
               {
-<<<<<<< HEAD
-                id       : 'game',
-                title    : 'Game',
-=======
                 id       : 'games',
                 title    : 'Games',
->>>>>>> develop_rolando
                 translate: 'NAV.GAME',
                 type     : 'item',
                 icon     : 'send',

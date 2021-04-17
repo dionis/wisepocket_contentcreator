@@ -25,7 +25,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "assets/app/favicon.ico",
-              "assets/app/assets"
+              "assets/app/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images/",
+                "output": "./leafleticons"
+              }
             ],
             "styles": [
               "assets/app/styles.scss",

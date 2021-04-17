@@ -94,6 +94,7 @@ $typography: mat-typography-config(
 @import "../app/main/authentication/login/login.theme.scss";
 @import "../app/main/errors/404/error-404.theme.scss";
 @import "../app/main/errors/500/error-500.theme.scss";
+@import "../app/main/sample/sample.theme.scss";
 
 @import "../app/main/pages/profile/tabs/about/about.theme";
 @import "../app/main/pages/profile/tabs/photos-videos/photos-videos.theme";
@@ -112,6 +113,7 @@ $typography: mat-typography-config(
    @include mail-theme($theme);
    @include mail-ngrx-theme($theme);
    @include list-campaign-theme($theme);
+   @include sample-theme($theme);
 
 
     // Layout components

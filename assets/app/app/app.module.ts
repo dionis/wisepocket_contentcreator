@@ -58,6 +58,11 @@ const appRoutes: Routes = [
     canActivate: [AuthguardService],
     loadChildren: () => import('../app/main/campaigns/campaigns.module').then(m => m.CampaignsModule)
     },
+    {
+        path        : 'maps',
+        canActivate: [AuthguardService],
+        loadChildren: () => import('../app/main/geopoints/geopoints.module').then(m => m.GeopointsModule)
+    },
   {
       path        : 'pages',
       canActivate: [AuthguardService],

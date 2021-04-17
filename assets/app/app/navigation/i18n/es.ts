@@ -12,6 +12,7 @@ export const locale = {
                 'TITLE': 'Lista de Campañas',
                 'BADGE': '12'
             },
+<<<<<<< HEAD
             'ECOMMERCE'   : 'E-Commerce',
             'MAIL'        : {
                 'TITLE': 'Correo',
@@ -25,6 +26,14 @@ export const locale = {
             'WIZARD'       : 'Guia',
             'GAME'       : 'Juegos',
             'SURVEY'       : 'Encuesta',
+=======
+            'GAME': 'Juegos',
+            'SURVEY': 'Encuestas',
+            'MAP'        : {
+                'TITLE': 'Mapas',
+                'BADGE': '25'
+            },
+>>>>>>> develop_rolando
         },
 
     }

@@ -25,6 +25,8 @@ module.exports = {
     const token = this.req.header('Authorization').split('Bearer ')[1];
     //sails.log.debug(token);
     //const payload = await jwt.decode(token);
+    sails.log.debug(this.req.param('page'));
+    sails.log.debug(this.req.param('limit'));
     await jwt.verify(token,'hjghdvdfjvnishvishr4oo', async (err,payload)=>{
         if(err) return this.res.status(500).send({'error': err});
         await Campaign.find({

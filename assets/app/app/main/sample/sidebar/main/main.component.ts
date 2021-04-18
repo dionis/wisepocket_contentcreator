@@ -41,7 +41,12 @@ export class GeoPointsMainSidebarComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        // this.filterBy = this._contactsService.filterBy || 'all';
+        this._markerService.sourceMap
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe(source=>{
+            this.filterBy = source || 'googleMap';
+        })
+        
 
         // this._contactsService.onUserDataChanged
         //     .pipe(takeUntil(this._unsubscribeAll))

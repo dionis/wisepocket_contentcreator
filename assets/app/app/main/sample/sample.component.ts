@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 
 import { FuseTranslationLoaderService } from '../../../@fuse/services/translation-loader.service';
 
@@ -12,6 +12,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FuseSidebarService } from '../../../@fuse/components/sidebar/sidebar.service';
 import { fuseAnimations } from '../../../@fuse/animations';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector   : 'sample',
@@ -20,7 +22,7 @@ import { fuseAnimations } from '../../../@fuse/animations';
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
-export class SampleComponent implements OnInit, AfterViewInit
+export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges
 {
     private map;
     private  uris = [
@@ -31,7 +33,10 @@ export class SampleComponent implements OnInit, AfterViewInit
     private iconUrl = './leafleticons/marker-icon.png';
     private shadowUrl = './leafleticons/marker-shadow.png';
     private iconDefault;
+    private current_position: number;
+    private current_accuracy: number;
     dialogRef: any;
+    private _unsubscribeAll: Subject<any>;
 
 
     serverMap: any;
@@ -64,6 +69,45 @@ export class SampleComponent implements OnInit, AfterViewInit
         //L.Marker.prototype.options.icon = this.iconDefault;
     }
 
+    ngOnDestroy(): void {
+        this._unsubscribeAll.next();
+        this._unsubscribeAll.complete();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.markerService.sourceMap
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe(source=>{
+            //this.serverMap = source;
+            console.log(source)
+            this.map.remove();
+            this.initMap();
+            //console.log(this.map)
+        });
+    }
+
+    onLocationFound(e) {
+        // if position defined, then remove the existing position marker and accuracy circle from the map
+        if (this.current_position) {
+            this.map.removeLayer(this.current_position);
+            this.map.removeLayer(this.current_accuracy);
+        }
+  
+        var radius = e.accuracy / 2;
+  
+        this.current_position = L.marker(e.latlng,this.markerService.iconDefault).addTo(this.map)
+          .bindPopup("You are within " + radius + " meters from this point").openPopup();
+  
+        this.current_accuracy = L.circle(e.latlng, radius).addTo(this.map);
+      }
+
+      onLocationError(e) {
+        alert(e.message);
+    }
+    locate() {
+        this.map.locate({setView: true, maxZoom: 16});
+    }
+
     private initMap(){
         let tiles;
         let corner1= L.latLng(19.8351702,-84.9514723);
@@ -73,8 +117,8 @@ export class SampleComponent implements OnInit, AfterViewInit
             case 'googleMap':
                 tiles = L.tileLayer(`http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}`,{
                 maxZoom: 20,
-                subdomains:['mt0','mt1','mt2','mt3']
-                //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                subdomains:['mt0','mt1','mt2','mt3'],
+                attribution: "CUBA"
               });
               break;
             case 'geoServer':
@@ -85,6 +129,12 @@ export class SampleComponent implements OnInit, AfterViewInit
                     width:330,
                     attribution: "CUBA"
                   });          
+                break;
+            case 'openStretMap':
+                tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            	maxZoom: 20,
+            	attribution: 'CUBA'
+                });
                 break;
             default:
                 break;
@@ -108,18 +158,28 @@ export class SampleComponent implements OnInit, AfterViewInit
             });
         }
     }
+
     ngOnInit(){
         
     }
 
+
     async ngAfterViewInit(){
-        await this.markerService.sourceMap.subscribe(source=>{
+        await this.markerService.sourceMap
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe(source=>{
             this.serverMap = source;
             console.log(source)
-            //this.map = null;
+            //
+            //this.map.remove();
             //console.log(this.map)
         })
         this.initMap(); //Inizialize Map
+        setTimeout(() => {
+            this.locate();
+        }, 2000);
+        this.map.on('locationfound', this.onLocationFound);
+        this.map.on('locationerror', this.onLocationError);
         //L.control.mousePosition().addTo(this.map);
         this.newMarker(); // Create Marker From Click Event
     }

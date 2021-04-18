@@ -10,7 +10,7 @@ export class MarkerService {
   private iconRetinaUrl = './leafleticons/marker-icon-2x.png';
   private iconUrl = './leafleticons/marker-icon.png';
   private shadowUrl = './leafleticons/marker-shadow.png';
-  private iconDefault = L.icon({
+  public iconDefault = L.icon({
     iconRetinaUrl:this.iconRetinaUrl,
     iconUrl: this.iconUrl,
     shadowUrl: this.shadowUrl,

@@ -23,6 +23,12 @@ export const locale = {
             },
             'CONTACTS'    : 'Contacts',
             'WIZARD'       : 'Wizard',
+            'GAME': 'Games',
+            'SURVEY': 'Surveys',
+            'MAP'        : {
+                'TITLE': 'Maps',
+                'BADGE': '25'
+            },
         },
 
     }

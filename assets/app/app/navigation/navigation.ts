@@ -9,10 +9,10 @@ export const navigation: FuseNavigation[] = [
         children : [
             {
                 id       : 'sample',
-                title    : 'Sample',
-                translate: 'NAV.SAMPLE.TITLE',
+                title    : 'Maps',
+                translate: 'NAV.MAP.TITLE',
                 type     : 'item',
-                icon     : 'email',
+                //icon     : 'email',
                 url      : '/sample',
                 badge    : {
                     title    : '25',
@@ -31,7 +31,11 @@ export const navigation: FuseNavigation[] = [
         children : [
             {
                 id       : 'campings_table',
+<<<<<<< HEAD
                 title    : 'Campings',
+=======
+                title    : 'Campings List',
+>>>>>>> develop_rolando
                 translate: 'NAV.CAMPINGIN_LIST.TITLE',
                 type     : 'item',
                 icon     : 'list',
@@ -50,6 +54,22 @@ export const navigation: FuseNavigation[] = [
                 type     : 'item',
                 icon     : 'send',
                 url      : 'campaigns/forms'
+              },
+              {
+                id       : 'games',
+                title    : 'Games',
+                translate: 'NAV.GAME',
+                type     : 'item',
+                icon     : 'send',
+                url      : 'campaigns/game'
+              },
+              {
+                id       : 'survey',
+                title    : 'Survey',
+                translate: 'NAV.SURVEY',
+                type     : 'item',
+                icon     : 'send',
+                url      : 'campaigns/survey'
               },
 
         ]

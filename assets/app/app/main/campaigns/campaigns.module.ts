@@ -49,7 +49,8 @@ const routes: Routes = [
     path     : 'survey',
     canActivate: [AuthguardService],
     component: SurveyComponent
-},
+  },
+
   {
       path     : 'campaigns-list',
       canActivate: [AuthguardService],
@@ -69,6 +70,8 @@ const routes: Routes = [
     GameComponent,
     SurveyComponent,
     DragDorpDirective,
+    SurveyComponent,
+    GameComponent,
     ListCampComponent,
     CampaignDetailComponent
   ],

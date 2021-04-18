@@ -13,8 +13,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '../../../@fuse/shared.module';
 
 import { FormsComponent } from './forms/forms.component';
-import { GameComponent } from './game/game.component';
-import { SurveyComponent } from './survey/survey.component';
 import { AuthguardService } from '../../services/authguard.service';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { from } from 'rxjs';
@@ -33,6 +31,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AgmCoreModule } from '@agm/core';
 import { CampaignDetailComponent } from './product/campaign-detail.component';
+import { GameComponent } from './game/game.component';
+import { SurveyComponent } from './survey/survey.component';
+
 
 const routes: Routes = [
   {
@@ -70,8 +71,6 @@ const routes: Routes = [
     GameComponent,
     SurveyComponent,
     DragDorpDirective,
-    SurveyComponent,
-    GameComponent,
     ListCampComponent,
     CampaignDetailComponent
   ],

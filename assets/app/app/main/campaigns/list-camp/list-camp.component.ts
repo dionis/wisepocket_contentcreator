@@ -116,13 +116,20 @@ export class CampaignDataSource extends DataSource<any>{
         private _matSort: MatSort
         ){
             super();
-            this.campService.countUserCampaigns()
-            .subscribe(res=>{
-                console.log(res);
-                this._countCampaigns = res['data'];
-            })
+            // this.campService.countUserCampaigns()
+            // .subscribe(res=>{
+            //     console.log(res);
+            //     this._countCampaigns = res['data'];
+            // })
+            this.loadUserCampaigns(0, this._matPaginator.pageSize)
+
 
         }
+
+   set filteredData(value: any)
+   {
+        this.campagainsSubject.next(value);
+    }
     get filteredData(): any
     {
         return this.campagainsSubject.value;
@@ -174,9 +181,15 @@ export class CampaignDataSource extends DataSource<any>{
 
     loadUserCampaigns(page:number,limit:number): Promise<any[]>{
         return new Promise ((resolve,reject)=>{
+          if (typeof(limit) === 'undefined')
+             limit = 5;
           this.campService.getCampaignUser(page.toString(),limit.toString())
             .toPromise().then( (result:Campaign[])=>{
-              this.campagainsSubject.next(result);
+              if (typeof(result) !== 'undefined')
+                 this._countCampaigns = result.length;
+              console.log("Pagination values ",  this._countCampaigns)
+             // this.campagainsSubject.next(result);
+              this.filteredData = result;
               resolve(result);
 
 
@@ -192,13 +205,15 @@ export class CampaignDataSource extends DataSource<any>{
     }
 
     loadCampaigns(page:number,limit:number){
+       if (typeof(limit) === 'undefined')
+          limit = 5;
 
         this.campService.fetchCampagins(page.toString(),limit.toString())
         .subscribe(campaigns=>{
             console.log(campaigns);
             this.campagainsSubject.next(campaigns)
         } );
-        console.log(this.campagainsSubject.value)
+
     }
     // /**
     //  * Filter data

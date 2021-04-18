@@ -12,6 +12,20 @@ export const locale = {
                 'TITLE': 'Campings List',
                 'BADGE': '12'
             },
+            'ECOMMERCE'   : 'E-Commerce',
+            'MAIL'        : {
+                'TITLE': 'Mail',
+                'BADGE': '25'
+            },
+            'MAIL_NGRX'        : {
+                'TITLE': 'Mail Ngrx',
+                'BADGE': '13'
+            },
+            'CONTACTS'    : 'Contacts',
+            'WIZARD'       : 'Wizard',
+            'GAME'       : 'Game',
+            'SURVEY'       : 'Survey',
+
         }
     }
 };

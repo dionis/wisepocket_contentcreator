@@ -147,8 +147,6 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
         });
         //console.log(tiles)
         tiles.addTo(this.map);
-       
-        //console.log(mauseCoordinates)
     }
     private newMarker(){
         if(this.map){
@@ -169,10 +167,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
         .pipe(takeUntil(this._unsubscribeAll))
         .subscribe(source=>{
             this.serverMap = source;
-            console.log(source)
-            //
-            //this.map.remove();
-            //console.log(this.map)
+           // console.log(source)
         })
         this.initMap(); //Inizialize Map
         setTimeout(() => {

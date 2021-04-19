@@ -31,15 +31,7 @@ export const navigation: FuseNavigation[] = [
         children : [
             {
                 id       : 'campings_table',
-<<<<<<< HEAD
-<<<<<<< HEAD
-                title    : 'Campings',
-=======
                 title    : 'Campings List',
->>>>>>> develop_rolando
-=======
-                title    : 'Campings List',
->>>>>>> d51d460ff4e135857d7920992b71f513377e910c
                 translate: 'NAV.CAMPINGIN_LIST.TITLE',
                 type     : 'item',
                 icon     : 'list',

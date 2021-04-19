@@ -62,7 +62,7 @@
 
 #add-contact-button1 {
   position: absolute;
-  bottom: 12px;
+  bottom: 8px;
   right: 12px;
   padding: 0;
   z-index: 99;
@@ -72,4 +72,62 @@
       top: calc(100vh - 120px);
       bottom: auto;
   }
+}
+#add-contact-button2 {
+  position: absolute;
+  bottom: 70px;
+  right: 12px;
+  padding: 0;
+  z-index: 99;
+
+  @include media-breakpoint('xs') {
+      position: sticky;
+      top: calc(100vh - 120px);
+      bottom: auto;
+  }
+}
+
+#add-contact-button3 {
+  position: absolute;
+  bottom: 132px;
+  right: 12px;
+  padding: 0;
+  z-index: 99;
+
+  @include media-breakpoint('xs') {
+      position: sticky;
+      top: calc(100vh - 120px);
+      bottom: auto;
+  }
+}
+section {
+  display: table;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
 }

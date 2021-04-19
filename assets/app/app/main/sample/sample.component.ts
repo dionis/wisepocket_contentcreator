@@ -66,6 +66,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
             tooltipAnchor: [16, -28],
             shadowSize: [41, 41]
           });
+        this._unsubscribeAll = new Subject<any>();
         //L.Marker.prototype.options.icon = this.iconDefault;
     }
 

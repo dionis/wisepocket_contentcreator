@@ -9,6 +9,9 @@ import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { MailService } from '../../../../../../app/main/apps/mail/mail.service';
 import { MailComposeDialogComponent } from '../../../../../../app/main/apps/mail/dialogs/compose/compose.component';
 
+
+import { locale as english } from '../../i18n/en';
+import { locale as spanish } from '../../i18n/tr';
 @Component({
     selector     : 'mail-main-sidebar',
     templateUrl  : './main-sidebar.component.html',

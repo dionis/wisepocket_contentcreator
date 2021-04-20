@@ -81,6 +81,11 @@ export class TopicItemComponent implements OnInit, OnDestroy {
 
   private _unsubscribeAll: Subject<any>;
 
+
+  showTextCard = true;
+  showPhotoCard = true;
+  showVideoCard = true;
+
   constructor(
     private imageService: ImageService,
     private campService: CampaignService,
@@ -113,6 +118,46 @@ export class TopicItemComponent implements OnInit, OnDestroy {
       // Unsubscribe from all subscriptions
       this._unsubscribeAll.next();
       this._unsubscribeAll.complete();
+  }
+
+
+  openTextCard(){
+   this.showTextCard = true;
+   this.showPhotoCard = false;
+    this.showVideoCard = false;
+
+  }
+
+  closeTextCard(){
+
+    this.showTextCard = true;
+    this.showPhotoCard = true;
+    this.showVideoCard = true;
+
+  }
+
+  openPhotoCard(){
+
+    this.showTextCard = false;
+    this.showPhotoCard = true;
+    this.showVideoCard = false;
+
+  }
+
+  closePhotoCard(){
+    this.closeTextCard()
+
+  }
+
+  openVideoCard(){
+    this.showTextCard = false;
+    this.showPhotoCard = false;
+    this.showVideoCard = true;
+
+  }
+
+  closeVideoCard(){
+    this.closeTextCard();
   }
 
 

@@ -10,6 +10,11 @@ import { FuseSidebarService } from '../../../../@fuse/components/sidebar/sidebar
 import { ContactsService } from '../../../../app/main/apps/contacts/contacts.service';
 import { ContactsContactFormDialogComponent } from '../../../../app/main/apps/contacts/contact-form/contact-form.component';
 
+import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
+
+
+import { locale as english } from './i18n/en';
+import { locale as spanish } from './i18n/es';
 @Component({
     selector     : 'contacts',
     templateUrl  : './contacts.component.html',
@@ -36,7 +41,8 @@ export class ContactsComponent implements OnInit, OnDestroy
     constructor(
         private _contactsService: ContactsService,
         private _fuseSidebarService: FuseSidebarService,
-        private _matDialog: MatDialog
+        private _matDialog: MatDialog,
+        private _fuseTranslationLoaderService: FuseTranslationLoaderService
     )
     {
         // Set the defaults
@@ -44,6 +50,8 @@ export class ContactsComponent implements OnInit, OnDestroy
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+
+        this._fuseTranslationLoaderService.loadTranslations(english, spanish);
     }
 
     // -----------------------------------------------------------------------------------------------------

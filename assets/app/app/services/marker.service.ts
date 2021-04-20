@@ -1,6 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as L from 'leaflet'
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +23,23 @@ export class MarkerService {
     tooltipAnchor: [16, -28],
     shadowSize: [41, 41]
   });
-  constructor() {
+  constructor(
+    private _http: HttpClient
+  ) {
     this.sourceMap = new BehaviorSubject('geoServer');
   }
-  createMarker(e){
-    return  L.marker([e.latlng.lat, e.latlng.lng],this.iconDefault)
+  
+  //Add Marker
+  createMarker(e:any,data:any){
+    return this._http.post(environment.sails_services_urlpath+":"+environment.sails_services_urlport+
+    '/marker/create',data)
+    .pipe(map(response=>{
+      if(response['success']){
+        return true;
+      }else{
+        return false
+      }
+    }));
   }
 
   setSource(source:string){

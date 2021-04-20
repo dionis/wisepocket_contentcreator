@@ -95,7 +95,7 @@ module.exports.bootstrap = async function() {
     let phone = faker.phone.phoneNumber();
     campaigns.push({
         titulo: faker.company.companyName(),
-        descripcion: "This is a test ",
+        descripcion: faker.lorem.paragraph(50),
         contanctoTelefono: phone,
         country: faker.address.country(),
         city: faker.address.city(),
@@ -111,13 +111,33 @@ module.exports.bootstrap = async function() {
       }
     );
   }
-  await sails.helpers.createCampaign(campaigns)
+  campaignList = await sails.helpers.createCampaign(campaigns)
   .tolerate('notUniqueError', (err)=>{
     sails.log.warn('Error', err)
   })
   .tolerate('someError',(err)=>{
     sails.log.warn('Error', err)
   })
+
+  registerSize = 50;
+  markers = [];
+  for (let index = 0; index < registerSize; index++) {
+    camp = faker.random.arrayElement(campaignList.data);
+    let phone = faker.phone.phoneNumber();
+    markers.push({
+        titulo: faker.company.companyName(),
+        descripcion: faker.lorem.paragraph(50),
+        phone: phone,
+        email: faker.internet.email(faker.name.findName()),
+        url: faker.internet.ip(),
+        lat: faker.address.latitude(),
+        lon: faker.address.longitude(),
+        related_campaign: camp.id,
+      }
+    );
+  }
+  marks  = await Marker.createEach(markers).fetch()
+  sails.log.debug(marks)
   // Save new bootstrap version
   await sails.helpers.fs.writeJson.with({
     destination: bootstrapLastRunInfoPath,

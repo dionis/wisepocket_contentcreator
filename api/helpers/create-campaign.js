@@ -85,7 +85,7 @@ module.exports = {
       //     carrusel4: images[4]?images[4].id:null
       // }
     inputs.campaigns).fetch()
-    .then(async (campaign)=>{
+    .then(async (campaigns)=>{
         //sails.log.debug('entra bien');
         // if(images){
         //   campaign = await campaign.update().set({
@@ -100,7 +100,7 @@ module.exports = {
             'success': true,
             'message': 'Record Created',
             //'files': images,
-            'data': campaign 
+            'data': campaigns 
         });
     })
     // .intercept('E_UNIQUE', ()=>{ 

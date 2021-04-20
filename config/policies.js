@@ -20,6 +20,7 @@ module.exports.policies = {
   // '*': true,
   'campaign/*': 'isAuthenticated',
   'image/*': 'isAuthenticated',
+  'marker/*': 'isAuthenticated',
 
   UserController: {
     '*': 'isAuthenticated',

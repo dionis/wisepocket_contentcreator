@@ -12,8 +12,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FuseSidebarService } from '../../../@fuse/components/sidebar/sidebar.service';
 import { fuseAnimations } from '../../../@fuse/animations';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MarkerContactFormDialogComponent } from './marker-form/marker-form.component';
 
 @Component({
     selector   : 'sample',
@@ -149,11 +150,27 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
         //console.log(tiles)
         tiles.addTo(this.map);
     }
-    private newMarker(){
+    private  onMark(){
         if(this.map){
-            this.map.on("click", e => {
-                console.log(e.latlng); // get the coordinates
-                this.markerService.createMarker(e).addTo(this.map); // add the marker onclick
+            this.map.on("click", async e => {
+                //console.log(e.latlng); // get the coordinates
+                 let flag = await this.newMarker(e.latlng.lat,e.latlng.lng,'new')
+                .subscribe((response: FormGroup) => {
+                    if ( !response )
+                    {
+                        //console.log('NO')
+                        return false;
+                    }
+                    //console.log('entra')
+                    let data = response.value
+                    let succes =this.markerService.createMarker(e,data)
+                    if(succes){
+                        L.marker([e.latlng.lat, e.latlng.lng],this.iconDefault).addTo(this.map);
+                    }
+                    return succes
+                    //console.log(response);
+                   //this._contactsService.updateContact(response.getRawValue());
+                });                 
             });
         }
     }
@@ -177,27 +194,22 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
         this.map.on('locationfound', this.onLocationFound);
         this.map.on('locationerror', this.onLocationError);
         //L.control.mousePosition().addTo(this.map);
-        this.newMarker(); // Create Marker From Click Event
+        this.onMark(); // Create Marker From Click Event
     }
 
-    newContact(): void
+    newMarker(lat,lon,action:string): Observable<any>
     {
-        // this.dialogRef = this._matDialog.open(GeopointsFormDialogComponent, {
-        //     panelClass: 'contact-form-dialog',//ojo
-        //     data      : {
-        //         action: 'new'
-        //     }
-        // });
-
-        // this.dialogRef.afterClosed()
-        //     .subscribe((response: FormGroup) => {
-        //         if ( !response )
-        //         {
-        //             return;
-        //         }
-
-        //        //this._contactsService.updateContact(response.getRawValue());
-        //     });
+        console.log(lat,lon);
+        this.dialogRef = this._matDialog.open(MarkerContactFormDialogComponent, {
+            panelClass: 'marker-form-dialog',//ojo
+            data      : {
+                action: action,
+                lat: lat,
+                lon: lon,
+            }
+        });
+        return this.dialogRef.afterClosed()
+            
     }
 
     /**

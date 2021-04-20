@@ -224,6 +224,28 @@ export class ContactsContactListComponent implements OnInit, OnDestroy
 
         this._contactsService.updateUserData(this.user);
     }
+
+    moveUp( from, to) {
+
+      ///Biblografy: https://dev.to/jalal246/moving-element-in-an-array-from-index-to-another-464b
+      let numberOfDeletedElm = 1;
+
+      const elm = this.topicAbout.splice(from, numberOfDeletedElm)[0];
+
+      numberOfDeletedElm = 0;
+
+      this.topicAbout.splice(to, numberOfDeletedElm, elm);
+    }
+
+    moveDown( from, to) {
+      let numberOfDeletedElm = 1;
+
+      const elm = this.topicAbout.splice(from, numberOfDeletedElm)[0];
+
+      numberOfDeletedElm = 0;
+
+      this.topicAbout.splice(to, numberOfDeletedElm, elm);
+    }
 }
 
 export class FilesDataSource extends DataSource<any>

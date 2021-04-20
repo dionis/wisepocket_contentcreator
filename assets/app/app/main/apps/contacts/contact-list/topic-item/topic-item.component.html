@@ -12,11 +12,11 @@
                       [@animateStagger]="{value:'50'}" fxLayoutAlign="center center">
 
                       <!-- WIDGET 1 -->
-                      <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
+                      <fuse-widget *ngIf="showTextCard" [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
                                   fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
 
                           <!-- Front -->
-                          <div class="fuse-widget-front">
+                          <div class="fuse-widget-front" (click)="openTextCard()">
                               <div class="pl-16 pr-8 py-16 h-52" fxLayout="row"
                                   fxLayoutAlign="space-between center">
                                   <div class="h3">Text</div>
@@ -30,7 +30,7 @@
                                           </mat-option>
                                       </mat-select>
                                   </mat-form-field> -->
-                                  <button mat-icon-button fuseWidgetToggle aria-label="more">
+                                  <button mat-icon-button fuseWidgetToggle aria-label="more" (click)="openTextCard()">
                                       <mat-icon>more_vert</mat-icon>
                                   </button>
                               </div>
@@ -55,9 +55,9 @@
                           <!-- / Front -->
 
                           <!-- Back -->
-                          <div class="fuse-widget-back p-16 pt-32">
+                          <div class="fuse-widget-back p-16 pt-32" fxFlex="100" fxFlexFill>
                               <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
-                                      aria-label="Flip widget">
+                                      aria-label="Flip widget" (click)="closeTextCard()">
                                   <mat-icon class="s-16">close</mat-icon>
                               </button>
 
@@ -92,17 +92,17 @@
                       <!-- / WIDGET 1 -->
 
                       <!-- WIDGET 2 -->
-                      <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
+                      <fuse-widget *ngIf="showPhotoCard" [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
                                   fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
 
                           <!-- Front -->
-                          <div class="fuse-widget-front">
+                          <div class="fuse-widget-front"  (click)="openPhotoCard()">
                               <div class="pl-16 pr-8 py-16 h-52" fxLayout="row"
                                   fxLayoutAlign="space-between center">
                                   <div class="h3">Photo</div>
 
                                   <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
-                                          aria-label="more">
+                                          aria-label="more"  (click)="openPhotoCard()">
                                       <mat-icon>more_vert</mat-icon>
                                   </button>
                               </div>
@@ -127,7 +127,7 @@
                           <!-- Back -->
                           <div class="fuse-widget-back p-16 pt-32">
                               <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
-                                      aria-label="Flip widget">
+                                      aria-label="Flip widget" (click)="closePhotoCard()">
                                   <mat-icon class="s-16">close</mat-icon>
                               </button>
 
@@ -160,17 +160,17 @@
                       <!-- / WIDGET 2 -->
 
                       <!-- WIDGET 3 -->
-                      <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
+                      <fuse-widget  *ngIf="showVideoCard" [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
                                   fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
 
                           <!-- Front -->
-                          <div class="fuse-widget-front">
+                          <div class="fuse-widget-front"  (click)="openVideoCard()">
                               <div class="pl-16 pr-8 py-16 h-52" fxLayout="row"
                                   fxLayoutAlign="space-between center">
                                   <div class="h3">Video</div>
 
                                   <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
-                                          aria-label="more">
+                                          aria-label="more"  (click)="openVideoCard()">
                                       <mat-icon>more_vert</mat-icon>
                                   </button>
                               </div>
@@ -195,7 +195,7 @@
                           <!-- Back -->
                           <div class="fuse-widget-back p-16 pt-32">
                               <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
-                                      aria-label="Flip widget">
+                                      aria-label="Flip widget"  (click)="closeVideoCard()">
                                   <mat-icon class="s-16">close</mat-icon>
                               </button>
 

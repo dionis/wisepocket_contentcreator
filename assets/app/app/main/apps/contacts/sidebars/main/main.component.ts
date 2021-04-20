@@ -3,7 +3,11 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { ContactsService } from '../../../../../../app/main/apps/contacts/contacts.service';
+import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 
+
+import { locale as english } from '../../i18n/en';
+import { locale as spanish } from '../../i18n/es';
 @Component({
     selector   : 'contacts-main-sidebar',
     templateUrl: './main.component.html',
@@ -23,11 +27,14 @@ export class ContactsMainSidebarComponent implements OnInit, OnDestroy
      * @param {ContactsService} _contactsService
      */
     constructor(
-        private _contactsService: ContactsService
+        private _contactsService: ContactsService,
+        private _fuseTranslationLoaderService: FuseTranslationLoaderService
     )
     {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+
+        this._fuseTranslationLoaderService.loadTranslations(english, spanish);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -71,5 +78,10 @@ export class ContactsMainSidebarComponent implements OnInit, OnDestroy
     {
         this.filterBy = filter;
         this._contactsService.onFilterChanged.next(this.filterBy);
+    }
+
+
+    addTopic(){
+
     }
 }

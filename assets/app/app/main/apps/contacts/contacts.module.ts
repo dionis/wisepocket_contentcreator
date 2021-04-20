@@ -28,6 +28,7 @@ import { ContactsSelectedBarComponent } from '../../../../app/main/apps/contacts
 import { ContactsMainSidebarComponent } from '../../../../app/main/apps/contacts/sidebars/main/main.component';
 import { ContactsContactFormDialogComponent } from '../../../../app/main/apps/contacts/contact-form/contact-form.component';
 import { TopicItemComponent } from './contact-list/topic-item/topic-item.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { QuillModule } from 'ngx-quill';
 import { NgxDropzoneModule } from 'ngx-dropzone';
@@ -71,6 +72,7 @@ const routes: Routes = [
         MatButtonToggleModule,
         MatListModule,
         MatCardModule,
+        TranslateModule,
 
         FuseSharedModule,
         FuseConfirmDialogModule,

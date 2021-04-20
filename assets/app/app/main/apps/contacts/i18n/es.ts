@@ -2,7 +2,7 @@ export const locale = {
     lang: 'es',
     data: {
         FORMS: {
-          CREATE_CAMPAIGN                  : 'Crear Campaña',  
+          CREATE_CAMPAIGN                  : 'Crear Campaña',
           CAMPAIGN                         : 'Campaña',
           NAME_CAMPAIGN_PLACEHOLDER        : 'Nombre de la Campaña',
           DESCRIPTION_PLACEHOLDER          : 'Descripción',
@@ -23,12 +23,15 @@ export const locale = {
 		      IMAGE2_PLACEHOLDER               : 'Imagen 2',
 		      IMAGE3_PLACEHOLDER               : 'Imagen 3',
 		      IMAGE4_PLACEHOLDER               : 'Imagen 4',
-          SOCIAL_NETWORKS                  : 'Redes Sociales', 
+          SOCIAL_NETWORKS                  : 'Redes Sociales',
           CONGRATULATIONS                  : 'Gracias por completar nuestro formulario',
 		      SAVE							               : 'Guardar',
 		      NEXT							               : 'Siguiente',
 		      PREVIOUS						             : 'Anterior',
-          DONE                             : 'Done' 
+          DONE                             : 'Hecho',
+          ADD_TOPIC                             : 'Añadir tema',
+          SEARCH_A_TOPIC                        : 'Buscar un tema',
+          TOPICS                               :'Temas de una Campaña'
         }
     }
 };

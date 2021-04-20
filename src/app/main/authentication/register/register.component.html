@@ -10,7 +10,7 @@
 
             <div class="title">CREATE AN ACCOUNT</div>
 
-            <form name="registerForm" [formGroup]="registerForm" novalidate>
+            <form name="registerForm" [formGroup]="registerForm" (ngSubmit)= "onSave()" novalidate>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Name</mat-label>

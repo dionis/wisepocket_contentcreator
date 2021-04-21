@@ -75,7 +75,11 @@ module.exports.routes = {
  'GET /campaign/countall': {action:'campaign/countall'},
  'GET /campaign/countUserCampaigns': {action:'campaign/count-user-campaigns'},
 
- 
+
+ ///GET CAMPAING XML
+ 'POST /campaign/getXmlCampaing': {action:'campaign/generate-xml'},
+
+
 
 
 

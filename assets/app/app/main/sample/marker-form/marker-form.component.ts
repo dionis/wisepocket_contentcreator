@@ -1,4 +1,4 @@
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
@@ -15,6 +15,7 @@ export class MarkerContactFormDialogComponent
 {
     action: string;
    // contact: Contact;
+    marker:any;
     markerForm: FormGroup;
     dialogTitle: string;
 
@@ -32,18 +33,26 @@ export class MarkerContactFormDialogComponent
     )
     {
         // Set the defaults
-        console.log(_data.lat, _data.lon)
         this.action = _data.action;
 
         if ( this.action === 'edit' )
         {
             this.dialogTitle = 'Edit Marker';
-            //this.contact = _data.contact;
+            this.marker = _data.data;
+            console.log(this.marker);
         }
         else
         {
             this.dialogTitle = 'New Marker';
-            //this.contact = new Contact({});
+            this.marker = {
+                title: '',
+                url:'',
+                description:'',
+                phone: '',
+                email: '',
+                lat: this._data.lat,
+                lon: this._data.lon
+            };
         }
 
         this.markerForm = this.createContactForm();
@@ -60,18 +69,17 @@ export class MarkerContactFormDialogComponent
      */
     createContactForm(): FormGroup
     {
-        console.log(this._data.lat, this._data.lon)
         return this._formBuilder.group({
-            title    : ['',Validators.required],
+            title    : [this.marker.title,Validators.required],
             //phone: [this.contact.lastName],
             //email  : [this.contact.avatar],
-            url: ['',Validators.required],
-            description : ['',Validators.required],
+            url: [this.marker.url,Validators.required],
+            description : [this.marker.description,Validators.required],
             //images: [this.contact.jobTitle],
-            email   : ['',[Validators.required, Validators.email, Validators.maxLength(30)]],
-            phone   : ['',Validators.required],
-            lat   : [this._data.lat,Validators.required], 
-            lon: [this._data.lon,Validators.required],
+            email   : [this.marker.email,[Validators.required, Validators.email, Validators.maxLength(30)]],
+            phone   : [this.marker.phone,Validators.required],
+            lat   : [this.marker.lat,Validators.required], 
+            lon: [this.marker.lon,Validators.required],
         });
     }
 }

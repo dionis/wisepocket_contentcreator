@@ -39,12 +39,13 @@
           }
       }
       .map-container {
-        position: absolute;
+        //position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         margin: 30px;
+        height: 466px;
       }
 
       .map-frame {
@@ -54,7 +55,7 @@
 
       #map {
         width: auto;
-        height: 466px;
+        height: 100%;
       }
   }
 }

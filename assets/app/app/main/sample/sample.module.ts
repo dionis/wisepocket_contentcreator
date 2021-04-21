@@ -28,6 +28,7 @@ import { AuthguardService } from '../../services/authguard.service';
 import { SampleComponent } from './sample.component';
 import { GeoPointsMainSidebarComponent } from './sidebar/main/main.component';
 import { MarkerContactFormDialogComponent } from './marker-form/marker-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes = [
     {
@@ -69,6 +70,7 @@ const routes = [
         FuseConfirmDialogModule,
         FuseSidebarModule,
         FuseWidgetModule,
+        HttpClientModule
     ],
     exports     : [
         SampleComponent

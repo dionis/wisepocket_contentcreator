@@ -9,13 +9,13 @@ module.exports = {
 
   attributes: {
 
-    titulo: {
+    title: {
       type: 'string',
       required: true,
       unique: true
     },
 
-    descripcion: {
+    description: {
       type: 'string',
       required: true,
       columnName:'descripcion'

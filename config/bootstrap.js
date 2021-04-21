@@ -125,8 +125,8 @@ module.exports.bootstrap = async function() {
     camp = faker.random.arrayElement(campaignList.data);
     let phone = faker.phone.phoneNumber();
     markers.push({
-        titulo: faker.company.companyName(),
-        descripcion: faker.lorem.paragraph(50),
+        title: faker.company.companyName(),
+        description: faker.lorem.paragraph(50),
         phone: phone,
         email: faker.internet.email(faker.name.findName()),
         url: faker.internet.ip(),
@@ -136,7 +136,7 @@ module.exports.bootstrap = async function() {
       }
     );
   }
-  marks  = await Marker.createEach(markers).fetch()
+  marks  = await Marker.createEach(markers)
   sails.log.debug(marks)
   // Save new bootstrap version
   await sails.helpers.fs.writeJson.with({

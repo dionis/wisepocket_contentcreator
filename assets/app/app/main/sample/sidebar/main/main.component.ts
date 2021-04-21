@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MarkerService } from '../../../../services/marker.service';
+import { SampleComponent } from '../../sample.component';
 
 //import { ContactsService } from '../../../../../app/main/apps/contacts/contacts.service';
 
@@ -24,7 +26,8 @@ export class GeoPointsMainSidebarComponent implements OnInit, OnDestroy
      * @param {ContactsService} _contactsService
      */
     constructor(
-        private _markerService: MarkerService
+        private _markerService: MarkerService,
+        //private router:Router
         //private _contactsService: ContactsService
     )
     {
@@ -79,6 +82,7 @@ export class GeoPointsMainSidebarComponent implements OnInit, OnDestroy
         this.filterBy = filter;
         console.log(filter);
         this._markerService.setSource(filter);
+        //window.location.reload()
         //this._contactsService.onFilterChanged.next(this.filterBy);
     }
 }

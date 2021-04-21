@@ -39,7 +39,8 @@ module.exports = {
 
     contactoEmail: {
       type: 'string',
-      required: true
+      required: true, 
+      unique: true
     },
 
     direccionPostal: {
@@ -94,7 +95,12 @@ module.exports = {
     informations: {
       collection: 'information',
       via: 'campaign'
-    }
+    },
+
+    markers: {
+      collection: 'marker',
+      via: 'related_campaign'
+    },
 
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗

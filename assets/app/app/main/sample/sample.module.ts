@@ -27,6 +27,8 @@ import { AuthguardService } from '../../services/authguard.service';
 
 import { SampleComponent } from './sample.component';
 import { GeoPointsMainSidebarComponent } from './sidebar/main/main.component';
+import { MarkerContactFormDialogComponent } from './marker-form/marker-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes = [
     {
@@ -39,7 +41,8 @@ const routes = [
 @NgModule({
     declarations: [
         SampleComponent,
-        GeoPointsMainSidebarComponent
+        GeoPointsMainSidebarComponent,
+        MarkerContactFormDialogComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -61,14 +64,19 @@ const routes = [
         MatCardModule,
         MatDialogModule,
         NgxDropzoneModule,
+        MatDialogModule,
 
         FuseSharedModule,
         FuseConfirmDialogModule,
         FuseSidebarModule,
         FuseWidgetModule,
+        HttpClientModule
     ],
     exports     : [
         SampleComponent
+    ],
+    entryComponents: [
+        MarkerContactFormDialogComponent
     ]
 })
 

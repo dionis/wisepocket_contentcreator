@@ -4,13 +4,13 @@ module.exports = {
   friendlyName: 'Delete',
 
 
-  description: 'Delete information.',
+  description: 'Delete marker.',
 
 
   inputs: {
-    informationId: {
+    markerId: {
       type: 'string',
-      description: 'A Information Id',
+      description: 'A Marker Id',
     }
   },
 
@@ -23,15 +23,15 @@ module.exports = {
   fn: async function (inputs) {
 
     // All done.
-    if(!inputs.informationId){return this.res.status(400).send({'error':'No Id Found in Request'})}
+    if(!inputs.markerId){return this.res.status(400).send({'error':'No Id Found in Request'})}
          //sails.log.debug(req.body);
-         updatedId = inputs.informationId;
-         await Information.destroy({id: updatedId}).fetch()
-         .then(info=>{
+         updatedId = inputs.markerId;
+         await Marker.destroy({id: updatedId}).fetch()
+         .then(marker=>{
              return this.res.send({
                 'success': true,
                  'message': 'Record Edited',
-                 'data': info
+                 'data': marker
              })
          })
          .catch(err=>{

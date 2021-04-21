@@ -114,7 +114,7 @@ export class ContactsComponent implements OnInit, OnDestroy
                 }
 
                 this._contactsService.updateContact(response.getRawValue());
-            });
+        });
     }
 
     /**

@@ -56,22 +56,18 @@ module.exports.routes = {
 
  'GET /download': 'CampaignController.downloadImage',
 
- //Campaign's Requests
+
  //'POST /campaign/addCampaign': 'CampaignController.create',
  'POST /campaign/addCampaign': {action:'campaign/registrate'},
+//Campaign's Requests
 //Images Asociations
  'POST /campaign/addImagesToCampaign': {action:'campaign/asociate-images'},
- //'PATCH /campaign/editCampaign': 'CampaignController.editCampaign',
+
  'PATCH /campaign/editCampaign': {action:'campaign/edit'},
- //'DELETE /campaign/deleteCampaign': 'CampaignController.deleteCampaign',
  'DELETE /campaign/deleteCampaign': 'CampaignController.deleteCampaign',
- //'GET /campaign/Campaignslist': 'CampaignController.getCampaigns',
  'GET /campaign/Campaignslist': {action:'campaign/showall'},
- //'GET /campaign/CampaignslistbyUser/:_id': 'CampaignController.getCampaignsbyUser',
  'GET /campaign/CampaignslistbyUser': {action:'campaign/show-campaign-of-user'},
-
  'GET /campaign/CampaignDetail': {action:'campaign/get-campaign'},
-
  'GET /campaign/countall': {action:'campaign/countall'},
  'GET /campaign/countUserCampaigns': {action:'campaign/count-user-campaigns'},
 

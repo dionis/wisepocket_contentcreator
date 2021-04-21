@@ -1,4 +1,12 @@
-import { AfterViewChecked, AfterViewInit, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { AfterViewChecked, AfterViewInit,
+     Component, 
+     ElementRef, 
+     OnChanges,
+     OnDestroy, 
+     OnInit, 
+     SimpleChanges,
+      ViewChild, 
+      ViewEncapsulation } from '@angular/core';
 
 import { FuseTranslationLoaderService } from '../../../@fuse/services/translation-loader.service';
 
@@ -12,8 +20,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FuseSidebarService } from '../../../@fuse/components/sidebar/sidebar.service';
 import { fuseAnimations } from '../../../@fuse/animations';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import { MarkerContactFormDialogComponent } from './marker-form/marker-form.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector   : 'sample',
@@ -22,7 +32,7 @@ import { takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
-export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges
+export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
 {
     private map;
     private  uris = [
@@ -37,6 +47,8 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
     private current_accuracy: number;
     dialogRef: any;
     private _unsubscribeAll: Subject<any>;
+    private sourceChange = true;
+    @ViewChild('mapcontainer',{static:false}) mapContainer: ElementRef;
 
 
     serverMap: any;
@@ -50,7 +62,8 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _fuseSidebarService: FuseSidebarService,
         private markerService: MarkerService,
-        private _matDialog: MatDialog
+        private _matDialog: MatDialog,
+        private _router: Router
     )
     {
         this.searchInput = new FormControl('');
@@ -75,18 +88,6 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
         this._unsubscribeAll.complete();
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        this.markerService.sourceMap
-        .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe(source=>{
-            //this.serverMap = source;
-            console.log(source)
-            this.map.remove();
-            this.initMap();
-            //console.log(this.map)
-        });
-    }
-
     onLocationFound(e) {
         // if position defined, then remove the existing position marker and accuracy circle from the map
         if (this.current_position) {
@@ -107,6 +108,17 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
     }
     locate() {
         this.map.locate({setView: true, maxZoom: 16});
+    }
+
+    builtMap(latlon:any,bonus:any){
+        this.mapContainer.nativeElement.innerHTML = "<div id='map'></div>";
+        this.map = new L.map('map',{
+            center: latlon,
+            maxBounds: bonus,
+            //crs: L.CRS.EPSG4326,
+            zoom: 6
+        });
+        console.log(this.mapContainer);
     }
 
     private initMap(){
@@ -140,64 +152,153 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy, OnChan
             default:
                 break;
         }
-        this.map = L.map('map',{
-            center: corner1,
-            maxBounds: bonus,
-            //crs: L.CRS.EPSG4326,
-            zoom: 6
-        });
-        //console.log(tiles)
+        this.builtMap(corner1,bonus);
         tiles.addTo(this.map);
     }
-    private newMarker(){
+    private  onMark(){
         if(this.map){
-            this.map.on("click", e => {
-                console.log(e.latlng); // get the coordinates
-                this.markerService.createMarker(e).addTo(this.map); // add the marker onclick
+            this.map.on("click", async e => {
+                //console.log(e.latlng); // get the coordinates
+                 let flag = await this.newMarker(e.latlng.lat,e.latlng.lng,'new')
+                .subscribe((response: FormGroup) => {
+                    if ( !response )
+                    {
+                        //console.log('NO')
+                        return false;
+                    }
+                    //console.log('entra')
+                    let data = response.value
+                    this.markerService.createMarker(e,data)
+                    .then((response:any)=>{
+                        let succes = response['success'];
+                        if(succes){
+                            let object = response['data'];
+                            let marker= L.marker([e.latlng.lat, e.latlng.lng],this.iconDefault);
+                            marker.bindPopup(this.markerService.makePopup(object));
+                            marker.on('mouseover', function (e) {
+                                this.openPopup();
+                            });
+                            marker.on('mouseout', function (e) {
+                                this.closePopup();
+                            });
+                            marker.on('click', e=> {
+                               this.editMarker(object,marker);
+                            });
+                            marker.addTo(this.map);
+                        }
+                        return succes
+                    })
+                    
+                    //console.log(response);
+                   //this._contactsService.updateContact(response.getRawValue());
+                });                 
             });
         }
     }
 
-    ngOnInit(){
-        
+    private async loadMarkers(){
+        await this.markerService.getAllMarkers()
+        .then(markers=>{
+            for (let index = 0; index < markers.length; index++) {
+                let mark = markers[index];
+                let marker = L.marker([mark.lat, mark.lon],this.iconDefault);
+                marker.bindPopup(this.markerService.makePopup(mark));
+                marker.on('mouseover', function (e) {
+                    this.openPopup();
+                });
+                marker.on('mouseout', function (e) {
+                    this.closePopup();
+                });
+                marker.on('click', e=> {
+                    this.editMarker(mark,marker);
+                 });
+                marker.addTo(this.map); 
+            }
+        })
+        .catch(error=>{
+            //Implement
+        })
     }
 
+    ngOnInit(){
+        console.log('Entra');
+    }
+    
+    reloadComponent() {
+        this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this._router.onSameUrlNavigation = 'reload';
+        this._router.navigate(['/sample']);
+    }
 
-    async ngAfterViewInit(){
+    async ngAfterViewInit(){        
         await this.markerService.sourceMap
         .pipe(takeUntil(this._unsubscribeAll))
         .subscribe(source=>{
+            let lastsource = this.serverMap;
+            //this.serverMap = source;
+            console.log(this.sourceChange);
+            console.log(source===this.serverMap);
+            console.log(typeof this.serverMap === 'undefined');
+            this.sourceChange = (source === this.serverMap || typeof this.serverMap !== 'undefined');
             this.serverMap = source;
+            console.log(this.sourceChange);
+            if(this.sourceChange){
+                this.reloadComponent();
+            }
            // console.log(source)
         })
         this.initMap(); //Inizialize Map
-        setTimeout(() => {
-            this.locate();
-        }, 2000);
+        this.loadMarkers();
+        // setTimeout(() => {
+        //     this.locate();
+        // }, 2000);
         this.map.on('locationfound', this.onLocationFound);
         this.map.on('locationerror', this.onLocationError);
         //L.control.mousePosition().addTo(this.map);
-        this.newMarker(); // Create Marker From Click Event
+        this.onMark(); // Create Marker From Click Event        
     }
 
-    newContact(): void
+    newMarker(lat,lon,action:string): Observable<any>
     {
-        // this.dialogRef = this._matDialog.open(GeopointsFormDialogComponent, {
-        //     panelClass: 'contact-form-dialog',//ojo
-        //     data      : {
-        //         action: 'new'
-        //     }
-        // });
+        //console.log(lat,lon);
+        this.dialogRef = this._matDialog.open(MarkerContactFormDialogComponent, {
+            panelClass: 'marker-form-dialog',
+            data      : {
+                action: action,
+                lat: lat,
+                lon: lon,
+            }
+        });
+        return this.dialogRef.afterClosed()
+            
+    }
 
-        // this.dialogRef.afterClosed()
-        //     .subscribe((response: FormGroup) => {
-        //         if ( !response )
-        //         {
-        //             return;
-        //         }
+    editMarker(data:any,marker:any){
+        this.dialogRef = this._matDialog.open(MarkerContactFormDialogComponent, {
+            panelClass: 'marker-form-dialog',
+            data      : {
+                action: 'edit',
+                data: data
+            }
+        });
 
-        //        //this._contactsService.updateContact(response.getRawValue());
-        //     });
+        this.dialogRef.afterClosed()
+            .subscribe((response: any) => {
+                if ( !response )
+                {
+                    return;
+                }
+                console.log(response)
+                let form = response[1];
+                if(response[0] == "save"){
+                    this.markerService.updateMarker(data.id,form.value);
+                    marker._popup.setContent(this.markerService.makePopup(form.value));
+                }else{
+                    this.markerService.deleteMarker(data.id);
+                    this.map.removeLayer(marker)
+                }
+                
+        }); 
     }
 
     /**

@@ -24,6 +24,7 @@ import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { MarkerContactFormDialogComponent } from './marker-form/marker-form.component';
 import { Router } from '@angular/router';
+import { ImageService } from '../../services/image.service';
 
 @Component({
     selector   : 'sample',
@@ -63,7 +64,8 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
         private _fuseSidebarService: FuseSidebarService,
         private markerService: MarkerService,
         private _matDialog: MatDialog,
-        private _router: Router
+        private _router: Router,
+        private imageService:ImageService
     )
     {
         this.searchInput = new FormControl('');
@@ -160,19 +162,34 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
             this.map.on("click", async e => {
                 //console.log(e.latlng); // get the coordinates
                  let flag = await this.newMarker(e.latlng.lat,e.latlng.lng,'new')
-                .subscribe((response: FormGroup) => {
+                .subscribe(async (response: FormGroup) => {
                     if ( !response )
                     {
                         //console.log('NO')
                         return false;
                     }
-                    //console.log('entra')
-                    let data = response.value
+                    let data = response[0].value
+                    let files = response[1];
+                    let imagesCarruselIds = [];
+                    if(files.length>0){
+                        await this.imageService.addImage(files)
+                        .then((img)=>{
+                            console.log(img); 
+                            let data = img['data'];
+                            imagesCarruselIds = img
+                            //dataCamp.carrusel = img;
+                        }); 
+                    }
                     this.markerService.createMarker(e,data)
-                    .then((response:any)=>{
+                    .then(async (response:any)=>{
                         let succes = response['success'];
                         if(succes){
                             let object = response['data'];
+                            if(object!==null){
+                                if(imagesCarruselIds.length>0){
+                                    await this.markerService.asociateImages(imagesCarruselIds,object.id)
+                                }
+                            } 
                             let marker= L.marker([e.latlng.lat, e.latlng.lng],this.iconDefault);
                             marker.bindPopup(this.markerService.makePopup(object));
                             marker.on('mouseover', function (e) {
@@ -181,7 +198,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                             marker.on('mouseout', function (e) {
                                 this.closePopup();
                             });
-                            marker.on('click', e=> {
+                            marker.on('click', e=> {//error
                                this.editMarker(object,marker);
                             });
                             marker.addTo(this.map);
@@ -209,9 +226,9 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                 marker.on('mouseout', function (e) {
                     this.closePopup();
                 });
-                marker.on('click', e=> {
+                marker.on('click', e=> {//ERROR
                     this.editMarker(mark,marker);
-                 });
+                });
                 marker.addTo(this.map); 
             }
         })
@@ -275,6 +292,8 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
 
     editMarker(data:any,marker:any){
         this.dialogRef = this._matDialog.open(MarkerContactFormDialogComponent, {
+            height: '600px',
+            width: '700px',
             panelClass: 'marker-form-dialog',
             data      : {
                 action: 'edit',
@@ -283,16 +302,40 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
         });
 
         this.dialogRef.afterClosed()
-            .subscribe((response: any) => {
+            .subscribe(async (response: any) => {
                 if ( !response )
                 {
                     return;
                 }
                 console.log(response)
                 let form = response[1];
+                let files = response[2];
                 if(response[0] == "save"){
-                    this.markerService.updateMarker(data.id,form.value);
+                    let imagesCarruselIds = [];
+                    if(files.length>0){
+                        await this.imageService.addImage(files)
+                        .then((img)=>{
+                            console.log(img); 
+                            let data = img['data'];
+                            imagesCarruselIds = img
+                            //dataCamp.carrusel = img;
+                        }); 
+                    }
+                    this.markerService.updateMarker(data.id,form.value)
+                    .pipe(takeUntil(this._unsubscribeAll))
+                    .subscribe(async mark=>{
+                        console.log(mark)
+                        if(mark!==null){
+                            if(imagesCarruselIds.length>0){
+                                await this.markerService.asociateImages(imagesCarruselIds,mark.id)
+                            }
+                        }
+                    }, error=>{
+                        console.log(error);
+                        alert("Something Wrong Happend!!!!")
+                    });;
                     marker._popup.setContent(this.markerService.makePopup(form.value));
+                    
                 }else{
                     this.markerService.deleteMarker(data.id);
                     this.map.removeLayer(marker)

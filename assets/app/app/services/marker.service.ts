@@ -50,13 +50,15 @@ export class MarkerService {
     {params:{'markerId': id}})
     .pipe(map(response=>{
       if(response['success']){
-        return true;
+        return response['data'];
       }else{
-        return false
+        return null;
       }
     }))
-    .subscribe(response=>{});
+    
   }
+
+
 
   //DELETE MARKER
   deleteMarker(id:string){
@@ -98,5 +100,23 @@ export class MarkerService {
       `<div>Titulo: ${ data.title }</div>` +
       `<div>Email: ${ data.email }</div>` +
       `<div>Web Site: ${ data.url }</div>`
+  }
+
+  asociateImages(idImages: any[], id:string){
+    const body = {
+      id: id,
+      images: idImages
+    }
+    return this._http.post(
+      environment.sails_services_urlpath+":"+environment.sails_services_urlport+'/marker/asociate-images',body)
+      .pipe(map(responseData=>{
+        if(responseData['data']){
+          //let campaign = new Campaign();
+          let marker = responseData['data'];
+          return marker
+        }else{
+        return null;
+      }
+    })).toPromise();
   }
 }

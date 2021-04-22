@@ -80,9 +80,6 @@ export class GeoPointsMainSidebarComponent implements OnInit, OnDestroy
     changeFilter(filter): void
     {
         this.filterBy = filter;
-        console.log(filter);
         this._markerService.setSource(filter);
-        //window.location.reload()
-        //this._contactsService.onFilterChanged.next(this.filterBy);
     }
 }

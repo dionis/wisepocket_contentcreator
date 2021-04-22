@@ -76,7 +76,7 @@ module.exports.routes = {
  'PATCH /marker/update': { action: 'marker/update' },
  'GET /marker/get-all': { action: 'marker/get-all' },
  'DELETE /marker/delete': { action: 'marker/delete' },
-
+ 'POST /marker/asociate-images': { action: 'marker/asociate-images' },
 
  
 

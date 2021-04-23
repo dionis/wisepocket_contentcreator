@@ -14,7 +14,7 @@
         </mat-toolbar-row> -->
     </mat-toolbar>
 
-    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+    <div mat-dialog-content style="height: 650px; width: 600px;" class="p-24 pb-0 m-0" fusePerfectScrollbar>
 
         <form [formGroup]="markerForm">
             <div fxLayout="row" fxLayoutAlign="start start">   
@@ -53,13 +53,31 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Latitud</mat-label>
                     <input name="lat" formControlName="lat" matInput>
-                </mat-form-field>
+                  </mat-form-field>
             </div>
 
+            
             <div fxLayout="row" class="textarea-wrapper" fxLayoutAlign="start start">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Longitud</mat-label>
                     <input name="lon" formControlName="lon" matInput>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" class="textarea-wrapper" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Campaigns</mat-label>
+                    <mat-select matInput formControlName="related_campaign">
+                        <mat-option *ngFor="let camp of campaigns" value="{{camp.id}}">
+                            <img class="product-image"
+                                        *ngIf="camp.logo !==null"
+                                        [src]="camp.logo.path">
+                            <img *ngIf="camp.logo === null"
+                                    [src]="'assets/images/ecommerce/product-image-placeholder.png'">
+                                    {{camp.titulo}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>Country is required!</mat-error>
                 </mat-form-field>
             </div>
 
@@ -71,10 +89,21 @@
             </div>
 
         </form>
-
+        <div fxLayout="row" fxLayoutAlign="start start">
+        <ngx-dropzone class="images-dialog" (change)="onSelect($event)"
+            [multiple] = "true"
+            accept="image/jpg,image/png">
+                <ngx-dropzone-label>Drag and Drop</ngx-dropzone-label>
+                <ngx-dropzone-image-preview *ngIf="images.length>0" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="images[0]">
+                
+                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                </ngx-dropzone-image-preview>
+                <!-- <img *ngIf="marker.images.length>0" src="marker.images[0].path" alt=""> -->
+        </ngx-dropzone>
+        </div>
     </div>
 
-    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+    <div mat-dialog-actions style="margin-top: 5px; padding: 16px;" fxLayout="row" fxLayoutAlign="end center">
 
         <button *ngIf="action === 'edit'"
                 mat-button
@@ -88,7 +117,7 @@
         <button *ngIf="action !== 'edit'"
                 mat-button
                 class="save-button"
-                (click)="matDialogRef.close(markerForm)"
+                (click)="matDialogRef.close([markerForm,images])"
                 [disabled]="markerForm.invalid"
                 aria-label="SAVE">
             ADD
@@ -97,7 +126,7 @@
         <button *ngIf="action === 'edit'"
                 mat-button
                 class="save-button"
-                (click)="matDialogRef.close(['save',markerForm])"
+                (click)="matDialogRef.close(['save',markerForm,images])"
                 [disabled]="markerForm.invalid"
                 aria-label="SAVE">
             SAVE

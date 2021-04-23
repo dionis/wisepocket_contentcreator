@@ -29,6 +29,7 @@ import { SampleComponent } from './sample.component';
 import { GeoPointsMainSidebarComponent } from './sidebar/main/main.component';
 import { MarkerContactFormDialogComponent } from './marker-form/marker-form.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatSelect, MatSelectModule } from '@angular/material/select';
 
 const routes = [
     {
@@ -65,6 +66,8 @@ const routes = [
         MatDialogModule,
         NgxDropzoneModule,
         MatDialogModule,
+        MatSelectModule,
+
 
         FuseSharedModule,
         FuseConfirmDialogModule,

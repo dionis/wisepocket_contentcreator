@@ -1,6 +1,7 @@
 import { Component, Inject, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CampaignService } from '../../../services/campaign.service';
 
 //import { Contact } from '../../../../../app/main/apps/contacts/contact.model';
 
@@ -18,7 +19,9 @@ export class MarkerContactFormDialogComponent
     marker:any;
     markerForm: FormGroup;
     dialogTitle: string;
-
+    images: File[] = [];
+    campaigns = [];
+    
     /**
      * Constructor
      *
@@ -29,16 +32,21 @@ export class MarkerContactFormDialogComponent
     constructor(
         public matDialogRef: MatDialogRef<MarkerContactFormDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private campService: CampaignService
     )
     {
         // Set the defaults
         this.action = _data.action;
+        campService.getCampaignUser('','').subscribe(data=>{
+            this.campaigns = data;
+        });
 
         if ( this.action === 'edit' )
         {
             this.dialogTitle = 'Edit Marker';
             this.marker = _data.data;
+            //this.images.push(new File())
             console.log(this.marker);
         }
         else
@@ -80,6 +88,14 @@ export class MarkerContactFormDialogComponent
             phone   : [this.marker.phone,Validators.required],
             lat   : [this.marker.lat,Validators.required], 
             lon: [this.marker.lon,Validators.required],
+            related_campaign: [this.marker.related_campaign?this.marker.related_campaign:''
+                ,Validators.required],
         });
+    }
+
+    onSelect(event){
+        console.log(event.addedFiles)
+       this.images = event.addedFiles;
+      // this.files.push(event.addedFiles[0]);
     }
 }

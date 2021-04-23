@@ -227,8 +227,7 @@ export class FormsComponent implements OnInit, OnDestroy
        .subscribe(async campaign =>{
            if(imagesCarruselIds.length>0){
             await this.campService.asociateImages(imagesCarruselIds,campaign.id);
-           }
-           console.log(campaign);        
+           }       
         },error=>{
            console.log(error)
        });       

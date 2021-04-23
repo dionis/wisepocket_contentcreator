@@ -71,10 +71,12 @@ module.exports.routes = {
  'GET /campaign/countall': {action:'campaign/countall'},
  'GET /campaign/countUserCampaigns': {action:'campaign/count-user-campaigns'},
 
-
- ///GET CAMPAING XML
- 'POST /campaign/getXmlCampaing': {action:'campaign/generate-xml'},
-
+ //Marker Routes
+ 'POST /marker/create': { action: 'marker/create' },
+ 'PATCH /marker/update': { action: 'marker/update' },
+ 'GET /marker/get-all': { action: 'marker/get-all' },
+ 'DELETE /marker/delete': { action: 'marker/delete' },
+ 'POST /marker/asociate-images': { action: 'marker/asociate-images' },
 
 
 

@@ -11,7 +11,13 @@ module.exports = {
 
 
   inputs: {
-
+    camapingname: {
+        type: 'string',
+        example: 'covid-19',
+        description: 'The name of campaing.',
+        required: true,
+        //defaultsTo: 'covid-19'
+      }
   },
 
 
@@ -32,6 +38,9 @@ module.exports = {
     var options = {compact: true, ignoreComment: true, spaces: 4};
    // var result = convert.json2xml(json, options);
     console.log(result);
+
+     var result = `Hello, ${inputs.camapingname}!`;
+     return exits.success(result);
   }
 
 

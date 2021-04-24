@@ -26,7 +26,21 @@ export class MarkerService {
   constructor(
     private _http: HttpClient
   ) {
-    this.sourceMap = new BehaviorSubject('geoServer');
+    this.sourceMap = new BehaviorSubject('googleMap');
+  }
+
+    /**
+   *  For current User and Campaign in the system search the
+   *   GIS server configuration
+   *  
+   *  return a promise with JSON in 
+   *     gisServerAddress: eje http://localhost:8080/geoserver/wisepocket/wms
+   *     gisAttribution: eje CUBA
+   * 
+   */
+
+  getGisServerConfiguration():Promise<any>{
+      return new Promise ((resolve,reject)=>{ resolve(undefined)}) ;
   }
 
   //Add Marker
@@ -119,4 +133,6 @@ export class MarkerService {
       }
     })).toPromise();
   }
+
+
 }

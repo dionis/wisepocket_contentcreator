@@ -13,11 +13,10 @@ import { FuseTranslationLoaderService } from '../../../../@fuse/services/transla
 import { locale as english } from '../i18n/en';
 import { locale as turkish } from '../i18n/tr';
 import { locale as spanish } from '../i18n/es';
-
 @Component({
-    selector     : 'marker-form-dialog',
-    templateUrl  : './marker-form.component.html',
-    styleUrls    : ['./marker-form.component.scss'],
+    selector     : 'gis-form-dialog',
+    templateUrl  : './gis-form.component.html',
+    styleUrls    : ['./gis-form.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 
@@ -45,6 +44,7 @@ export class MarkerContactFormDialogComponent
         private campService: CampaignService,
         private imageService: ImageService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
+
         //private http: HttpClient;
     )
     {
@@ -66,15 +66,10 @@ export class MarkerContactFormDialogComponent
         }
         else
         {
-            this.dialogTitle = 'New Marker';
+            this.dialogTitle = 'New Geografical Information Server';
             this.marker = {
-                title: '',
                 url:'',
-                description:'',
-                phone: '',
-                email: '',
-                lat: this._data.lat,
-                lon: this._data.lon
+                description:''              
             };
         }
 

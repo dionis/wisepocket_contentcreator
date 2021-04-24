@@ -1,11 +1,11 @@
 import { AfterViewChecked, AfterViewInit,
-     Component, 
-     ElementRef, 
+     Component,
+     ElementRef,
      OnChanges,
-     OnDestroy, 
-     OnInit, 
+     OnDestroy,
+     OnInit,
      SimpleChanges,
-      ViewChild, 
+      ViewChild,
       ViewEncapsulation } from '@angular/core';
 
 import { FuseTranslationLoaderService } from '../../../@fuse/services/translation-loader.service';
@@ -13,7 +13,7 @@ import { FuseTranslationLoaderService } from '../../../@fuse/services/translatio
 import { locale as english } from './i18n/en';
 import { locale as turkish } from './i18n/tr';
 import { locale as spanish } from './i18n/es';
-import * as L from 'leaflet' 
+import * as L from 'leaflet'
 import { MarkerService } from '../../services/marker.service';
 import { MatDialog } from '@angular/material/dialog';
 //import { GeopointsFormDialogComponent } from './contact-form/geopoints-form.component';
@@ -40,9 +40,9 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
         'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
         'http://localhost:8080/geoserver/wisepocket/wms'
     ];
-    private iconRetinaUrl = './leafleticons/marker-icon-2x.png';
-    private iconUrl = './leafleticons/marker-icon.png';
-    private shadowUrl = './leafleticons/marker-shadow.png';
+    private iconRetinaUrl = 'assets/leaflets/marker-icon-2x.png';
+    private iconUrl = 'assets/leaflets/marker-icon.png';
+    private shadowUrl = 'assets/leaflets/marker-shadow.png';
     private iconDefault;
     private current_position: number;
     private current_accuracy: number;
@@ -70,7 +70,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
     {
         this.searchInput = new FormControl('');
         this._fuseTranslationLoaderService.loadTranslations(english, turkish, spanish);
-        
+
         this.iconDefault = L.icon({
             iconRetinaUrl:this.iconRetinaUrl,
             iconUrl: this.iconUrl,
@@ -82,7 +82,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
             shadowSize: [41, 41]
           });
         this._unsubscribeAll = new Subject<any>();
-        //L.Marker.prototype.options.icon = this.iconDefault;
+        L.Marker.prototype.options.icon = this.iconDefault;
     }
 
     ngOnDestroy(): void {
@@ -96,12 +96,12 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
             this.map.removeLayer(this.current_position);
             this.map.removeLayer(this.current_accuracy);
         }
-  
+
         var radius = e.accuracy / 2;
-  
-        this.current_position = L.marker(e.latlng,this.markerService.iconDefault).addTo(this.map)
+
+        this.current_position = L.marker(e.latlng,this.iconDefault).addTo(this.map)
           .bindPopup("You are within " + radius + " meters from this point").openPopup();
-  
+
         this.current_accuracy = L.circle(e.latlng, radius).addTo(this.map);
       }
 
@@ -128,7 +128,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
         let corner1= L.latLng(19.8351702,-84.9514723);
         let corner2 = L.latLng(23.2431588,-74.1343019);
         let bonus = L.latLngBounds(corner1, corner2);
-        switch (this.serverMap) { 
+        switch (this.serverMap) {
             case 'googleMap':
                 tiles = L.tileLayer(`http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}`,{
                 maxZoom: 20,
@@ -137,14 +137,35 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
               });
               break;
             case 'geoServer':
-                tiles = L.tileLayer.wms('http://localhost:8080/geoserver/wisepocket/wms',{
-                    layers: 'wisepocket:gis_osm_roads_free_1',
-                    srs: "EPSG:4326",
-                    height: 768,
-                    width:330,
-                    attribution: "CUBA"
-                  });          
-                break;
+
+               ///Find in Backed Configuration System if exist
+               this.markerService.getGisServerConfiguration().then( infoData=>{
+                   if (typeof(infoData) === 'undefined' || infoData == null) {
+                     //Show dialog to set new GIS server values and update 
+                     //database
+                     console.log("Show Dialog to insert  GIS Configuration");
+
+                   }else {
+                     let gisServerAddress = 'http://localhost:8080/geoserver/wisepocket/wms';
+                     let gisAttribution = "CUBA";
+                    tiles = L.tileLayer.wms(gisServerAddress,{
+                      layers: 'wisepocket:gis_osm_roads_free_1',
+                      srs: "EPSG:4326",
+                      height: 768,
+                      width:330,
+                      attribution: gisAttribution
+                    });
+                  
+
+                   }
+
+               })
+               .catch(error=>{
+                  ///Show Dialog Error Because not exits data or some
+                  ///error happen
+
+               })
+            break;
             case 'openStretMap':
                 tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             	maxZoom: 20,
@@ -174,11 +195,11 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                     if(files.length>0){
                         await this.imageService.addImage(files)
                         .then((img)=>{
-                            console.log(img); 
+                            console.log(img);
                             let data = img['data'];
                             imagesCarruselIds = img
                             //dataCamp.carrusel = img;
-                        }); 
+                        });
                     }
                     this.markerService.createMarker(e,data)
                     .then(async (response:any)=>{
@@ -189,7 +210,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                                 if(imagesCarruselIds.length>0){
                                     await this.markerService.asociateImages(imagesCarruselIds,object.id)
                                 }
-                            } 
+                            }
                             let marker= L.marker([e.latlng.lat, e.latlng.lng],this.iconDefault);
                             marker.bindPopup(this.markerService.makePopup(object));
                             marker.on('mouseover', function (e) {
@@ -205,10 +226,10 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                         }
                         return succes
                     })
-                    
+
                     //console.log(response);
                    //this._contactsService.updateContact(response.getRawValue());
-                });                 
+                });
             });
         }
     }
@@ -229,7 +250,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                 marker.on('click', e=> {//ERROR
                     this.editMarker(mark,marker);
                 });
-                marker.addTo(this.map); 
+                marker.addTo(this.map);
             }
         })
         .catch(error=>{
@@ -240,14 +261,14 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
     ngOnInit(){
         console.log('Entra');
     }
-    
+
     reloadComponent() {
         this._router.routeReuseStrategy.shouldReuseRoute = () => false;
         this._router.onSameUrlNavigation = 'reload';
         this._router.navigate(['/sample']);
     }
 
-    async ngAfterViewInit(){        
+    async ngAfterViewInit(){
         await this.markerService.sourceMap
         .pipe(takeUntil(this._unsubscribeAll))
         .subscribe(source=>{
@@ -272,7 +293,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
         this.map.on('locationfound', this.onLocationFound);
         this.map.on('locationerror', this.onLocationError);
         //L.control.mousePosition().addTo(this.map);
-        this.onMark(); // Create Marker From Click Event        
+        this.onMark(); // Create Marker From Click Event
     }
 
     newMarker(lat,lon,action:string): Observable<any>
@@ -287,7 +308,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
             }
         });
         return this.dialogRef.afterClosed()
-            
+
     }
 
     editMarker(data:any,marker:any){
@@ -315,11 +336,11 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                     if(files.length>0){
                         await this.imageService.addImage(files)
                         .then((img)=>{
-                            console.log(img); 
+                            console.log(img);
                             let data = img['data'];
                             imagesCarruselIds = img
                             //dataCamp.carrusel = img;
-                        }); 
+                        });
                     }
                     this.markerService.updateMarker(data.id,form.value)
                     .pipe(takeUntil(this._unsubscribeAll))
@@ -335,13 +356,13 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                         alert("Something Wrong Happend!!!!")
                     });;
                     marker._popup.setContent(this.markerService.makePopup(form.value));
-                    
+
                 }else{
                     this.markerService.deleteMarker(data.id);
                     this.map.removeLayer(marker)
                 }
-                
-        }); 
+
+        });
     }
 
     /**

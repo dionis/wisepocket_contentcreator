@@ -9,7 +9,7 @@
             <!-- <img [src]="user.avatar" class="avatar mr-16" [alt]="user.name"/>
             <span class="h5">{{user.name}}</span> -->
             <!-- / USER -->
-            <span class="h5">Source Map</span>
+            <span class="h4">{{'MAP.SOURCE_MAP' | translate}}</span>
 
         </div>
         <!-- / SIDEBAR HEADER -->
@@ -22,15 +22,16 @@
                 <div class="nav-item" aria-label="inbox">
                     <a class="nav-link" matRipple (click)="changeFilter('googleMap')"
                        [ngClass]="{'active accent':filterBy ==='googleMap'}">
-                        <span class="title">Google Map</span>
+                        <span class="title">{{'MAP.GLOBAL_GIS' | translate}}</span>
                     </a>
                 </div> 
 
                 <div class="nav-item" aria-label="inbox">
                     <a class="nav-link" matRipple (click)="changeFilter('geoServer')"
                        [ngClass]="{'active accent':filterBy ==='geoServer'}">
-                        <span class="title">GeoServer</span>
+                        <span class="title">{{'MAP.OWNER_GIS' | translate}}</span>
                     </a>
+                    <button><mat-icon>edit</mat-icon></button>
                 </div> 
 
                 <!-- <div class="nav-item" aria-label="frequently contacted" (click)="changeFilter('frequent')">

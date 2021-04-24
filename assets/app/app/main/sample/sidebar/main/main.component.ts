@@ -5,6 +5,12 @@ import { takeUntil } from 'rxjs/operators';
 import { MarkerService } from '../../../../services/marker.service';
 import { SampleComponent } from '../../sample.component';
 
+import { FuseTranslationLoaderService } from '../../../../../@fuse/services/translation-loader.service';
+
+import { locale as english } from '../../i18n/en';
+import { locale as turkish } from '../../i18n/tr';
+import { locale as spanish } from '../../i18n/es';
+
 //import { ContactsService } from '../../../../../app/main/apps/contacts/contacts.service';
 
 @Component({
@@ -15,7 +21,7 @@ import { SampleComponent } from '../../sample.component';
 export class GeoPointsMainSidebarComponent implements OnInit, OnDestroy
 {
     user: any;
-    filterBy: string;
+    filterBy: string = 'googleMap';
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -27,12 +33,15 @@ export class GeoPointsMainSidebarComponent implements OnInit, OnDestroy
      */
     constructor(
         private _markerService: MarkerService,
+        private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         //private router:Router
         //private _contactsService: ContactsService
     )
     {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+        this._fuseTranslationLoaderService.loadTranslations(english, turkish, spanish);
+
     }
 
     // -----------------------------------------------------------------------------------------------------

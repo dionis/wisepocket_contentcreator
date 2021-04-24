@@ -9,32 +9,60 @@ const faker = require('faker');
 var appRoot = require('app-root-path');
 const pathToFile = 'test'+ path.sep + 'fixtures'+ path.sep
 
+//Bibliografy:
+//https://blog.logrocket.com/a-quick-and-complete-guide-to-mocha-testing-d0e0ea09f09d/
+//https://mochajs.org/#global-teardown-fixtures
+
+// before()  runs once before the first test case in the block
+// beforeEach()  runs before each test case
+// afterEach()  runs after each test case
+// after()  runs once after the last test case in the block
+
+// Depending on the hooks that apply to a given test suite, the hooks are run together with the tests in the suite in a definite sequence.
+
+// before() -> beforeEach() -> test() -> afterEach() -> after()
+
 describe('CampingController', function() {
+  before(async function() {
+    await  supertest(sails.hooks.http.app)
+    .post('/singIn')
+    .send({ email: 'admin@example.com', password: '12345678' })
+  });
+
+  after( async function() {
+    await  supertest(sails.hooks.http.app)
+    .post('/logout')
+    .send()
+  });
     describe('#create', function() {
-        it('shuld create a Campaign', (done)=>{
-            console.log("Call execution ==> " + '/campaign/addCampaign')
-            supertest(sails.hooks.http.app)
-            .post('/campaign/addCampaign')
-            .query()
-            .send({
-                titulo: 'TEste',
-                descripcion: 'This is a Test',
-                contanctoTelefono: '53684125',
-                colorPrincipal: '255',
-                colorSecundario: '0',
-                contactoEmail: 'test@test.com',
-                direccionPostal: 'J street #212, Suenno',
-                contactoTelegram: '@test',
-                contactoWhatsapp: '@53685125',
-                contactoFacebook: 'test.facebook.com',
-                createdby: null
-            })
-             .expect(200, function(err,res){
-                   console.log("<--- Execute test --->")
-                  if(err) return done(err);
-                  done();
-            });
-        });
+        // it('shuld create a Campaign', (done)=>{
+        //     console.log("Call execution ==> " + '/campaign/addCampaign')
+        //     supertest(sails.hooks.http.app)
+        //     .post('/campaign/addCampaign')
+        //     .query()
+        //     .send({
+        //         titulo: 'TEste',
+        //         descripcion: 'This is a Test',
+        //         contanctoTelefono: '53684125',
+        //         colorPrincipal: '255',
+        //         colorSecundario: '0',
+        //         contactoEmail: 'test@test.com',
+        //         direccionPostal: 'J street #212, Suenno',
+        //         contactoTelegram: '@test',
+        //         contactoWhatsapp: '@53685125',
+        //         contactoFacebook: 'test.facebook.com',
+        //         createdby: null
+        //     })
+        //      .expect(200, function(err,res){
+        //            console.log("<--- Execute test --->")
+        //           if(err) return done(err);
+        //           done();
+        //     });
+        // });
+
+        it('shuld create a Campaign TEMPLATE ', (done)=>{
+          done();
+      });
     });
 
     // describe('#getCampings', function() {

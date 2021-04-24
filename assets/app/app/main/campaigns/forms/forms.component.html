@@ -370,7 +370,10 @@
                                     [multiple] = "false"
                                     accept="image/jpg,image/png">
                                         <ngx-dropzone-label>>{{'FORMS.CAMPAIGN_ICON_PLACEHOLDER' | translate}}</ngx-dropzone-label>
-                                        <ngx-dropzone-image-preview *ngIf="campIconf" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="campIconf">
+                                        <ngx-dropzone-image-preview *ngIf="campIconf" class="preview" 
+                                        ngProjectAs="ngx-dropzone-preview" 
+                                        [removable]="true" (removed)="onRemove(campIconf)"
+                                        [file]="campIconf">
                                             <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
                                         </ngx-dropzone-image-preview>
                                     </ngx-dropzone>

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { FileUploadService } from './file-upload.service';
+//import { FileUploadService } from 'assets/images';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +32,26 @@ export class ImageService {
         }
         return ids;
       })).toPromise()
+  }
+
+  getImage(image:any) {
+    //const ext = image.path;
+    const name = image.titulo;
+    let ext = name.split('.')[1];
+    //let img = new Image()
+    //console.log();
+    //image = new ArrayBuffer()
+    return this._http
+      .get(environment.sails_services_urlpath+":"+environment.sails_services_urlport+
+      '/downloadImage', {
+        params:{'_id': image.id},
+        responseType: "arraybuffer"
+      })
+      .pipe(
+        map(response => {
+          console.log(response)
+          return new File([response], name,{type:'image/'+ext});
+        })
+      );
   }
 }

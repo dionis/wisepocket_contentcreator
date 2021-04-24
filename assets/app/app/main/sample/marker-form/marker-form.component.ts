@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Inject, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CampaignService } from '../../../services/campaign.service';
+import { ImageService } from '../../../services/image.service';
 
 //import { Contact } from '../../../../../app/main/apps/contacts/contact.model';
 
@@ -33,7 +35,9 @@ export class MarkerContactFormDialogComponent
         public matDialogRef: MatDialogRef<MarkerContactFormDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private _formBuilder: FormBuilder,
-        private campService: CampaignService
+        private campService: CampaignService,
+        private imageService: ImageService,
+        //private http: HttpClient;
     )
     {
         // Set the defaults
@@ -46,8 +50,8 @@ export class MarkerContactFormDialogComponent
         {
             this.dialogTitle = 'Edit Marker';
             this.marker = _data.data;
-            //this.images.push(new File())
             console.log(this.marker);
+            this.loadImage();
         }
         else
         {
@@ -64,6 +68,28 @@ export class MarkerContactFormDialogComponent
         }
 
         this.markerForm = this.createContactForm();
+    }
+
+    async loadImage(){
+        if(this.marker.images.length>0){
+            let frontImages = this.marker.images
+            for (let index = 0; index < frontImages.length; index++) {
+                const element = frontImages[index];
+                let ext = element.titulo.split('.')[1];
+                await this.imageService.getImage(element).subscribe(response=>{
+                    console.log(response);
+                    this.images.push(response)
+                })
+                //let img = this.imageService.getImage(element);
+                //this.images.push(img);
+                //this.images.push(new File([element.path],element.titulo,{type:'image/'+ext}));
+            }
+            //console.log(this.images    )
+        } 
+    }
+    onRemove(event){
+        console.log(event);
+        this.images.splice(this.images.indexOf(event), 1)
     }
 
     // -----------------------------------------------------------------------------------------------------

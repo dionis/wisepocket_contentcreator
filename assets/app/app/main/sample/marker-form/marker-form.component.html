@@ -94,7 +94,12 @@
             [multiple] = "true"
             accept="image/jpg,image/png">
                 <ngx-dropzone-label>Drag and Drop</ngx-dropzone-label>
-                <ngx-dropzone-image-preview *ngIf="images.length>0" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="images[0]">
+                <ngx-dropzone-image-preview *ngFor="let f of images" 
+                    class="preview" 
+                    ngProjectAs="ngx-dropzone-preview" 
+                    [removable]="true" 
+                    (removed)="onRemove(f)" 
+                    [file]="f">
                 
                     <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
                 </ngx-dropzone-image-preview>

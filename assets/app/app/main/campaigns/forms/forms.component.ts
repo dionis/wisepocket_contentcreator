@@ -137,16 +137,21 @@ export class FormsComponent implements OnInit, OnDestroy
         console.log(this.horizontalStepperStep3.get('countries'))
 
     }
+    
     onChage(event){
         console.log(event);
         console.log(this.inputFile);
     }
+
     onSelectIcon(event){
         console.log(event.addedFiles)
        this.campIconf = event.addedFiles[0];
       // this.files.push(event.addedFiles[0]);
     }
-    
+
+    onRemove(event){
+        console.log(event);
+    }
     onSelect(event) {
         console.log(event);
         switch (event.source.id) {

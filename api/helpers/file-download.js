@@ -40,7 +40,7 @@ module.exports = {
     sails.log.debug(fd);
     arrayString = fd.split("'\\'")// Arreglar
     sails.log.debug(arrayString);
-    fs.read(fd, function(error , file) {
+    fs.readFile(fd, function(error , file) {
         if(error) {
           sails.log.debug(error);
           exits.download_err(error);

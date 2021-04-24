@@ -17,7 +17,7 @@ module.exports = {
 
   exits: {
     success: {
-      responseType: 'json',
+      response: 'json',
       description: 'Record Created'
     },
 
@@ -32,7 +32,7 @@ module.exports = {
 
 
   fn: async function (inputs,exits) {
-    
+
     //if(!this.req.header('Authorization')){ return exits.someError({'message': 'No Token Foud!'});}
          //const token = this.req.header('Authorization').split('Bearer ')[1];
          //sails.log.debug(token);
@@ -41,7 +41,7 @@ module.exports = {
         //      if(err) return exits.someError({'message': err});
         //      if(!payload) return exits.someError({'message': 'Not Match Token Payload'})
         //     await User.findOne({id:payload._id}, async (err, user)=> {
-        //         if (err) { 
+        //         if (err) {
         //             //ails.log.debug('No match User');
         //             return exits.someError({
         //                 'error': err
@@ -50,7 +50,7 @@ module.exports = {
     //if(!inputs.user) return exits.someError({'error': 'User Not Found'});
     // let images;
     // if(this.req){
-    //   images = await sails.helpers.fileUpload(this.req)                
+    //   images = await sails.helpers.fileUpload(this.req)
     //   .tolerate('upload_err', (err)=>{
     //       return exits.someError({
     //           'message': 'Error while uploading files',
@@ -100,17 +100,17 @@ module.exports = {
             'success': true,
             'message': 'Record Created',
             //'files': images,
-            'data': campaigns 
+            'data': campaigns
         });
     })
-    // .intercept('E_UNIQUE', ()=>{ 
+    // .intercept('E_UNIQUE', ()=>{
     //   return exits.notUniqueError(
     //     {'error':'There is already an account using that email address!'}
-    //     ) 
+    //     )
     // })
     .catch(err=>{
         sails.log.debug(err);
-        return exits.someError(err); 
+        return exits.someError(err);
     })
         //     });
         //  });

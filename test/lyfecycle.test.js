@@ -30,7 +30,7 @@ before(function(done) {
     User.createEach([
         { email: 'admin@example.com', phone:'+53552448', name: 'Ryan Dahl', fullName: 'Ryan Dahl', isSuperAdmin: true, password: hashpass },
     ]);
-    return done();
+     done();
   });
 });
 

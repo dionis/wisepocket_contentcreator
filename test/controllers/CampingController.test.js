@@ -12,8 +12,9 @@ const pathToFile = 'test'+ path.sep + 'fixtures'+ path.sep
 describe('CampingController', function() {
     describe('#create', function() {
         it('shuld create a Campaign', (done)=>{
+            console.log("Call execution ==> " + '/campaign/addCampaign')
             supertest(sails.hooks.http.app)
-            .post('/camping/addCamping')
+            .post('/campaign/addCampaign')
             .query()
             .send({
                 titulo: 'TEste',
@@ -28,6 +29,11 @@ describe('CampingController', function() {
                 contactoFacebook: 'test.facebook.com',
                 createdby: null
             })
+             .expect(200, function(err,res){
+                   console.log("<--- Execute test --->")
+                  if(err) return done(err);
+                  done();
+            });
         });
     });
 

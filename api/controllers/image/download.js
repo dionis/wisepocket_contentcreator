@@ -32,6 +32,7 @@ module.exports = {
           'error': err
         })
       })
+      sails.log.debug('File',files)
       this.res.send({
         'data': files
       });

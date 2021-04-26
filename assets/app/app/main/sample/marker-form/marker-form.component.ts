@@ -30,6 +30,7 @@ export class MarkerContactFormDialogComponent
     dialogTitle: string;
     images: File[] = [];
     campaigns = [];
+    imgSrcBase:string
     
     /**
      * Constructor
@@ -89,7 +90,8 @@ export class MarkerContactFormDialogComponent
                 let ext = element.titulo.split('.')[1];
                 await this.imageService.getImage(element).subscribe(response=>{
                     console.log(response);
-                    this.images.push(response)
+                    //this.images.push(response)
+                    this.imgSrcBase = `data:image/png;base64,${response}`
                 })
                 //let img = this.imageService.getImage(element);
                 //this.images.push(img);

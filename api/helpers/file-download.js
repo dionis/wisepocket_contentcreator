@@ -40,12 +40,12 @@ module.exports = {
     sails.log.debug(fd);
     arrayString = fd.split("'\\'")// Arreglar
     sails.log.debug(arrayString);
-    fs.readFile(fd, function(error , file) {
+    fs.readFile(fd, {encoding: 'base64'}, function(error , file) {
         if(error) {
           sails.log.debug(error);
           exits.download_err(error);
         } else {
-          sails.log.debug(file);
+          //sails.log.debug(file);
           return exits.success(file);
         }
     });

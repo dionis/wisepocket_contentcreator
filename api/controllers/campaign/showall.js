@@ -24,8 +24,8 @@ module.exports = {
     await Campaign.find()
     .populate('createdby')
     .paginate(
-      page?page:undefined,
-      limit?limit:undefined)
+      page?page:0,
+      limit?limit:99999999)
     .then(campaigns =>{
         return this.res.send({
           'success': true,

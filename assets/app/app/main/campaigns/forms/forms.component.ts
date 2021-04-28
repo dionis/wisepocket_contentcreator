@@ -197,7 +197,7 @@ export class FormsComponent implements OnInit, OnDestroy
         let dataCamp = new Campaign()
         dataCamp.titulo = this.horizontalStepperStep1.get('nameCampaign').value;
         dataCamp.descripcion = this.horizontalStepperStep1.get('description').value;
-        dataCamp.contanctoTelefono= this.horizontalStepperStep2.get('phone').value;
+        dataCamp.phone= this.horizontalStepperStep2.get('phone').value;
         dataCamp.contactoEmail = this.horizontalStepperStep2.get('email').value;
         dataCamp.direccionPostal = this.horizontalStepperStep2.get('postalCode').value;
         dataCamp.colorPrincipal = this.horizontalStepperStep3.get('primaryColor').value;

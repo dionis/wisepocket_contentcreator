@@ -96,7 +96,7 @@ module.exports.bootstrap = async function() {
     campaigns.push({
         titulo: faker.company.companyName(),
         descripcion: faker.lorem.paragraph(50),
-        contanctoTelefono: phone,
+        phone: phone,
         country: faker.address.country(),
         city: faker.address.city(),
         state: faker.address.state(),

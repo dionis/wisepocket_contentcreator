@@ -50,6 +50,7 @@
             <mat-table class="products-table"
                        #table [dataSource]="dataSource"
                        matSort
+                       (matSortChange)="sortData($event)"
                        [@animateStagger]="{value:'50'}"
                        fusePerfectScrollbar>
 

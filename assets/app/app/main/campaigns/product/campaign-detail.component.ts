@@ -117,7 +117,7 @@ export class CampaignDetailComponent implements OnInit, OnDestroy
             //Basic Info
             titulo            : [this.campaign.titulo],
             descripcion     : [this.campaign.descripcion],
-            phone      : [this.campaign.contanctoTelefono],
+            phone      : [this.campaign.phone],
             email   : [this.campaign.contactoEmail],
 
             //Aditional Info

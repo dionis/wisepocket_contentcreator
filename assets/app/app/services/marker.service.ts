@@ -32,11 +32,11 @@ export class MarkerService {
     /**
    *  For current User and Campaign in the system search the
    *   GIS server configuration
-   *  
-   *  return a promise with JSON in 
+   *
+   *  return a promise with JSON in
    *     gisServerAddress: eje http://localhost:8080/geoserver/wisepocket/wms
    *     gisAttribution: eje CUBA
-   * 
+   *
    */
 
   getGisServerConfiguration():Promise<any>{
@@ -69,7 +69,7 @@ export class MarkerService {
         return null;
       }
     }))
-    
+
   }
 
 
@@ -96,6 +96,7 @@ export class MarkerService {
     .pipe(map((response:any)=>{
       let markers = [];
       for (let index = 0; index < response.data.length; index++) {
+        console.log("Marker to Show <==> ", response.data[index] );
         markers.push(response.data[index]);
       }
       return markers;

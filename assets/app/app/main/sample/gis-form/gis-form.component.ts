@@ -58,7 +58,7 @@ export class GisServerFormDialogComponent
 
         // Set the defaults
         this.action = _data.action;
-        campService.getCampaignUser('','').subscribe(data=>{
+        campService.getCampaignUser('','','').subscribe(data=>{
             this.campaigns = data;
         });
 

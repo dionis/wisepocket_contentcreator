@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 //import { FileUploadService } from 'assets/images';
@@ -9,7 +10,8 @@ import { environment } from '../../environments/environment';
 })
 export class ImageService {
 
-  constructor(private _http: HttpClient,) { }
+  constructor(private _http: HttpClient,
+    private sanitizer:DomSanitizer) { }
   addImage(files){
     console.log(files)
     let formdata = new FormData();
@@ -53,12 +55,12 @@ export class ImageService {
           // let base64String = btoa(new Uint8Array(response)
           // .reduce((data, byte) => data + String.fromCharCode(byte), ''));
           // console.log(base64String);
-          //const imageBlob = this.dataUriToBlob(response,ext);
+          const imageBlob = this.dataUriToBlob(response,ext);
           // let encoded = window.btoa(response);
           // const byteArray = new Uint8Array(atob(encoded).split('').map(char => char.charCodeAt(0)));
           // const blob = new Blob([byteArray], {type:'image/'+ext});
-          // return new File([blob], name,{type:'image/'+ext});
-          return response;
+          return imageBlob;
+          //return this.sanitizer.bypassSecurityTrustResourceUrl(response);
         })
       );
   }
@@ -73,7 +75,7 @@ export class ImageService {
       .pipe(
         map(response => {
           console.log(response)
-          return new File([response], name,{type:'image/'+ext});
+          return response;
         })
       );
   }
@@ -81,7 +83,7 @@ export class ImageService {
   dataUriToBlob(dataUri,ext){
     let converted = this.toBinary(dataUri);
     let encoded = window.btoa(converted);
-    const byteStr = window.atob(dataUri);
+    const byteStr = window.atob(encoded);
     const arrayBuff = new ArrayBuffer(byteStr.length);
     const init8Array = new Uint8Array(arrayBuff);
     for (let index = 0; index < byteStr.length; index++) {

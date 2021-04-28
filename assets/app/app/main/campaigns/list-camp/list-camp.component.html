@@ -50,6 +50,7 @@
             <mat-table class="products-table"
                        #table [dataSource]="dataSource"
                        matSort
+                       (matSortChange)="sortData($event)"
                        [@animateStagger]="{value:'50'}"
                        fusePerfectScrollbar>
 
@@ -80,10 +81,10 @@
                     </mat-cell>
                 </ng-container>
                 <!-- Contanct Phone Column -->
-                <ng-container matColumnDef="contactoTelefono">
+                <ng-container matColumnDef="phone">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>{{'LIST.PHONE_CONTACT' | translate}}</mat-header-cell>
                     <mat-cell *matCellDef="let product">
-                        <p class="text-truncate">{{product.contanctoTelefono}}</p>
+                        <p class="text-truncate">{{product.phone}}</p>
                     </mat-cell>
                 </ng-container>
 

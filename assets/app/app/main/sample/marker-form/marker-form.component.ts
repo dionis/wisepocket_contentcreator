@@ -31,7 +31,7 @@ export class MarkerContactFormDialogComponent
     images: File[] = [];
     campaigns = [];
     imgSrcBase:string
-    
+
     /**
      * Constructor
      *
@@ -54,7 +54,7 @@ export class MarkerContactFormDialogComponent
 
         // Set the defaults
         this.action = _data.action;
-        campService.getCampaignUser('','').subscribe(data=>{
+        campService.getCampaignUser('','','').subscribe(data=>{
             this.campaigns = data;
         });
 
@@ -90,15 +90,15 @@ export class MarkerContactFormDialogComponent
                 let ext = element.titulo.split('.')[1];
                 await this.imageService.getImage(element).subscribe(response=>{
                     console.log(response);
-                    //this.images.push(response)
-                    this.imgSrcBase = `data:image/png;base64,${response}`
+                    this.images.push(new File([response], element.titulo,{type:'image/'+ext}))
+                    //this.imgSrcBase = `data:image/png;base64,${response}`
                 })
                 //let img = this.imageService.getImage(element);
                 //this.images.push(img);
                 //this.images.push(new File([element.path],element.titulo,{type:'image/'+ext}));
             }
             //console.log(this.images    )
-        } 
+        }
     }
     onRemove(event){
         console.log(event);
@@ -125,7 +125,7 @@ export class MarkerContactFormDialogComponent
             //images: [this.contact.jobTitle],
             email   : [this.marker.email,[Validators.required, Validators.email, Validators.maxLength(30)]],
             phone   : [this.marker.phone,Validators.required],
-            lat   : [this.marker.lat,Validators.required], 
+            lat   : [this.marker.lat,Validators.required],
             lon: [this.marker.lon,Validators.required],
             related_campaign: [this.marker.related_campaign?this.marker.related_campaign:''
                 ,Validators.required],
@@ -133,7 +133,9 @@ export class MarkerContactFormDialogComponent
     }
 
     onSelect(event){
-        console.log(event.addedFiles)
+      console.log("-----")
+      console.log(event);
+      console.log(event.addedFiles)
        this.images = event.addedFiles;
       // this.files.push(event.addedFiles[0]);
     }

@@ -22,10 +22,10 @@ module.exports = {
       columnName:'descripcion'
     },
 
-    contanctoTelefono: {
+    phone: {
       type: 'string',
       required: true,
-      columnName:'contanctoTelefono'
+      columnName:'phone'
     },
 
     colorPrincipal: {

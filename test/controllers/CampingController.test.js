@@ -13,6 +13,8 @@ const pathToFile = 'test'+ path.sep + 'fixtures'+ path.sep
 //https://blog.logrocket.com/a-quick-and-complete-guide-to-mocha-testing-d0e0ea09f09d/
 //https://mochajs.org/#global-teardown-fixtures
 
+
+///To call in Bearear y JWT https://www.codota.com/code/javascript/functions/supertest/SuperTest/post
 // before()  runs once before the first test case in the block
 // beforeEach()  runs before each test case
 // afterEach()  runs after each test case

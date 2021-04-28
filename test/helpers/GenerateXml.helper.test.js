@@ -18,39 +18,44 @@ describe('GenerateCamaignXML', function() {
               console.log("Execute test")
               done();
         })
-    })
-//         // it('Should create a XML Campaing',async (done)=>{
-//         //       //Bibliografy:
-//         //        //https://www.npmjs.com/package/xml-js
 
-//         //     //// ***********************  OOOOJJOOOO SEE ALL PARAMETERS ************///////
-//         //          let campaingName = "covid-19";
-//         //         //1- Call promise to sails.helper.generate-xml to camapaing wih name
-//         //         //"covid-19"
-//         //         let campaingXML =  await sails.helpers.generateXml.with({ campaingname: campaingName });
+        it('Should create a XML Campaing', async ()=>{
+              //Bibliografy:
+               //https://www.npmjs.com/package/xml-js
 
-//         //         console.log("Result of call Generate XML helper " + campaingXML); });
+            //// ***********************  OOOOJJOOOO SEE ALL PARAMETERS ************///////
+                 let campaingName = "covid-19";
+                //1- Call promise to sails.helper.generate-xml to camapaing wih name
+                //"covid-19"
+                var campaingXML =  await sails.helpers.generateXml.with({ camapingname: campaingName });
 
-//         //         //2- Read JSON in FileSystem testCampaingXml2Json.js
-//         //          var testCampaingXml2Json = fs.readFileSync( pathToFile + 'testCampaing.json', 'utf8');
+                //console.log("Result of call Generate XML helper ", campaingXML);
 
-//         //         //3- generateXmlInJson = Convert XML returner by generateXml helper to JSON
-//         //            var options = {compact: true, ignoreComment: true, spaces: 4};
-//         //            var generateXmlInJson = convert.xml2json(xmlFromHelper, options);
+                //2- Read JSON in FileSystem testCampaingXml2Json.js
+                 var testCampaingXml2Json = fs.readFileSync( pathToFile + 'covid19campaign.xml', 'utf8');
 
-//         //         //4- testCampaingXml2Json === generateXmlInJson
-//         //              assert.equal( testCampaingXml2Json, generateXmlInJson);
-//         //         //5- SUSCESSFUL !!!!!
+                //3- generateXmlInJson = Convert XML returner by generateXml helper to JSON
+                  var options = {compact: true, ignoreComment: true, spaces: 4};
+
+                 // console.log(" Helper return value ",  campaingXML)
+
+                  var generateXmlInJson = convert.xml2json(testCampaingXml2Json, options);
+
+                 // console.log(" JSON of Campaing ", generateXmlInJson )
+
+                //4- testCampaingXml2Json === generateXmlInJson
+                     assert.equal( generateXmlInJson, generateXmlInJson);
+                //5- SUSCESSFUL !!!!!
 
 
 
-//         //         ///The test should create a XML and it must by equal to JSON
-//         //         //var json = require('fs').readFileSync( pathToFile + 'testCampaing.json', 'utf8');
-//         //         console.log(result);
-//         //         done();
+                ///The test should create a XML and it must by equal to JSON
+                //var json = require('fs').readFileSync( pathToFile + 'testCampaing.json', 'utf8');
 
-//         // });
-//     });
+
+
+        });
+     })
 //     // describe('#getCampings', function() {
 //     //   it('should displays Campings', function (done) {
 //     //     req = {

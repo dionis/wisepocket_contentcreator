@@ -76,7 +76,7 @@ export class ListCampComponent implements AfterViewInit,OnInit {
         //console.log(this._ecommerceProductsService.products)
         this.dataSource = new CampaignDataSource(this.campService, this.paginator, this.sort);
         console.log(this.dataSource)
-        this.dataSource.loadUserCampaigns(0,10);
+        //this.dataSource.loadUserCampaigns(0,10);
         // fromEvent(this.filter.nativeElement, 'keyup')
         //     .pipe(
         //         takeUntil(this._unsubscribeAll),
@@ -111,6 +111,9 @@ export class CampaignDataSource extends DataSource<any>{
     private loadingSubject = new BehaviorSubject<boolean>(false);
     private _countCampaigns: number = 0;
 
+    private _filterChange = new BehaviorSubject('');
+    private _filteredDataChange = new BehaviorSubject('');
+
     constructor(private campService:CampaignService,
         private _matPaginator: MatPaginator,
         private _matSort: MatSort
@@ -128,11 +131,17 @@ export class CampaignDataSource extends DataSource<any>{
 
    set filteredData(value: any)
    {
-        this.campagainsSubject.next(value);
+
+        console.log(" Insert data ==> ", value);
+
+        //this.campagainsSubject.next(value);
+        this._filteredDataChange.next(value);
+
     }
     get filteredData(): any
     {
-        return this.campagainsSubject.value;
+        //return this.campagainsSubject.value;
+        return  this._filteredDataChange.value
     }
 
     connect(collectionViewer: CollectionViewer): Observable<any[]>{
@@ -187,8 +196,8 @@ export class CampaignDataSource extends DataSource<any>{
             .toPromise().then( (result:Campaign[])=>{
               if (typeof(result) !== 'undefined')
                  this._countCampaigns = result.length;
-              console.log("Pagination values ",  this._countCampaigns)
-             // this.campagainsSubject.next(result);
+              console.log("Pagination values ==> ",  this._countCampaigns)
+              //this.campagainsSubject.next(result);
               this.filteredData = result;
               resolve(result);
 

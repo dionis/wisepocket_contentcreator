@@ -20,16 +20,17 @@ import { locale as spanish } from '../i18n/es';
     encapsulation: ViewEncapsulation.None
 })
 
-export class MarkerContactFormDialogComponent
+export class GisServerFormDialogComponent
 {
     action: string;
    // contact: Contact;
+
     marker:any;
     markerForm: FormGroup;
     dialogTitle: string;
     images: File[] = [];
     campaigns = [];
-    
+
     /**
      * Constructor
      *
@@ -38,7 +39,7 @@ export class MarkerContactFormDialogComponent
      * @param {FormBuilder} _formBuilder
      */
     constructor(
-        public matDialogRef: MatDialogRef<MarkerContactFormDialogComponent>,
+        public matDialogRef: MatDialogRef<GisServerFormDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private _formBuilder: FormBuilder,
         private campService: CampaignService,
@@ -49,53 +50,42 @@ export class MarkerContactFormDialogComponent
     )
     {
 
+       //Bibliografy:
+       //https://es.wikipedia.org/wiki/Sistema_de_referencia_geod%C3%A9sico
+
+
         this._fuseTranslationLoaderService.loadTranslations(english, turkish, spanish);
 
         // Set the defaults
         this.action = _data.action;
-        campService.getCampaignUser('','').subscribe(data=>{
+        campService.getCampaignUser('','','','').subscribe(data=>{
             this.campaigns = data;
         });
 
         if ( this.action === 'edit' )
         {
-            this.dialogTitle = 'Edit Marker';
+            this.dialogTitle = 'Edit Geographival Local Server Address';
             this.marker = _data.data;
             console.log(this.marker);
-            this.loadImage();
+
         }
         else
         {
             this.dialogTitle = 'New Geografical Information Server';
             this.marker = {
                 url:'',
-                description:''              
+                description:'',
+                related_campaign:''
             };
         }
 
         this.markerForm = this.createContactForm();
     }
 
-    async loadImage(){
-        if(this.marker.images.length>0){
-            let frontImages = this.marker.images
-            for (let index = 0; index < frontImages.length; index++) {
-                const element = frontImages[index];
-                let ext = element.titulo.split('.')[1];
-                await this.imageService.getImage(element).subscribe(response=>{
-                    console.log(response);
-                    this.images.push(response)
-                })
-                //let img = this.imageService.getImage(element);
-                //this.images.push(img);
-                //this.images.push(new File([element.path],element.titulo,{type:'image/'+ext}));
-            }
-            //console.log(this.images    )
-        } 
-    }
+
     onRemove(event){
         console.log(event);
-        this.images.splice(this.images.indexOf(event), 1)
+        //this.images.splice(this.images.indexOf(event), 1)
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -110,24 +100,20 @@ export class MarkerContactFormDialogComponent
     createContactForm(): FormGroup
     {
         return this._formBuilder.group({
-            title    : [this.marker.title,Validators.required],
             //phone: [this.contact.lastName],
             //email  : [this.contact.avatar],
-            url: [this.marker.url,Validators.required],
-            description : [this.marker.description,Validators.required],
+            url: ['',Validators.required],
+            description : ['',Validators.required],
             //images: [this.contact.jobTitle],
-            email   : [this.marker.email,[Validators.required, Validators.email, Validators.maxLength(30)]],
-            phone   : [this.marker.phone,Validators.required],
-            lat   : [this.marker.lat,Validators.required], 
-            lon: [this.marker.lon,Validators.required],
-            related_campaign: [this.marker.related_campaign?this.marker.related_campaign:''
-                ,Validators.required],
+            related_campaign: ['WGS84',Validators.required],
         });
     }
 
     onSelect(event){
         console.log(event.addedFiles)
-       this.images = event.addedFiles;
+        //this.images = event.addedFiles;
       // this.files.push(event.addedFiles[0]);
     }
+
+
 }

@@ -27,6 +27,7 @@ import { AuthguardService } from '../../services/authguard.service';
 
 import { SampleComponent } from './sample.component';
 import { GeoPointsMainSidebarComponent } from './sidebar/main/main.component';
+import {GisServerFormDialogComponent} from './gis-form/gis-form.component';
 import { MarkerContactFormDialogComponent } from './marker-form/marker-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
@@ -43,7 +44,8 @@ const routes = [
     declarations: [
         SampleComponent,
         GeoPointsMainSidebarComponent,
-        MarkerContactFormDialogComponent
+        MarkerContactFormDialogComponent,
+        GisServerFormDialogComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -79,7 +81,8 @@ const routes = [
         SampleComponent
     ],
     entryComponents: [
-        MarkerContactFormDialogComponent
+        MarkerContactFormDialogComponent,
+        GisServerFormDialogComponent
     ]
 })
 

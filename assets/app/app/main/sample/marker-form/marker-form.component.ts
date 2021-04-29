@@ -31,7 +31,7 @@ export class MarkerContactFormDialogComponent
     images: File[] = [];
     campaigns = [];
     imgSrcBase:string
-    
+
     /**
      * Constructor
      *
@@ -98,7 +98,7 @@ export class MarkerContactFormDialogComponent
                 //this.images.push(new File([element.path],element.titulo,{type:'image/'+ext}));
             }
             //console.log(this.images    )
-        } 
+        }
     }
     onRemove(event){
         console.log(event);
@@ -125,7 +125,7 @@ export class MarkerContactFormDialogComponent
             //images: [this.contact.jobTitle],
             email   : [this.marker.email,[Validators.required, Validators.email, Validators.maxLength(30)]],
             phone   : [this.marker.phone,Validators.required],
-            lat   : [this.marker.lat,Validators.required], 
+            lat   : [this.marker.lat,Validators.required],
             lon: [this.marker.lon,Validators.required],
             related_campaign: [this.marker.related_campaign?this.marker.related_campaign:''
                 ,Validators.required],
@@ -133,7 +133,9 @@ export class MarkerContactFormDialogComponent
     }
 
     onSelect(event){
-        console.log(event.addedFiles)
+      console.log("-----")
+      console.log(event);
+      console.log(event.addedFiles)
        this.images = event.addedFiles;
       // this.files.push(event.addedFiles[0]);
     }

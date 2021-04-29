@@ -24,12 +24,12 @@ import { locale as spanish } from '../../../main/campaigns/list-camp/i18n/es';
 export class ListCampComponent implements AfterViewInit,OnInit {
     dataSource: CampaignDataSource | null;
     displayedColumns = ['id',
-        'logo', 
-        'titulo', 
+        'logo',
+        'titulo',
         'phone',
         'direccionPostal',
-        'contactoEmail', 
-        //'contactoTelegram', 
+        'contactoEmail',
+        //'contactoTelegram',
         'active'
     ];
 
@@ -121,7 +121,7 @@ export class ListCampComponent implements AfterViewInit,OnInit {
                 })
             )
             .subscribe();
-        
+
     }
 
     loadCampaignsPage(){
@@ -145,9 +145,12 @@ export class CampaignDataSource extends DataSource<any>{
     private loadingSubject = new BehaviorSubject<boolean>(false);
     private _countCampaigns: number = 0;
 
+    private _filterChange = new BehaviorSubject('');
+    private _filteredDataChange = new BehaviorSubject('');
+
     constructor(private campService:CampaignService,
         // private _matPaginator: MatPaginator,
-        // private _matSort: MatSort        
+        // private _matSort: MatSort
         ){
             super();
             this.campService.countUserCampaigns()
@@ -155,11 +158,12 @@ export class CampaignDataSource extends DataSource<any>{
                 console.log(res);
                 this._countCampaigns = res['data'];
             })
-            
+
         }
     get filteredData(): any
     {
-        return this.campagainsSubject.value;
+        //return this.campagainsSubject.value;
+        return  this._filteredDataChange.value
     }
 
     connect(collectionViewer: CollectionViewer): Observable<any[]>{
@@ -167,7 +171,7 @@ export class CampaignDataSource extends DataSource<any>{
         //if(this.campagainsSubject.value.length !== 0){
             return this.campagainsSubject.asObservable();
         //}
-        
+
     }
     disconnect(){
         this.campagainsSubject.complete();
@@ -211,7 +215,7 @@ export class CampaignDataSource extends DataSource<any>{
     //         }
     //         return FuseUtils.filterArrayByString(data, this.filter);
     //     }
-        
+
     /**
      * Sort data
      *
@@ -224,11 +228,11 @@ export class CampaignDataSource extends DataSource<any>{
          {
              return data;
          }
- 
+
          return data.sort((a, b) => {
              let propertyA: number | string = '';
              let propertyB: number | string = '';
- 
+
              switch ( matSort.active )
              {
                  case 'id':
@@ -250,10 +254,10 @@ export class CampaignDataSource extends DataSource<any>{
                      [propertyA, propertyB] = [a.active, b.active];
                      break;
              }
- 
+
              const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
              const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
- 
+
              return (valueA < valueB ? -1 : 1) * (matSort.direction === 'asc' ? 1 : -1);
          });
      }

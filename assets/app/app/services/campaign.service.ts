@@ -49,14 +49,14 @@ export class CampaignService {
     // })
   }
 
-  getCampaignUser(page:string,limit:string,sortCriteria:string): Observable<Campaign[]>{
-    console.log('Page',page);
-    console.log('Sort',sortCriteria);
+  getCampaignUser(page:string,limit:string,sortCriteria:string, filter:string): Observable<Campaign[]>{
+    console.log('Filter',filter);
     return this._http.get(
         environment.sails_services_urlpath+":"+environment.sails_services_urlport+'/campaign/CampaignslistbyUser',
         {params:{'page': page,
                   'limit':limit,
-                  'criteria': sortCriteria}})
+                  'criteria': sortCriteria,
+                  'filter': filter}})
         .pipe(
           map((responseData:any)=>{
             let arrayCamps: any[] = [];

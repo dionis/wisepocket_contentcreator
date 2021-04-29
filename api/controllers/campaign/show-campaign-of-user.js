@@ -22,16 +22,23 @@ module.exports = {
     const page = this.req.param('page');
     const limit  = Number(this.req.param('limit'));
     const sortCriteria  = this.req.param('criteria');
+    const filter = this.req.param('filter');
     sails.log.debug(sortCriteria, typeof sortCriteria === 'string');
     const token = this.req.header('Authorization').split('Bearer ')[1];
-    //sails.log.debug(token);
-    //const payload = await jwt.decode(token);
     sails.log.debug(this.req.param('page'));
     sails.log.debug(this.req.param('limit'));
     await jwt.verify(token,'hjghdvdfjvnishvishr4oo', async (err,payload)=>{
         if(err) return this.res.status(500).send({'error': err});
         await Campaign.find({
-          where: {createdby: payload._id},
+          createdby: payload._id,
+          })
+        .where({
+          or:[
+            { titulo: { startsWith: filter } },
+            { contactoEmail: { startsWith: filter } },
+            { phone: { startsWith: filter } },
+            { direccionPostal: { startsWith: filter } }
+          ]
         })
         .sort(`${sortCriteria?sortCriteria:'id ASC'}`)
         .populate('logo')
@@ -50,7 +57,6 @@ module.exports = {
         .catch(err=>{
           return this.res.status(500).send({'error': err});
         });
-
     });
   }
 

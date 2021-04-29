@@ -76,9 +76,10 @@ export class ListCampComponent implements AfterViewInit,OnInit {
     ngOnInit(): void
     {
         //console.log(this._ecommerceProductsService.products)
+        console.log( 'OnInit',this.filter.nativeElement.value);
         this.dataSource = new CampaignDataSource(this.campService);
         console.log(this.dataSource)
-        this.dataSource.loadUserCampaigns(0,10,this.criteria);
+        this.dataSource.loadUserCampaigns(0,10,this.criteria,'');
         // fromEvent(this.filter.nativeElement, 'keyup')
         //     .pipe(
         //         takeUntil(this._unsubscribeAll),
@@ -96,17 +97,23 @@ export class ListCampComponent implements AfterViewInit,OnInit {
     }
     ngAfterViewInit() {
         //let criteria = ''
+       console.log( this.filter.nativeElement.value);
+        fromEvent(this.filter.nativeElement,'keyup')
+        .pipe(
+            takeUntil(this._unsubscribeAll),
+            debounceTime(150),
+            distinctUntilChanged(),
+            tap(() => {
+                //this.paginator.pageIndex = 0;
+                this.loadCampaignsPage();
+
+            })
+        )
+        .subscribe()
         this.sort.sortChange.subscribe((event) => {
-            console.log(event);
             this.criteria = event.active +' ' + event.direction
             //this.paginator.pageIndex = 0;
         });
-        
-        // this.paginator.page
-        //     .pipe(
-        //         tap(() => this.loadCampaignsPage())
-        //     )
-        //     .subscribe();
         merge(this.sort.sortChange, this.paginator.page)
             .pipe(
                 tap(() => {
@@ -120,7 +127,12 @@ export class ListCampComponent implements AfterViewInit,OnInit {
     loadCampaignsPage(){
         console.log(this.paginator.pageSize);
         console.log(this.criteria);
-        this.dataSource.loadUserCampaigns(this.paginator.pageIndex,this.paginator.pageSize,this.criteria);
+        this.dataSource
+        .loadUserCampaigns(
+            this.paginator.pageIndex,
+            this.paginator.pageSize,
+            this.criteria,
+            this.filter.nativeElement.value);
     }
 
     sortData(event){
@@ -165,8 +177,8 @@ export class CampaignDataSource extends DataSource<any>{
         return this._countCampaigns;
     }
 
-    loadUserCampaigns(page:number,limit:number,criteria:string){
-        this.campService.getCampaignUser(page.toString(),limit.toString(),criteria)
+    loadUserCampaigns(page:number,limit:number,criteria:string,filter:string){
+        this.campService.getCampaignUser(page.toString(),limit.toString(),criteria,filter)
         .subscribe(campaigns=>{
             console.log(campaigns);
             this.campagainsSubject.next(campaigns)

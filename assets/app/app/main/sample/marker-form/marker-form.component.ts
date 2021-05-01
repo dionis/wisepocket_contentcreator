@@ -135,8 +135,16 @@ export class MarkerContactFormDialogComponent
     onSelect(event){
       console.log("-----")
       console.log(event);
-      console.log(event.addedFiles)
-       this.images = event.addedFiles;
-      // this.files.push(event.addedFiles[0]);
+      let fileLoaded = undefined
+      if (event.addedFiles.length > 0) {
+         console.log(event.addedFiles[0])
+         fileLoaded = event.addedFiles[0];
+      }
+      else {
+        console.log(event.rejectedFiles[0])
+        fileLoaded = event.rejectedFiles[0];
+      }
+
+      this.images.push(fileLoaded);
     }
 }

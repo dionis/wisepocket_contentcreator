@@ -141,7 +141,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                ///Find in Backed Configuration System if exist
                this.markerService.getGisServerConfiguration().then( infoData=>{
                    if (typeof(infoData) === 'undefined' || infoData == null) {
-                     //Show dialog to set new GIS server values and update 
+                     //Show dialog to set new GIS server values and update
                      //database
                      console.log("Show Dialog to insert  GIS Configuration");
 
@@ -155,7 +155,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                       width:330,
                       attribution: gisAttribution
                     });
-                  
+
 
                    }
 
@@ -195,7 +195,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                     if(files.length>0){
                         await this.imageService.addImage(files)
                         .then((img)=>{
-                            console.log(img);
+                            console.log("Saved image" , img);
                             let data = img['data'];
                             imagesCarruselIds = img
                             //dataCamp.carrusel = img;
@@ -322,6 +322,8 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
             }
         });
 
+        //All files are salved in
+        //'assets/app/assets/'
         this.dialogRef.afterClosed()
             .subscribe(async (response: any) => {
                 if ( !response )
@@ -348,6 +350,7 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                         console.log(mark)
                         if(mark!==null){
                             if(imagesCarruselIds.length>0){
+                               console.log("Asociate images ", imagesCarruselIds)
                                 await this.markerService.asociateImages(imagesCarruselIds,mark.id)
                             }
                         }

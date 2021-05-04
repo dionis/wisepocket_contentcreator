@@ -13,6 +13,7 @@ import { FuseTranslationLoaderService } from '../../../../@fuse/services/transla
 import { locale as english } from '../i18n/en';
 import { locale as turkish } from '../i18n/tr';
 import { locale as spanish } from '../i18n/es';
+import { Router } from '@angular/router';
 
 @Component({
     selector     : 'marker-form-dialog',
@@ -46,6 +47,7 @@ export class MarkerContactFormDialogComponent
         private campService: CampaignService,
         private imageService: ImageService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
+        private router: Router
         //private http: HttpClient;
     )
     {
@@ -56,6 +58,10 @@ export class MarkerContactFormDialogComponent
         this.action = _data.action;
         campService.getCampaignUser('','','','').subscribe(data=>{
             this.campaigns = data;
+        },error=>{
+            if(error.error === 'Unauthrized'){
+                this.router.navigate(['**']);
+            }
         });
 
         if ( this.action === 'edit' )

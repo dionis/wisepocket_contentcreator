@@ -188,7 +188,7 @@ export class CampaignDataSource extends DataSource<any>{
             this.campagainsSubject.next(campaigns)
         }, error=>{
             this.errorSubject.next(error.message);
-        } );
+        });
         console.log(this.campagainsSubject.value)
     }
 

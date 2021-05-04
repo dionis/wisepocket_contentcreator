@@ -90,6 +90,7 @@ module.exports = {
         const limit  = req.param('limit')
         let user= null;
         await User.find()
+        .populate('campaings')
         .paginate({
             page:page?page:undefined,
             limit:limit?limit:undefined

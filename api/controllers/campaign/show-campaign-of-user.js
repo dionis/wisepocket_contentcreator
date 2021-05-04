@@ -29,34 +29,58 @@ module.exports = {
     sails.log.debug(this.req.param('limit'));
     await jwt.verify(token,'hjghdvdfjvnishvishr4oo', async (err,payload)=>{
         if(err) return this.res.status(500).send({'error': err});
-        await Campaign.find({
-          createdby: payload._id,
+        if(!filter || filter===''){
+          await Campaign.find({
+            createdby: payload._id,
+            })
+          .sort(`${sortCriteria?sortCriteria:'id ASC'}`)
+          .populate('logo')
+          .paginate(
+            page?page:'',
+            limit?limit:99999999)
+          .then(campaigns => {
+            return this.res.send({
+              'success': true,
+              'message': 'Records Fetched',
+              //'files': images,
+              'data': campaigns,
+              'count': campaigns.length
+            })
           })
-        .where({
-          or:[
-            { titulo: { startsWith: filter } },
-            { contactoEmail: { startsWith: filter } },
-            { phone: { startsWith: filter } },
-            { direccionPostal: { startsWith: filter } }
-          ]
-        })
-        .sort(`${sortCriteria?sortCriteria:'id ASC'}`)
-        .populate('logo')
-        .paginate(
-          page?page:'',
-          limit?limit:99999999)
-        .then(campaigns => {
-          return this.res.send({
-            'success': true,
-            'message': 'Records Fetched',
-            //'files': images,
-            'data': campaigns,
-            'count': campaigns.length
+          .catch(err=>{
+            return this.res.status(500).send({'error': err});
+          });
+        }else{
+          await Campaign.find({
+            createdby: payload._id,
+            })
+          .where({
+            or:[
+              { titulo: { startsWith: filter } },
+              { contactoEmail: { startsWith: filter } },
+              { phone: { startsWith: filter } },
+              { direccionPostal: { startsWith: filter } }
+            ]
           })
-        })
-        .catch(err=>{
-          return this.res.status(500).send({'error': err});
-        });
+          .sort(`${sortCriteria?sortCriteria:'id ASC'}`)
+          .populate('logo')
+          .paginate(
+            page?page:'',
+            limit?limit:99999999)
+          .then(campaigns => {
+            return this.res.send({
+              'success': true,
+              'message': 'Records Fetched',
+              //'files': images,
+              'data': campaigns,
+              'count': campaigns.length
+            })
+          })
+          .catch(err=>{
+            return this.res.status(500).send({'error': err});
+          });
+        }
+       
     });
   }
 

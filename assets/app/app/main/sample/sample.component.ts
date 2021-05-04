@@ -199,6 +199,14 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                             let data = img['data'];
                             imagesCarruselIds = img
                             //dataCamp.carrusel = img;
+                        })
+                        .catch(error=>{
+                            if(error.error === 'Unauthrized'){
+                                this._router.navigate(['**']);
+                            } 
+                            if(error.error.error.code === 'E_UNIQUE'){
+                                alert('USTED HA TECLEADO UN CAMPO QUE DEBE SER ÚNICO EN LA TABLA IMAGEN. POR FAVOR VUELVA A VERFICAR')
+                            }
                         });
                     }
                     this.markerService.createMarker(e,data)
@@ -226,9 +234,21 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                         }
                         return succes
                     })
+                    .catch(error=>{
+                        if(error.error === 'Unauthrized'){
+                            this._router.navigate(['**']);
+                        } 
+                        if(error.error.error.code === 'E_UNIQUE'){
+                            alert('USTED HA TECLEADO UN CAMPO QUE DEBE SER ÚNICO EN LA TABLA MARCADORES. POR FAVOR VUELVA A VERFICAR')
+                        }
+                    });
 
                     //console.log(response);
                    //this._contactsService.updateContact(response.getRawValue());
+                },error=>{
+                    if(error.error === 'Unauthrized'){
+                        this._router.navigate(['**']);
+                    }
                 });
             });
         }
@@ -350,12 +370,13 @@ export class SampleComponent implements OnInit, AfterViewInit, OnDestroy
                             if(imagesCarruselIds.length>0){
                                 await this.markerService.asociateImages(imagesCarruselIds,mark.id)
                             }
+                            marker._popup.setContent(this.markerService.makePopup(mark[0]));
                         }
                     }, error=>{
                         console.log(error);
                         alert("Something Wrong Happend!!!!")
                     });;
-                    marker._popup.setContent(this.markerService.makePopup(form.value));
+                    
 
                 }else{
                     this.markerService.deleteMarker(data.id);

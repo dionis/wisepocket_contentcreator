@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ImageService {
+  baseUrl:string  = 'assets/images/api/';
 
   constructor(private _http: HttpClient,
     private sanitizer:DomSanitizer) { }
@@ -38,28 +39,28 @@ export class ImageService {
 
   getImage(image:any) {
     //const ext = image.path;
-    const name = image.titulo;
-    let ext = name.split('.')[1];
     //let img = new Image()
     //console.log();
     //image = new ArrayBuffer()
     return this._http
       .get(environment.sails_services_urlpath+":"+environment.sails_services_urlport+
       '/downloadImage', {
-        params:{'_id': image.id},
+        params:{'_id': image},
         //responseType: "arraybuffer"
       })
       .pipe(
         map((response:any) => {
-          // console.log(response)
+          console.log(response.data)
+          const name = response.object.titulo;
+          let ext = name.split('.')[1];
           // let base64String = btoa(new Uint8Array(response)
           // .reduce((data, byte) => data + String.fromCharCode(byte), ''));
           // console.log(base64String);
-          const imageBlob = this.dataUriToBlob(response,ext);
+          //const imageBlob = this.dataUriToBlob(response,ext);
           // let encoded = window.btoa(response);
           // const byteArray = new Uint8Array(atob(encoded).split('').map(char => char.charCodeAt(0)));
           // const blob = new Blob([byteArray], {type:'image/'+ext});
-          return imageBlob;
+          return `data:image/${ext};base64,${response.data}`;
           //return this.sanitizer.bypassSecurityTrustResourceUrl(response);
         })
       );
@@ -69,7 +70,7 @@ export class ImageService {
     const name = image.titulo;
     let ext = name.split('.')[1];
     return this._http
-      .get('assets/images/api/'+name, {
+      .get(this.baseUrl+name, {
         responseType: "arraybuffer"
       })
       .pipe(

@@ -66,9 +66,9 @@
                 <ng-container matColumnDef="logo">
                     <mat-header-cell *matHeaderCellDef>{{'LIST.ICON' | translate}}</mat-header-cell>
                     <mat-cell *matCellDef="let product">
-                        <img class="product-image !== null"
-                             *ngIf="product.logo" [alt]="product.logo.titulo"
-                             [src]="product.logo.path"/>
+                        <img class="product-image"
+                             *ngIf="product.logo !== null" [alt]="product.logo.titulo"
+                             [src]="loadImage(product.logo)"/>
                         <img *ngIf="product.logo === null"
                              [src]="'assets/images/ecommerce/product-image-placeholder.png'">
                     </mat-cell>

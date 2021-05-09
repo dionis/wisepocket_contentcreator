@@ -94,15 +94,18 @@
             [multiple] = "true"
             accept="image/jpg,image/png,image/jpeg">
                 <ngx-dropzone-label>Drag and Drop</ngx-dropzone-label>
-                <ngx-dropzone-image-preview *ngFor="let f of images"
+                <div *ngIf="images.length>0" fxLayout="row" fxLayoutAlign="start start">
+                    <img *ngFor= "let i of images" [src]="i" alt="" >
+                </div>
+                <!-- <ngx-dropzone-image-preview *ngFor="let f of images"
                     class="preview"
                     ngProjectAs="ngx-dropzone-preview"
                     [removable]="true"
                     (removed)="onRemove(f)"
                     [file]="f">
 
-                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
-                </ngx-dropzone-image-preview>
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> 
+                </ngx-dropzone-image-preview> -->
                 <!-- <img *ngIf="marker.images.length>0" src="marker.images[0].path" alt=""> -->
         </ngx-dropzone>
         </div>
@@ -125,7 +128,7 @@
         <button *ngIf="action !== 'edit'"
                 mat-button
                 class="save-button"
-                (click)="matDialogRef.close([markerForm,images])"
+                (click)="matDialogRef.close([markerForm,files])"
                 [disabled]="markerForm.invalid"
                 aria-label="SAVE">
                 {{'MAP.ADD' | translate}}

@@ -13,6 +13,7 @@ import { FuseTranslationLoaderService } from '../../../../@fuse/services/transla
 import { locale as english } from '../i18n/en';
 import { locale as turkish } from '../i18n/tr';
 import { locale as spanish } from '../i18n/es';
+import { Router } from '@angular/router';
 
 @Component({
     selector     : 'marker-form-dialog',
@@ -28,7 +29,8 @@ export class MarkerContactFormDialogComponent
     marker:any;
     markerForm: FormGroup;
     dialogTitle: string;
-    images: File[] = [];
+    images: string[] = [];
+    files: File[] = []; 
     campaigns = [];
     imgSrcBase:string
 
@@ -46,6 +48,7 @@ export class MarkerContactFormDialogComponent
         private campService: CampaignService,
         private imageService: ImageService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
+        private router: Router
         //private http: HttpClient;
     )
     {
@@ -56,6 +59,10 @@ export class MarkerContactFormDialogComponent
         this.action = _data.action;
         campService.getCampaignUser('','','','').subscribe(data=>{
             this.campaigns = data;
+        },error=>{
+            if(error.error === 'Unauthrized'){
+                this.router.navigate(['**']);
+            }
         });
 
         if ( this.action === 'edit' )
@@ -87,11 +94,16 @@ export class MarkerContactFormDialogComponent
             let frontImages = this.marker.images
             for (let index = 0; index < frontImages.length; index++) {
                 const element = frontImages[index];
-                let ext = element.titulo.split('.')[1];
-                await this.imageService.getImage(element).subscribe(response=>{
+                const ext = element.titulo.split('.')[1];
+                const name = element.titulo;
+                // let path= 'assets/images/api/'+name;
+                // console.log(path)
+                // this.images.push(path);
+                await this.imageService.getImage(element.id).subscribe(response=>{
                     console.log(response);
-                    this.images.push(new File([response], element.titulo,{type:'image/'+ext}))
+                    //this.images.push(new File([response], element.titulo,{type:'image/'+ext}))
                     //this.imgSrcBase = `data:image/png;base64,${response}`
+                    this.images.push(response);
                 })
                 //let img = this.imageService.getImage(element);
                 //this.images.push(img);
@@ -145,6 +157,6 @@ export class MarkerContactFormDialogComponent
         fileLoaded = event.rejectedFiles[0];
       }
 
-      this.images.push(fileLoaded);
+      this.files.push(fileLoaded);
     }
 }

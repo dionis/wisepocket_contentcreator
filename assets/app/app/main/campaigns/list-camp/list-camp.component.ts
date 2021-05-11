@@ -13,6 +13,7 @@ import { EcommerceProductsService } from '../../apps/e-commerce/products/product
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as english } from '../../../main/campaigns/list-camp/i18n/en';
 import { locale as spanish } from '../../../main/campaigns/list-camp/i18n/es';
+import { ImageService } from '../../../services/image.service';
 
 @Component({
   selector     : 'campaign-list',
@@ -43,6 +44,7 @@ export class ListCampComponent implements AfterViewInit,OnInit {
     filter: ElementRef;
 
     criteria: string = '';
+    actLogo: any;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -56,7 +58,8 @@ export class ListCampComponent implements AfterViewInit,OnInit {
     constructor(
        // private _ecommerceProductsService: EcommerceProductsService,
         private campService: CampaignService,
-        private _fuseTranslationLoaderService: FuseTranslationLoaderService
+        private _fuseTranslationLoaderService: FuseTranslationLoaderService,
+        private imageService: ImageService
     )
     {
         // Load the translations
@@ -138,6 +141,24 @@ export class ListCampComponent implements AfterViewInit,OnInit {
     sortData(event){
         console.log(event)
     }
+
+    async loadImage(idImg){
+        console.log(idImg.id);
+        let src = '';
+        await this.imageService.getImage(idImg.id)
+        .pipe(takeUntil(this._unsubscribeAll))
+        .toPromise()
+        .then(res=>{
+            src = res;
+            console.log('Dentro',src) 
+        })
+        // .subscribe(res=>{
+        //     src = res;
+        //     console.log('Dentro',src)
+        // })
+        console.log('Fuera',src)
+        return src;
+    }
 }
 export class CampaignDataSource extends DataSource<any>{
     private campagainsSubject= new BehaviorSubject<any[]>([]);
@@ -188,7 +209,7 @@ export class CampaignDataSource extends DataSource<any>{
             this.campagainsSubject.next(campaigns)
         }, error=>{
             this.errorSubject.next(error.message);
-        } );
+        });
         console.log(this.campagainsSubject.value)
     }
 
@@ -261,6 +282,8 @@ export class CampaignDataSource extends DataSource<any>{
              return (valueA < valueB ? -1 : 1) * (matSort.direction === 'asc' ? 1 : -1);
          });
      }
+    
+    
 
 
 }

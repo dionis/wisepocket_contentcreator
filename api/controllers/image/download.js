@@ -32,8 +32,9 @@ module.exports = {
           'error': err
         })
       })
-      sails.log.debug('File',files)
+      //sails.log.debug('File',files)
       this.res.send({
+        'object': imagen,
         'data': files
       });
     })

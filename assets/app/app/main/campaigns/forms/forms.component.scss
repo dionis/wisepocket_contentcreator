@@ -3,7 +3,6 @@
     .content {
         form {
             width: 100%;
-            max-width: 800px !important;
         }
 
         .form-errors-model {
@@ -13,7 +12,7 @@
                 background: none !important;
             }
         }
-
+        
         // .horizontal-stepper-wrapper,
         // .vertical-stepper-wrapper {
         //     //max-width: 1000px;
@@ -85,5 +84,8 @@
           }
 
         }
+    }
+    .horizontal-stepper-wrapper{
+        width: 100%;
     }
 }

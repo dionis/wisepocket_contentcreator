@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Campanna tamanno="37.6 MB" fecha="2-4-2020" dirHttp="www.wisepocket.com" dirCorreo="wisepocket@gmail.com" telf="22601000">
+    <TemaCampanna>COVID-19</TemaCampanna>
+    <LogoCampanna>logo.jpg</LogoCampanna>
+    <ImagenesCampanna cant="3">
+        <ImagenCampanna>uno.jpg</ImagenCampanna>
+        <ImagenCampanna>dos.jpg</ImagenCampanna>
+        <ImagenCampanna>tres.jpg</ImagenCampanna>
+    </ImagenesCampanna>
+    <ListaTemas cant="2">
+        <ItemTema>
+            <Titulo>Actualidad de la información sobre COVID-19 en Cuba</Titulo>
+            <Descripcion>Situación actual de COVID-19 a través del portal oficial del MINSAP</Descripcion>
+            <Informacion cant="1">
+                <PaginaWebTema pos="0">https://salud.msp.gob.cu/</PaginaWebTema>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>Actualidad de la información sobre COVID-19 en Cuba</Titulo>
+            <Descripcion>Información y estadísticas hacerca del COVID-19 en nuestro país</Descripcion>
+            <Informacion cant="1">
+                <PaginaWebTema pos="0">https://covid19cubadata.github.io/#c3-1586027960597-clip</PaginaWebTema>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>Actualidad de la información sobre COVID-19 en el mundo</Titulo>
+            <Descripcion>Estado actual de la información referente al estado de infección del mundo</Descripcion>
+            <Informacion cant="1">
+                <PaginaWebTema pos="0">https://google.com/covid19-map/?hl=es-419</PaginaWebTema>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>¿Qué debes saber?</Titulo>
+            <Descripcion>Información importante que debes saber sobre el COVID-19</Descripcion>
+            <Informacion cant="4">
+                <Texto pos="0">Los coronavirus son virus ARN implicados en una gran variedad de enfermedades que afectan a los seres humanos y animales. En los humanos pueden causar el catarro común y la gastroenteritis en lactantes. Fue aislado por primera vez en pollos en 1937, por Beaudette y Hudson. Hoy se conocen aproximadamente 13 especies de esta familia, algunos de los cuales infectan a los seres humanos. También existen coronavirus de bovinos, cerdos, roedores, gatos, perros y pájaros
+				</Texto>
+                <Texto pos="2">Los coronavirus son esféricos con un tamaño aproximado entre 80 y 220 nm de diámetro. Estos virus poseen el genoma de mayor tamaño y son altamente infecciosos. Poseen glicoproteínas distribuidas en la superficie de la capa externa de la envoltura, dándole aspecto de corona (de ahí el nombre)
+				</Texto>
+                <Texto pos="4">Los coronavirus se clasifican según la morfología, estrategia de replicación del ARN, organización del genoma y homología de la secuencia de los nucleótidos.
+						•	Familia Coronaviridae
+						•	Género Torovirus
+						•	Género Arterivirus
+				</Texto>
+                <Texto pos="5">Género Coronavirus con 3 grupos serológicos:
+						•	cepa 229E (afecta humanos, animales domésticos y roedores)
+						•	cepa OC43 (afecta humanos, animales domésticos y roedores)
+						•	otra (provoca bronquitis infecciosa aviar)
+				</Texto>
+                <ImagenTema pos="1">covid.jpg</ImagenTema>
+                <ImagenTema pos="3">covid_2.jpg</ImagenTema>
+                <VideoTema pos="6">covid_1.mp4</VideoTema>
+                <VideoTema pos="7">covid_2.mp4</VideoTema>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>Enfermedades provocadas por coronavirus </Titulo>
+            <Descripcion>Estos virus muestran tropismo selectivo por células epiteliales de los aparatos respiratorio....</Descripcion>
+            <Informacion cant="2">
+                <Texto pos="0">Estos virus muestran tropismo selectivo por células epiteliales de los aparatos respiratorio y gastrointestinal. Por ello las enfermedades que producen son básicamente  respiratorias y gastrointestinales, pero también se han visto coronavirus involucrados en hepatitis, peritonitis, nefritis, pancreatitis, parotiditis, adenitis, infecciones neurológicas y problemas inmunológicos.
+				</Texto>
+                <ImagenTema pos="1">covid_3.jpg</ImagenTema>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>Síntomas y complicaciones</Titulo>
+            <Descripcion>Explicación sobre los síntomas y complicaciones sobre el COVID-19</Descripcion>
+            <Informacion cant="1">
+                <ImagenTema pos="0">covid_4.gif</ImagenTema>
+                <Texto pos="1">Vigilancia, síntomas y definición de caso COVID-10 puede presentarse como una enfermedad leve, moderada o grave; este último caso incluye neumonía severa, sepsis y shock séptico. Las personas que creen que podrían haber estado expuestas al COVID-19 deben comunicarse con su proveedor de atención médica de inmediato. El reconocimiento temprano de los pacientes sospechosos permite el inicio oportuno de la prevención y el control de la infección de la misma manera que la identificación temprana de las personas con manifestaciones graves permite tratamientos de atención de apoyo optimizados inmediatos y un ingreso (o derivación) seguro y rápido a la unidad de cuidados intensivos de acuerdo con protocolos institucionales o nacionales. Para aquellos con enfermedad leve, la hospitalización puede no ser necesaria a menos que exista preocupación por el rápido deterioro. Todos los pacientes dados de alta deben recibir instrucciones de regresar al hospital si desarrollan un empeoramiento de la enfermedad. Todos los casos deben ser confirmados por prueba de RT-PCR.
+				</Texto>
+                <Texto pos="2">Caso sospechoso
+					A. Paciente con infección respiratoria aguda severa (con fiebre, resfriado y que necesita ser hospitalizado) Y sin otra etiología que explique completamente las manifestaciones clínicas y que haya viajado mantenido contacto con viajero proveniente de paise con  contagio, en los 14 días anteriores al inicio de los síntomas.
+					B. Paciente con cualquier enfermedad respiratoria aguda y en el que se cumpla al menos una de las siguientes condiciones en los últimos 14 días anteriores al inicio de los síntomas:
+					a) haber estado en contacto con un caso confirmado o probable de COVID-19
+					b) haber trabajado o estado en un centro de atención sanitaria en el que se estuviese tratando a pacientes con COVID-19 confirmada o probable, o pacientes con enfermedades respiratorias agudas.
+				</Texto>
+                <Texto pos="3">Caso probable
+					Caso sospechoso en el que los resultados de las pruebas de diagnóstico de COVID-19 no son concluyentes (resultado de la prueba notificado por el laboratorio no es concluyente) o en el que los resultados de un ensayo de detección de todo tipo de coronavirus son positivos, y en el que no se ha podido confirmar mediante pruebas de laboratorio la presencia de otros patógenos respiratorios.
+				</Texto>
+                <Texto pos="4">Caso confirmado
+					Persona con COVID-19 confirmada mediante pruebas de laboratorio, independientemente de los signos y síntomas clínicos.
+				</Texto>
+                <Texto pos="5">Definición de contacto
+					Un contacto es una persona que:
+					•	Ha prestado atención directa a pacientes con COVID-19, ha trabajado con personal sanitario infectado por el nuevo coronavirus, ha visitado a pacientes infectados por ese virus o ha compartido el mismo entorno cerrado que ellos.
+					•	Ha trabajado con un paciente con COVID-19 en estrecha proximidad o ha compartido el mismo espacio que él.
+				</Texto>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>Medidas  de prevención para personas confirmadas para tener, o siendo evaluadas por, infección con COVID-19</Titulo>
+            <Descripcion>Si se confirma que tiene una infección por COVID19 o se lo evalúa, debe seguir los pasos de prevención a continuación hasta que un médico le indiquen que puede regresar a sus actividades normales.</Descripcion>
+            <Informacion cant="1">
+                <ImagenTema pos="0">infografia_1.png</ImagenTema>
+                <Texto pos="1">
+				Quédese en casa
+				Debe restringir las actividades fuera de su hogar, excepto para obtener atención médica. No vaya al trabajo, la escuela o las áreas públicas, y no use transporte público o taxis.
+				</Texto>
+                <Texto pos="2">
+				Separarse de otras personas en su hogar
+				Tanto como sea posible, debe permanecer en una habitación diferente de otras personas en su hogar. Además, debe usar un baño separado, si está disponible.
+				</Texto>
+                <Texto pos="3">Notifique al médico sus síntomas 
+					Antes de su cita médica, llame al proveedor de atención médica y dígale que tiene o está siendo evaluado por una infección por COVID19. Esto ayudará a que el consultorio del proveedor de atención médica tome medidas para evitar que otras personas se infecten.
+				</Texto>
+                <Texto pos="4">Use una máscara facial o nasobuco
+						Debe usar una máscara facial cuando esté en la misma habitación con otras personas y cuando visite a un proveedor de atención médica. Si no puede usar una máscara facial, las personas que viven con usted deben usar una mientras estén en la misma habitación que usted.
+				</Texto>
+                <Texto pos="5">Cúbrase la tos y los estornudos
+						Cúbrase la boca y la nariz con un pañuelo desechable cuando tosa o estornude, o puede toser o estornudar en la parte interior del codo. Tire los pañuelos usados en un bote de basura forrado e inmediatamente lávese las manos con agua y jabón durante al menos 20 segundos.
+				</Texto>
+                <Texto pos="6"> Lávese las manos
+						Lávese las manos a menudo y a fondo con agua y jabón durante al menos 20 segundos. Puede usar un desinfectante para manos a base de alcohol si no hay agua y jabón disponibles y si sus manos no están visiblemente sucias. Evite tocarse los ojos, la nariz y la boca con las manos sin lavar.
+				</Texto>
+                <Texto pos="7"> Evite compartir artículos para el hogar
+					No debe compartir platos, vasos, vasos, utensilios para comer, toallas, ropa de cama u otros artículos con otras personas en su hogar. Después de usar estos artículos, debe lavarlos a fondo con agua y jabón.
+				</Texto>
+                <Texto pos="8"> Controle sus síntomas
+					Busque atención médica inmediata si su enfermedad está empeorando (por ejemplo, dificultad para respirar). Antes de ir a su cita médica, llame al proveedor de atención médica y dígale que tiene o está siendo evaluado por una infección por COVID19. Esto ayudará a que el consultorio del proveedor de atención médica tome medidas para evitar que otras personas se infecten. Pídale a su proveedor de atención médica que llame al departamento de salud local o estatal.
+				</Texto>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>Medidas de prevención para cuidadores y miembros del hogar</Titulo>
+            <Descripcion>Si vive con una persona confirmada que tiene o está siendo evaluada para una infección por COVID19 o le brinda atención en el hogar, debe...</Descripcion>
+            <Informacion cant="1">
+                <ImagenTema pos="0">infografia_2.png</ImagenTema>
+                <Texto pos="1">
+				Asegúrese de comprender y ayudar a la persona a seguir las instrucciones del proveedor de atención médica para la medicación y la atención. Debe ayudar a la persona con necesidades básicas en el hogar y brindar apoyo para obtener alimentos, recetas y otras necesidades personales.
+				Tenga solo personas en el hogar que sean esenciales para brindar atención al enfermo
+				Otros miembros del hogar deben permanecer en otro hogar o lugar de residencia. Si esto no es posible, deben permanecer en otra habitación o estar separados de la persona tanto como sea posible. Use un baño separado, si está disponible.
+				Restrinja a los visitantes que no tienen una necesidad esencial de estar en el hogar.
+				Mantenga a las personas de edad avanzada y a aquellos que tengan sistemas inmunes comprometidos o ciertas condiciones de salud lejos de la persona. Esto incluye personas con afecciones crónicas del corazón, pulmones o riñones y diabetes.
+				Asegúrese de que los espacios compartidos en el hogar tengan un buen flujo de aire, como un aire acondicionado o una ventana abierta, si el clima lo permite.
+				Lávese las manos a menudo y a fondo con agua y jabón durante al menos 20 segundos. Puede usar un desinfectante para manos a base de alcohol si no hay agua y jabón disponibles y si sus manos no están visiblemente sucias. Evite tocarse los ojos, la nariz y la boca con las manos sin lavar.
+				Use una mascarilla, bata y guantes desechables cuando toque o tenga contacto con la sangre, fluidos corporales y / o secreciones de la persona, como sudor, saliva, esputo, moco nasal, vómito, orina o diarrea.
+				Deseche las mascarillas, batas y guantes desechables después de usarlos. No reutilizar
+				Lávese las manos inmediatamente después de quitarse la mascarilla, la bata y los guantes.
+				Evite compartir artículos para el hogar. No debe compartir platos, vasos, vasos, utensilios para comer, toallas, ropa de cama u otros artículos con una persona que se confirme que tiene o está siendo evaluada por infección por COVID19. Después de que la persona use estos artículos, debe lavarlos a fondo (consulte a continuación "Lave bien la ropa").
+				Limpie todas las superficies de "alto contacto", como mostradores, mesas, perillas de las puertas, accesorios de baño, inodoros, teléfonos, teclados, tabletas y mesitas de noche, todos los días. Además, limpie cualquier superficie que pueda tener sangre, fluidos corporales y / o secreciones o excreciones sobre ellos.
+				Lea la etiqueta de los productos de limpieza y siga las recomendaciones provistas en las etiquetas de los productos. Las etiquetas contienen instrucciones para el uso seguro y efectivo del producto de limpieza, incluidas las precauciones que debe tomar al aplicar el producto, como usar guantes o delantales y asegurarse de tener buena ventilación durante el uso del producto.
+				Use una solución de lejía diluida o un desinfectante doméstico. Para hacer una solución de cloro en casa, agregue 1 cucharada de cloro a 1 cuarto (4 tazas) de agua. Para un suministro mayor, agregue ¼ de taza de cloro a 1 galón (16 tazas) de agua.
+				Lave bien la ropa.
+				Quítese y lave inmediatamente la ropa o ropa de cama que contenga sangre, fluidos corporales y / o secreciones o excreciones.
+				Use guantes desechables al manipular artículos sucios. Lávese las manos inmediatamente después de quitarse los guantes.
+				Lea y siga las instrucciones en las etiquetas de la ropa o artículos de ropa y detergente. En general, lave y seque con las temperaturas más cálidas recomendadas en la etiqueta de la ropa.
+				Coloque todos los guantes, batas, mascarillas y otros artículos contaminados usados en un recipiente forrado antes de desecharlos con otros desechos domésticos. Lávese las manos inmediatamente después de manipular estos artículos.
+				Monitoree los síntomas de la persona. Si se están enfermando, llame al consultorio o médico de la familia y dígale que la persona tiene o está siendo evaluada por infección por MERS-CoV. Esto ayudará a que el consultorio tome medidas para evitar que otras personas se infecten. Pídale al médico notificar al Policlínico
+				Los cuidadores y los miembros del hogar que no siguen las precauciones cuando están en contacto cercano con una persona que se confirma que tiene o está siendo evaluada por infección por COVID19, se consideran "contactos cercanos" y deben controlar su salud. Siga los pasos de prevención para contactos cercanos a continuación.
+				</Texto>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>Medidas de prevención para contactos cercanos </Titulo>
+            <Descripcion>Si ha tenido contacto cercano con alguien que se confirma que tiene o está siendo evaluado por una infección por COVID19, debe...</Descripcion>
+            <Informacion cant="1">
+                <ImagenTema pos="0">infografia_3.png</ImagenTema>
+                <Texto pos="1">
+				Controle su salud desde el día en que estuvo expuesto a la persona por primera vez y continúe durante 14 días después de la última exposición a la persona. Esté atento a estos signos y síntomas:
+				Fiebre. Tómese la temperatura dos veces al día.
+				Tos
+				Falta de aliento
+				Otros síntomas tempranos a tener en cuenta son escalofríos, dolores corporales, dolor de garganta, dolor de cabeza, diarrea, náuseas / vómitos y secreción nasal.
+				Si desarrolla síntomas, siga los pasos de prevención descritos anteriormente y llame a su médico lo antes posible. Antes de ir a su cita médica, llame al proveedor de atención médica y cuéntele sobre su posible exposición al COVID19. Esto ayudará a que el consultorio del proveedor de atención médica tome medidas para evitar que otras personas se infecten. Pídale a su proveedor de atención médica que llame al departamento de salud local o estatal.
+				Si no tiene ningún síntoma, puede continuar con sus actividades diarias pero observando cualquier cambio.
+				No se considera que esté en riesgo de infección por COVID19 si no ha tenido contacto cercano  con alguien que se confirme que tiene o está siendo evaluado por la infección por COVID19. Los CDC recomiendan que las personas sigan los pasos de prevención para ayudar a reducir el riesgo de infectarse con virus respiratorios, como COVID19. 
+				</Texto>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>Medidas preventivas al salir de casa</Titulo>
+            <Descripcion>Medidas que debe de tomar al salir de su casa para evitar el contagio por COVID-19</Descripcion>
+            <Informacion cant="1">
+                <ImagenTema pos="0">infografia_4.png</ImagenTema>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>Medidas preventivas al entrar a casa</Titulo>
+            <Descripcion>Medidas que debe de tomar al entrar a su casa para proteger a su usted y su familia del contagio por COVID-19</Descripcion>
+            <Informacion cant="1">
+                <ImagenTema pos="0">infografia_5.png</ImagenTema>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>Acciones del gobierno cubano para enfrentar el COVID-19</Titulo>
+            <Descripcion>Medidas tomadas por el gobierno cubano para evitar el COVID-19</Descripcion>
+            <Informacion cant="1">
+                <ImagenTema pos="0">gobierno_cuba.png</ImagenTema>
+            </Informacion>
+        </ItemTema>
+        <ItemTema>
+            <Titulo>Acciones del gobierno cubano para enfrentar el COVID-19</Titulo>
+            <Descripcion>Acciones del ministerio de comunicaciones</Descripcion>
+            <Informacion cant="1">
+                <ImagenTema pos="0">etecsa_medidas.jpg</ImagenTema>
+            </Informacion>
+        </ItemTema>
+    </ListaTemas>
+    <ListEntidades cant="3">
+        <Entidad nombre="Hospital Juan Bruno Zayas. Urgencias" tipo="salud" dirHttp="www.wisepocket.com" dirCorreo="wisepocket@gmail.com">
+            <TelefonoEntidad cant="2">
+                <Telefono>22642067</Telefono>
+                <Telefono>22642168</Telefono>
+            </TelefonoEntidad>
+            <Comentario>Lugar a donde puede acudir en caso de presentar algún síntoma</Comentario>
+            <ImagenesEntidad cant="1">
+                <Imagen>entidad_1.jpg</Imagen>
+            </ImagenesEntidad>
+            <DirPostal>
+                <Texto>Carretera del Caney y Calle 23 Rpto Pastorita</Texto>
+                <PuntoEntidad>
+                    <Latitud>20.033492</Latitud>
+                    <Longitud>-75.798084</Longitud>
+                </PuntoEntidad>
+            </DirPostal>
+        </Entidad>
+        <Entidad nombre="Hospital Dr. Joaquín Castillo Duany" tipo="salud" dirHttp="www.wisepocket.com" dirCorreo="wisepocket@gmail.com">
+            <TelefonoEntidad cant="2">
+                <Telefono>22626471</Telefono>
+                <Telefono>22626472</Telefono>
+            </TelefonoEntidad>
+            <Comentario>Lugar a donde puede acudir en caso de presentar algún síntoma</Comentario>
+            <DirPostal>
+                <Texto>Gasómetro y Los Tamayos</Texto>
+                <PuntoEntidad>
+                    <Latitud>20.33192</Latitud>
+                    <Longitud>-75.818220</Longitud>
+                </PuntoEntidad>
+            </DirPostal>
+        </Entidad>
+    </ListEntidades>
+    <Mapa nombre="cubav4.map">
+        <PuntoMapa lat="20.025520" long="-75.805280">
+            <EntidadMapa nombre="Consultorio médico 19" tipo="salud" dirHttp="" dirCorreo="">
+                <TelefonoEntidad cant="1">
+                    <Telefono>22641457</Telefono>
+                </TelefonoEntidad>
+                <Comentario>Lugar a donde puede acudir en caso de presentar síntomas</Comentario>
+                <DirPostal>Calle 8 entre 5 y 7 Vista Alegre</DirPostal>
+            </EntidadMapa>
+        </PuntoMapa>
+        <PuntoMapa lat="20.028970" long="-75.806138">
+            <EntidadMapa nombre="Puesto de mando para COVID 19" tipo="salud" dirHttp="" dirCorreo="">
+                <TelefonoEntidad cant="1">
+                    <Telefono>22668397</Telefono>
+                </TelefonoEntidad>
+                <Comentario>Lugar a donde puede acudir en caso de presentar síntomas</Comentario>
+                <DirPostal>Calle 7 entre Calle M y Carretera del Caney Rpto. Terraza</DirPostal>
+            </EntidadMapa>
+        </PuntoMapa>
+        <PuntoMapa lat="20.022951" long="-75.795386">
+            <EntidadMapa nombre="Centro de aislamiento Escuela Vocacional Mariana Grajales" tipo="salud" dirHttp="" dirCorreo="">
+                <TelefonoEntidad cant="1">
+                    <Telefono>22647931</Telefono>
+                </TelefonoEntidad>
+                <Comentario>Lugar a donde puede acudir en caso de presentar síntomas</Comentario>
+                <DirPostal>Carretera de Siboney Km 2 ½</DirPostal>
+            </EntidadMapa>
+        </PuntoMapa>
+        <PuntoMapa lat="20.026715" long="-75.801170">
+            <EntidadMapa nombre="Punto de venta de cloro" tipo="tienda" dirHttp="" dirCorreo="">
+                <TelefonoEntidad cant="1">
+                    <Telefono>22642296</Telefono>
+                </TelefonoEntidad>
+                <Comentario>Lugar a donde puede realizar la compra de cloro</Comentario>
+                <DirPostal>Calle 8 esquina 15 Vista Alegre Supermercado de Vista Alegre</DirPostal>
+            </EntidadMapa>
+        </PuntoMapa>
+        <PuntoMapa lat="20.026715" long="-75.801170">
+            <EntidadMapa nombre="Punto de venta de nasobuco" tipo="tienda" dirHttp="" dirCorreo="">
+                <TelefonoEntidad cant="1">
+                    <Telefono>22642296</Telefono>
+                </TelefonoEntidad>
+                <Comentario>Lugar a donde puede realizar la compra de nasobucos</Comentario>
+                <DirPostal>Calle 8 esquina 15 Vista Alegre Supermercado de Vista Alegre</DirPostal>
+            </EntidadMapa>
+        </PuntoMapa>
+    </Mapa>
+    <ListaJuego>
+        <Juego nombre="Encuesta de autopesquisa" cantNivel="2">
+            <Nivel pregunta="Seleccione su rango de edad " cantResp="5" tipo="texto">
+                <Respuesta correcta="false">hasta 16</Respuesta>
+                <Respuesta correcta="false">17 a 40</Respuesta>
+                <Respuesta correcta="false">41 a 59</Respuesta>
+                <Respuesta correcta="false">Más de 60</Respuesta>
+            </Nivel>
+            <Nivel pregunta="Marque si tiene alguno de estos padecimientos" cantResp="4" tipo="texto">
+                <Respuesta correcta="false">Insuficiencia cardiaca</Respuesta>
+                <Respuesta correcta="false">Diabetes</Respuesta>
+                <Respuesta correcta="false">Hipertensión</Respuesta>
+                <Respuesta correcta="false">Enfermedad respiratoria aguda</Respuesta>
+            </Nivel>
+            <Nivel pregunta="¿Ha tenido contacto con algún viajero proveniente de paises con contagio de COVID-19?" cantResp="2" tipo="texto">
+                <Respuesta correcta="false">Si</Respuesta>
+                <Respuesta correcta="false">No</Respuesta>
+            </Nivel>
+            <Nivel pregunta="¿Ha tenido contacto con algún paciente confirmado con COVID-19?" cantResp="2" tipo="texto">
+                <Respuesta correcta="false">Si</Respuesta>
+                <Respuesta correcta="false">No</Respuesta>
+            </Nivel>
+            <Nivel pregunta="Marque los síntomas que tiene en estos momentos" cantResp="9" tipo="texto">
+                <Respuesta correcta="false">Tos</Respuesta>
+                <Respuesta correcta="false">Dolor de garganta</Respuesta>
+                <Respuesta correcta="false">Secreción nasal</Respuesta>
+                <Respuesta correcta="false">Malestar general</Respuesta>
+                <Respuesta correcta="false">Dificultad para respirar</Respuesta>
+                <Respuesta correcta="false">Fiebre</Respuesta>
+                <Respuesta correcta="false">Escalofrios</Respuesta>
+                <Respuesta correcta="false">Diarreas</Respuesta>
+                <Respuesta correcta="false">Vómitos</Respuesta>
+            </Nivel>
+        </Juego>
+    </ListaJuego>
+</Campanna>

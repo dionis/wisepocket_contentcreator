@@ -1,5 +1,5 @@
 
-const path = require('path') 
+const path = require('path')
 const fs = require('fs')
 module.exports = {
 
@@ -38,7 +38,7 @@ module.exports = {
   fn: async function (inputs,exits) {
     //sails.log.debug(inputs.req.file('files'))
     if(!inputs.req.file) return exits.upload_err(err)
-    var newPath = 'assets/app/assets/' 
+    var newPath = 'assets/app/assets/'
     inputs.req.file('files').upload({
       maxBytes: 1024000000,
       dirname: path.resolve(sails.config.appPath, newPath),
@@ -51,14 +51,14 @@ module.exports = {
         if(filesUploaded.length > 0){
           for (let index = 0; index < filesUploaded.length; index++) {
             //sails.log.debug(filesUploaded[index].type)
-            if(filesUploaded[index].type === 'image/jpeg' 
-            || filesUploaded[index].type === 'image/png' 
+            if(filesUploaded[index].type === 'image/jpeg'
+            || filesUploaded[index].type === 'image/png'
             || filesUploaded[index].type === 'image/jpg'){
               fileName = filesUploaded[index].filename.replace(' ','');
               //sails.log.debug(fileName)
               newPath = "assets/app/assets/images/api/"+fileName;
               fs.rename(
-                filesUploaded[index].fd, 
+                filesUploaded[index].fd,
                 newPath, function(err){
                   if(err)sails.log.debug(err)})
               files.push({
@@ -66,21 +66,21 @@ module.exports = {
                   path: newPath,
                 });
             }else{
-              if(filesUploaded[index].type === 'video/mp4' 
-              || filesUploaded[index].type === 'video/mpg' 
+              if(filesUploaded[index].type === 'video/mp4'
+              || filesUploaded[index].type === 'video/mpg'
               || filesUploaded[index].type === 'video/avi'){
                 fileName = filesUploaded[index].filename.replace(' ','');
                 //sails.log.debug(fileName)
                 newPath = "assets/app/assets/videos/api/"+fileName;
                 fs.rename(
-                filesUploaded[index].fd, 
+                filesUploaded[index].fd,
                 newPath, function(err){
                 });
                 files.push({
                   titulo: fileName,
-                  path: newPath,
+                  path: "assets/videos/api/"+fileName,
                 });
-              } 
+              }
             }
           }
         }
@@ -88,7 +88,7 @@ module.exports = {
       });
     //return exits.success('hello');
   },
-  
+
 
 
 };

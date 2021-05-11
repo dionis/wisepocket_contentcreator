@@ -111,12 +111,36 @@ export class MarkerService {
   }
 
   makePopup(data:any):string{
-    return `` +
+    let images =  ``;
+    console.log("Show data ===> ", data.images)
+    if (typeof(data.images) !== 'undefined' && data.images.length >= 1 ){
+      let start =   `<div><ul>`;
+      let lineLi =  ``;
+
+      //OJOOOO
+
+      // “ assets/app/assets/images/api/images.jpg”
+
+      // Different to show images
+      // change when create a service//
+
+      // <img src="assets/images/avatars/Velazquez.jpg" class="avatar">
+      data.images.forEach(item=>{
+        lineLi +=  `<li><img src="`+ item.path+ `"></a></li>`;
+      })
+
+      let end =  `</ul></div>`;
+      images = start + lineLi + end;
+    }
+
+    console.log("Return ", images)
+    return   ` `+
       `<div>Titulo: ${ data.title }</div>` +
       `<div>Email: ${ data.email }</div>` +
-      `<div>Web Site: ${ data.url }</div>`
-  }
+      `<div>Web Site: ${ data.url }</div>` +
+       images
 
+    }
   asociateImages(idImages: any[], id:string){
     const body = {
       id: id,

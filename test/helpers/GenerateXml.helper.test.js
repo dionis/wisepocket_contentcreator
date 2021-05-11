@@ -41,9 +41,14 @@ describe('GenerateCamaignXML', function() {
 
                   var generateXmlInJson = convert.xml2json(testCampaingXml2Json, options);
 
-                 // console.log(" JSON of Campaing ", generateXmlInJson )
+                 console.log("+============== JSON of Campaing ==============+" )
+                 console.log(generateXmlInJson);
+                 console.log("+==============================================+")
+                 result = convert.json2xml(generateXmlInJson, options);
+                 var testCampaingJson2Xml = fs.writeFileSync( pathToFile + 'covid19campaignJson2Xml.xml', result);
 
-                //4- testCampaingXml2Json === generateXmlInJson
+
+                 //4- testCampaingXml2Json === generateXmlInJson
                      assert.equal( generateXmlInJson, generateXmlInJson);
                 //5- SUSCESSFUL !!!!!
 

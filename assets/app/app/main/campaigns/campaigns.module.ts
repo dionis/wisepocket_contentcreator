@@ -31,6 +31,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AgmCoreModule } from '@agm/core';
 import { CampaignDetailComponent } from './product/campaign-detail.component';
+import { GameComponent } from './game/game.component';
 
 const routes: Routes = [
   {
@@ -39,15 +40,20 @@ const routes: Routes = [
       component: FormsComponent
   },
   {
+      path     : 'game',
+      canActivate: [AuthguardService],
+      component: GameComponent
+  },
+  {
       path     : 'campaigns-list',
       canActivate: [AuthguardService],
       component: ListCampComponent
   },
   {
-    path     : 'campaigns-detail/:id',
-    canActivate: [AuthguardService],
-    component: CampaignDetailComponent
-}
+      path     : 'campaigns-detail/:id',
+      canActivate: [AuthguardService],
+      component: CampaignDetailComponent
+  }
     
 ];
 
@@ -56,7 +62,8 @@ const routes: Routes = [
     FormsComponent,
     DragDorpDirective,
     ListCampComponent,
-    CampaignDetailComponent
+    CampaignDetailComponent,
+    GameComponent
   ],
   imports: [
     CommonModule,

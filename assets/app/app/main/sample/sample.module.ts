@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { FuseSharedModule } from '../../../@fuse/shared.module';
 import { AuthguardService } from '../../services/authguard.service';
+import { PruebaService } from './prueba.service';
 
 import { SampleComponent } from './sample.component';
 
@@ -28,6 +29,9 @@ const routes = [
     ],
     exports     : [
         SampleComponent
+    ],
+    providers: [
+        PruebaService
     ]
 })
 

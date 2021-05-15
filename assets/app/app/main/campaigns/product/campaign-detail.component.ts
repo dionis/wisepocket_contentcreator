@@ -22,7 +22,7 @@ import { Imagen } from '../../../models/image.model';
 })
 export class CampaignDetailComponent implements OnInit, OnDestroy
 {
-    //product: Product;
+    // product: Product;
     campaign: Campaign;
     pageType: string;
     productForm: FormGroup;
@@ -64,7 +64,7 @@ export class CampaignDetailComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        //console.log(this.productForm)
+        // console.log(this.productForm)
         let campID = this.route.snapshot.params['id'];
         this._campaignService.getCampaign(campID)
         .pipe(takeUntil(this._unsubscribeAll))
@@ -83,7 +83,7 @@ export class CampaignDetailComponent implements OnInit, OnDestroy
                 }
                 console.log(this.campaign);
                 this.productForm = this.createProductForm();
-                console.log(this.productForm)
+                console.log(this.productForm);
             }
         ),error=>{
             this.pageType = 'error';
@@ -114,19 +114,19 @@ export class CampaignDetailComponent implements OnInit, OnDestroy
     {
         console.log(this.campaign.titulo);
         return this._formBuilder.group({
-            //Basic Info
+            // Basic Info
             titulo            : [this.campaign.titulo],
             descripcion     : [this.campaign.descripcion],
             phone      : [this.campaign.contanctoTelefono],
             email   : [this.campaign.contactoEmail],
 
-            //Aditional Info
+            // Aditional Info
             state            : [this.campaign.state],
             city    : [this.campaign.city],
             postalCode    : [this.campaign.direccionPostal],
-            //taxRate         : [this.product.taxRate],
+            // taxRate         : [this.product.taxRate],
 
-            //Images
+            // Images
             icon        : [this.campaign.logo],
             images          : [this.images],
 

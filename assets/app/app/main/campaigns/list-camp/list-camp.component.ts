@@ -132,75 +132,75 @@ export class CampaignDataSource extends DataSource<any>{
     }
 
     // Filter
-    // get filter(): string
-    // {
-    //    return this._filterChange.value;
-    // }
+    get filter(): string
+    {
+        return this._filterChange.value;
+    }
     
-    // set filter(filter: string)
+    set filter(filter: string)
+    {
+        this._filterChange.next(filter);
+    }
+
+    connect(collectionViewer: CollectionViewer): Observable<any[]>{
+       console.log(this.campagainsSubject);
+       // if(this.campagainsSubject.value.length !== 0){
+       return this.campagainsSubject.asObservable();
+       // }
+       
+    }
+
+    // connect(): Observable<any[]>
     // {
-    //    this._filterChange.next(filter);
+    //     const displayDataChanges = [
+    //         this._matPaginator.page,
+    //         this.campagainsSubject,
+    //         this._matSort.sortChange
+    //     ];
+    // 
+    //     return merge(...displayDataChanges).pipe(map(() => {
+    // 
+    //            // let data = this._ecommerceOrdersService.orders.slice();
+    // 
+    //            // data = this.filterData(data);
+    // 
+    //            // this.filteredData = [...data];
+    // 
+    //            // data = this.sortData(data);
+    // 
+    //             // Grab the page's slice of data.
+    //             // const startIndex = this._matPaginator.pageIndex * this._matPaginator.pageSize;
+    //             console.log("cantidad de eleme", this._matPaginator.pageSize);
+    //             console.log("pagina actual", this._matPaginator.pageIndex);
+    //             // console.log("posicion en el arreglo", startIndex );
+    //             return this.loadUserCampaigns( this._matPaginator.pageIndex, this._matPaginator.pageSize);
+    //         })
+    //     );
+    // 
     // }
 
-    // connect(collectionViewer: CollectionViewer): Observable<any[]>{
-    //    console.log(this.campagainsSubject);
-    //    // if(this.campagainsSubject.value.length !== 0){
-    //    return this.campagainsSubject.asObservable();
-    //    // }
-    //    
-    // }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
-
-     connect(): Observable<any[]>
-     {
-         const displayDataChanges = [
-             this._matPaginator.page,            
-             this._matSort.sortChange
-         ];
-     
-         return merge(...displayDataChanges).pipe(map(() => {
-     
-                // let data = this._ecommerceOrdersService.orders.slice();
-     
-                // data = this.filterData(data);
-     
-                // this.filteredData = [...data];
-     
-                // data = this.sortData(data);
-     
-                 // Grab the page's slice of data.
-                 // const startIndex = this._matPaginator.pageIndex * this._matPaginator.pageSize;
-                 console.log("cantidad de eleme", this._matPaginator.pageSize);
-                 console.log("pagina actual", this._matPaginator.pageIndex);
-                 // console.log("posicion en el arreglo", startIndex );
-                 return this.loadUserCampaigns( this._matPaginator.pageIndex, this._matPaginator.pageSize);
-             })
-         );
-     
-     }
-
+    
     disconnect(){
         this.campagainsSubject.complete();
         this.loadingSubject.complete();
     }
-    public get countCampaigns(){
+    get countCampaigns(): number{
         return this._countCampaigns;
     }
 
-    loadUserCampaigns(page: number, limit: number): Observable<any[]>{
-        return this.campService.getCampaignUser(page.toString(), limit.toString())
+    
+    loadUserCampaigns(page: number, limit: number){
+        this.campService.getCampaignUser(page.toString(), limit.toString())
         .subscribe(campaigns => {
-            console.log("Data from DataBase", campaigns);     
+            console.log(campaigns);
+            this.campagainsSubject.next(campaigns);
         }, error => {
             this.errorSubject.next(error.message);
         } );
-        
+        console.log(this.campagainsSubject.value);
     }
 
+    
     loadCampaigns(page: number, limit: number){
 
         this.campService.fetchCampagins(page.toString(), limit.toString())
@@ -210,54 +210,67 @@ export class CampaignDataSource extends DataSource<any>{
         } );
         console.log(this.campagainsSubject.value);
     }
-    
+     /**
+      * Filter data
+      *
+      * @param data
+      * @returns {any}
+      */
+     filterData(data): any
+     {
+         if ( !this.filter )
+         {
+             return data;
+         }
+         console.log("ejecutando", this.filter);
+         return FuseUtils.filterArrayByString(data, this.filter);
+     }
         
-    // /**
-    //  * Sort data
-    //  *
-    //  * @param data
-    //  * @returns {any[]}
-    //  */
-    //  sortData(data): any[]
-    //  {
-    //      if ( !this._matSort.active || this._matSort.direction === '' )
-    //      {
-    //          return data;
-    //      }
+    /**
+     * Sort data
+     *
+     * @param data
+     * @returns {any[]}
+     */
+     sortData(data): any[]
+     {
+         if ( !this._matSort.active || this._matSort.direction === '' )
+         {
+             return data;
+         }
  
-    //      return data.sort((a, b) => {
-    //          let propertyA: number | string = '';
-    //          let propertyB: number | string = '';
+         return data.sort((a, b) => {
+             let propertyA: number | string = '';
+             let propertyB: number | string = '';
  
-    //          switch ( this._matSort.active )
-    //          {
-    //              case 'id':
-    //                  [propertyA, propertyB] = [a.id, b.id];
-    //                  break;
-    //              case 'name':
-    //                  [propertyA, propertyB] = [a.name, b.name];
-    //                  break;
-    //              case 'categories':
-    //                  [propertyA, propertyB] = [a.categories[0], b.categories[0]];
-    //                  break;
-    //              case 'price':
-    //                  [propertyA, propertyB] = [a.priceTaxIncl, b.priceTaxIncl];
-    //                  break;
-    //              case 'quantity':
-    //                  [propertyA, propertyB] = [a.quantity, b.quantity];
-    //                  break;
-    //              case 'active':
-    //                  [propertyA, propertyB] = [a.active, b.active];
-    //                  break;
-    //          }
+             switch ( this._matSort.active )
+             {
+                 case 'id':
+                     [propertyA, propertyB] = [a.id, b.id];
+                     break;
+                 case 'titulo':
+                     [propertyA, propertyB] = [a.titulo, b.titulo];
+                     break;
+                 case 'contactoTelefono':
+                     [propertyA, propertyB] = [a.contactoTelefono, b.contactoTelefono];
+                     break;
+                 case 'direccionPostal':
+                     [propertyA, propertyB] = [a.direccionPostal, b.direccionPostal];
+                     break;
+                 case 'contactoEmail':
+                     [propertyA, propertyB] = [a.quantity, b.quantity];
+                     break;
+                 case 'active':
+                     [propertyA, propertyB] = [a.active, b.active];
+                     break;
+             }
  
-    //          const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-    //          const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
+             const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
+             const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
  
-    //          return (valueA < valueB ? -1 : 1) * (this._matSort.direction === 'asc' ? 1 : -1);
-    //      });
-    //  }
-
+             return (valueA < valueB ? -1 : 1) * (this._matSort.direction === 'asc' ? 1 : -1);
+         });
+     }
 
 }
 

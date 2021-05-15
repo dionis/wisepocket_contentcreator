@@ -34,8 +34,8 @@ export class FormsComponent implements OnInit, OnDestroy
     horizontalStepperStep4: FormGroup;
     horizontalStepperStep5: FormGroup;
     readonly maxSize = 104857600;
-    campaignicon:string = 'campaignicon';
-    @ViewChild('fileDorp',{static:false}) inputFile:ElementRef;
+    campaignicon: string = 'campaignicon';
+    @ViewChild('fileDorp', {static: false}) inputFile: ElementRef;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -44,7 +44,7 @@ export class FormsComponent implements OnInit, OnDestroy
     image2: File = undefined;
     image3: File = undefined;
     image4: File = undefined;
-    campIconf:File = undefined;
+    campIconf: File = undefined;
 
     countrySelected = false;
 
@@ -116,8 +116,8 @@ export class FormsComponent implements OnInit, OnDestroy
             whatsapp      : ['', Validators.required],
             telegram      : ['', Validators.required]
         });
-        //console.log(this.inputFile);
-        //this.campService.fetchCampagins('0','10');
+        // console.log(this.inputFile);
+        // this.campService.fetchCampagins('0','10');
         console.log(csc.getAllCountries());
 
         this.countries = csc.getAllCountries();
@@ -128,12 +128,12 @@ export class FormsComponent implements OnInit, OnDestroy
             
         })
         this.horizontalStepperStep3.get('states').valueChanges.subscribe(i=>{
-            console.log(i)
-            var state = csc.getStateByCode(i)
-            console.log(state)
-            this.cities = csc.getCitiesOfState(state.countryCode,state.isoCode);    
-        })
-        console.log(this.horizontalStepperStep3.get('countries'))
+            console.log(i);
+            var state = csc.getStateByCode(i);
+            console.log(state);
+            this.cities = csc.getCitiesOfState(state.countryCode, state.isoCode);    
+        });
+        console.log(this.horizontalStepperStep3.get('countries'));
 
     }
     onChage(event){
@@ -141,7 +141,7 @@ export class FormsComponent implements OnInit, OnDestroy
         console.log(this.inputFile);
     }
     onSelectIcon(event){
-        console.log(event.addedFiles)
+       console.log(event.addedFiles);
        this.campIconf = event.addedFiles[0];
        this.files.push(event.addedFiles[0]);
     }
@@ -165,7 +165,7 @@ export class FormsComponent implements OnInit, OnDestroy
                 break;
         }
         this.files.push(event.addedFiles[0]);
-        //console.log(this.files);
+        // console.log(this.files);
       }
 
     /**
@@ -188,7 +188,7 @@ export class FormsComponent implements OnInit, OnDestroy
 
     async finishHorizontalStepper()
     {
-        let dataCamp = new Campaign()
+        let dataCamp = new Campaign();
         dataCamp.titulo = this.horizontalStepperStep1.get('nameCampaign').value;
         dataCamp.descripcion = this.horizontalStepperStep1.get('description').value;
         dataCamp.contanctoTelefono= this.horizontalStepperStep2.get('phone').value;
@@ -212,7 +212,7 @@ export class FormsComponent implements OnInit, OnDestroy
         }
         if(this.image1){
             await this.uploadService.upload_files(this.image1)
-            .then((img:any)=>{
+            .then((img: any) => {
                 console.log(img); 
                 let data = img['data'];
                 dataCamp.carrusel1 = data[0].id;
@@ -220,7 +220,7 @@ export class FormsComponent implements OnInit, OnDestroy
         }
         if(this.image2){
             await this.uploadService.upload_files(this.image2)
-            .then((img:any)=>{
+            .then((img: any) => {
                 console.log(img);
                 let data = img['data']; 
                 dataCamp.carrusel2 = data[0].id;
@@ -228,7 +228,7 @@ export class FormsComponent implements OnInit, OnDestroy
         }
         if(this.image3){
             await this.uploadService.upload_files(this.image3)
-            .then((img:any)=>{
+            .then((img: any) => {
                 console.log(img);
                 let data = img['data']; 
                 dataCamp.carrusel3 = data[0].id;
@@ -236,13 +236,13 @@ export class FormsComponent implements OnInit, OnDestroy
         }
         if(this.image4){
             await this.uploadService.upload_files(this.image3)
-            .then((img:any)=>{
+            .then((img: any) => {
                 console.log(img);
                 let data = img['data'];  
                 dataCamp.carrusel4 = data[0].id;
             });
         }
-        console.log(dataCamp);
+       console.log(dataCamp);
        this.campService.addCampaign(dataCamp)
        .pipe(takeUntil(this._unsubscribeAll))
        .subscribe(campaign =>{

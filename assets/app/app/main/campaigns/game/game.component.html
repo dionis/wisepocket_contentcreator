@@ -153,24 +153,26 @@
                     <form fxLayout="column" [formGroup]="horizontalStepperStep1">
 
                         <ng-template matStepLabel>{{'FORMS.CAMPAIGN' | translate}}</ng-template>
-
                         <div fxFlex="1 0 auto" fxLayout="column">
-
-                            <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>{{'FORMS.NAME_CAMPAIGN_PLACEHOLDER' | translate}}</mat-label>
-                                <input matInput #nameCampaign1 formControlName="nameCampaign" minlength="100" maxlength="120" required>
-                                <mat-hint align="end">{{nameCampaign1.value.length}} / 120</mat-hint>
-                                <mat-error>Name of the campaign is required!</mat-error>
-                            </mat-form-field>
-
-                            <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>Description</mat-label>
-                                <textarea matInput formControlName="description" required></textarea>
-                                <mat-error>Description is required!</mat-error>
-                            </mat-form-field>
-
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>{{'FORMS.TITLE_GAME_PLACEHOLDER' | translate}}</mat-label>
+                            <input matInput #title formControlName="title" minlength="100" maxlength="120" required>
+                            <mat-hint align="end">{title.value.length}} / 120</mat-hint>
+                            <mat-error>Title of Game is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                        <div fxLayout="row" fxFlex="1 0 auto" >
+                            <ngx-dropzone id="image1" class="images" (change)="onSelect($event)"
+                            [multiple] = "false"
+                            accept="image/jpg,image/png">
+                                <ngx-dropzone-label>{{'FORMS.IMAGE1_PLACEHOLDER' | translate}}</ngx-dropzone-label>
+                                <ngx-dropzone-image-preview *ngIf="image1" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image1">
+                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                </ngx-dropzone-image-preview>
+                            </ngx-dropzone>
+                           
                         </div>
-
+                       
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <button mat-raised-button matStepperNext type="button" color="accent">
                                 {{'FORMS.NEXT' | translate}}
@@ -186,7 +188,7 @@
                     <form fxLayout="column" [formGroup]="horizontalStepperStep2">
 
                         <ng-template matStepLabel>{{'FORMS.DATA_CAMPAIGN' | translate}}</ng-template>
-
+                       
                         <div fxFlex="1 0 auto" fxLayout="column">
 
                             <mat-form-field appearance="outline" fxFlex="100">
@@ -361,25 +363,7 @@
                                 <h3><strong>Campaing Icon</strong></h3>
                                 <label id="iconlabel" for="fileDrop2">Drag and Drop</label>
                             </div> -->
-                            <div  fxLayout="column" class="dropzone" style="width: 50%; height: auto;">
-                                <div fxLayout="row" fxFlex="1 0 auto" style="    width: 100%; height: 50%;
-                                margin-top: 10px;
-                                border-bottom-width: 10px;
-                                margin-bottom: 10px;">
-                                    <ngx-dropzone [id]="campaignicon" class="campaign-icon" (change)="onSelectIcon($event)"
-                                    [multiple] = "false"
-                                    accept="image/jpg,image/png">
-                                        <ngx-dropzone-label>>{{'FORMS.CAMPAIGN_ICON_PLACEHOLDER' | translate}}</ngx-dropzone-label>
-                                        <ngx-dropzone-image-preview *ngIf="campIconf" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="campIconf">
-                                            <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
-                                        </ngx-dropzone-image-preview>
-                                    </ngx-dropzone>
-                                </div>
-                                <div fxLayout="row" fxFlex="1 0 auto" style="width: 100%;
-                                height: 5%; margin-top: 10px; margin-bottom: 5px;" >
-                                    <label >{{'FORMS.DRAG_DROP' | translate}}</label>
-                                </div>
-                            </div>
+                          
                             <div  fxLayout="column" class="dropzone" style="width: 50%; height: auto;">
                                 <div fxLayout="row" fxFlex="1 0 auto" >
                                     <ngx-dropzone id="image1" class="images" (change)="onSelect($event)"

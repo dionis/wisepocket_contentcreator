@@ -36,7 +36,8 @@ const appRoutes: Routes = [
     {
         path      : '**',
         redirectTo: 'ui/forms'
-    }
+    },
+  
 ];
 
 @NgModule({

@@ -23,6 +23,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule
+  
   ],
   exports: [
     MatMomentDateModule,
@@ -34,6 +35,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule
+ 
   ]
 })
 export class AppMaterialModule { }

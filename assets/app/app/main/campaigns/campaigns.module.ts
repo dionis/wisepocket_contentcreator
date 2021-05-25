@@ -36,8 +36,9 @@ import { SurveyComponent } from './survey/survey.component';
 
 
 const routes: Routes = [
+
   {
-      path     : 'forms',
+    path     : 'forms',
       canActivate: [AuthguardService],
       component: FormsComponent
   },

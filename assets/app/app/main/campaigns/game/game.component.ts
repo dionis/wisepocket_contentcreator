@@ -92,8 +92,9 @@ export class GameComponent implements OnInit, OnDestroy
     {
         // Horizontal Stepper form steps
         this.horizontalStepperStep1 = this._formBuilder.group({
-            nameCampaign: ['', [Validators.required, Validators.minLength(100), Validators.maxLength(120)]],
+            title: ['', [Validators.required, Validators.minLength(100), Validators.maxLength(120)]],
             description : ['', [Validators.required, Validators.maxLength(800)]]
+            
         });
 
         const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
@@ -101,6 +102,7 @@ export class GameComponent implements OnInit, OnDestroy
             phone: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(20)]],
             postalCode: ['', [Validators.required, Validators.maxLength(5)]],
             website: ['', [Validators.required, Validators.pattern(reg)]],
+    
             email: ['', [Validators.required, Validators.email, Validators.maxLength(30)]]
         });
 
@@ -190,7 +192,7 @@ export class GameComponent implements OnInit, OnDestroy
     async finishHorizontalStepper()
     {
         let dataCamp = new Campaign()
-        dataCamp.titulo = this.horizontalStepperStep1.get('nameCampaign').value;
+        dataCamp.title = this.horizontalStepperStep1.get('title').value;
         dataCamp.descripcion = this.horizontalStepperStep1.get('description').value;
         dataCamp.contanctoTelefono= this.horizontalStepperStep2.get('phone').value;
         dataCamp.contactoEmail = this.horizontalStepperStep2.get('email').value;

@@ -18,4 +18,6 @@ export class Campaign{
     contactoFacebook: string
     logo: string;
     carrusel: string[];
+    title: any;
+    
 }

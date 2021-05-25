@@ -42,16 +42,17 @@ const appRoutes: Routes = [
         loadChildren: () => import('./main/authentication/authentication.module')
                             .then(m => m.AuthenticationModule)
     },
+  
     {
         path        : 'dashboard',
         canActivate: [AuthguardService],
         loadChildren: () => import('./main/sample/sample.module')
                             .then(m => m.SampleModule)
     },
+   
     {
       path        : 'apps',
-      canActivate: [AuthguardService],
-      loadChildren: () => import('./main/apps/apps.module').then(m => m.AppsModule)
+      loadChildren: () => import('../app/main/apps/apps.module').then(m => m.AppsModule)
   },
   {
     path        : 'campaigns',
@@ -68,12 +69,9 @@ const appRoutes: Routes = [
       canActivate: [AuthguardService],
       loadChildren: () => import('./main/pages/pages.module').then(m => m.PagesModule)
   },
-    {
-        path      : '**',
-        redirectTo: 'auth/login'
-    },
+  
 
-
+    
 ];
 
 @NgModule({
@@ -110,7 +108,7 @@ const appRoutes: Routes = [
         Error500Module,
         AppMaterialModule,
         NgxDropzoneModule,
-
+     
     ],
     providers: [
         {

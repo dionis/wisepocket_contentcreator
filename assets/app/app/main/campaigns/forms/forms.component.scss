@@ -14,14 +14,16 @@
             }
         }
 
-        // .horizontal-stepper-wrapper,
+         .horizontal-stepper-wrapper{
+             color: blue;
+         }
         // .vertical-stepper-wrapper {
         //     //max-width: 1000px;
         // }
         .dropzone{
           padding: 1rem;
           text-align: center;
-          border: dashed 1px #979797;
+          border: dashed 1px blue;
           position: relative;
           margin: 10px auto;
           margin-left: 10px;
@@ -69,7 +71,7 @@
           h3{
               font-size: 20px;
               font-weight: 300;
-              color: #38424c;
+              color:darkorange;
               margin-top: 10px;
               margin-bottom: 10px;
           }

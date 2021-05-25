@@ -72,10 +72,13 @@ const routes = [
       loadChildren: () => import('./e-commerce/e-commerce.module').then(m => m.EcommerceModule)
   },
   {
-      path        : 'contacts',
-      canActivate: [AuthguardService],
-      loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule)
-  },
+    path        : 'contacts',
+    loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule)
+},
+  {
+    path        : 'calendar',
+    loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule)
+},
   {
     path        : 'componets-third-party',
     canActivate: [AuthguardService],

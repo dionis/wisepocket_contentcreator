@@ -4,7 +4,7 @@ export const locale = {
         FORMS: {
           CREATE_CAMPAIGN                  : 'Create Campaign',  
           CAMPAIGN                         : 'Campaign',
-          NAME_CAMPAIGN_PLACEHOLDER        : 'Name of the Campaign',
+          TITLE_GAME_PLACEHOLDER           : 'Title of Game',
           DESCRIPTION_PLACEHOLDER          : 'Description',
           PHONE_NUMBER_PLACEHOLDER         : 'Phone Number',
           DATA_CAMPAIGN                    : 'Add data from the campaign',

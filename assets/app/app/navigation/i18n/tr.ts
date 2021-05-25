@@ -22,6 +22,7 @@ export const locale = {
                 'BADGE': '13'
             },
             'CONTACTS'    : 'Contacts',
+            'CALENDAR'    : 'Takvim',
             'WIZARD'       : 'Wizard',
             'GAME'       : 'Game',
             'SURVEY'       : 'Survey',

@@ -51,7 +51,7 @@ export class GameComponent implements OnInit, OnDestroy
   {
     this.horizontalStepperStep1 = this._formBuilder.group({
       nameGame     : ['', Validators.required],
-      cant_preg    : ['', Validators.required],
+      cant_preg    : ['',[ Validators.required, Validators.maxLength(20)]],
       cant_resp    : ['', Validators.required]
     });
     

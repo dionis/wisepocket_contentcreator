@@ -101,7 +101,7 @@
 				Separarse de otras personas en su hogar
 				Tanto como sea posible, debe permanecer en una habitación diferente de otras personas en su hogar. Además, debe usar un baño separado, si está disponible.
 				</Texto>
-				<Texto pos="3">Notifique al médico sus síntomas 
+				<Texto pos="3">Notifique al médico sus síntomas
 					Antes de su cita médica, llame al proveedor de atención médica y dígale que tiene o está siendo evaluado por una infección por COVID19. Esto ayudará a que el consultorio del proveedor de atención médica tome medidas para evitar que otras personas se infecten.
 				</Texto>
 				<Texto pos="4">Use una máscara facial o nasobuco
@@ -164,7 +164,7 @@
 				Otros síntomas tempranos a tener en cuenta son escalofríos, dolores corporales, dolor de garganta, dolor de cabeza, diarrea, náuseas / vómitos y secreción nasal.
 				Si desarrolla síntomas, siga los pasos de prevención descritos anteriormente y llame a su médico lo antes posible. Antes de ir a su cita médica, llame al proveedor de atención médica y cuéntele sobre su posible exposición al COVID19. Esto ayudará a que el consultorio del proveedor de atención médica tome medidas para evitar que otras personas se infecten. Pídale a su proveedor de atención médica que llame al departamento de salud local o estatal.
 				Si no tiene ningún síntoma, puede continuar con sus actividades diarias pero observando cualquier cambio.
-				No se considera que esté en riesgo de infección por COVID19 si no ha tenido contacto cercano  con alguien que se confirme que tiene o está siendo evaluado por la infección por COVID19. Los CDC recomiendan que las personas sigan los pasos de prevención para ayudar a reducir el riesgo de infectarse con virus respiratorios, como COVID19. 
+				No se considera que esté en riesgo de infección por COVID19 si no ha tenido contacto cercano  con alguien que se confirme que tiene o está siendo evaluado por la infección por COVID19. Los CDC recomiendan que las personas sigan los pasos de prevención para ayudar a reducir el riesgo de infectarse con virus respiratorios, como COVID19.
 				</Texto>
 			</Informacion>
 		</ItemTema>
@@ -196,8 +196,6 @@
 				<ImagenTema pos="0">etecsa_medidas.jpg</ImagenTema>
 			</Informacion>
 		</ItemTema>
-		
-		
 	</ListaTemas>
 	<ListEntidades cant="3">
 		<Entidad nombre="Hospital Juan Bruno Zayas. Urgencias" tipo="salud" dirHttp="www.wisepocket.com" dirCorreo="wisepocket@gmail.com">

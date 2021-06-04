@@ -35,21 +35,24 @@ describe('GenerateCamaignXML', function() {
                  var testCampaingXml2Json = fs.readFileSync( pathToFile + 'covid19campaign.xml', 'utf8');
 
                 //3- generateXmlInJson = Convert XML returner by generateXml helper to JSON
-                  var options = {compact: true, ignoreComment: true, spaces: 4};
+                  var options = {compact: false, ignoreComment: true, spaces: 2};
 
                  // console.log(" Helper return value ",  campaingXML)
+
+                 var systemXmlInJson = convert.xml2json(campaingXML, options);
+
 
                   var generateXmlInJson = convert.xml2json(testCampaingXml2Json, options);
 
                  console.log("+============== JSON of Campaing ==============+" )
-                 console.log(generateXmlInJson);
+                // console.log(generateXmlInJson);
                  console.log("+==============================================+")
                  result = convert.json2xml(generateXmlInJson, options);
                  var testCampaingJson2Xml = fs.writeFileSync( pathToFile + 'covid19campaignJson2Xml.xml', result);
 
 
                  //4- testCampaingXml2Json === generateXmlInJson
-                     assert.equal( generateXmlInJson, generateXmlInJson);
+                     assert.equal( generateXmlInJson, systemXmlInJson);
                 //5- SUSCESSFUL !!!!!
 
 

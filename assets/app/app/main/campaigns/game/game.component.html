@@ -33,7 +33,7 @@
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>Title of game</mat-label>
                                 <input matInput formControlName="nameGame" required>
-                                <mat-error>Name of the title is required!</mat-error>
+                                <mat-error>Name of the game is required!</mat-error>
                             </mat-form-field>
 
                             <div fxFlex="1 0 auto" fxLayout="row">
@@ -224,7 +224,10 @@
 
                         <ng-template matStepLabel>List of Game</ng-template>
                         <div class="customer mb-32">
-                            <table class="simple">
+                            <button mat-icon-button aria-label="Search" matTooltip="Search" class="boton">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <table class="simple" >
                                 <thead>
                                     <tr>
                                         <th>Games</th>
@@ -237,13 +240,13 @@
                                     <tr>
                                        
                                         <td>
-                                            <span class="game text-truncate">gan</span>
+                                            <span class="game text-truncate">titanic</span>
                                         </td>
                                         <td>
                                             <span class="cantidad text-truncate">10</span>
                                         </td>
                                         <td><button mat-raised-button type="button" color="accent"  >Editar</button></td> 
-                                        <td><button  mat-raised-button type="button" color="accent" >Borrar</button></td>
+                                        <td><button  mat-raised-button type="button" color="warn" >Borrar</button></td>
                                    
                                     </tr>
                                 </tbody>

@@ -33,8 +33,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AgmCoreModule } from '@agm/core';
 import { CampaignDetailComponent } from './product/campaign-detail.component';
 import { GameComponent } from './game/game.component';
-import { SurveyComponent } from './survey/survey.component';
-
 
 const routes: Routes = [
   {
@@ -43,37 +41,30 @@ const routes: Routes = [
       component: FormsComponent
   },
   {
-    path     : 'game',
-    canActivate: [AuthguardService],
-    component: GameComponent
+      path     : 'game',
+      canActivate: [AuthguardService],
+      component: GameComponent
   },
-  {
-    path     : 'survey',
-    canActivate: [AuthguardService],
-    component: SurveyComponent
-  },
-
   {
       path     : 'campaigns-list',
       canActivate: [AuthguardService],
       component: ListCampComponent
   },
   {
-    path     : 'campaigns-detail/:id',
-    canActivate: [AuthguardService],
-    component: CampaignDetailComponent
-}
-
+      path     : 'campaigns-detail/:id',
+      canActivate: [AuthguardService],
+      component: CampaignDetailComponent
+  }
+    
 ];
 
 @NgModule({
   declarations: [
     FormsComponent,
-    GameComponent,
-    SurveyComponent,
     DragDorpDirective,
     ListCampComponent,
-    CampaignDetailComponent
+    CampaignDetailComponent,
+    GameComponent
   ],
   imports: [
     CommonModule,

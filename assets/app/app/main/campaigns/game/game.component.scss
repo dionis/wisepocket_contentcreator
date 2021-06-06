@@ -57,7 +57,7 @@
               padding: 8px 16px;
               position: relative;
           }
-          .campaign-icon{
+          .game-icon{
             margin: 10px auto;
             margin-left: 5px;
             margin-right: 5px;
@@ -73,17 +73,14 @@
               margin-top: 10px;
               margin-bottom: 10px;
           }
-
-          .images{
-              width: 50%;
-              height: 70%;
-              margin: 10px auto;
-              margin-left: 5px;
-              margin-right: 5px ;
-              max-width: 50%;
-              max-height: 70%;
-          }
-
         }
     }
+}
+.boton{
+    left: 150%;
+    margin-right: 50px;   
+    position:relative;
+}
+.accent{
+    left: 120%;
 }

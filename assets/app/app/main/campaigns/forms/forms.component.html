@@ -138,7 +138,7 @@
 
             </form>
         </div> -->
-
+    
         <div class="h1">
             {{'FORMS.CREATE_CAMPAIGN' | translate}}
         </div>
@@ -152,9 +152,11 @@
 
                     <form fxLayout="column" [formGroup]="horizontalStepperStep1">
 
-                        <ng-template matStepLabel>{{'FORMS.CAMPAIGN' | translate}}</ng-template>
+                        <ng-template matStepLabel color="accent">{{'FORMS.CAMPAIGN' | translate}}</ng-template>
+
 
                         <div class="fields-container" fxLayout="column">
+
 
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>{{'FORMS.NAME_CAMPAIGN_PLACEHOLDER' | translate}}</mat-label>
@@ -182,7 +184,7 @@
                 </mat-step>
 
                 <mat-step [stepControl]="horizontalStepperStep2">
-
+               
                     <form fxLayout="column" [formGroup]="horizontalStepperStep2">
 
                         <ng-template matStepLabel>{{'FORMS.DATA_CAMPAIGN' | translate}}</ng-template>

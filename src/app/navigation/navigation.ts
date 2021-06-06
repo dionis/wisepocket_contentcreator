@@ -45,5 +45,5 @@ export const navigation: FuseNavigation[] = [
             }
         ]
     },
-
+  
 ];

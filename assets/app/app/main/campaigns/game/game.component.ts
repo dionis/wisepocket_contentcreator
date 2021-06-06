@@ -5,179 +5,106 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Campaign } from '../../../models/campaign.model';
 import { Imagen } from '../../../models/image.model';
-import { CampaignService } from '../../../services/campaign.service';
 import { FileUploadService } from '../../../services/file-upload.service';
-import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
-import { locale as english } from '../../../main/campaigns/forms/i18n/en';
-import { locale as spanish } from '../../../main/campaigns/forms/i18n/es';
-import { ICountry, ICity, IState } from 'country-state-city/src/interface';
-import csc from 'country-state-city';
-import { ImageService } from '../../../services/image.service';
-
-
-// import { locale as english } from './i18n/en';
-// import { locale as turkish } from './i18n/tr';
-// import { locale as spanish } from './i18n/es';
+// import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 
 @Component({
-    selector   : 'game',
-    templateUrl: './game.component.html',
-    styleUrls  : ['./game.component.scss']
+  selector: 'app-game',
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit, OnDestroy
+export class GameComponent implements OnInit, OnDestroy 
 {
-    form: FormGroup;
+  form: FormGroup;
 
-    // Horizontal Stepper
-    horizontalStepperStep1: FormGroup;
-    horizontalStepperStep2: FormGroup;
-    horizontalStepperStep3: FormGroup;
-    horizontalStepperStep4: FormGroup;
-    horizontalStepperStep5: FormGroup;
-    readonly maxSize = 104857600;
-    campaignicon:string = 'campaignicon';
-    @ViewChild('fileDorp',{static:false}) inputFile:ElementRef;
+  horizontalStepperStep1: FormGroup;
+  horizontalStepperStep2: FormGroup;
+  horizontalStepperStep3: FormGroup;
+  readonly maxSize = 104857600;
+  gameicon: string = 'gameicon';
+ @ViewChild('fileDorp', {static: false}) inputFile: ElementRef;
+  
+  private _unsubscribeAll: Subject<any>;
+  files: File[] = []; 
+  gameIconf: File = undefined;
+  image1: File = undefined;
+  image2: File = undefined;
+  image3: File = undefined;
+  image4: File = undefined;
+  
+  constructor(
+    private _formBuilder: FormBuilder,
+    // private _fuseTranslationLoaderService: FuseTranslationLoaderService
 
-    // Private
-    private _unsubscribeAll: Subject<any>;
-    files: File[] = [];
-    image1: File = undefined;
-    image2: File = undefined;
-    image3: File = undefined;
-    image4: File = undefined;
-    campIconf:File = undefined;
+  ) 
+  {
 
-    countrySelected = false;
+    // Load the translations
+    // this._fuseTranslationLoaderService.loadTranslations(english, spanish);
 
-    public selectedCountry: ICountry[] = [{isoCode: '', name: '', phonecode: '', flag: '', currency: '', latitude: '', longitude: ''}];
-    public countries: ICountry [];
-    public states: IState [];
-    public cities: ICity [];
+    // Set the private defaults
+    this._unsubscribeAll = new Subject();
 
-    statesSubject: Subject<IState []>;
+  }
 
+  ngOnInit(): void 
+  {
+    this.horizontalStepperStep1 = this._formBuilder.group({
+      nameGame     : ['', Validators.required],
+      cant_preg    : ['',[ Validators.required, Validators.maxLength(20)]],
+      cant_resp    : ['', Validators.required]
+    });
+    
+    this.horizontalStepperStep2 = this._formBuilder.group({
+      redacte      : ['', Validators.required],
+      redacte1     : ['', Validators.required],
+      redacte2     : ['', Validators.required],
+      redacte3     : ['', Validators.required],
+      redacte4     : ['', Validators.required]
+    });
+  }
+  
 
+  onChage(event){
+    console.log(event);
+    console.log(this.inputFile);
+  }
+  onSelectIcon(event){
+   console.log(event.addedFiles);
+   this.gameIconf = event.addedFiles[0];
+   this.files.push(event.addedFiles[0]);
+  }
 
-
-    /**
-     * Constructor
-     *
-     * @param {FormBuilder} _formBuilder
-     * @param {FuseTranslationLoaderService} _fuseTranslationLoaderService
-     */
-    constructor(
-
-        private _formBuilder: FormBuilder,
-        private imageService: ImageService,
-        private campService: CampaignService,
-        private _fuseTranslationLoaderService: FuseTranslationLoaderService
-    )
-    {
-        // Load the translations
-        this._fuseTranslationLoaderService.loadTranslations(english, spanish);
-
-        // Set the private defaults
-        this._unsubscribeAll = new Subject();
-        this.statesSubject = new Subject();
-    }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Horizontal Stepper form steps
-        this.horizontalStepperStep1 = this._formBuilder.group({
-            nameCampaign: ['', [Validators.required, Validators.minLength(100), Validators.maxLength(120)]],
-            description : ['', [Validators.required, Validators.maxLength(800)]]
-        });
-
-        const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
-        this.horizontalStepperStep2 = this._formBuilder.group({
-            phone: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(20)]],
-            postalCode: ['', [Validators.required, Validators.maxLength(5)]],
-            website: ['', [Validators.required, Validators.pattern(reg)]],
-            email: ['', [Validators.required, Validators.email, Validators.maxLength(30)]]
-        });
-
-        this.horizontalStepperStep3 = this._formBuilder.group({
-            countries      : ['', Validators.required],
-            states     : ['', Validators.required],
-            cities      : ['', Validators.required],
-            primaryColor: ['', Validators.required],
-            secondaryColor: ['', Validators.required]
-        });
-
-        this.horizontalStepperStep4 = this._formBuilder.group({
-            facebook      : ['', Validators.required],
-            whatsapp      : ['', Validators.required],
-            telegram      : ['', Validators.required]
-        });
-        //console.log(this.inputFile);
-        //this.campService.fetchCampagins('0','10');
-        console.log(csc.getAllCountries());
-
-        this.countries = csc.getAllCountries();
-        this.horizontalStepperStep3.get('countries').valueChanges.subscribe(i=>{
-            console.log(i)
-            this.states = csc.getAllStates().filter(item => item.countryCode === i);
-            console.log(this.states)
-
-        })
-        this.horizontalStepperStep3.get('states').valueChanges.subscribe(i=>{
-            console.log(i)
-            var state = csc.getStateByCode(i)
-            console.log(state)
-            this.cities = csc.getCitiesOfState(state.countryCode,state.isoCode);
-        })
-        console.log(this.horizontalStepperStep3.get('countries'))
-
-    }
-    onChage(event){
-        console.log(event);
-        console.log(this.inputFile);
-    }
-    onSelectIcon(event){
-        console.log(event.addedFiles)
-       this.campIconf = event.addedFiles[0];
-      // this.files.push(event.addedFiles[0]);
-    }
-
-    onSelect(event) {
-        console.log(event);
-        switch (event.source.id) {
-            case "image1":
-                this.image1 = event.addedFiles[0];
-                break;
-            case "image2":
-                this.image2 = event.addedFiles[0];
-                break;
-            case "image3":
-                this.image3 = event.addedFiles[0];
-                break;
-            case "image4":
-                this.image4 = event.addedFiles[0];
-                break;
-            default:
-                break;
-        }
-        this.files.push(event.addedFiles[0]);
-        //console.log(this.files);
-      }
-
-    /**
-     * On destroy
-     */
-    ngOnDestroy(): void
-    {
+  ngOnDestroy(): void
+  {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
+  }
+
+  // onSelectedChange(): void
+  // {
+  //       this._mailService.toggleSelectedMail(this.mail.id);
+  // }
+  onSelect(event) {
+    console.log(event);
+    switch (event.source.id) {
+        case "image1":
+            this.image1 = event.addedFiles[0];
+            break;
+        case "image2":
+            this.image2 = event.addedFiles[0];
+            break;
+        case "image3":
+            this.image3 = event.addedFiles[0];
+            break;
+        case "image4":
+            this.image4 = event.addedFiles[0];
+            break;
+        default:
+            break;
     }
+
 
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
@@ -234,4 +161,5 @@ export class GameComponent implements OnInit, OnDestroy
        });
         alert('You have finished the horizontal stepper!');
     }
+
 }

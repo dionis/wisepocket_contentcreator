@@ -3,7 +3,6 @@
     .content {
         form {
             width: 100%;
-            max-width: 800px !important;
         }
 
         .form-errors-model {
@@ -14,12 +13,11 @@
             }
         }
 
+
          .horizontal-stepper-wrapper{
              color: blue;
          }
-        // .vertical-stepper-wrapper {
-        //     //max-width: 1000px;
-        // }
+
         .dropzone{
           padding: 1rem;
           text-align: center;
@@ -87,5 +85,8 @@
           }
 
         }
+    }
+    .horizontal-stepper-wrapper{
+        width: 100%;
     }
 }

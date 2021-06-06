@@ -1,9 +1,19 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Inject, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CampaignService } from '../../../services/campaign.service';
+import { ImageService } from '../../../services/image.service';
 
 //import { Contact } from '../../../../../app/main/apps/contacts/contact.model';
+
+import { FuseTranslationLoaderService } from '../../../../@fuse/services/translation-loader.service';
+
+
+import { locale as english } from '../i18n/en';
+import { locale as turkish } from '../i18n/tr';
+import { locale as spanish } from '../i18n/es';
+import { Router } from '@angular/router';
 
 @Component({
     selector     : 'marker-form-dialog',
@@ -19,9 +29,11 @@ export class MarkerContactFormDialogComponent
     marker:any;
     markerForm: FormGroup;
     dialogTitle: string;
-    images: File[] = [];
+    images: string[] = [];
+    files: File[] = []; 
     campaigns = [];
-    
+    imgSrcBase:string
+
     /**
      * Constructor
      *
@@ -33,21 +45,32 @@ export class MarkerContactFormDialogComponent
         public matDialogRef: MatDialogRef<MarkerContactFormDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private _formBuilder: FormBuilder,
-        private campService: CampaignService
+        private campService: CampaignService,
+        private imageService: ImageService,
+        private _fuseTranslationLoaderService: FuseTranslationLoaderService,
+        private router: Router
+        //private http: HttpClient;
     )
     {
+
+        this._fuseTranslationLoaderService.loadTranslations(english, turkish, spanish);
+
         // Set the defaults
         this.action = _data.action;
-        campService.getCampaignUser('','').subscribe(data=>{
+        campService.getCampaignUser('','','','').subscribe(data=>{
             this.campaigns = data;
+        },error=>{
+            if(error.error === 'Unauthrized'){
+                this.router.navigate(['**']);
+            }
         });
 
         if ( this.action === 'edit' )
         {
             this.dialogTitle = 'Edit Marker';
             this.marker = _data.data;
-            //this.images.push(new File())
             console.log(this.marker);
+            this.loadImage();
         }
         else
         {
@@ -64,6 +87,34 @@ export class MarkerContactFormDialogComponent
         }
 
         this.markerForm = this.createContactForm();
+    }
+
+    async loadImage(){
+        if(this.marker.images.length>0){
+            let frontImages = this.marker.images
+            for (let index = 0; index < frontImages.length; index++) {
+                const element = frontImages[index];
+                const ext = element.titulo.split('.')[1];
+                const name = element.titulo;
+                // let path= 'assets/images/api/'+name;
+                // console.log(path)
+                // this.images.push(path);
+                await this.imageService.getImage(element.id).subscribe(response=>{
+                    console.log(response);
+                    //this.images.push(new File([response], element.titulo,{type:'image/'+ext}))
+                    //this.imgSrcBase = `data:image/png;base64,${response}`
+                    this.images.push(response);
+                })
+                //let img = this.imageService.getImage(element);
+                //this.images.push(img);
+                //this.images.push(new File([element.path],element.titulo,{type:'image/'+ext}));
+            }
+            //console.log(this.images    )
+        }
+    }
+    onRemove(event){
+        console.log(event);
+        this.images.splice(this.images.indexOf(event), 1)
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -86,7 +137,7 @@ export class MarkerContactFormDialogComponent
             //images: [this.contact.jobTitle],
             email   : [this.marker.email,[Validators.required, Validators.email, Validators.maxLength(30)]],
             phone   : [this.marker.phone,Validators.required],
-            lat   : [this.marker.lat,Validators.required], 
+            lat   : [this.marker.lat,Validators.required],
             lon: [this.marker.lon,Validators.required],
             related_campaign: [this.marker.related_campaign?this.marker.related_campaign:''
                 ,Validators.required],
@@ -94,8 +145,18 @@ export class MarkerContactFormDialogComponent
     }
 
     onSelect(event){
-        console.log(event.addedFiles)
-       this.images = event.addedFiles;
-      // this.files.push(event.addedFiles[0]);
+      console.log("-----")
+      console.log(event);
+      let fileLoaded = undefined
+      if (event.addedFiles.length > 0) {
+         console.log(event.addedFiles[0])
+         fileLoaded = event.addedFiles[0];
+      }
+      else {
+        console.log(event.rejectedFiles[0])
+        fileLoaded = event.rejectedFiles[0];
+      }
+
+      this.files.push(fileLoaded);
     }
 }

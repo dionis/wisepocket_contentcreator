@@ -78,7 +78,6 @@ module.exports.routes = {
  'DELETE /marker/delete': { action: 'marker/delete' },
  'POST /marker/asociate-images': { action: 'marker/asociate-images' },
 
- 
 
 
 

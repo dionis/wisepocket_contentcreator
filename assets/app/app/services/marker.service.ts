@@ -26,7 +26,21 @@ export class MarkerService {
   constructor(
     private _http: HttpClient
   ) {
-    this.sourceMap = new BehaviorSubject('geoServer');
+    this.sourceMap = new BehaviorSubject('googleMap');
+  }
+
+    /**
+   *  For current User and Campaign in the system search the
+   *   GIS server configuration
+   *
+   *  return a promise with JSON in
+   *     gisServerAddress: eje http://localhost:8080/geoserver/wisepocket/wms
+   *     gisAttribution: eje CUBA
+   *
+   */
+
+  getGisServerConfiguration():Promise<any>{
+      return new Promise ((resolve,reject)=>{ resolve(undefined)}) ;
   }
 
   //Add Marker
@@ -55,7 +69,7 @@ export class MarkerService {
         return null;
       }
     }))
-    
+
   }
 
 
@@ -82,6 +96,7 @@ export class MarkerService {
     .pipe(map((response:any)=>{
       let markers = [];
       for (let index = 0; index < response.data.length; index++) {
+        console.log("Marker to Show <==> ", response.data[index] );
         markers.push(response.data[index]);
       }
       return markers;
@@ -96,12 +111,36 @@ export class MarkerService {
   }
 
   makePopup(data:any):string{
-    return `` +
+    let images =  ``;
+    console.log("Show data ===> ", data.images)
+    if (typeof(data.images) !== 'undefined' && data.images.length >= 1 ){
+      let start =   `<div><ul>`;
+      let lineLi =  ``;
+
+      //OJOOOO
+
+      // “ assets/app/assets/images/api/images.jpg”
+
+      // Different to show images
+      // change when create a service//
+
+      // <img src="assets/images/avatars/Velazquez.jpg" class="avatar">
+      data.images.forEach(item=>{
+        lineLi +=  `<li><img src="`+ item.path+ `"></a></li>`;
+      })
+
+      let end =  `</ul></div>`;
+      images = start + lineLi + end;
+    }
+
+    console.log("Return ", images)
+    return   ` `+
       `<div>Titulo: ${ data.title }</div>` +
       `<div>Email: ${ data.email }</div>` +
-      `<div>Web Site: ${ data.url }</div>`
-  }
+      `<div>Web Site: ${ data.url }</div>` +
+       images
 
+    }
   asociateImages(idImages: any[], id:string){
     const body = {
       id: id,
@@ -119,4 +158,6 @@ export class MarkerService {
       }
     })).toPromise();
   }
+
+
 }

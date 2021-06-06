@@ -281,7 +281,7 @@ export class CampaignDataSource extends DataSource<Campaign>{
 
     loadCampaigns(page:number,limit:number){
 
-        this.campService.getCampaignUser(page.toString(),limit.toString())
+        this.campService.getCampaignUser(page.toString(),limit.toString(),'','')
         .subscribe(campaigns=>{
             console.log(campaigns)
             this.campagainsSubject.next(campaigns)

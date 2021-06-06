@@ -154,7 +154,9 @@
 
                         <ng-template matStepLabel color="accent">{{'FORMS.CAMPAIGN' | translate}}</ng-template>
 
-                        <div fxFlex="1 0 auto" fxLayoutAlign="center center" fxLayout="column">
+
+                        <div class="fields-container" fxLayout="column">
+
 
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>{{'FORMS.NAME_CAMPAIGN_PLACEHOLDER' | translate}}</mat-label>
@@ -165,7 +167,7 @@
 
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>Description</mat-label>
-                                <textarea matInput formControlName="description" required></textarea>
+                                <textarea matInput formControlName="description" required rows="15" ></textarea>
                                 <mat-error>Description is required!</mat-error>
                             </mat-form-field>
 
@@ -286,17 +288,23 @@
                                 <mat-error>City is required!</mat-error>
                             </mat-form-field>
 
-                            <mat-form-field appearance="outline" fxFlex="100">
+                            <!-- <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>{{'FORMS.PRIMARY_COLOR' | translate}}</mat-label>
-                                <input matInput formControlName="primaryColor" required>
+                                
                                 <mat-error>Primary Color is required!</mat-error>
-                            </mat-form-field>
+                            </mat-form-field> -->
+                            <h3 class="mt-16 mb-8">{{'FORMS.PRIMARY_COLOR' | translate}}</h3>
+                            <fuse-material-color-picker class="mb-16"
+                                                    formControlName="primaryColor"></fuse-material-color-picker>
 
-                            <mat-form-field appearance="outline" fxFlex="100">
+                            <!-- <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>{{'FORMS.SECONDARY_COLOR' | translate}}</mat-label>
-                                <input matInput formControlName="secondaryColor" required>
+                                
                                 <mat-error>Secondary Color is required!</mat-error>
-                            </mat-form-field>
+                            </mat-form-field> -->
+                            <h3 class="mt-16 mb-8">{{'FORMS.SECONDARY_COLOR' | translate}}</h3>
+                            <fuse-material-color-picker class="mb-16"
+                                                    formControlName="secondaryColor"></fuse-material-color-picker>
 
                         </div>
 
@@ -369,8 +377,11 @@
                                     <ngx-dropzone [id]="campaignicon" class="campaign-icon" (change)="onSelectIcon($event)"
                                     [multiple] = "false"
                                     accept="image/jpg,image/png">
-                                        <ngx-dropzone-label>>{{'FORMS.CAMPAIGN_ICON_PLACEHOLDER' | translate}}</ngx-dropzone-label>
-                                        <ngx-dropzone-image-preview *ngIf="campIconf" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="campIconf">
+                                        <ngx-dropzone-label>{{'FORMS.CAMPAIGN_ICON_PLACEHOLDER' | translate}}</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngIf="campIconf" class="preview" 
+                                        ngProjectAs="ngx-dropzone-preview" 
+                                        [removable]="true" (removed)="onRemove(campIconf)"
+                                        [file]="campIconf">
                                             <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
                                         </ngx-dropzone-image-preview>
                                     </ngx-dropzone>

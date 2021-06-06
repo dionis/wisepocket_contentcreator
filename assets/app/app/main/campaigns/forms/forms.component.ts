@@ -13,6 +13,7 @@ import { locale as spanish } from '../../../main/campaigns/forms/i18n/es';
 import { ICountry, ICity, IState } from 'country-state-city/src/interface';
 import csc from 'country-state-city';
 import { ImageService } from '../../../services/image.service';
+import { Router } from '@angular/router';
 
 
 // import { locale as english } from './i18n/en';
@@ -70,7 +71,8 @@ export class FormsComponent implements OnInit, OnDestroy
         private _formBuilder: FormBuilder,
         private imageService: ImageService,
         private campService: CampaignService,
-        private _fuseTranslationLoaderService: FuseTranslationLoaderService
+        private _fuseTranslationLoaderService: FuseTranslationLoaderService,
+        private router:Router
     )
     {
         // Load the translations
@@ -108,7 +110,7 @@ export class FormsComponent implements OnInit, OnDestroy
             countries      : ['', Validators.required],
             states     : ['', Validators.required],
             cities      : ['', Validators.required],
-            primaryColor: ['', Validators.required],
+            primaryColor: ['cyan-600', Validators.required],
             secondaryColor: ['', Validators.required]
         });
 
@@ -134,19 +136,25 @@ export class FormsComponent implements OnInit, OnDestroy
             console.log(state)
             this.cities = csc.getCitiesOfState(state.countryCode,state.isoCode);    
         })
-        console.log(this.horizontalStepperStep3.get('countries'))
+        console.log(this.horizontalStepperStep3.get('secondaryColor'))
+        
 
     }
+    
     onChage(event){
         console.log(event);
         console.log(this.inputFile);
     }
+
     onSelectIcon(event){
         console.log(event.addedFiles)
        this.campIconf = event.addedFiles[0];
       // this.files.push(event.addedFiles[0]);
     }
-    
+
+    onRemove(event){
+        console.log(event);
+    }
     onSelect(event) {
         console.log(event);
         switch (event.source.id) {
@@ -189,10 +197,11 @@ export class FormsComponent implements OnInit, OnDestroy
 
     async finishHorizontalStepper()
     {
+        console.log(this.horizontalStepperStep3.get('primaryColor').value);
         let dataCamp = new Campaign()
         dataCamp.titulo = this.horizontalStepperStep1.get('nameCampaign').value;
         dataCamp.descripcion = this.horizontalStepperStep1.get('description').value;
-        dataCamp.contanctoTelefono= this.horizontalStepperStep2.get('phone').value;
+        dataCamp.phone= this.horizontalStepperStep2.get('phone').value;
         dataCamp.contactoEmail = this.horizontalStepperStep2.get('email').value;
         dataCamp.direccionPostal = this.horizontalStepperStep2.get('postalCode').value;
         dataCamp.colorPrincipal = this.horizontalStepperStep3.get('primaryColor').value;
@@ -205,10 +214,20 @@ export class FormsComponent implements OnInit, OnDestroy
         dataCamp.contactoTelegram = this.horizontalStepperStep2.get('website').value;
         if(this.campIconf){
             console.log(this.campIconf);
-            await this.imageService.addImage(this.campIconf).then(img=>{
+            await this.imageService.addImage(this.campIconf)
+            .then(img=>{
                 console.log(img);
                 //let data = img['data'];
                 dataCamp.logo = img[0];
+            })
+            .catch(error=>{
+                if(error.error === 'Unauthrized'){
+                    this.router.navigate(['**']);
+                } 
+                if(error.error.error.code === 'E_UNIQUE'){
+                    console.log('Entra')
+                    alert('USTED HA TECLEADO UN CAMPO QUE DEBE SER ÚNICO EN LA TABLA CAMPAÑAS. POR FAVOR VUELVA A VERFICAR')
+                }
             });
         }
         let imagesCarruselIds = [];
@@ -219,6 +238,15 @@ export class FormsComponent implements OnInit, OnDestroy
                 let data = img['data'];
                 imagesCarruselIds = img
                 //dataCamp.carrusel = img;
+            })
+            .catch(error=>{
+                if(error.error === 'Unauthrized'){
+                    this.router.navigate(['**']);
+                } 
+                if(error.error.error.code === 'E_UNIQUE'){
+                    console.log('Entra')
+                    alert('USTED HA TECLEADO UN CAMPO QUE DEBE SER ÚNICO EN LA TABLA CAMPAÑAS. POR FAVOR VUELVA A VERFICAR')
+                }
             });
         }
         console.log(dataCamp);
@@ -227,8 +255,16 @@ export class FormsComponent implements OnInit, OnDestroy
        .subscribe(async campaign =>{
            if(imagesCarruselIds.length>0){
             await this.campService.asociateImages(imagesCarruselIds,campaign.id);
-           }       
+           }
+                  
         },error=>{
+            if(error.error === 'Unauthrized'){
+                this.router.navigate(['**']);
+            }
+            if(error.error.error.code === 'E_UNIQUE'){
+                console.log('Entra')
+                alert('USTED HA TECLEADO UN CAMPO QUE DEBE SER ÚNICO EN LA TABLA CAMPAÑAS. POR FAVOR VUELVA A VERFICAR')
+            }
            console.log(error)
        });       
         alert('You have finished the horizontal stepper!');

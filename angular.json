@@ -26,10 +26,11 @@
             "assets": [
               "assets/app/favicon.ico",
               "assets/app/assets",
+
               {
                 "glob": "**/*",
-                "input": "node_modules/leaflet/dist/images/",
-                "output": "./leafleticons"
+                "input": "./node_modules/leaflet/dist/images/",
+                "output": "./assets/app/assets/leaflets/"
               }
             ],
             "styles": [

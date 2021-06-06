@@ -54,7 +54,7 @@ export class ContactsService implements Resolve<any>
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any
     {
         return new Promise((resolve, reject) => {
-
+            console.log(this.getUserData());
             Promise.all([
                 this.getContacts(),
                 this.getUserData()

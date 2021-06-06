@@ -4,6 +4,12 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MarkerService } from '../../../../services/marker.service';
 import { SampleComponent } from '../../sample.component';
+import { MatDialog } from '@angular/material/dialog';
+import { FuseTranslationLoaderService } from '../../../../../@fuse/services/translation-loader.service';
+import {GisServerFormDialogComponent} from '../../gis-form/gis-form.component';
+import { locale as english } from '../../i18n/en';
+import { locale as turkish } from '../../i18n/tr';
+import { locale as spanish } from '../../i18n/es';
 
 //import { ContactsService } from '../../../../../app/main/apps/contacts/contacts.service';
 
@@ -15,10 +21,12 @@ import { SampleComponent } from '../../sample.component';
 export class GeoPointsMainSidebarComponent implements OnInit, OnDestroy
 {
     user: any;
-    filterBy: string;
+    filterBy: string = 'googleMap';
 
     // Private
     private _unsubscribeAll: Subject<any>;
+
+    dialogRef: any;
 
     /**
      * Constructor
@@ -27,12 +35,16 @@ export class GeoPointsMainSidebarComponent implements OnInit, OnDestroy
      */
     constructor(
         private _markerService: MarkerService,
+        private _fuseTranslationLoaderService: FuseTranslationLoaderService,
+        private _matDialog: MatDialog,
         //private router:Router
         //private _contactsService: ContactsService
     )
     {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+        this._fuseTranslationLoaderService.loadTranslations(english, turkish, spanish);
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -49,7 +61,7 @@ export class GeoPointsMainSidebarComponent implements OnInit, OnDestroy
         .subscribe(source=>{
             this.filterBy = source || 'googleMap';
         })
-        
+
 
         // this._contactsService.onUserDataChanged
         //     .pipe(takeUntil(this._unsubscribeAll))
@@ -82,4 +94,29 @@ export class GeoPointsMainSidebarComponent implements OnInit, OnDestroy
         this.filterBy = filter;
         this._markerService.setSource(filter);
     }
+
+    updateGisLocalServer(){
+        this.dialogRef = this._matDialog.open(GisServerFormDialogComponent, {
+          height: '600px',
+          width: '700px',
+          panelClass: 'gis-form-dialog',
+          data      : {
+              action: 'edit',
+
+          }
+      });
+
+      this.dialogRef.afterClosed()
+          .subscribe(async (response: any) => {
+              if ( !response )
+              {
+                  return;
+              }
+
+              //Update data in View and server
+              //this._markerService.updateGisLocalServer();
+              console.log(response)
+
+      });
+ }
 }

@@ -5,7 +5,7 @@ export class Campaign{
     id:string;
     titulo: string;
     descripcion: string;
-    contanctoTelefono: string;
+    phone: string;
     country: string;
     state: string;
     city: string;

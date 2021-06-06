@@ -11,6 +11,7 @@ import {DragDorpDirective} from './forms/dragdrop.directive';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { FuseSharedModule } from '../../../@fuse/shared.module';
+import { FuseMaterialColorPickerModule } from '@fuse/components/material-color-picker/material-color-picker.module';
 
 import { FormsComponent } from './forms/forms.component';
 import { AuthguardService } from '../../services/authguard.service';
@@ -88,6 +89,7 @@ const routes: Routes = [
     MatTabsModule,
     MatSnackBarModule,
     FuseSharedModule,
+    FuseMaterialColorPickerModule
   ]
 })
 export class CampaignsModule { }

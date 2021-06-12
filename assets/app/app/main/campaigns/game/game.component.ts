@@ -103,63 +103,16 @@ export class GameComponent implements OnInit, OnDestroy
             break;
         default:
             break;
+
+
+            
     }
 
-
+  }
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * Finish the horizontal stepper
-     */
-
-    async finishHorizontalStepper()
-    {
-        let dataCamp = new Campaign()
-        dataCamp.titulo = this.horizontalStepperStep1.get('nameCampaign').value;
-        dataCamp.descripcion = this.horizontalStepperStep1.get('description').value;
-        dataCamp.phone= this.horizontalStepperStep2.get('phone').value;
-        dataCamp.contactoEmail = this.horizontalStepperStep2.get('email').value;
-        dataCamp.direccionPostal = this.horizontalStepperStep2.get('postalCode').value;
-        dataCamp.colorPrincipal = this.horizontalStepperStep3.get('primaryColor').value;
-        dataCamp.colorSecundario = this.horizontalStepperStep3.get('secondaryColor').value;
-        dataCamp.country = this.horizontalStepperStep3.get('countries').value;
-        dataCamp.city = this.horizontalStepperStep3.get('cities').value;
-        dataCamp.state = this.horizontalStepperStep3.get('states').value;
-        dataCamp.contactoWhatsapp = this.horizontalStepperStep2.get('phone').value;
-        dataCamp.contactoFacebook = this.horizontalStepperStep2.get('website').value;
-        dataCamp.contactoTelegram = this.horizontalStepperStep2.get('website').value;
-        if(this.campIconf){
-            console.log(this.campIconf);
-            await this.imageService.addImage(this.campIconf).then(img=>{
-                console.log(img);
-                //let data = img['data'];
-                dataCamp.logo = img[0];
-            });
-        }
-        let imagesCarruselIds = [];
-        if(this.files.length>0){
-            await this.imageService.addImage(this.files)
-            .then((img)=>{
-                console.log(img);
-                let data = img['data'];
-                imagesCarruselIds = img
-                //dataCamp.carrusel = img;
-            });
-        }
-        console.log(dataCamp);
-        await this.campService.addCampaign(dataCamp)
-       .pipe(takeUntil(this._unsubscribeAll))
-       .subscribe(async campaign =>{
-           if(imagesCarruselIds.length>0){
-            await this.campService.asociateImages(imagesCarruselIds,campaign.id);
-           }
-           console.log(campaign);
-        },error=>{
-           console.log(error)
-       });
-        alert('You have finished the horizontal stepper!');
-    }
+    
 
 }

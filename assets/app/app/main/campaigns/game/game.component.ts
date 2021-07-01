@@ -42,7 +42,7 @@ export class GameComponent implements OnInit, OnDestroy
     // Load the translations
     // this._fuseTranslationLoaderService.loadTranslations(english, spanish);
 
-    // Set the private defaults
+  
     this._unsubscribeAll = new Subject();
 
   }

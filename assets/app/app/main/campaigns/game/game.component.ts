@@ -13,7 +13,7 @@ import { FileUploadService } from '../../../services/file-upload.service';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit, OnDestroy 
+export class GameComponent implements OnInit, OnDestroy
 {
   form: FormGroup;
 
@@ -23,20 +23,20 @@ export class GameComponent implements OnInit, OnDestroy
   readonly maxSize = 104857600;
   gameicon: string = 'gameicon';
  @ViewChild('fileDorp', {static: false}) inputFile: ElementRef;
-  
+
   private _unsubscribeAll: Subject<any>;
-  files: File[] = []; 
+  files: File[] = [];
   gameIconf: File = undefined;
   image1: File = undefined;
   image2: File = undefined;
   image3: File = undefined;
   image4: File = undefined;
-  
+
   constructor(
     private _formBuilder: FormBuilder,
     // private _fuseTranslationLoaderService: FuseTranslationLoaderService
 
-  ) 
+  )
   {
 
     // Load the translations
@@ -47,14 +47,14 @@ export class GameComponent implements OnInit, OnDestroy
 
   }
 
-  ngOnInit(): void 
+  ngOnInit(): void
   {
     this.horizontalStepperStep1 = this._formBuilder.group({
       nameGame     : ['', Validators.required],
       cant_preg    : ['',[ Validators.required, Validators.maxLength(20)]],
       cant_resp    : ['', Validators.required]
     });
-    
+
     this.horizontalStepperStep2 = this._formBuilder.group({
       redacte      : ['', Validators.required],
       redacte1     : ['', Validators.required],
@@ -63,7 +63,7 @@ export class GameComponent implements OnInit, OnDestroy
       redacte4     : ['', Validators.required]
     });
   }
-  
+
 
   onChage(event){
     console.log(event);
@@ -105,7 +105,7 @@ export class GameComponent implements OnInit, OnDestroy
             break;
 
 
-            
+
     }
 
   }
@@ -113,6 +113,6 @@ export class GameComponent implements OnInit, OnDestroy
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
 
-    
+
 
 }

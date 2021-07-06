@@ -33,8 +33,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CampaignsModule } from './main/campaigns/campaigns.module';
-
-
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const appRoutes: Routes = [
     {
@@ -42,14 +42,14 @@ const appRoutes: Routes = [
         loadChildren: () => import('./main/authentication/authentication.module')
                             .then(m => m.AuthenticationModule)
     },
-  
+
     {
         path        : 'dashboard',
         canActivate: [AuthguardService],
         loadChildren: () => import('./main/sample/sample.module')
                             .then(m => m.SampleModule)
     },
-   
+
     {
       path        : 'apps',
       loadChildren: () => import('../app/main/apps/apps.module').then(m => m.AppsModule)
@@ -69,15 +69,15 @@ const appRoutes: Routes = [
       canActivate: [AuthguardService],
       loadChildren: () => import('./main/pages/pages.module').then(m => m.PagesModule)
   },
-  
 
-    
+
+
 ];
 
 @NgModule({
     declarations: [
         AppComponent
-        
+
     ],
     imports     : [
         BrowserModule,
@@ -90,7 +90,7 @@ const appRoutes: Routes = [
           delay             : 0,
           passThruUnknownUrl: true
          }),
-  
+
 
         // Fuse modules
         FuseModule.forRoot(fuseConfig),
@@ -108,7 +108,7 @@ const appRoutes: Routes = [
         Error500Module,
         AppMaterialModule,
         NgxDropzoneModule,
-     
+       
     ],
     providers: [
         {

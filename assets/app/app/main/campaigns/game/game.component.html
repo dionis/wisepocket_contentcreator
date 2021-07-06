@@ -1,14 +1,14 @@
 <div id="forms" class="page-layout simple fullwidth" fxLayout="column">
     <!-- HEADER -->
-    <div class="header accent p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="column" fxLayoutAlign="center start">
+    <div class="header accent me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden" fxLayout="row" fxLayoutAlign="start center">
+        <divv class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;" fxLayout="column" fxLayoutAlign="center start">
             <div fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="secondary-text s-18">home</mat-icon>
+                <mat-icon class="secondary-text s-30">videogame_asset</mat-icon>
                 <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
-                <span class="secondary-text">Campaign Wizard</span>
+                <span class="h1 mt-16">Creation of the Game Questions and Answer</span>
             </div>
-            <div class="h1 mt-16">Form</div>
-        </div>
+
+        </divv>
     </div>
     <!-- / HEADER -->
     <!-- CONTENT -->
@@ -30,61 +30,60 @@
 
                         <div fxFlex="1 0 auto" fxLayout="column">
 
-                            <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-form-field class="titulo" appearance="outline" fxFlex="100">
                                 <mat-label>Title of game</mat-label>
-                                <input matInput formControlName="nameGame" required>
+                                <input matInput formControlName="nameGame"  [(ngModel)]="addGames.Games" required>
+                                <mat-icon matSuffix class="secondary-text">title</mat-icon>
                                 <mat-error>Name of the game is required!</mat-error>
                             </mat-form-field>
 
-                            <div fxFlex="1 0 auto" fxLayout="row">
-                                <div  fxLayout="column" class="dropzone" style="width: 50%; height: auto;">
-                                    <div fxLayout="row" fxFlex="1 0 auto" style="    width: 100%; height: 50%;
-                                    margin-top: 10px;
-                                    border-bottom-width: 10px;
-                                    margin-bottom: 10px;">
-                                        <ngx-dropzone [id]="gameicon" class="game-icon" (change)="onSelectIcon($event)"
-                                        [multiple] = "false"
-                                        accept="image/jpg,image/png">
-                                            <ngx-dropzone-label>>Icon of Game</ngx-dropzone-label>
-                                            <ngx-dropzone-image-preview *ngIf="gameIconf" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="gameIconf">
-                                                <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
-                                            </ngx-dropzone-image-preview>
-                                        </ngx-dropzone>
-                                    </div>
-                                    <div fxLayout="row" fxFlex="1 0 auto" style="width: 100%;
-                                    height: 5%; margin-top: 10px; margin-bottom: 5px;" >
-                                        <label >DRAG AND DROP</label>
-                                    </div>
-                                </div>
+                            <mat-form-field class="answer" appearance="outline" fxFlex="100">
+                              <mat-label>Cantidad de Preguntas</mat-label>
+                              <input type="number" matInput formControlName="cant_preg"  [(ngModel)]="addGames.Questions" required>
+                              <mat-icon matSuffix class="secondary-text">assignment</mat-icon>
+                          <mat-error>Questions is required!</mat-error>
+                          </mat-form-field>
 
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Cantidad de Preguntas</mat-label>
-                                    <input type="number" matInput formControlName="cant_preg" required>
-                                <mat-error>Questions is required!</mat-error>
-                                </mat-form-field>
-
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Cantidad de Respuestas</mat-label>
-                                    <input type="number" matInput formControlName="cant_resp" required>                               
-                                </mat-form-field>
+                          <mat-form-field class="question" appearance="outline" fxFlex="100">
+                              <mat-label>Cantidad de Respuestas</mat-label>
+                              <input type="number" matInput formControlName="cant_resp" required>
+                              <mat-icon matSuffix class="secondary-text">assignment</mat-icon>
+                          </mat-form-field>
+                          <div  fxLayout="column" class="dropzone" style="width: 50%; height: auto;">
+                            <div fxLayout="row" fxFlex="1 0 auto" style="    width: 100%; height: 50%;
+                            margin-top: 10px;
+                            border-bottom-width: 10px;
+                            margin-bottom: 10px;">
+                                <ngx-dropzone [id]="gameicon" class="game-icon" (change)="onSelectIcon($event)"
+                                [multiple] = "false"
+                                accept="image/jpg,image/png">
+                                    <ngx-dropzone-label>>Icon of Game</ngx-dropzone-label>
+                                    <ngx-dropzone-image-preview *ngIf="gameIconf" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="gameIconf">
+                                        <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                    </ngx-dropzone-image-preview>
+                                </ngx-dropzone>
+                            </div>
+                             <div fxLayout="row" fxFlex="1 0 auto" style="width: 100%;
+                            height: 5%; margin-top: 10px; margin-bottom: 5px;" >
+                                <label >DRAG AND DROP</label>
                             </div>
                         </div>
 
-                        <div fxLayout="row" fxLayoutAlign="center center">
-                            <button class="mr-8" mat-raised-button type="button" color="accent">
-                                Add Game
-                            </button>
-                            <button class="mr-8" mat-raised-button matStepperNext type="button" color="accent">
-                                Add Questions
-                            </button>
-                            <button mat-raised-button type="button" color="accent">
-                                Skip
-                            </button>
-                        </div>
+                  </div>
 
-                    </form>
+                  <div fxLayout="row" fxLayoutAlign="center center">
+                      <button class="mr-8"  (click)="addGame()"  mat-raised-button type="button" color="accent">
+                          Add Game
+                      </button>
 
-                </mat-step>
+                      <button mat-raised-button type="button" color="accent">
+                          Skip
+                      </button>
+                  </div>
+
+              </form>
+
+          </mat-step>
 
                 <mat-step [stepControl]="horizontalStepperStep2">
 
@@ -94,104 +93,71 @@
 
                         <div fxFlex="1 0 auto" fxLayout="column">
 
-                            <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-form-field  class="question" appearance="outline" fxFlex="100">
                                 <mat-label>Redacte la pregunta</mat-label>
                                 <input matInput #postalCode2 formControlName="redacte" required>
                                 <mat-error>Redaction is required!</mat-error>
                             </mat-form-field>
 
-                            <h2>Respuestas</h2><h2 class="boton">Correcta</h2>
+                            <h2>Respuestas</h2>
 
                             <div fxFlex="1 0 auto" fxLayout="column" class="game">
-                                
-                                <mat-form-field appearance="outline" fxFlex="50">
-                                    <div  fxLayout="row" fxLayoutAlign="center center">
-                                        <mat-form-field> 
-                                        <mat-label>Respuesta 1</mat-label>
-                                        <input matInput formControlName="redacte1" required>
-                                        
-                                        <mat-error>Respuesta 1 is required!</mat-error>
-                                    </mat-form-field>
-                                    
-                                       
-                                  
-                                         <ngx-dropzone id="image1" class="images" (change)="onSelect($event)"
-                                        [multiple] = "false"
-                                        accept="image/jpg,image/png">
-                                            <ngx-dropzone-label>{{'FORMS.IMAGE1_PLACEHOLDER' | translate}}</ngx-dropzone-label>
-                                            <ngx-dropzone-image-preview *ngIf="image1" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image1">
-                                                <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
-                                            </ngx-dropzone-image-preview>
-                                        </ngx-dropzone>
-                                  
-                                </div>
 
-                               
-                                </mat-form-field>
-                                <input type="checkbox" class="boton">
-                                <mat-form-field appearance="outline" fxFlex="50">
-                                    <div  fxLayout="row" fxLayoutAlign="center center">
-                                <mat-form-field>
-                                    <mat-label>Respuesta 2</mat-label>
-                                    <input matInput formControlName="redacte2" required>
-                                    
-                                    <mat-error>Respuesta 2 is required!</mat-error>
-                                </mat-form-field>
-                                    <ngx-dropzone id="image2" class="images" (change)="onSelect($event)"
-                                accept="image/jpg,image/png"
-                                [multiple] = "false">
-                                    <ngx-dropzone-label>{{'FORMS.IMAGE2_PLACEHOLDER' | translate}}</ngx-dropzone-label>
-                                    <ngx-dropzone-image-preview *ngIf="image2" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image2">
-                                        <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
-                                    </ngx-dropzone-image-preview>
-                                </ngx-dropzone>
-                            </div>
-                                </mat-form-field>
-                                <input type="checkbox" class="boton">
+                              <mat-form-field   class="resp1"  appearance="outline" fxFlex="50">
+                                <div  fxLayout="row" fxLayoutAlign="center center">
+                                    <mat-form-field>
+                                    <mat-label>Respuesta 1</mat-label>
+                                    <input matInput formControlName="redacte1" required>
 
-                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-error>Respuesta 1 is required!</mat-error>
+                                </mat-form-field>
 
-                                    <div  fxLayout="row" fxLayoutAlign="center center">
-                                        <mat-form-field>
-                                    <mat-label>Respuesta 3</mat-label>
-                                    <input matInput formControlName="redacte3" required>
-                                    
-                                    <mat-error>Respuesta 3 is required!</mat-error>
-                                  </mat-form-field>
-                                    <ngx-dropzone id="image3" class="images" (change)="onSelect($event)" [multiple] = "false"
+
+
+                                     <ngx-dropzone id="image1" class="images" (change)="onSelect($event)"
+                                    [multiple] = "false"
                                     accept="image/jpg,image/png">
-                                        <ngx-dropzone-label>{{'FORMS.IMAGE3_PLACEHOLDER' | translate}}</ngx-dropzone-label>
-                                        <ngx-dropzone-image-preview *ngIf="image3" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image3">
+                                        <ngx-dropzone-label>{{'FORMS.IMAGE1_PLACEHOLDER' | translate}}</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngIf="image1" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image1">
                                             <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
                                         </ngx-dropzone-image-preview>
                                     </ngx-dropzone>
-                                </div>
-                                </mat-form-field>
-                                <input type="checkbox" class="boton">
 
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <div  fxLayout="row" fxLayoutAlign="center center">
-                                        <mat-form-field>
-                                    <mat-label>Respuesta 4</mat-label>
-                                    <input matInput formControlName="redacte4" required>
-                                    
-                                    <mat-error>Respuesta 4 is required!</mat-error>
-                                </mat-form-field>
-                                    <ngx-dropzone id="image4" class="images" (change)="onSelect($event)"
-                                    accept="image/jpg,image/png"
-                                    [multiple] = "false">
-                                        <ngx-dropzone-label>{{'FORMS.IMAGE4_PLACEHOLDER' | translate}}</ngx-dropzone-label>
-                                        <ngx-dropzone-image-preview *ngIf="image4" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image4">
-                                            <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
-                                        </ngx-dropzone-image-preview>
-                                    </ngx-dropzone>
-                                </div>
-                                </mat-form-field>
-                            
-                                <input type="checkbox" class="boton">
-                                
                             </div>
-                            
+
+                            </mat-form-field>
+
+                            <label class="switch">
+                              <label>Correcta</label>
+                              <input  type="checkbox" /> <span class="slider round"></span>
+                               </label>
+
+                            <mat-form-field  class="resp2"  appearance="outline" fxFlex="50">
+                                <div  fxLayout="row" fxLayoutAlign="center center">
+                            <mat-form-field>
+                                <mat-label>Respuesta 2</mat-label>
+                                <input matInput formControlName="redacte2" required>
+
+                                <mat-error>Respuesta 2 is required!</mat-error>
+                            </mat-form-field>
+                                <ngx-dropzone id="image2" class="images" (change)="onSelect($event)"
+                            accept="image/jpg,image/png"
+                            [multiple] = "false">
+                                <ngx-dropzone-label>{{'FORMS.IMAGE2_PLACEHOLDER' | translate}}</ngx-dropzone-label>
+                                <ngx-dropzone-image-preview *ngIf="image2" class="preview" ngProjectAs="ngx-dropzone-preview" [file]="image2">
+                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                </ngx-dropzone-image-preview>
+                            </ngx-dropzone>
+                        </div>
+                            </mat-form-field>
+
+                               <label class="swit">
+                                <label>Correcta</label>
+                              <input  type="checkbox" /> <span class="slider round"></span>
+                               </label>
+
+                            </div>
+
 
                         </div>
 
@@ -224,33 +190,32 @@
 
                         <ng-template matStepLabel>List of Game</ng-template>
                         <div class="customer mb-32">
-                            <button mat-icon-button aria-label="Search" matTooltip="Search" class="boton">
-                                <mat-icon>search</mat-icon>
-                            </button>
+                          <div class="row" >
                             <table class="simple" >
-                                <thead>
+                                <thead >
                                     <tr>
                                         <th>Games</th>
                                         <th>Cantidad de Preguntas</th>
                                         <th>Opcion</th>
-                                   
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                       
+
                                         <td>
                                             <span class="game text-truncate">titanic</span>
                                         </td>
                                         <td>
                                             <span class="cantidad text-truncate">10</span>
                                         </td>
-                                        <td><button mat-raised-button type="button" color="accent"  >Editar</button></td> 
+                                        <td><button mat-raised-button type="button" color="accent"  >Editar</button></td>
                                         <td><button  mat-raised-button type="button" color="warn" >Borrar</button></td>
-                                   
+
                                     </tr>
                                 </tbody>
                             </table>
+                          </div>
                         </div>
                     </form>
 

@@ -7,7 +7,7 @@ import { Campaign } from '../../../models/campaign.model';
 import { Imagen } from '../../../models/image.model';
 import { FileUploadService } from '../../../services/file-upload.service';
 // import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
-
+import { GamesService } from "../../../services/games.service";
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -15,6 +15,62 @@ import { FileUploadService } from '../../../services/file-upload.service';
 })
 export class GameComponent implements OnInit, OnDestroy
 {
+addGames:any = {Games: '',Questions: ''}
+
+games:any;
+
+
+
+obtenerGame(){
+this.gamesService.obtenerList().subscribe(resultado=>{
+this.games=resultado.games;
+},
+error=>{
+console.log(JSON.stringify(error));
+});
+}
+
+
+
+
+editGame(identificador){
+  console.log('event delete')
+
+  this.gamesService.editGame(identificador).subscribe(resultado=>{
+    this.obtenerGame;
+    },
+    error=>{
+    console.log(JSON.stringify(error));
+    });
+}
+
+
+deleteGame(identificador){
+console.log('event delete')
+
+this.gamesService.deleteGame(identificador).subscribe(resultado=>{
+  this.obtenerGame;
+  },
+  error=>{
+  console.log(JSON.stringify(error));
+  });
+
+}
+
+addGame(){
+  console.log('event add')
+this.gamesService.addGame(this.addGames).subscribe(resultado=>{
+  this.obtenerGame();
+  },
+  error=>{
+  console.log(JSON.stringify(error));
+  });
+}
+
+
+
+
+
   form: FormGroup;
 
   horizontalStepperStep1: FormGroup;
@@ -35,14 +91,16 @@ export class GameComponent implements OnInit, OnDestroy
   constructor(
     private _formBuilder: FormBuilder,
     // private _fuseTranslationLoaderService: FuseTranslationLoaderService
+    private gamesService: GamesService,
+
 
   )
   {
-
+this.obtenerGame();
     // Load the translations
     // this._fuseTranslationLoaderService.loadTranslations(english, spanish);
 
-  
+    // Set the private defaults
     this._unsubscribeAll = new Subject();
 
   }
@@ -62,6 +120,10 @@ export class GameComponent implements OnInit, OnDestroy
       redacte3     : ['', Validators.required],
       redacte4     : ['', Validators.required]
     });
+
+
+
+
   }
 
 
@@ -103,16 +165,15 @@ export class GameComponent implements OnInit, OnDestroy
             break;
         default:
             break;
-
-
-
     }
 
   }
+
+
+
+
+
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
-
-
-
 }

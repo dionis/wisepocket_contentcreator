@@ -27,6 +27,8 @@
           margin-left: 10px;
           margin-right: 10px;
           max-width: 50%;
+          left:700px;
+          border: 3px solid blue;
           input{
               opacity: 0;
               position: absolute;
@@ -56,6 +58,7 @@
               background-color: #db202f;
               padding: 8px 16px;
               position: relative;
+              font-size:2em;
           }
           .game-icon{
             margin: 10px auto;
@@ -64,6 +67,7 @@
             width: 100%;
             height: 100%;
             left: 35%;
+            border: 3px solid blue;
           }
 
           h3{
@@ -78,9 +82,125 @@
 }
 .boton{
     left: 150%;
-    margin-right: 50px;   
-    position:relative;
+    margin-right: 50px;
+    border:3px blue;
+
 }
 .accent{
     left: 120%;
 }
+.simple {
+  border-spacing: 5px 12px;
+  padding: 0 8px 8px 0;
+  border: 1px solid blue;
+}
+.fondo{
+  background-position: center center;
+ margin: 30px;
+  padding: 40px 100px;
+ }
+td {
+  width: 20px;
+}
+.titulo{
+  left:500px;
+  border: 3px solid blue;
+  border-radius: 15px ;
+}
+.answer{
+  left:500px;
+  border: 3px solid blue;
+  border-radius: 15px ;
+}
+.question{
+  left:500px;
+  border: 3px solid blue;
+  border-radius: 15px ;
+}
+.resp1{
+  border-spacing: 5px 12px;
+  padding: 0 8px 8px 0;
+  border: 3px solid blue;
+}
+.resp2{
+  border-spacing: 5px 12px;
+  padding: 0 8px 8px 0;
+  border: 3px solid blue;
+
+}
+.switch {
+position: fixed;
+  display: inline-block;
+  width: 65px;
+  height: 40px;
+  left:1500px;
+  margin-top: 100px;
+}
+.swit{
+  position: fixed;
+  display: inline-block;
+  width: 65px;
+  height: 40px;
+  left:1500px;
+  margin-top: 350px;
+}
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.swit input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+

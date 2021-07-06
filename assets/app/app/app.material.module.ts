@@ -7,7 +7,8 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @NgModule({
   declarations: [],
   imports: [
@@ -22,8 +23,9 @@ import { MatSortModule } from '@angular/material/sort';
     MaterialFileInputModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule
-  
+    MatSortModule,
+    MatCheckboxModule,
+    MatSlideToggleModule
   ],
   exports: [
     MatMomentDateModule,
@@ -35,7 +37,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule
- 
+
   ]
 })
 export class AppMaterialModule { }
